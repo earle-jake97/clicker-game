@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://8f3lkkc764ot"]
+
+[ext_resource type="Script" path="res://scenes/test_map.gd" id="1_2g1ql"]
+[ext_resource type="PackedScene" uid="uid://cumiauvh5q1oh" path="res://scenes/player_spot.tscn" id="1_mjvge"]
+[ext_resource type="Texture2D" uid="uid://101axaav75hx" path="res://backgrounds/test1.png" id="1_na15e"]
+[ext_resource type="Texture2D" uid="uid://m3cj5oqp1tvu" path="res://backgrounds/test2.png" id="2_0vhge"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qirex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_na15e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0vhge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Test Map" type="Node2D"]
+scale = Vector2(1.06457, 1.032)
+script = ExtResource("1_2g1ql")
+
+[node name="background" type="AnimatedSprite2D" parent="."]
+z_index = -100
+position = Vector2(543, 372)
+scale = Vector2(0.96, 1)
+sprite_frames = SubResource("SpriteFrames_qirex")
+autoplay = "default"
+
+[node name="position3" parent="." instance=ExtResource("1_mjvge")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(256, 553)
+pos = 3
+
+[node name="position2" parent="." instance=ExtResource("1_mjvge")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(176, 435)
+pos = 2
+
+[node name="position1" parent="." instance=ExtResource("1_mjvge")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(99, 323)
+pos = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 9.39346
+offset_top = 5.81395
+offset_right = 161.393
+offset_bottom = 54.814
+text = "Base Damage: 10
+Additional Damage: 0
+Damage Multiplier: 0"

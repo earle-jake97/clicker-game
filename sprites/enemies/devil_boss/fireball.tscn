@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw0wffi85bn1m"]
+
+[ext_resource type="Script" path="res://sprites/enemies/devil_boss/fireball.gd" id="1_mvqrp"]
+[ext_resource type="Texture2D" uid="uid://bri24e6eggm7x" path="res://sprites/enemies/devil_boss/fireball01.png" id="1_ul8al"]
+[ext_resource type="Texture2D" uid="uid://cgesxrx47nhrw" path="res://sprites/enemies/devil_boss/fireball02.png" id="2_jxg2k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tupnt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ul8al")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jxg2k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 13.0
+}]
+
+[node name="Fireball" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_mvqrp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tupnt")
+autoplay = "default"
+frame_progress = 0.17457

@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://gplk7ebibxa0"]
+
+[ext_resource type="Script" path="res://systems/map/horde_scenes/test.gd" id="1_ul3ds"]
+[ext_resource type="Texture2D" uid="uid://101axaav75hx" path="res://backgrounds/test1.png" id="1_vub4t"]
+[ext_resource type="Texture2D" uid="uid://m3cj5oqp1tvu" path="res://backgrounds/test2.png" id="2_fjeev"]
+[ext_resource type="Script" path="res://items/scripts/1/knife.gd" id="3_cx6dv"]
+[ext_resource type="PackedScene" uid="uid://cumiauvh5q1oh" path="res://scenes/player_spot.tscn" id="3_ekpqm"]
+[ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="5_cx6uy"]
+[ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="6_m4ro6"]
+[ext_resource type="Texture2D" uid="uid://b5etxgkqii08j" path="res://sprites/test_player/x.png" id="7_blten"]
+[ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="8_72xac"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qirex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vub4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fjeev")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_qeu23"]
+script/source = "extends Label
+
+var player = PlayerController
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = (\"Base Damage: \" + str(10) 
+	+ \"\\nAdditional damage: \" + str(player.additional_dmg) 
+	+ \"\\nDamage multiplier: \" + str(player.mult_dmg * 100) + \"%\" 
+	+ \"\\nHealth: \" + str(player.current_hp)
+	+ \"\\nArmor: \" + str(player.total_armor)
+	+ \"\\n Cash: \" + str(player.cash))
+"
+
+[node name="Test Map" type="Node2D"]
+scale = Vector2(1.06457, 1.032)
+script = ExtResource("1_ul3ds")
+
+[node name="background" type="AnimatedSprite2D" parent="."]
+z_index = -100
+position = Vector2(543, 372)
+scale = Vector2(0.96, 1)
+sprite_frames = SubResource("SpriteFrames_qirex")
+autoplay = "default"
+script = ExtResource("3_cx6dv")
+
+[node name="position3" parent="." instance=ExtResource("3_ekpqm")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(256, 553)
+pos = 3
+
+[node name="position2" parent="." instance=ExtResource("3_ekpqm")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(176, 435)
+pos = 2
+
+[node name="position1" parent="." instance=ExtResource("3_ekpqm")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(99, 323)
+pos = 1
+
+[node name="thrower_spawner" type="Node2D" parent="." groups=["spawner"]]
+modulate = Color(1, 0.133333, 0, 0.0980392)
+position = Vector2(1141.31, 608.527)
+script = ExtResource("5_cx6uy")
+enemy_scene = ExtResource("6_m4ro6")
+y_min = 0.0
+y_max = -400.0
+min_spawns = 1
+max_spawns = 1
+min_spawn_time = 2.0
+max_spawn_time = 5.0
+enemy_max_health = 200
+enemy_damage = 20
+enemy_cash_value = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="thrower_spawner"]
+visible = false
+position = Vector2(2.81799, 1.93802)
+texture = ExtResource("7_blten")
+
+[node name="devil_spawner" type="Node2D" parent="." groups=["spawner"]]
+modulate = Color(1, 0.133333, 0, 0.0980392)
+position = Vector2(1142.25, 609.496)
+script = ExtResource("5_cx6uy")
+enemy_scene = ExtResource("8_72xac")
+y_min = 0.0
+y_max = -400.0
+min_spawns = 20
+max_spawns = 25
+min_spawn_time = 0.5
+max_spawn_time = 0.8
+enemy_max_health = 60
+enemy_damage = 10
+enemy_cash_value = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="devil_spawner"]
+visible = false
+position = Vector2(2.81799, 1.93802)
+texture = ExtResource("7_blten")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 9.39346
+offset_top = 5.81395
+offset_right = 161.393
+offset_bottom = 54.814
+text = "Base Damage: 10
+Additional Damage: 0
+Damage Multiplier: 0"
+script = SubResource("GDScript_qeu23")

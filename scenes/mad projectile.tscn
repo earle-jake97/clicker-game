@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8106cbrgghd3"]
+
+[ext_resource type="Script" path="res://scenes/mad_projectile.gd" id="1_6r1q3"]
+[ext_resource type="Texture2D" uid="uid://d1yakisqdd6ot" path="res://sprites/test_player/mad.png" id="1_kvs7s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f08dx"]
+
+[node name="projectile" type="Area2D"]
+script = ExtResource("1_6r1q3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("1_kvs7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f08dx")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhqmkx1oukr5d"]
+
+[ext_resource type="Texture2D" uid="uid://c5m3epwanymut" path="res://sprites/enemies/devil_boss/curled_devil.png" id="1_m2la5"]
+
+[node name="Minion_ball" type="Node2D"]
+position = Vector2(507, 1201)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m2la5")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(40, -5)
+rotation = -1.85441
+texture = ExtResource("1_m2la5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-13, 77)
+rotation = -1.9302
+texture = ExtResource("1_m2la5")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(30, 57)
+rotation = 0.888936
+texture = ExtResource("1_m2la5")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-35, 42)
+rotation = -1.10053
+texture = ExtResource("1_m2la5")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(-13, 40)
+texture = ExtResource("1_m2la5")

@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://ch6f5awjg4nfl"]
+
+[ext_resource type="Texture2D" uid="uid://dg3vnx8aauag3" path="res://sprites/test_player/map.png" id="1_ljowo"]
+[ext_resource type="Script" path="res://systems/map/map_view.gd" id="1_tpmxt"]
+[ext_resource type="Texture2D" uid="uid://101axaav75hx" path="res://backgrounds/test1.png" id="2_qi3gj"]
+[ext_resource type="Texture2D" uid="uid://m3cj5oqp1tvu" path="res://backgrounds/test2.png" id="3_yc2dv"]
+[ext_resource type="Texture2D" uid="uid://ksjayfsiju5" path="res://sprites/test_player/horde_node.png" id="4_wqm7o"]
+[ext_resource type="Texture2D" uid="uid://cr0jsgdtjcenm" path="res://sprites/test_player/item_node.png" id="6_7jnel"]
+[ext_resource type="Texture2D" uid="uid://chdogvuqsovq8" path="res://sprites/test_player/shop_node.png" id="7_csere"]
+[ext_resource type="Texture2D" uid="uid://dxehmr0r2jan2" path="res://sprites/test_player/miniboss_node.png" id="8_jar70"]
+[ext_resource type="Texture2D" uid="uid://krs3lt7fieyy" path="res://sprites/test_player/gamble_node.png" id="9_ru1gg"]
+[ext_resource type="Texture2D" uid="uid://di471kkk0i7xp" path="res://sprites/test_player/boss_node.png" id="10_0o23i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbch5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qi3gj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yc2dv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="MapView" type="Node2D"]
+script = ExtResource("1_tpmxt")
+
+[node name="map_sprite" type="Sprite2D" parent="."]
+position = Vector2(586, 326)
+texture = ExtResource("1_ljowo")
+
+[node name="background" type="AnimatedSprite2D" parent="."]
+z_index = -100
+position = Vector2(577, 372)
+scale = Vector2(1.03461, 1)
+sprite_frames = SubResource("SpriteFrames_pbch5")
+autoplay = "default"
+
+[node name="layer_1" type="Node" parent="." groups=["layer"]]
+
+[node name="node_1_1" type="Sprite2D" parent="layer_1"]
+position = Vector2(129, 328)
+texture = ExtResource("4_wqm7o")
+
+[node name="layer_2" type="Node" parent="." groups=["layer"]]
+
+[node name="node_2_1" type="Sprite2D" parent="layer_2"]
+position = Vector2(243, 225)
+texture = ExtResource("6_7jnel")
+
+[node name="node_2_2" type="Sprite2D" parent="layer_2"]
+position = Vector2(247, 404)
+texture = ExtResource("7_csere")
+
+[node name="layer_3" type="Node" parent="." groups=["layer"]]
+
+[node name="node_3_1" type="Sprite2D" parent="layer_3"]
+position = Vector2(403, 142)
+texture = ExtResource("8_jar70")
+
+[node name="node_3_2" type="Sprite2D" parent="layer_3"]
+position = Vector2(406, 261)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_3_3" type="Sprite2D" parent="layer_3"]
+position = Vector2(399, 377)
+texture = ExtResource("9_ru1gg")
+
+[node name="node_3_4" type="Sprite2D" parent="layer_3"]
+position = Vector2(383, 503)
+texture = ExtResource("4_wqm7o")
+
+[node name="layer_4" type="Node" parent="." groups=["layer"]]
+
+[node name="node_4_1" type="Sprite2D" parent="layer_4"]
+position = Vector2(543, 194)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_4_2" type="Sprite2D" parent="layer_4"]
+position = Vector2(544, 323)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_4_3" type="Sprite2D" parent="layer_4"]
+position = Vector2(540, 453)
+texture = ExtResource("4_wqm7o")
+
+[node name="layer_5" type="Node" parent="." groups=["layer"]]
+
+[node name="node_5_1" type="Sprite2D" parent="layer_5"]
+position = Vector2(663, 142)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_5_2" type="Sprite2D" parent="layer_5"]
+position = Vector2(672, 259)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_5_3" type="Sprite2D" parent="layer_5"]
+position = Vector2(675, 384)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_5_4" type="Sprite2D" parent="layer_5"]
+position = Vector2(679, 509)
+texture = ExtResource("4_wqm7o")
+
+[node name="layer_6" type="Node" parent="." groups=["layer"]]
+
+[node name="node_6_1" type="Sprite2D" parent="layer_6"]
+position = Vector2(794, 197)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_6_2" type="Sprite2D" parent="layer_6"]
+position = Vector2(798, 321)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_6_3" type="Sprite2D" parent="layer_6"]
+position = Vector2(803, 449)
+texture = ExtResource("4_wqm7o")
+
+[node name="layer_7" type="Node" parent="." groups=["layer"]]
+
+[node name="node_7_1" type="Sprite2D" parent="layer_7"]
+position = Vector2(914, 259)
+texture = ExtResource("4_wqm7o")
+
+[node name="node_7_2" type="Sprite2D" parent="layer_7"]
+position = Vector2(921, 392)
+texture = ExtResource("4_wqm7o")
+
+[node name="layer_8" type="Node" parent="." groups=["layer"]]
+
+[node name="node_8_1" type="Sprite2D" parent="layer_8"]
+position = Vector2(1033, 318)
+texture = ExtResource("10_0o23i")

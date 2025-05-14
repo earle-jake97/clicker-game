@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgbxk43sllhp7"]
+
+[ext_resource type="Script" path="res://systems/shop/tooltip.gd" id="1_ohc3x"]
+
+[node name="Tooltip" type="Control"]
+visible = false
+z_index = 40
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_ohc3x")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+autowrap_mode = 2

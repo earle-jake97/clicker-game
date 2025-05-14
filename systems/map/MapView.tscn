@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch6f5awjg4nfl"]
+
+[ext_resource type="Texture2D" uid="uid://dg3vnx8aauag3" path="res://sprites/test_player/map.png" id="1_ljowo"]
+[ext_resource type="Script" path="res://systems/map/map_view.gd" id="1_tpmxt"]
+[ext_resource type="PackedScene" uid="uid://cki1jiyknnd8f" path="res://systems/map/node_x_y.tscn" id="5_xa28b"]
+
+[node name="MapView" type="Node2D" groups=["map_root"]]
+z_index = 4094
+script = ExtResource("1_tpmxt")
+
+[node name="map_sprite" type="Sprite2D" parent="."]
+position = Vector2(586, 326)
+texture = ExtResource("1_ljowo")
+
+[node name="layer_1" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_1_1" parent="layer_1" instance=ExtResource("5_xa28b")]
+
+[node name="layer_2" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_2_1" parent="layer_2" instance=ExtResource("5_xa28b")]
+position = Vector2(252, 229)
+
+[node name="node_2_2" parent="layer_2" instance=ExtResource("5_xa28b")]
+position = Vector2(246, 404)
+
+[node name="layer_3" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_3_1" parent="layer_3" instance=ExtResource("5_xa28b")]
+position = Vector2(410, 150)
+
+[node name="node_3_2" parent="layer_3" instance=ExtResource("5_xa28b")]
+position = Vector2(406, 258)
+
+[node name="node_3_3" parent="layer_3" instance=ExtResource("5_xa28b")]
+position = Vector2(390, 365)
+
+[node name="node_3_4" parent="layer_3" instance=ExtResource("5_xa28b")]
+position = Vector2(388, 479)
+
+[node name="layer_4" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_4_1" parent="layer_4" instance=ExtResource("5_xa28b")]
+position = Vector2(544, 195)
+
+[node name="node_4_2" parent="layer_4" instance=ExtResource("5_xa28b")]
+position = Vector2(545, 318)
+
+[node name="node_4_3" parent="layer_4" instance=ExtResource("5_xa28b")]
+position = Vector2(544, 441)
+
+[node name="layer_5" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_5_1" parent="layer_5" instance=ExtResource("5_xa28b")]
+position = Vector2(665, 156)
+
+[node name="node_5_2" parent="layer_5" instance=ExtResource("5_xa28b")]
+position = Vector2(671, 268)
+
+[node name="node_5_3" parent="layer_5" instance=ExtResource("5_xa28b")]
+position = Vector2(675, 387)
+
+[node name="node_5_4" parent="layer_5" instance=ExtResource("5_xa28b")]
+position = Vector2(681, 511)
+
+[node name="layer_6" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_6_1" parent="layer_6" instance=ExtResource("5_xa28b")]
+position = Vector2(808, 211)
+
+[node name="node_6_2" parent="layer_6" instance=ExtResource("5_xa28b")]
+position = Vector2(800, 329)
+
+[node name="node_6_3" parent="layer_6" instance=ExtResource("5_xa28b")]
+position = Vector2(810, 448)
+
+[node name="layer_7" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_7_1" parent="layer_7" instance=ExtResource("5_xa28b")]
+position = Vector2(910, 262)
+
+[node name="node_7_2" parent="layer_7" instance=ExtResource("5_xa28b")]
+position = Vector2(916, 392)
+
+[node name="layer_8" type="Node2D" parent="." groups=["layer"]]
+
+[node name="node_8_1" parent="layer_8" instance=ExtResource("5_xa28b")]
+position = Vector2(1027, 325)

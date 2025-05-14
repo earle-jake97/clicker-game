@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://uteyjrh5xtyh"]
+
+[ext_resource type="Script" path="res://systems/pause.gd" id="1_t6q6d"]
+
+[sub_resource type="GDScript" id="GDScript_l3h6n"]
+script/source = "extends Label
+
+var player = PlayerController
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = (\"Damage: \" + str(player.damage) 
+	+ \"\\nDamage multiplier: \" + str(player.mult_dmg * 100) + \"%\" 
+	+ \"\\nHealth: \" + str(player.current_hp) + \"/\" + str(player.max_hp)
+	+ \"\\nCritical Chance: \" + str(player.crit_chance*100) + \"%\"
+	+ \"\\nCritical Damage Modifier: \" + str(player.crit_damage*100) + \"%\"
+	+ \"\\nArmor: \" + str(player.total_armor)
+	+ \"\\nCash: \" + str(player.cash))
+"
+
+[node name="Pause_Menu" type="Control"]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_t6q6d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.9381, 16.3065)
+color = Color(0, 0, 0, 0.34902)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 218.0
+offset_right = 824.0
+offset_bottom = 390.0
+theme_override_font_sizes/font_size = 126
+text = "PAUSED"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+offset_left = 893.0
+offset_right = 1059.0
+offset_bottom = 75.0
+text = "Base Damage: 10
+Additional Damage: 0
+Damage Multiplier: 0"
+horizontal_alignment = 2
+script = SubResource("GDScript_l3h6n")

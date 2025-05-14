@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dscohesb5klt7"]
+
+[ext_resource type="Script" path="res://items/misc/ghost_projectile.gd" id="1_lhc1g"]
+[ext_resource type="Texture2D" uid="uid://s7nnppgmvtfh" path="res://items/sprites/ghost_1.png" id="1_yycj5"]
+[ext_resource type="Texture2D" uid="uid://dqoyhk0g3v2w1" path="res://items/sprites/ghost_2.png" id="2_qnojw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3b3jj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yycj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qnojw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b8vqx"]
+radius = 114.28
+
+[node name="ghost_projectile" type="Node2D"]
+script = ExtResource("1_lhc1g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3b3jj")
+autoplay = "default"
+frame_progress = 0.049065
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 25)
+scale = Vector2(1, 1.56)
+shape = SubResource("CircleShape2D_b8vqx")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

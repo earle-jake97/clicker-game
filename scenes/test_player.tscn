@@ -1,0 +1,207 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0j1si2atqlhf"]
+
+[ext_resource type="Script" path="res://scenes/test_player.gd" id="1_t3wex"]
+[ext_resource type="Texture2D" uid="uid://clyjffpswv1fn" path="res://sprites/test_player/new_player_idle.png" id="2_gfwpp"]
+[ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_l5cuq"]
+
+[sub_resource type="Animation" id="Animation_wr54o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, -47)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.383436, 0.384615)]
+}
+
+[sub_resource type="Animation" id="Animation_ibewd"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5, -47), Vector2(5, -47), Vector2(5, -44.827), Vector2(5, -44.827)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.383436, 0.384615), Vector2(0.383436, 0.384615), Vector2(0.413333, 0.376368), Vector2(0.413333, 0.376368)]
+}
+
+[sub_resource type="Animation" id="Animation_bmmlp"]
+resource_name = "move_down"
+length = 0.2667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(5, -47), Vector2(5, -47), Vector2(5, -47)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.322035, -0.00162888]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.383436, 0.384615), Vector2(0.383436, 0.384615), Vector2(0.383436, 0.384615)]
+}
+
+[sub_resource type="Animation" id="Animation_7hnbd"]
+resource_name = "move_up"
+length = 0.2333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5, -47), Vector2(5, -47), Vector2(5, -47), Vector2(5, -47)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.182879, 0.0920539, -0.00172837]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.383436, 0.384615), Vector2(0.383436, 0.384615), Vector2(0.383436, 0.384615), Vector2(0.383436, 0.384615)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6nxs"]
+_data = {
+"RESET": SubResource("Animation_wr54o"),
+"idle": SubResource("Animation_ibewd"),
+"move_down": SubResource("Animation_bmmlp"),
+"move_up": SubResource("Animation_7hnbd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2qkx"]
+size = Vector2(45, 52)
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_t3wex")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.537255)
+z_as_relative = false
+position = Vector2(-2, 3)
+scale = Vector2(0.0963802, 0.191225)
+texture = ExtResource("2_l5cuq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, -47)
+scale = Vector2(0.383436, 0.384615)
+texture = ExtResource("2_gfwpp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_g6nxs")
+}
+autoplay = "idle"
+
+[node name="Area2D" type="Area2D" parent="." groups=["player_hitbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.833333, -12.5)
+scale = Vector2(1, 0.566666)
+shape = SubResource("RectangleShape2D_c2qkx")
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

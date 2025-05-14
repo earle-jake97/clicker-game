@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://eht10cfp43xw"]
+
+[ext_resource type="Texture2D" uid="uid://101axaav75hx" path="res://backgrounds/test1.png" id="1_b12us"]
+[ext_resource type="Texture2D" uid="uid://m3cj5oqp1tvu" path="res://backgrounds/test2.png" id="2_orkmr"]
+[ext_resource type="PackedScene" uid="uid://cumiauvh5q1oh" path="res://scenes/player_spot.tscn" id="3_4uowj"]
+[ext_resource type="PackedScene" uid="uid://b0j1si2atqlhf" path="res://scenes/test_player.tscn" id="4_gtayk"]
+[ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="5_vov3v"]
+[ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="6_ki1v3"]
+[ext_resource type="Texture2D" uid="uid://b5etxgkqii08j" path="res://sprites/test_player/x.png" id="7_2va67"]
+[ext_resource type="Script" path="res://items/stats/scripts/debug_stats.gd" id="8_o4xan"]
+[ext_resource type="PackedScene" uid="uid://cekobbajkwup5" path="res://items/thunderbolt.tscn" id="12_khh8t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qirex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b12us")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_orkmr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Test Map" type="Node2D"]
+scale = Vector2(1.06457, 1.032)
+
+[node name="background" type="AnimatedSprite2D" parent="."]
+z_index = -100
+position = Vector2(543, 372)
+scale = Vector2(0.96, 1)
+sprite_frames = SubResource("SpriteFrames_qirex")
+autoplay = "default"
+
+[node name="position3" parent="." instance=ExtResource("3_4uowj")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(256, 553)
+pos = 3
+
+[node name="position2" parent="." instance=ExtResource("3_4uowj")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(176, 435)
+pos = 2
+
+[node name="position1" parent="." instance=ExtResource("3_4uowj")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(99, 323)
+pos = 1
+
+[node name="player" parent="." groups=["player"] instance=ExtResource("4_gtayk")]
+position = Vector2(-48, 16)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 9.39346
+offset_top = 5.81395
+offset_right = 161.393
+offset_bottom = 54.814
+text = "Base Damage: 10
+Additional Damage: 0
+Damage Multiplier: 0"
+script = ExtResource("8_o4xan")
+
+[node name="spawner2" type="Node2D" parent="."]
+modulate = Color(1, 0.133333, 0, 0.0980392)
+position = Vector2(1169.49, 297.481)
+script = ExtResource("5_vov3v")
+enemy_scene = ExtResource("6_ki1v3")
+y_min = 150.0
+y_max = 0.0
+max_spawns = 1
+min_spawn_time = 1.0
+max_spawn_time = 1.5
+enemy_max_health = 100
+enemy_damage = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="spawner2"]
+position = Vector2(2.81799, 1.93802)
+texture = ExtResource("7_2va67")
+
+[node name="items" type="Node" parent="."]
+
+[node name="Thunderbolt" parent="items" instance=ExtResource("12_khh8t")]
+position = Vector2(-672, 577)
+
+[node name="Thunderbolt2" parent="items" instance=ExtResource("12_khh8t")]
+position = Vector2(-672, 577)
+
+[node name="Thunderbolt3" parent="items" instance=ExtResource("12_khh8t")]
+position = Vector2(-672, 577)
+
+[node name="Thunderbolt4" parent="items" instance=ExtResource("12_khh8t")]
+position = Vector2(-672, 577)

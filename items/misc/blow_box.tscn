@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm67n4ysk1n68"]
+
+[ext_resource type="Script" path="res://items/misc/blow_box.gd" id="1_ctstq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xt1o2"]
+size = Vector2(3388, 124)
+
+[node name="blow_box" type="Node2D"]
+z_index = 3000
+position = Vector2(0, -37)
+script = ExtResource("1_ctstq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1532, -15)
+shape = SubResource("RectangleShape2D_xt1o2")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1, 1)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

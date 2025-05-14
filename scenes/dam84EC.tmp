@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://8ejuyhgqoysc"]
+
+[ext_resource type="Script" path="res://scenes/damage_number.gd" id="1_uyli1"]
+[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="2_tgymw"]
+
+[node name="Node2D" type="Node2D"]
+z_index = 4096
+script = ExtResource("1_uyli1")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 4
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_tgymw")
+theme_override_font_sizes/font_size = 20
+text = "test number"
