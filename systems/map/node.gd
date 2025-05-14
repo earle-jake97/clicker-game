@@ -16,8 +16,10 @@ func _ready() -> void:
 	parent = get_parent()
 
 func _process(delta: float) -> void:
-	check_alive_enemies()
-	leave_shop()
+	if not GameState.endless_mode:
+		check_alive_enemies()
+		leave_shop()
+
 
 func _input_event(viewport, event, shape_idx) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -28,7 +30,6 @@ func select_node() -> void:
 		var room_type = parent.get_meta("room_type")
 		var node_id = parent.name
 		var connected_nodes = GameState.node_connections_map_1.get(GameState.current_node_id, [])
-		print("Clicked node:", node_id, "Connected nodes:", connected_nodes)
 
 		if node_id in connected_nodes:
 			print("Valid move to:", node_id)
@@ -69,7 +70,6 @@ func highlight_current_node() -> void:
 
 func go_to_horde_room():
 	PlayerController.difficulty += 1
-	print("Increasing difficulty")
 	var horde_room = HordeRoomScene.instantiate()
 	get_tree().root.add_child(horde_room)
 	get_tree().current_scene = horde_room
@@ -81,7 +81,6 @@ func go_to_horde_room():
 	
 func go_to_boss_room():
 	PlayerController.difficulty += 1
-	print("Increasing difficulty")
 	var boss_room = BOSS_SCENE.instantiate()
 	get_tree().root.add_child(boss_room)
 	get_tree().current_scene = boss_room
@@ -145,7 +144,6 @@ func check_level_completion():
 		TestPlayer.visible = false
 		map_scene.visible = true
 		return true
-
 
 func go_to_map():
 	var empty_room = EmptyRoomScene.instantiate()

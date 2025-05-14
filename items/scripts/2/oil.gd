@@ -7,6 +7,7 @@ const item_description = "Step 2, cover your enemies in oil. When you hit an ene
 const item_icon = preload("res://items/icons/oil.png")
 var file_name = "res://items/scripts/2/oil.gd"
 static var explosion_damage = 0.10
+static var flat_damage = 10
 
 
 func proc(target: Node, source_item: BaseItem = null):
@@ -32,4 +33,4 @@ static func get_explosion_percentage(item_count: int, scale: float= 0.5) -> floa
 	return explosion_damage * (1.0 - pow(scale, item_count))
 
 static func get_explosion_damage(enemy, percentage):
-	return enemy * percentage
+	return (enemy * percentage) + flat_damage

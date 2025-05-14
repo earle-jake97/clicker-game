@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://rb1s3vly17nx"]
+
+[ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="1_f8egw"]
+[ext_resource type="Script" path="res://systems/map/horde_scenes/horde_endless.gd" id="1_h4i6l"]
+[ext_resource type="PackedScene" uid="uid://cumiauvh5q1oh" path="res://scenes/player_spot.tscn" id="3_qpncu"]
+[ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="4_6ib1t"]
+[ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="5_fuvhk"]
+[ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="6_30tdk"]
+[ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="7_iibda"]
+
+[node name="Test Map" type="Node2D"]
+texture_filter = 2
+scale = Vector2(1.06457, 1.032)
+script = ExtResource("1_h4i6l")
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -100
+texture_filter = 2
+position = Vector2(543, 311.922)
+scale = Vector2(0.96, 0.844961)
+texture = ExtResource("1_f8egw")
+
+[node name="position3" parent="." instance=ExtResource("3_qpncu")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(187.869, 549.419)
+pos = 3
+
+[node name="position2" parent="." instance=ExtResource("3_qpncu")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(155.932, 429.264)
+pos = 2
+
+[node name="position1" parent="." instance=ExtResource("3_qpncu")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(132.448, 305.233)
+pos = 1
+
+[node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1055.83, 562.984)
+script = ExtResource("4_6ib1t")
+enemy_scene = ExtResource("5_fuvhk")
+y_min = 50.0
+y_max = -380.0
+min_spawn_time = 1.1
+max_spawn_time = 1.3
+enemy_max_health = 65
+enemy_damage = 5
+enemy_cash_value_min = 1
+enemy_cash_value_max = 2
+enemy_speed = 100
+
+[node name="thrower spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1158.21, 562.985)
+script = ExtResource("4_6ib1t")
+enemy_scene = ExtResource("6_30tdk")
+y_min = 50.0
+y_max = -340.0
+min_spawn_time = 8.0
+max_spawn_time = 10.0
+enemy_max_health = 150
+enemy_damage = 20
+enemy_cash_value_min = 5
+enemy_cash_value_max = 10
+enemy_speed = 100
+
+[node name="imp spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1057.7, 562.985)
+script = ExtResource("4_6ib1t")
+enemy_scene = ExtResource("7_iibda")
+y_min = 50.0
+y_max = -380.0
+min_spawns = 5
+max_spawns = 5
+min_spawn_time = 10.0
+max_spawn_time = 4.0
+enemy_max_health = 80
+enemy_damage = 5
+enemy_cash_value_min = 1
+enemy_cash_value_max = 2
+enemy_speed = 275
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(542.942, 313.953)

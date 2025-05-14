@@ -24,6 +24,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	room_count.text = str(GameState.endless_counter)
 	var percentage = float(player.current_hp) / player.max_hp
 	if percentage <= 0.0 and not dead:
 		dead = true

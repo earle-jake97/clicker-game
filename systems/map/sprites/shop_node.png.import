@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxehmr0r2jan2"
-path="res://.godot/imported/miniboss_node.png-33f07c86715cded2d233fe30cf281d1d.ctex"
+uid="uid://chdogvuqsovq8"
+path="res://.godot/imported/shop_node.png-cbd4e7c7cedb3ea8fb0b76ecc2379e31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/test_player/miniboss_node.png"
-dest_files=["res://.godot/imported/miniboss_node.png-33f07c86715cded2d233fe30cf281d1d.ctex"]
+source_file="res://systems/map/sprites/shop_node.png"
+dest_files=["res://.godot/imported/shop_node.png-cbd4e7c7cedb3ea8fb0b76ecc2379e31.ctex"]
 
 [params]
 

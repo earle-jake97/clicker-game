@@ -22,5 +22,5 @@ func proc(target: Node, source_item: BaseItem = null):
 		if item.item_name == "Contaminated Syringe":
 			occurrences += 1
 	
-	var damage = occurrences * health_percentage * target.max_health
+	var damage = occurrences * health_percentage * target.health
 	target.take_damage(damage)

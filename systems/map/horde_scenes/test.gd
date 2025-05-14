@@ -14,16 +14,17 @@ const _1_DAY = preload("res://backgrounds/1_day.png")
 const IceCube = preload("res://items/scripts/2/ice_cube.gd")
 const Oil = preload("res://items/scripts/2/oil.gd")
 const Awp = preload("res://items/scripts/2/awp.gd")
+const _1_HELL = preload("res://backgrounds/1_hell.png")
 const WindtwisterScroll = preload("res://items/scripts/2/windtwister_scroll.gd")
 func _ready():
 
-	#var item_instance = WindtwisterScroll.new()
+	#var item_instance = Thunderbolt.new()
 	#player.add_item(item_instance)
 #
 	## Optional: If it needs to run _process or emit signals
 	#if not item_instance.is_inside_tree():
 		#player.add_child(item_instance)
-	##
+	#
 	#player.add_item(item_instance)
 	#player.add_item(item_instance)
 	#player.add_item(item_instance)
@@ -35,7 +36,9 @@ func _ready():
 	pass
 
 func _process(delta: float) -> void:
-	if PlayerController.difficulty >= 6:
+	if PlayerController.difficulty >= 8:
+		background.texture = _1_HELL
+	elif PlayerController.difficulty >= 6:
 		background.texture = _1
 	elif PlayerController.difficulty >= 3:
 		background.texture = _1_DAY

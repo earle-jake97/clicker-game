@@ -12,15 +12,15 @@ var heart_7_present = false
 var time_present = false
 
 const COMPLETED_OVERLAY = preload("res://sprites/test_player/completed.png")
-const SHOP_NODE = preload("res://sprites/test_player/shop_node.png")
-const MINIBOSS_NODE = preload("res://sprites/test_player/miniboss_node.png")
-const ITEM_NODE = preload("res://sprites/test_player/item_node.png")
-const HORDE_NODE = preload("res://sprites/test_player/horde_node.png")
-const GAMBLE_NODE = preload("res://sprites/test_player/gamble_node.png")
-const BOSS_NODE = preload("res://sprites/test_player/boss_node.png")
-const HEART_NODE = preload("res://sprites/test_player/heart_node.png")
-const HORDE_CHALLENGE_NODE = preload("res://sprites/test_player/horde_challenge.png")
-const TIME_NODE = preload("res://sprites/test_player/time_node.png")
+const SHOP_NODE = preload("res://systems/map/sprites/shop_node.png")
+const MINIBOSS_NODE = preload("res://systems/map/sprites/miniboss_node.png")
+const ITEM_NODE = preload("res://systems/map/sprites/item_node.png")
+const HORDE_NODE = preload("res://systems/map/sprites/horde_node.png")
+const GAMBLE_NODE = preload("res://systems/map/sprites/gamble_node.png")
+const BOSS_NODE = preload("res://systems/map/sprites/boss_node.png")
+const HEART_NODE = preload("res://systems/map/sprites/heart_node.png")
+const HORDE_CHALLENGE_NODE = preload("res://systems/map/sprites/horde_challenge.png")
+const TIME_NODE = preload("res://systems/map/sprites/time_node.png")
 
 func _ready() -> void:
 	generate_layer()

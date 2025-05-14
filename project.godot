@@ -26,6 +26,8 @@ HealthBar="*res://scenes/Health_bar.tscn"
 Tooltip="*res://systems/shop/tooltip.tscn"
 EnemyDeathListener="*res://systems/EnemyDeathListener.gd"
 Crosshair="*res://scenes/crosshair.tscn"
+Map="*res://systems/map/map_data.gd"
+SceneManager="*res://systems/SceneManager.gd"
 
 [display]
 

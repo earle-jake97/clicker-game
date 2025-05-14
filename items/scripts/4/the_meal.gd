@@ -10,12 +10,13 @@ var file_name = "res://items/scripts/4/the_meal.gd"
 func add_to_inventory():
 	player.add_item(self)
 	print("Added " + self.name + " to inventory.")
+	heal()
 
 func get_flat_attack_damage():
 	return dmg_increase
 
 func heal():
-	player.heal(player.max_health)
+	player.heal(player.max_hp)
 
 func get_percent_attack_damage():
 	return percent_attack_damage

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ksjayfsiju5"
-path="res://.godot/imported/horde_node.png-09ab58e2e0990cbd411d631cf9dc7285.ctex"
+uid="uid://hkywrx5suiil"
+path="res://.godot/imported/horde_challenge.png-ac3905f9c8263ad0ed29d1d733d0d951.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/test_player/horde_node.png"
-dest_files=["res://.godot/imported/horde_node.png-09ab58e2e0990cbd411d631cf9dc7285.ctex"]
+source_file="res://systems/map/sprites/horde_challenge.png"
+dest_files=["res://.godot/imported/horde_challenge.png-ac3905f9c8263ad0ed29d1d733d0d951.ctex"]
 
 [params]
 

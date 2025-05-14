@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://krs3lt7fieyy"
-path="res://.godot/imported/gamble_node.png-8e4d0a70c75abea185f81b128c8a2413.ctex"
+uid="uid://ksjayfsiju5"
+path="res://.godot/imported/horde_node.png-d7b473dd71b2c2aba10db38bcb7e4fcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/test_player/gamble_node.png"
-dest_files=["res://.godot/imported/gamble_node.png-8e4d0a70c75abea185f81b128c8a2413.ctex"]
+source_file="res://systems/map/sprites/horde_node.png"
+dest_files=["res://.godot/imported/horde_node.png-d7b473dd71b2c2aba10db38bcb7e4fcd.ctex"]
 
 [params]
 

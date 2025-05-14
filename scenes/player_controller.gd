@@ -114,8 +114,9 @@ func attack() -> void:
 
 func attack_specific_enemy(enemy, damage_multiplier: float = 1.0, damage_type = DamageBatcher.DamageType.NORMAL):
 	var result = calculate_damage(damage_type, damage_multiplier)
-	enemy.take_damage(result.damage, result.crit)
-	proc_items(enemy)
+	if enemy:
+		enemy.take_damage(result.damage, result.crit)
+		proc_items(enemy)
 
 func attack_all_enemies():
 	for enemy in get_tree().get_nodes_in_group("enemy"):
@@ -175,7 +176,6 @@ func update_modifiers():
 	crit_chance = base_crit_chance
 	crit_damage = base_crit_damage
 	clicks_per_second = base_clicks_per_second
-	var will_heal = false
 	for item in inventory:
 		if item.has_method("get_flat_attack_damage"):
 			additional_dmg += item.get_flat_attack_damage()
@@ -194,9 +194,9 @@ func update_modifiers():
 		if item.has_method("get_cps"):
 			clicks_per_second += item.get_cps()
 			hold_click_timer.wait_time = 1.0 / clicks_per_second
-		if item.has_method("heal"):
-			will_heal = true
 	max_hp = round(max_hp * (1 + max_hp_percentage))
+	if inventory.back().has_method("heal"):
+		inventory.back().heal()
 
 func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, specific_multiplier : float = 1.0 ):
 	damage = (base_attack_damage + additional_dmg) * specific_multiplier

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cki1jiyknnd8f"]
 
-[ext_resource type="Texture2D" uid="uid://ksjayfsiju5" path="res://sprites/test_player/horde_node.png" id="1_6lq2e"]
+[ext_resource type="Texture2D" uid="uid://ksjayfsiju5" path="res://systems/map/sprites/horde_node.png" id="1_6lq2e"]
 [ext_resource type="Script" path="res://systems/map/node.gd" id="2_vwd2o"]
 [ext_resource type="Texture2D" uid="uid://cbeuappsd5x1v" path="res://sprites/test_player/completed.png" id="3_o3xaf"]
 

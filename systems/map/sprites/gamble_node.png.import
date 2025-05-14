@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di471kkk0i7xp"
-path="res://.godot/imported/boss_node.png-fe33f2472537b081f61a0d9e2bdf5805.ctex"
+uid="uid://krs3lt7fieyy"
+path="res://.godot/imported/gamble_node.png-9ab4c00d2ac0ffa23dcd59b12e04959d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/test_player/boss_node.png"
-dest_files=["res://.godot/imported/boss_node.png-fe33f2472537b081f61a0d9e2bdf5805.ctex"]
+source_file="res://systems/map/sprites/gamble_node.png"
+dest_files=["res://.godot/imported/gamble_node.png-9ab4c00d2ac0ffa23dcd59b12e04959d.ctex"]
 
 [params]
 

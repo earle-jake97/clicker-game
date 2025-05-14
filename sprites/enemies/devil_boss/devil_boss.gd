@@ -59,7 +59,10 @@ func _ready() -> void:
 	animation_player.animation_set_next("meditate", "idle")
 	animation_player.animation_set_next("throw_minions", "idle")
 	bleed_icon.visible = false
-	max_health *= controller.difficulty
+	if PlayerController.difficulty >= 15:
+		max_health = max_health * pow(1 + 0.10, PlayerController.difficult)
+	else:
+		max_health *= controller.difficulty
 	health = max_health
 	health_bar.visible = false
 	health_bar.max_value = max_health

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chdogvuqsovq8"
-path="res://.godot/imported/shop_node.png-71a5a6ce86e113886c7132f44fb95c7f.ctex"
+uid="uid://pflisvjejl55"
+path="res://.godot/imported/heart_node.png-f3149d0434c8d2dee7ce790044519786.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/test_player/shop_node.png"
-dest_files=["res://.godot/imported/shop_node.png-71a5a6ce86e113886c7132f44fb95c7f.ctex"]
+source_file="res://systems/map/sprites/heart_node.png"
+dest_files=["res://.godot/imported/heart_node.png-f3149d0434c8d2dee7ce790044519786.ctex"]
 
 [params]
 
