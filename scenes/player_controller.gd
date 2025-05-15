@@ -10,13 +10,13 @@ var hold_click_timer := Timer.new()
 var position_map := {}
 var base_attack_damage = 10
 var base_max_hp = 100.0
-var max_hp
+var max_hp = 0.0
 var max_hp_percentage = 1.0
 var base_armor = 1
 var additional_dmg = 0
 var mult_dmg = 0
 var total_armor
-var current_hp
+var current_hp = 0.0
 var base_crit_chance = 0.01
 var base_crit_damage = 1.5
 var crit_chance = 0.01
@@ -248,14 +248,19 @@ func heal(amount):
 		current_hp = max_hp
 
 func proc_items(target, source_item: BaseItem = null):
+	var proc_count = 1
+	for item in inventory:
+		if item.item_name == "Parrot":
+			proc_count += 1
 	var used_thunderbolt = false
 	for item in inventory:
-		if item.has_method("proc"):
-			if item.tags.has("thunderbolt") and not used_thunderbolt:
-				item.proc(target, source_item)
-				used_thunderbolt = true
-			elif not item.tags.has("thunderbolt"):
-				item.proc(target, source_item)
+		for i in range(proc_count):
+			if item.has_method("proc"):
+				if item.tags.has("thunderbolt") and not used_thunderbolt:
+					item.proc(target, source_item)
+					used_thunderbolt = true
+				elif not item.tags.has("thunderbolt"):
+					item.proc(target, source_item)
 
 
 func add_cash(amount) -> void:

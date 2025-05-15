@@ -4,7 +4,7 @@ var percent_attack_damage = 0.3
 var tags = ["add_damage"]
 var rarity = 4
 var item_name = "The Meal"
-var item_description = "The Meal"
+var item_description = "This tasty treat will give you 5 additional damage, and a 30% damage multiplier!"
 var item_icon = preload("res://items/icons/the_meal.png")
 var file_name = "res://items/scripts/4/the_meal.gd"
 func add_to_inventory():

@@ -1,11 +1,11 @@
 extends BaseItem
 
 var tags = ["bounce", "thunderbolt"]
-var rarity = 3
+var rarity = 2
 const item_name = "Thunderbolt"
 const item_description = "Attacks will chain damage to an extra enemy."
 const item_icon = preload("res://items/icons/thunderbolt.png")
-var file_name = "res://items/scripts/3/thunderbolt.gd"
+var file_name = "res://items/scripts/2/thunderbolt.gd"
 
 func proc(target: Node, source_item: BaseItem = null):
 	if not player or not target or not is_instance_valid(target):
@@ -21,12 +21,12 @@ func proc(target: Node, source_item: BaseItem = null):
 
 
 	# Count how many Thunderbolt items the player has
-	var bounce_count = 0
+	var bounce_count = 3
 	for item in player.inventory:
 		if item.item_name == item_name:
 			bounce_count += 1
 		if "bounce_extend" in item.tags:
-			bounce_count += 1  # optional
+			bounce_count += item.get_bounces()  # optional
 
 	var current_target = target
 	var already_hit: Array[Node] = [target]
@@ -43,7 +43,7 @@ func proc(target: Node, source_item: BaseItem = null):
 					nearest = enemy
 
 		if nearest:
-			nearest.take_damage(round(player.calculate_damage().damage * 0.20))
+			nearest.take_damage(round(player.calculate_damage().damage * 0.05))
 			if player and player.has_method("proc_items"):
 				player.proc_items(nearest, self)  # mark this Thunderbolt as the source
 			already_hit.append(nearest)

@@ -10,3 +10,6 @@ var occurrences = 3
 
 func _process(delta: float) -> void:
 	pass
+
+func get_bounces():
+	return occurrences

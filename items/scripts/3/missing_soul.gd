@@ -46,5 +46,5 @@ func spawn_ghost():
 	projectile.global_position = Vector2((target_enemy.global_position.x - 30) + randx, -20 + randy)  # Off-screen above
 	projectile.target_position = target_enemy.global_position
 	projectile.player = player  # So it knows who to use for damage
-	projectile.damage_multiplier = 2.0
+	projectile.damage_multiplier = 3.0
 	tree.current_scene.add_child(projectile)
