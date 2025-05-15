@@ -3,10 +3,10 @@ extends BaseItem
 var tags = []
 var rarity = 2
 const item_name = "Contaminated Syringe"
-const item_description = "Your attacks deal additional damage based on 1% of the enemy's current HP."
+const item_description = "Your attacks deal additional damage based on 0.4% of the enemy's current HP."
 const item_icon = preload("res://items/icons/contaminated_syringe.png")
 var file_name = "res://items/scripts/2/contaminated_syringe.gd"
-var health_percentage = 0.01
+var health_percentage = 0.004
 var occurrences = 0
 
 func proc(target: Node, source_item: BaseItem = null):

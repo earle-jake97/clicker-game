@@ -3,9 +3,9 @@ extends BaseItem
 const item_name = "Siphoning Soul"
 const item_description = "Every attack heals you for 0.5% of your max HP."
 var tags = ["heal"]
-var rarity = 3
+var rarity = 4
 var item_icon = preload("res://items/icons/siphoning_soul.png")
-var file_name = "res://items/scripts/3/siphoning_soul"
+var file_name = "res://items/scripts/4/siphoning_soul"
 var base_heal_amount = 0.005
 
 func proc(enemy, any):

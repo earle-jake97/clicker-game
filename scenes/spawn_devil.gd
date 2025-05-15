@@ -27,14 +27,14 @@ var decayRate = 0.07;
 
 func _ready() -> void:
 	if GameState.endless_mode:
-		decayRate = 0.2
+		decayRate = 0.1
 	var difficulty = PlayerController.difficulty
 	var spawn_threshold = 0.05
 	min_spawn_time = min_spawn_time * pow(1 - decayRate, difficulty);
 	max_spawn_time = max_spawn_time * pow(1 - decayRate, difficulty)
 	if enemy_scene == DEVIL:
 		if difficulty >= 15:
-			enemy_max_health = enemy_max_health * pow(1 + 0.10, difficulty)
+			enemy_max_health = enemy_max_health * pow(1 + 0.04, difficulty)
 		else:
 			enemy_max_health += difficulty * 4
 		min_spawns = max(difficulty * 15, max_spawns)
@@ -42,7 +42,7 @@ func _ready() -> void:
 	if enemy_scene == PROJECTILE_DEMON:
 		min_spawns = max(1, round(difficulty/2.0))
 		if difficulty >= 15:
-			enemy_max_health = enemy_max_health * pow(1 + 0.10, difficulty)
+			enemy_max_health = enemy_max_health * pow(1 + 0.07, difficulty)
 		else:
 			enemy_max_health += difficulty * 20
 		max_spawns = min_spawns
@@ -52,7 +52,7 @@ func _ready() -> void:
 			max_spawns = 0
 		else:
 			if difficulty >= 15:
-				enemy_max_health = enemy_max_health * pow(1 + 0.10, difficulty)
+				enemy_max_health = enemy_max_health * pow(1 + 0.04, difficulty)
 			else:
 				enemy_max_health += difficulty * 4
 			min_spawns = max(difficulty * 3, max_spawns)

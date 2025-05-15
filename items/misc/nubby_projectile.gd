@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed: float = 300.0
 @export var arc_height: float = 550.0
-@export var max_bounces: int = 2
+@export var max_bounces: int = 3
 
 var rotation_speed := 0.0
 var rotation_direction := 1.0
@@ -69,7 +69,7 @@ func _process(delta):
 				new_proj.target = next_target
 				new_proj.bounce_index = bounce_index + 1
 				new_proj.hit_chain = hit_chain.duplicate()
-				new_proj.damage = damage * 1.5
+				new_proj.damage = damage * 1.3
 				new_proj.player = player
 				get_tree().current_scene.add_child(new_proj)
 

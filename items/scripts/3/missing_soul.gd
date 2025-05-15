@@ -1,10 +1,10 @@
 extends BaseItem
 
 var elapsed_time := 0.0
-const TIMER_DURATION := 5
+const TIMER_DURATION := 3
 var amount_of_times_to_click = 1
 const item_name = "Missing Soul"
-const item_description = "Every 5 seconds, a soul bombards a random enemy, dealing 3 times your damage in an area."
+const item_description = "Every 3 seconds, a soul bombards a random enemy, dealing 3 times your damage in an area."
 var tags = ["timer", "area"]
 var rarity = 3
 var item_icon = preload("res://items/icons/missing_soul.png")

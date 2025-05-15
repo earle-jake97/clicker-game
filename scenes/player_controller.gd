@@ -9,7 +9,7 @@ const PLAYER_MOVE = preload("res://sprites/test_player/new_player_move.png")
 var hold_click_timer := Timer.new()
 var position_map := {}
 var base_attack_damage = 10
-var base_max_hp = 100
+var base_max_hp = 100.0
 var max_hp
 var max_hp_percentage = 1.0
 var base_armor = 1
@@ -27,6 +27,9 @@ var difficulty = 0
 var paused = false
 var base_clicks_per_second = 6.0
 var clicks_per_second
+var base_passive_regen = 1.0
+var passive_regen = 1.0
+var regen_timer = 0.0
 
 var dash_animation_timer = 0.0
 
@@ -50,6 +53,12 @@ func _ready():
 
 func _process(delta: float) -> void:
 	dash_animation_timer += delta
+	regen_timer += delta
+	
+	if regen_timer >= 1.0 and TestPlayer.visible:
+		heal(passive_regen)
+		regen_timer = 0
+	
 	if Input.is_action_just_pressed("Pause"):
 		get_tree().paused = not get_tree().paused
 	if GameState.leave_shop_triggered:
@@ -176,6 +185,7 @@ func update_modifiers():
 	crit_chance = base_crit_chance
 	crit_damage = base_crit_damage
 	clicks_per_second = base_clicks_per_second
+	passive_regen = base_passive_regen
 	for item in inventory:
 		if item.has_method("get_flat_attack_damage"):
 			additional_dmg += item.get_flat_attack_damage()
@@ -191,10 +201,12 @@ func update_modifiers():
 			max_hp_percentage += item.get_hp_percentage()
 		if item.has_method("get_armor"):
 			total_armor += item.get_armor()
+		if item.has_method("get_regen"):
+			passive_regen += item.get_region()
 		if item.has_method("get_cps"):
 			clicks_per_second += item.get_cps()
 			hold_click_timer.wait_time = 1.0 / clicks_per_second
-	max_hp = round(max_hp * (1 + max_hp_percentage))
+	max_hp = max_hp * (1 + max_hp_percentage)
 	if inventory.back().has_method("heal"):
 		inventory.back().heal()
 

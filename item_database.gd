@@ -34,7 +34,7 @@ func register_items():
 		preload("res://items/scripts/1/bloody_syringe.gd"),
 		preload("res://items/scripts/2/contaminated_syringe.gd"),
 		preload("res://items/scripts/2/windtwister_scroll.gd"),
-		preload("res://items/scripts/3/siphoning_soul.gd"),
+		preload("res://items/scripts/4/siphoning_soul.gd"),
 		preload("res://items/scripts/4/the_meal.gd"),
 		# preload more items here...
 	]
