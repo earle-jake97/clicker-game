@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseEnemy
 signal died
 @export var speed: float
 @export var min_speed: float
@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	attack_timer += delta
-	if attack_timer >= attack_speed and not dead:
+	if attack_timer >= attack_speed and not dead and not is_frozen:
 		attack_timer = 0.0
 		launch_projectile()
 

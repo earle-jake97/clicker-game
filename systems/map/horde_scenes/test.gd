@@ -16,9 +16,10 @@ const Oil = preload("res://items/scripts/2/oil.gd")
 const Awp = preload("res://items/scripts/2/awp.gd")
 const _1_HELL = preload("res://backgrounds/1_hell.png")
 const WindtwisterScroll = preload("res://items/scripts/2/windtwister_scroll.gd")
+const CastIron = preload("res://items/scripts/2/cast_iron.gd")
 func _ready():
-
-	#var item_instance = Thunderbolt.new()
+#
+	#var item_instance = CastIron.new()
 	#player.add_item(item_instance)
 #
 	## Optional: If it needs to run _process or emit signals

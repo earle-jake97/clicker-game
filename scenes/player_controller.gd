@@ -30,6 +30,8 @@ var clicks_per_second
 var base_passive_regen = 1.0
 var passive_regen = 1.0
 var regen_timer = 0.0
+var luck
+var base_luck = 0
 
 var dash_animation_timer = 0.0
 
@@ -39,6 +41,7 @@ var last_enemy_attacked = null # For use in chain attacks
 
 
 func _ready():
+	luck = base_luck
 	clicks_per_second = base_clicks_per_second
 	current_hp = base_max_hp
 	total_armor = base_armor
@@ -186,7 +189,10 @@ func update_modifiers():
 	crit_damage = base_crit_damage
 	clicks_per_second = base_clicks_per_second
 	passive_regen = base_passive_regen
+	luck = base_luck
 	for item in inventory:
+		if item.has_method("get_luck"):
+			luck += item.get_luck()
 		if item.has_method("get_flat_attack_damage"):
 			additional_dmg += item.get_flat_attack_damage()
 		if item.has_method("get_percent_attack_damage"):
@@ -214,6 +220,10 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 	damage = (base_attack_damage + additional_dmg) * specific_multiplier
 	damage *= (mult_dmg + 1)
 	var crit_roll = randf()
+	for i in range(luck):
+		var roll = randf()
+		if roll < crit_roll:
+			crit_roll = roll
 	var is_crit = damage_type
 	if crit_roll <= crit_chance:
 		damage = round(damage*crit_damage) #Crit damage

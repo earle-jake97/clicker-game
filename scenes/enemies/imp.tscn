@@ -570,6 +570,13 @@ size = Vector2(67.75, 74)
 script = ExtResource("1_hdgym")
 max_health = 80.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../sprite")
+libraries = {
+"": SubResource("AnimationLibrary_rw0yy")
+}
+autoplay = "move"
+
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.537255)
 z_as_relative = false
@@ -600,12 +607,6 @@ texture = ExtResource("6_16gse")
 [node name="arm1" type="Sprite2D" parent="sprite"]
 position = Vector2(22, 25)
 texture = ExtResource("7_mv1j5")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sprite"]
-libraries = {
-"": SubResource("AnimationLibrary_rw0yy")
-}
-autoplay = "move"
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1

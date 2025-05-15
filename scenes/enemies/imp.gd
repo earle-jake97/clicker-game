@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseEnemy
 
 signal died
 var player = PlayerController
@@ -13,7 +13,7 @@ var health: float
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
 @export var value_min: int
 @export var value_max: int
-@onready var animation_player: AnimationPlayer = $sprite/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Node2D = $sprite
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var bleed_icon: Sprite2D = $"bleed stacks"
@@ -86,7 +86,7 @@ func _process(delta: float) -> void:
 			post_attack_delay = 0.0
 
 	# Move toward player only if not waiting after attack
-	elif player and not is_attacking and not dead:
+	elif player and not is_attacking and not dead and not is_frozen:
 		global_position = global_position.move_toward(player.player.global_position, speed * delta)
 
 	if health <= 0:

@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseEnemy
 
 signal died
 var player = PlayerController
@@ -96,7 +96,7 @@ func _process(delta: float) -> void:
 			post_attack_delay = 0.0
 
 	# Move toward player only if not waiting after attack
-	elif player and not is_attacking and not dead and not is_pushed:
+	elif player and not is_attacking and not dead and not is_pushed and not is_frozen:
 		global_position = global_position.move_toward(player.player.global_position, speed * delta)
 
 	if health <= 0:
@@ -107,7 +107,7 @@ func _process(delta: float) -> void:
 
 	z_index = round(global_position.y)
 
-	if touching_player and damage_cooldown >= player.iframe_duration and not is_attacking and not dead:
+	if touching_player and damage_cooldown >= player.iframe_duration and not is_attacking and not dead and not is_frozen:
 		reached_player = true
 		start_attack()
 

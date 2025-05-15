@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseEnemy
 signal died(enemy_node)
 var controller = PlayerController
 var player_model = TestPlayer

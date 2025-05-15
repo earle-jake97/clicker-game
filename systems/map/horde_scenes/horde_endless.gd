@@ -29,10 +29,10 @@ func check_level_completion():
 		if get_tree().get_nodes_in_group("enemy"):
 			return false
 		var rand = randf()
-		if rand <= 0.10:
+		if rand <= 0.15:
 			print("going to shop")
 			SceneManager.switch_to_scene("res://systems/shop/shop_endless.tscn")
-		elif rand <= 0.50:
+		elif rand <= 0.55:
 			print("going to item")
 			
 			SceneManager.switch_to_scene("res://systems/shop/item_room_endless.tscn")
