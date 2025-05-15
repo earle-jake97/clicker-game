@@ -981,41 +981,49 @@ text = "x0"
 [node name="sprite" type="Node2D" parent="."]
 
 [node name="tail" type="Sprite2D" parent="sprite"]
-position = Vector2(67, -86)
+position = Vector2(62, -107)
+rotation = -0.756874
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_gr1y5")
 
 [node name="left arm" type="Sprite2D" parent="sprite"]
-position = Vector2(-56, -78)
+position = Vector2(-49, -65)
+rotation = 0.254708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_j5buf")
 
 [node name="leg2" type="Sprite2D" parent="sprite"]
-position = Vector2(15, -51)
+position = Vector2(24, -48)
+rotation = -0.170085
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ccdv2")
 
 [node name="body" type="Sprite2D" parent="sprite"]
-position = Vector2(-2, -99)
+position = Vector2(-1, -91)
+rotation = -0.422748
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_n8ewx")
 
 [node name="leg" type="Sprite2D" parent="sprite"]
-position = Vector2(39, -49)
+position = Vector2(48, -55)
+rotation = -0.391593
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ccdv2")
 
 [node name="head" type="Sprite2D" parent="sprite"]
-position = Vector2(-29, -157)
+position = Vector2(-44, -133)
+rotation = -0.0961469
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_h0a8x")
 
 [node name="right arm" type="Sprite2D" parent="sprite"]
-position = Vector2(6, -76)
+position = Vector2(-16, -60)
+rotation = 0.340471
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_500si")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2(-14, -30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

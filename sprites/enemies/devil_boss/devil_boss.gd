@@ -36,7 +36,7 @@ var max_health = 2000
 var bleed_stacks = 0
 var dead = false
 var paid_out = false
-var value = 30
+var value = 200
 var death_timer = 0.0
 var mouth_timer = 0.0
 var armor = 50
@@ -60,7 +60,7 @@ func _ready() -> void:
 	animation_player.animation_set_next("throw_minions", "idle")
 	bleed_icon.visible = false
 	if PlayerController.difficulty >= 15:
-		max_health = max_health * pow(1 + 0.10, PlayerController.difficult)
+		max_health = max_health * pow(1 + 0.10, PlayerController.difficulty)
 	else:
 		max_health *= controller.difficulty
 	health = max_health

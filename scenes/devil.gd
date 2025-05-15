@@ -13,13 +13,18 @@ var health: float
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
 @export var value_min: int
 @export var value_max: int
-@onready var animation_player: AnimationPlayer = $sprite/AnimationPlayer
-@onready var sprite: AnimatedSprite2D = $sprite
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var bleed_icon: Sprite2D = $"bleed stacks"
 @onready var bleed_label: Label = $"bleed stacks/Label"
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var shadow: Sprite2D = $shadow
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Node2D = $sprite
+@onready var head: Sprite2D = $sprite/head
+const NEW_DEVIL_HEAD = preload("res://sprites/enemies/devil/new_devil_head.png")
+const NEW_DEVIL_HEAD_DEAD = preload("res://sprites/enemies/devil/new_devil_head_dead.png")
+const NEW_DEVIL_HEAD_SMILE = preload("res://sprites/enemies/devil/new_devil_head_smile.png")
+
 var debuffs = []
 
 var base_attack_speed = 0.7
@@ -82,6 +87,7 @@ func _process(delta: float) -> void:
 		post_attack_delay += delta
 		if post_attack_delay >= attack_speed:
 			waiting_after_attack = false
+			head.texture = NEW_DEVIL_HEAD
 			if player.player.global_position.x > global_position.x:
 				animation_player.play("walk_2")
 			else:
@@ -119,6 +125,7 @@ func push_back(strength: float):
 	pushback_timer = 0.0
 
 func start_attack():
+	head.texture = NEW_DEVIL_HEAD_SMILE
 	if player.player.global_position.x > global_position.x:
 		animation_player.play("attack_right")
 	else:
@@ -150,7 +157,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func die():
 	bleed_icon.visible = false
-	sprite.play("die")
+	head.texture = NEW_DEVIL_HEAD_DEAD
 	progress_bar.hide()
 	remove_from_group("enemy")
 	animation_player.play("die")

@@ -618,6 +618,7 @@ texture_under = ExtResource("5_umo2t")
 texture_progress = ExtResource("6_f4ftq")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2(-5, -114)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
