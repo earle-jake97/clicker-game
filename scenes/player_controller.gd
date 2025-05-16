@@ -98,8 +98,8 @@ func move_player() -> void:
 		dash_animation_timer = 0
 	if position < 1:
 		position = 1
-	elif position > 3:
-		position = 3
+	elif position > position_map.size():
+		position = position_map.size()
 	
 	if position_map.has(position) and not GameState.on_map_screen:
 		var pos_node = position_map[position]
