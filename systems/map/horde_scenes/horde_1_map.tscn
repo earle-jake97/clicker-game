@@ -10,6 +10,7 @@
 
 [node name="Test Map" type="Node2D"]
 texture_filter = 2
+position = Vector2(-2, 0)
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_ul3ds")
 
@@ -78,3 +79,8 @@ enemy_damage = 5
 enemy_cash_value_min = 1
 enemy_cash_value_max = 2
 enemy_speed = 275
+
+[node name="position4" parent="." instance=ExtResource("3_ekpqm")]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(516.641, 383.721)
+pos = 4
