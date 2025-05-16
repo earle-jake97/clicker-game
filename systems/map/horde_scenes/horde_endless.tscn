@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rb1s3vly17nx"]
+[gd_scene load_steps=9 format=3 uid="uid://rb1s3vly17nx"]
 
 [ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="1_f8egw"]
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_endless.gd" id="1_h4i6l"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="5_fuvhk"]
 [ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="6_30tdk"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="7_iibda"]
+[ext_resource type="PackedScene" uid="uid://pad5r8i2uemg" path="res://scenes/enemies/ent.tscn" id="8_wctcs"]
 
 [node name="Test Map" type="Node2D"]
 texture_filter = 2
@@ -81,3 +82,18 @@ enemy_speed = 275
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(542.942, 313.953)
+
+[node name="ent spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1094.34, 390.504)
+script = ExtResource("4_6ib1t")
+enemy_scene = ExtResource("8_wctcs")
+y_min = 200.0
+y_max = -200.0
+min_spawn_time = 10.0
+max_spawn_time = 15.0
+enemy_max_health = 800
+enemy_max_armor_penetration = 10
+enemy_damage = 25
+enemy_cash_value_min = 30
+enemy_cash_value_max = 40
+enemy_speed = 20
