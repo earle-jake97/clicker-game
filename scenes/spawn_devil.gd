@@ -16,6 +16,7 @@ extends Node2D
 const PROJECTILE_DEMON = preload("res://scenes/projectile_demon.tscn")
 const DEVIL = preload("res://scenes/devil.tscn")
 const IMP = preload("res://scenes/enemies/imp.tscn")
+const ENT = preload("res://scenes/enemies/ent.tscn")
 
 var player_controller = PlayerController
 var spawn_cap
@@ -34,7 +35,7 @@ func _ready() -> void:
 	max_spawn_time = max_spawn_time * pow(1 - decayRate, difficulty)
 	if enemy_scene == DEVIL:
 		if difficulty >= 15:
-			enemy_max_health = enemy_max_health * pow(1 + 0.04, difficulty)
+			enemy_max_health = enemy_max_health * pow(1 + 0.15, difficulty)
 		else:
 			enemy_max_health += difficulty * 4
 		min_spawns = max(difficulty * 15, max_spawns)
@@ -42,7 +43,7 @@ func _ready() -> void:
 	if enemy_scene == PROJECTILE_DEMON:
 		min_spawns = max(1, round(difficulty/2.0))
 		if difficulty >= 15:
-			enemy_max_health = enemy_max_health * pow(1 + 0.07, difficulty)
+			enemy_max_health = enemy_max_health * pow(1 + 0.15, difficulty)
 		else:
 			enemy_max_health += difficulty * 20
 		max_spawns = min_spawns
@@ -52,11 +53,20 @@ func _ready() -> void:
 			max_spawns = 0
 		else:
 			if difficulty >= 15:
-				enemy_max_health = enemy_max_health * pow(1 + 0.04, difficulty)
+				enemy_max_health = enemy_max_health * pow(1 + 0.15, difficulty)
 			else:
 				enemy_max_health += difficulty * 4
 			min_spawns = max(difficulty * 3, max_spawns)
-			min_spawns + randi_range(0, 3) 
+	if enemy_scene == ENT:
+		if difficulty <= 5:
+			min_spawns = 0
+			max_spawns = 0
+		else:
+			if difficulty >= 15:
+				enemy_max_health = enemy_max_health * pow(1 + 0.15, difficulty)
+			else:
+				enemy_max_health += difficulty * 1.3
+				min_spawns = max(difficulty * 1, max_spawns)
 	
 	spawn_cap = randi_range(min_spawns, max_spawns)
 	next_spawn_time = randf_range(min_spawn_time, max_spawn_time)
@@ -87,9 +97,17 @@ func spawn_devil():
 		enemy.value_max *= 10
 	else:
 		var base_color = Color.SALMON
-		var red_variation = randf_range(-0.3,0.3)
-		var blue_variation = randf_range(-0.2,0.2)
-		var green_variation = randf_range(-0.1,0.1)
+		var red_variation
+		var blue_variation
+		var green_variation
+		if enemy_scene == ENT:
+			red_variation = randf_range(-3, 3)
+			blue_variation = randf_range(-3,3)
+			green_variation = randf_range(-3,3)
+		else:
+			red_variation = randf_range(-0.3,0.3)
+			blue_variation = randf_range(-0.2,0.2)
+			green_variation = randf_range(-0.1,0.1)
 		var final_color = Color(
 			clamp(base_color.r + red_variation, 0.0, 1.0),
 			clamp(base_color.g + green_variation, 0.0, 1.0),
