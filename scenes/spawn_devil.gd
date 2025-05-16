@@ -34,40 +34,32 @@ func _ready() -> void:
 	min_spawn_time = min_spawn_time * pow(1 - decayRate, difficulty);
 	max_spawn_time = max_spawn_time * pow(1 - decayRate, difficulty)
 	if enemy_scene == DEVIL:
-		if difficulty >= 15:
-			enemy_max_health = enemy_max_health * pow(1 + 0.09, difficulty)
-		else:
-			enemy_max_health += difficulty * 3.5
+		
 		min_spawns = max(difficulty * 15, max_spawns)
 		max_spawns = min_spawns + randi_range(0, 5) 
 	if enemy_scene == PROJECTILE_DEMON:
 		min_spawns = max(1, round(difficulty/2.0))
-		if difficulty >= 15:
-			enemy_max_health = enemy_max_health * pow(1 + 0.11, difficulty)
-		else:
-			enemy_max_health += difficulty * 18
 		max_spawns = min_spawns
 	if enemy_scene == IMP:
 		if difficulty <= 2:
 			min_spawns = 0
 			max_spawns = 0
 		else:
-			if difficulty >= 15:
-				enemy_max_health = enemy_max_health * pow(1 + 0.09, difficulty)
-			else:
-				enemy_max_health += difficulty * 3.5
 			min_spawns = max(difficulty * 3, max_spawns)
 	if enemy_scene == ENT:
 		if difficulty <= 5:
 			min_spawns = 0
 			max_spawns = 0
 		else:
-			if difficulty >= 15:
-				enemy_max_health = enemy_max_health * pow(1 + 0.12, difficulty)
-			else:
-				enemy_max_health += difficulty * 1.3
-				min_spawns = max(difficulty * 1, max_spawns)
-	
+			min_spawns = max(difficulty * 1, max_spawns)
+	if difficulty >= 40:
+		enemy_max_health = enemy_max_health * pow(1 + 0.20, difficulty)
+	elif difficulty >= 25:
+		enemy_max_health = enemy_max_health * pow(1 + 0.14, difficulty)
+	elif difficulty >= 15:
+		enemy_max_health = enemy_max_health * pow(1 + 0.09, difficulty)
+	else:
+		enemy_max_health += difficulty * 3.5
 	spawn_cap = randi_range(min_spawns, max_spawns)
 	next_spawn_time = randf_range(min_spawn_time, max_spawn_time)
 
