@@ -15,6 +15,8 @@ const HEART_CASH_DEAD = preload("res://systems/heart_cash_dead.png")
 @onready var temp: AnimationPlayer = $Label/temp
 @onready var endless_sprite: Sprite2D = $endless_sprite
 @onready var room_count: Label = $endless_sprite/room_count
+@onready var button: TextureButton = $Button
+var fast_forward = false
 
 var dead = false
 # Called when the node enters the scene tree for the first time.
@@ -67,3 +69,11 @@ func format_large_number(number: int) -> String:
 		formatted = formatted.left(formatted.length() - 1)
 
 	return formatted + suffixes[magnitude]
+
+
+func _on_button_pressed() -> void:
+	fast_forward = not fast_forward
+	if fast_forward:
+			Engine.time_scale = 5.0
+	else:
+		Engine.time_scale = 1.0

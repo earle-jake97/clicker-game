@@ -74,7 +74,6 @@ func _on_area_2d_mouse_exited() -> void:
 
 func go_to_horde_room():
 	PlayerController.difficulty += 1
-	print("Increasing difficulty")
 	var horde_room = HORDE.instantiate()
 	get_tree().root.add_child(horde_room)
 	get_tree().current_scene = horde_room

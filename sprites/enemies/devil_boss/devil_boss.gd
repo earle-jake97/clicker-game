@@ -60,7 +60,7 @@ func _ready() -> void:
 	animation_player.animation_set_next("throw_minions", "idle")
 	bleed_icon.visible = false
 	if PlayerController.difficulty >= 15:
-		max_health = max_health * pow(1 + 0.10, PlayerController.difficulty)
+		max_health = max_health * pow(1 + 0.12, PlayerController.difficulty)
 	else:
 		max_health *= controller.difficulty
 	health = max_health
@@ -100,7 +100,7 @@ func _process(delta: float) -> void:
 	meditate_timer += delta
 	
 	if meditate_timer >= MEDITATE_TIME and meditating:
-		bleed_stacks = 0
+		bleed_stacks /= 2
 		health += round(max_health/18.0)
 		meditating = false
 	

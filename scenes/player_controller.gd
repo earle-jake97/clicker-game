@@ -3,8 +3,6 @@ extends Node
 @export var position = 2
 @export var iframe_duration = 1
 @onready var player = TestPlayer
-const PLAYER_IDLE = preload("res://sprites/test_player/new_player_idle.png")
-const PLAYER_MOVE = preload("res://sprites/test_player/new_player_move.png")
 
 var hold_click_timer := Timer.new()
 var position_map := {}
@@ -66,8 +64,6 @@ func _process(delta: float) -> void:
 		get_tree().paused = not get_tree().paused
 	if GameState.leave_shop_triggered:
 		Tooltip.hide_tooltip()
-	if dash_animation_timer >= 0.1:
-		player.sprite_2d.texture = PLAYER_IDLE
 	
 	if get_nearest_enemy():
 		Crosshair.target_enemy(get_nearest_enemy())
@@ -88,13 +84,13 @@ func _physics_process(delta: float) -> void:
 func move_player() -> void:
 	if Input.is_action_just_pressed("up") and not TestPlayer.dead:
 		position -= 1
-		player.animation_player.play("move_up")
-		player.sprite_2d.texture = PLAYER_MOVE
+		if position >= 1:
+			player.animation_player.play("move_up")
 		dash_animation_timer = 0
 	elif Input.is_action_just_pressed("down") and not TestPlayer.dead:
 		position += 1
-		player.animation_player.play("move_down")
-		player.sprite_2d.texture = PLAYER_MOVE
+		if position <= position_map.size():
+			player.animation_player.play("move_down")
 		dash_animation_timer = 0
 	if position < 1:
 		position = 1
@@ -236,7 +232,6 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 	}
 
 func take_damage(damage, penetration) -> void:
-	print(total_armor)
 	var damage_reduction = (total_armor - penetration)/(100.0 + total_armor - penetration)
 	damage *= (1 - damage_reduction)
 	damage = round(damage)

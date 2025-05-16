@@ -9,7 +9,6 @@ var file_name = "res://items/scripts/4/lucky_horseshoe.gd"
 var luck = 1
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 
 func get_luck():
 	return luck

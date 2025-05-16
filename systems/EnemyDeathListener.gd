@@ -29,5 +29,4 @@ func spawn_oil_explosion(position: Vector2, enemy: Node):
 	explosion.global_position = position
 	explosion.explosion_damage = damage
 	explosion.z_index = explosion.global_position.y
-	print("Spawning explosion at:", position, "with damage:", damage)
 	add_child(explosion)

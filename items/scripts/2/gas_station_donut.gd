@@ -9,7 +9,6 @@ var file_name = "res://items/scripts/2/gas_station_donut.gd"
 func add_to_inventory():
 	player.add_item(self)
 	heal()
-	print("Added " + self.name + " to inventory.")
 
 func get_flat_hp():
 	return health

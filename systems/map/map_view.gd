@@ -159,7 +159,6 @@ func generate_layer_8(room_list: Array) -> void:
 # Utility
 func change_sprite(node, room_type, resource) -> void:
 	if node is Sprite2D:
-		print("making " + node.name + " a " + room_type)
 		node.texture = resource
 		node.set_meta("room_type", room_type)
 

@@ -9,7 +9,6 @@ var item_icon = preload("res://items/icons/the_meal.png")
 var file_name = "res://items/scripts/4/the_meal.gd"
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 	heal()
 
 func get_flat_attack_damage():

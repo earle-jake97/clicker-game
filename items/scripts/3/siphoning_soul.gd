@@ -18,4 +18,3 @@ func proc(enemy, any):
 		var heal_multiplier = (2.0 - pow(2.0, -count))
 		var heal_amount = PlayerController.max_hp * base_heal_amount * heal_multiplier
 		PlayerController.heal(heal_amount)
-		print(player.current_hp)

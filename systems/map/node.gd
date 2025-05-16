@@ -32,7 +32,6 @@ func select_node() -> void:
 		var connected_nodes = GameState.node_connections_map_1.get(GameState.current_node_id, [])
 
 		if node_id in connected_nodes:
-			print("Valid move to:", node_id)
 			GameState.current_node_id = node_id
 			highlight_current_node()
 			marker.visible = true

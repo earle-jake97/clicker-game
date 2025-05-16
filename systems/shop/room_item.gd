@@ -34,7 +34,6 @@ func _process(delta: float) -> void:
 					return
 				var item_script = item.new()
 				PlayerController.add_item(item_script)
-				print("Player Items: " + str(PlayerController.inventory))
 				Tooltip.hide_tooltip()
 				queue_free()
 				GameState.leave_shop_triggered = true

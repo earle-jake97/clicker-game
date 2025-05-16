@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 				var item_script = item.new()
 				PlayerController.add_item(item_script)
 				PlayerController.cash -= cost
-				print("Player Items: " + str(PlayerController.inventory))
 				Tooltip.hide_tooltip()
 				queue_free()
 			else:

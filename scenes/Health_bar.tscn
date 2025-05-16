@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://fyxev4jdy2xn"]
+[gd_scene load_steps=15 format=3 uid="uid://fyxev4jdy2xn"]
 
 [ext_resource type="Script" path="res://scenes/health_bar.gd" id="1_csnks"]
 [ext_resource type="Texture2D" uid="uid://bi0jr2hyhkl48" path="res://systems/heart_icon_healthy.png" id="1_jrxhb"]
 [ext_resource type="Texture2D" uid="uid://cmpeyckcg31u0" path="res://systems/heart_cash.png" id="2_lk6qa"]
 [ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="2_p52ks"]
 [ext_resource type="Texture2D" uid="uid://cc855ynf4mlm5" path="res://systems/endless_sign.png" id="5_7hopj"]
+[ext_resource type="Texture2D" uid="uid://b1r7a8xuwltie" path="res://sprites/fast_forward.png" id="6_qq41d"]
 
 [sub_resource type="Animation" id="Animation_nitp3"]
 length = 0.001
@@ -206,3 +207,21 @@ theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("2_p52ks")
 text = "123/123"
 horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 838.0
+offset_top = 526.0
+offset_right = 1092.0
+offset_bottom = 766.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_qq41d")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

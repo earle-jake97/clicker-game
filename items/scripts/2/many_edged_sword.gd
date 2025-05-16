@@ -10,7 +10,6 @@ var item_icon = preload("res://items/icons/many_edged_sword.png")
 var file_name = "res://items/scripts/2/many_edged_sword.gd"
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 
 func get_flat_attack_damage():
 	return dmg_increase

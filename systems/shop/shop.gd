@@ -38,10 +38,6 @@ func set_up_items():
 			var discounted = false
 			if price != base_price:
 				discounted = true
-			print("Difficulty:", PlayerController.difficulty)
-			print("Rarity:", rarity)
-			print("Base price:", base_price)
-			print("Final price:", price)
 
 			item.assign_item(
 				instance.item_icon,

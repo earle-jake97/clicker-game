@@ -35,10 +35,3 @@ pos = 1
 z_index = 470
 position = Vector2(887.682, 311.047)
 scale = Vector2(0.4, 0.4)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 2000
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(27.7555, 16.3392)
-color = Color(0.36, 0, 0.00599991, 0.211765)
