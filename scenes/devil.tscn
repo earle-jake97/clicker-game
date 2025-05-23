@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_j47kg"]
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="3_oxgef"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="4_kl5w0"]
-[ext_resource type="Texture2D" uid="uid://c1tmm4qu44aji" path="res://items/misc/bleed_icon.png" id="6_gah5q"]
+[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="5_xurbf"]
 [ext_resource type="Texture2D" uid="uid://cse6g4c2cilem" path="res://sprites/enemies/devil/new_devil_body_arm2.png" id="7_wpaiu"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="7_wqoer"]
 [ext_resource type="Texture2D" uid="uid://d4bo2sd5ggg03" path="res://sprites/enemies/devil/new_devil_body_leg1.png" id="8_rnhnd"]
@@ -1487,25 +1487,19 @@ scale = Vector2(0.437226, 0.402117)
 texture_under = ExtResource("3_oxgef")
 texture_progress = ExtResource("4_kl5w0")
 
+[node name="debuff_container" type="HBoxContainer" parent="."]
+offset_left = 25.0
+offset_top = -112.0
+offset_right = 65.0
+offset_bottom = -72.0
+script = ExtResource("5_xurbf")
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-13, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(11.5, -34)
 shape = SubResource("RectangleShape2D_tjubl")
-
-[node name="bleed stacks" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(31, -100)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("6_gah5q")
-
-[node name="Label" type="Label" parent="bleed stacks"]
-offset_left = 11.4286
-offset_top = -10.6667
-offset_right = 51.4286
-offset_bottom = 12.3333
-text = "x0"
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-58, -65)

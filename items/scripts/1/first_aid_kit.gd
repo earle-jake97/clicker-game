@@ -9,7 +9,6 @@ var item_icon = preload("res://items/icons/first_aid_kit.png")
 var file_name = "res://items/scripts/1/first_aid_kit.gd"
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 	heal()
 
 func get_hp_percentage():

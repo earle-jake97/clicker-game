@@ -26,10 +26,10 @@ func proc(target: Node, source_item: BaseItem = null):
 		target.speed = target.base_speed * (1 - slow)
 	if "attack_speed" in target and "base_attack_speed" in target:
 		target.attack_speed = target.base_attack_speed * (1 + slow)
-	if "sprite" in target and not target.has_meta("ice_cube_slow_applied"):
-		target.set_meta("ice_cube_slow_applied", true)
-		target.sprite.modulate *= Color(0.3, 0.3, 2.0, 1.0)
-		Color.AQUA
+	if not target.debuffs.has(debuff.Debuff.CHILL):
+		target.debuffs.append(debuff.Debuff.CHILL)
+		target.apply_debuff()
+
 
 func get_slow_percentage(item_count: int, max_slow: float = 0.9, scale: float= 0.5) -> float:
 	return max_slow * (1.0 - pow(scale, item_count))

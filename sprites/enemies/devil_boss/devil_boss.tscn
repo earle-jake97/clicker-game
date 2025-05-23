@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://pfbshj7x4cra" path="res://sprites/enemies/devil_boss/arm_1.png" id="1_k8u28"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_4u6d6"]
 [ext_resource type="Texture2D" uid="uid://b07wlip3fehrk" path="res://sprites/enemies/devil_boss/leg_1.png" id="2_mkqc8"]
+[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="2_pc16v"]
 [ext_resource type="Texture2D" uid="uid://texojamrwdb0" path="res://sprites/enemies/devil_boss/body.png" id="3_6ibbh"]
 [ext_resource type="Texture2D" uid="uid://5oif148hfo8n" path="res://sprites/enemies/devil_boss/arm_2.png" id="4_2g6vc"]
 [ext_resource type="Texture2D" uid="uid://cgnrpf68a0jat" path="res://sprites/enemies/devil_boss/head.png" id="5_6quf5"]
@@ -11,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://dhqmkx1oukr5d" path="res://sprites/enemies/devil_boss/minion_ball.tscn" id="8_owrt7"]
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="9_5dash"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="10_4pgjm"]
-[ext_resource type="Texture2D" uid="uid://c1tmm4qu44aji" path="res://items/misc/bleed_icon.png" id="11_m16vj"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="12_dcpko"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s526b"]
@@ -1701,6 +1701,16 @@ _data = {
 [node name="Devil_Boss" type="Node2D" groups=["boss", "enemy"]]
 script = ExtResource("1_i6dqg")
 
+[node name="debuff_container" type="HBoxContainer" parent="."]
+texture_filter = 2
+texture_repeat = 1
+offset_left = 162.0
+offset_top = -448.0
+offset_right = 202.0
+offset_bottom = -408.0
+scale = Vector2(3, 3)
+script = ExtResource("2_pc16v")
+
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
 offset_left = -162.0
@@ -1718,18 +1728,6 @@ position = Vector2(6, 53)
 visible = false
 position = Vector2(41, 6)
 shape = SubResource("CircleShape2D_s526b")
-
-[node name="bleed stacks" type="Sprite2D" parent="."]
-position = Vector2(212, -414)
-scale = Vector2(2, 2)
-texture = ExtResource("11_m16vj")
-
-[node name="Label" type="Label" parent="bleed stacks"]
-offset_left = 11.4286
-offset_top = -10.6667
-offset_right = 51.4286
-offset_bottom = 12.3333
-text = "x0"
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(137, -184)

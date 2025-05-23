@@ -16,8 +16,12 @@ func _process(delta: float) -> void:
 		elapsed_time -= bleed_tick
 		timed_bleed()
 
-func proc(enemy, any):
-	enemy.bleed_stacks += 1
+func proc(target, any):
+	target.bleed_stacks += 1
+	if not target.debuffs.has(debuff.Debuff.BLEED):
+		target.debuffs.append(debuff.Debuff.BLEED)
+		target.apply_debuff()
+
 
 func timed_bleed():
 	for enemy in get_tree().get_nodes_in_group("enemy"):

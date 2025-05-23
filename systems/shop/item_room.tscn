@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://gcxkcs8mkau8"]
+[gd_scene load_steps=4 format=3 uid="uid://gcxkcs8mkau8"]
 
 [ext_resource type="Script" path="res://systems/shop/item_room.gd" id="1_f5v78"]
 [ext_resource type="Texture2D" uid="uid://b2rm71nahp3la" path="res://sprites/test_player/item_room.png" id="2_p3haw"]
 [ext_resource type="PackedScene" uid="uid://cy0s10jfhtpyo" path="res://systems/shop/room_item.tscn" id="3_k8iy7"]
-[ext_resource type="Script" path="res://systems/shop/room_item.gd" id="4_xq6yw"]
 
 [node name="item_room" type="Node2D"]
 texture_filter = 2
@@ -14,13 +13,10 @@ position = Vector2(576, 324)
 texture = ExtResource("2_p3haw")
 
 [node name="Room_Item" parent="." instance=ExtResource("3_k8iy7")]
-position = Vector2(186, 318)
-script = ExtResource("4_xq6yw")
+position = Vector2(189, 341)
 
 [node name="Room_Item2" parent="." instance=ExtResource("3_k8iy7")]
 position = Vector2(575, 412)
-script = ExtResource("4_xq6yw")
 
 [node name="Room_Item3" parent="." instance=ExtResource("3_k8iy7")]
-position = Vector2(973, 348)
-script = ExtResource("4_xq6yw")
+position = Vector2(987, 369)

@@ -16,11 +16,12 @@ var health: float
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Node2D = $sprite
 @onready var progress_bar: TextureProgressBar = $ProgressBar
-@onready var bleed_icon: Sprite2D = $"bleed stacks"
-@onready var bleed_label: Label = $"bleed stacks/Label"
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var shadow: Sprite2D = $shadow
+@onready var debuff_container: HBoxContainer = $debuff_container
+
 var debuffs = []
+var previous_debuffs = []
 
 var base_attack_speed = 0.7
 var bleed_stacks = 0
@@ -59,10 +60,6 @@ func _process(delta: float) -> void:
 	
 	if pushback_timer >= pushback_length:
 		is_pushed = false
-	if bleed_stacks > 0:
-		bleed_icon.visible = true
-		bleed_label.text = "x" + str(bleed_stacks)
-		debuffs.append(debuff.Debuff.BLEED)
 	if dead:
 		var color = sprite.modulate
 		shadow.visible = false
@@ -138,12 +135,13 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		touching_player = false
 		reached_player = false
 
-
-
 func die():
-	bleed_icon.visible = false
+	debuff_container.hide()
 	progress_bar.hide()
 	remove_from_group("enemy")
 	animation_player.play("die")
 	dead = true
 	died.emit()
+
+func apply_debuff():
+	debuff_container.update_debuffs()

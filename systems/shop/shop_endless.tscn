@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://df0x1d8hgyh0j"]
+[gd_scene load_steps=10 format=3 uid="uid://df0x1d8hgyh0j"]
 
 [ext_resource type="Script" path="res://systems/shop/shop_endless.gd" id="1_wprro"]
 [ext_resource type="Texture2D" uid="uid://bvul46pxm8stu" path="res://systems/shop/shop background.png" id="2_3ts12"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dy1svrnwt5qxr" path="res://systems/shop/player_hands2.png" id="6_jwujy"]
 [ext_resource type="Texture2D" uid="uid://c1iwsrkis4247" path="res://systems/shop/exit.png" id="7_kwsjb"]
 [ext_resource type="PackedScene" uid="uid://cqse1hh85l6qv" path="res://systems/shop/health_item.tscn" id="8_803iw"]
-[ext_resource type="PackedScene" uid="uid://brbvsisq2nbjk" path="res://systems/shop/shop_item_endless.tscn" id="9_tq0bm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfj14"]
 size = Vector2(208, 99)
@@ -76,8 +75,6 @@ position = Vector2(852, 440)
 
 [node name="Health_Item4" parent="." instance=ExtResource("8_803iw")]
 position = Vector2(374, 266)
-
-[node name="Shop_Item8" parent="." instance=ExtResource("9_tq0bm")]
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

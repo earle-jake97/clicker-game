@@ -1,5 +1,6 @@
 extends BaseEnemy
 
+
 signal died
 var player = PlayerController
 @export var min_speed: float
@@ -11,11 +12,10 @@ var health: float
 @export var max_health: float
 @onready var health_bar: TextureProgressBar = $ProgressBar
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
+@onready var debuff_container: HBoxContainer = $debuff_container
 @export var value_min: int
 @export var value_max: int
 @onready var progress_bar: TextureProgressBar = $ProgressBar
-@onready var bleed_icon: Sprite2D = $"bleed stacks"
-@onready var bleed_label: Label = $"bleed stacks/Label"
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var shadow: Sprite2D = $shadow
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -63,12 +63,7 @@ func _process(delta: float) -> void:
 	pushback_timer += delta
 	if pushback_timer >= pushback_length:
 		is_pushed = false
-	
-	
-	if bleed_stacks > 0:
-		bleed_icon.visible = true
-		bleed_label.text = "x" + str(bleed_stacks)
-		debuffs.append(debuff.Debuff.BLEED)
+
 	if dead:
 		var color = sprite.modulate
 		shadow.visible = false
@@ -153,13 +148,14 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		touching_player = false
 		reached_player = false
 
-
-
 func die():
-	bleed_icon.visible = false
 	head.texture = NEW_DEVIL_HEAD_DEAD
 	progress_bar.hide()
+	debuff_container.hide()
 	remove_from_group("enemy")
 	animation_player.play("die")
 	dead = true
 	died.emit()
+
+func apply_debuff():
+	debuff_container.update_debuffs()

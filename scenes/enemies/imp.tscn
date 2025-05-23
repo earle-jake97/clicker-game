@@ -1,6 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://b0vaiulul6fbm"]
 
 [ext_resource type="Script" path="res://scenes/enemies/imp.gd" id="1_hdgym"]
+[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="2_6irr7"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_h7qfv"]
 [ext_resource type="Texture2D" uid="uid://dudba01qk7bcw" path="res://sprites/enemies/imp/arm2.png" id="3_mnf50"]
 [ext_resource type="Texture2D" uid="uid://6bu82kni8vbn" path="res://sprites/enemies/imp/tail.png" id="4_qsbnw"]
@@ -8,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="5_umo2t"]
 [ext_resource type="Texture2D" uid="uid://dw6o4uafkf0gb" path="res://sprites/enemies/imp/head.png" id="6_16gse"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="6_f4ftq"]
-[ext_resource type="Texture2D" uid="uid://c1tmm4qu44aji" path="res://items/misc/bleed_icon.png" id="7_1ybxc"]
 [ext_resource type="Texture2D" uid="uid://m7k7jv0bo14f" path="res://sprites/enemies/imp/arm1.png" id="7_mv1j5"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="8_m1l0c"]
 
@@ -570,6 +570,13 @@ size = Vector2(67.75, 74)
 script = ExtResource("1_hdgym")
 max_health = 80.0
 
+[node name="debuff_container" type="HBoxContainer" parent="."]
+offset_left = 37.0
+offset_top = -177.0
+offset_right = 77.0
+offset_bottom = -137.0
+script = ExtResource("2_6irr7")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../sprite")
 libraries = {
@@ -625,19 +632,6 @@ position = Vector2(-5, -114)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(12, 47)
 shape = SubResource("RectangleShape2D_tjubl")
-
-[node name="bleed stacks" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(32, -116)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("7_1ybxc")
-
-[node name="Label" type="Label" parent="bleed stacks"]
-offset_left = 11.4286
-offset_top = -10.6667
-offset_right = 51.4286
-offset_bottom = 12.3333
-text = "x0"
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-58, -65)

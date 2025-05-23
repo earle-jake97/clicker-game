@@ -17,6 +17,7 @@ const PROJECTILE_DEMON = preload("res://scenes/projectile_demon.tscn")
 const DEVIL = preload("res://scenes/devil.tscn")
 const IMP = preload("res://scenes/enemies/imp.tscn")
 const ENT = preload("res://scenes/enemies/ent.tscn")
+const PROJECTILE_DEMON_ELITE = preload("res://scenes/enemies/projectile_demon_elite.tscn")
 
 var player_controller = PlayerController
 var spawn_cap
@@ -34,11 +35,13 @@ func _ready() -> void:
 	min_spawn_time = min_spawn_time * pow(1 - decayRate, difficulty);
 	max_spawn_time = max_spawn_time * pow(1 - decayRate, difficulty)
 	if enemy_scene == DEVIL:
-		
 		min_spawns = max(difficulty * 15, max_spawns)
 		max_spawns = min_spawns + randi_range(0, 5) 
 	if enemy_scene == PROJECTILE_DEMON:
-		min_spawns = max(1, round(difficulty/2.0))
+		min_spawns = max(min_spawns, round(difficulty/2.0))
+		max_spawns = min_spawns
+	if enemy_scene == PROJECTILE_DEMON_ELITE:
+		min_spawns = max(min_spawns, round(difficulty/8.0))
 		max_spawns = min_spawns
 	if enemy_scene == IMP:
 		if difficulty <= 2:
@@ -76,7 +79,7 @@ func spawn_devil():
 	var enemy = enemy_scene.instantiate()
 	var sprite = enemy.get_node("sprite")
 	enemy.max_health = enemy_max_health
-	enemy.damage = enemy_damage
+	enemy.damage = enemy_damage + PlayerController.difficulty * 2
 	enemy.armor_penetration = enemy_max_armor_penetration
 	enemy.value_min = enemy_cash_value_min
 	enemy.value_max = enemy_cash_value_max
@@ -93,9 +96,10 @@ func spawn_devil():
 		var blue_variation
 		var green_variation
 		if enemy_scene == ENT:
-			red_variation = randf_range(-3, 3)
-			blue_variation = randf_range(-3,3)
-			green_variation = randf_range(-3,3)
+			base_color = Color.DARK_GRAY
+			red_variation = randf_range(-0.3,0.3)
+			blue_variation = randf_range(-0.3,0.3)
+			green_variation = randf_range(-0.3,0.3)
 		else:
 			red_variation = randf_range(-0.3,0.3)
 			blue_variation = randf_range(-0.2,0.2)

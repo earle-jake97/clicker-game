@@ -8,7 +8,6 @@ var item_icon = preload("res://items/icons/knife.png")
 var file_name = "res://items/scripts/2/knife.gd"
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 
 func get_flat_attack_damage():
 	return dmg_increase

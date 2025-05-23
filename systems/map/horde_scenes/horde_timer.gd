@@ -1,0 +1,29 @@
+extends Node2D
+
+var spawners = []
+const MapView = "res://map/map_view.tscn"
+@onready var timer: Timer = $Timer
+@onready var label: Label = $Label
+
+func _ready() -> void:
+	GameState.on_map_screen = false
+	HealthBar.button.visible = true
+	HealthBar.fast_forward = false
+	TestPlayer.visible = true
+	PlayerController.reset_positions()
+	PlayerController.position = 2
+	for spawner in get_tree().get_nodes_in_group("spawner"):
+		spawners.append(spawner)
+	await get_tree().create_timer(0.5).timeout
+	timer.timeout.connect(_on_timer_timout)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	label.text = "%10.f" % timer.time_left
+
+func _on_timer_timout():
+	TestPlayer.visible = false
+	PlayerController.position = 2
+	GameState.on_map_screen = true
+	SceneManager.switch_to_scene(MapView)

@@ -24,10 +24,11 @@ func proc(target: Node, source_item: BaseItem = null):
 		if "Oil" == item.item_name:
 			strength += 1
 	var damage = get_explosion_percentage(strength, 0.5)
-	if "sprite" in target and not target.has_meta("oil_applied"):
-		target.set_meta("oil_applied", true)
-		target.sprite.modulate *= Color(0.3, 0.3, 0.3, 1.0)
+	if not target.debuffs.has(debuff.Debuff.OIL):
 		target.debuffs.append(debuff.Debuff.OIL)
+		target.set_meta("oil_applied", true)
+		target.apply_debuff()
+
 
 static func get_explosion_percentage(item_count: int, scale: float= 0.5) -> float:
 	return explosion_damage * (1.0 - pow(scale, item_count))

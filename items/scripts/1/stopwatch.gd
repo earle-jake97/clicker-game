@@ -10,7 +10,6 @@ var file_name = "res://items/scripts/1/stopwatch.gd"
 
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 
 func get_cps():
 	for item in player.inventory:

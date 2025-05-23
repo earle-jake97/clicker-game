@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://b4a3jjhslhncf" path="res://sprites/enemies/toss_devil/arm2.png" id="3_j5buf"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="3_wk3x0"]
 [ext_resource type="Texture2D" uid="uid://cjh4lxyqeyim0" path="res://sprites/enemies/toss_devil/leg.png" id="4_ccdv2"]
+[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="5_j7p4a"]
 [ext_resource type="Texture2D" uid="uid://cpith272fjwnq" path="res://sprites/enemies/toss_devil/body.png" id="5_n8ewx"]
 [ext_resource type="Texture2D" uid="uid://dwj2xdt7pkvh1" path="res://sprites/enemies/toss_devil/arm1.png" id="6_500si"]
 [ext_resource type="Texture2D" uid="uid://biil7431lg4cw" path="res://sprites/enemies/toss_devil/head_smile.png" id="9_h0a8x"]
-[ext_resource type="Texture2D" uid="uid://c1tmm4qu44aji" path="res://items/misc/bleed_icon.png" id="10_litx2"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="11_d3jje"]
 [ext_resource type="PackedScene" uid="uid://c8rr8yob6kshw" path="res://items/misc/smoke_cloud.tscn" id="12_qgoea"]
 
@@ -965,18 +965,12 @@ scale = Vector2(0.437226, 0.402117)
 texture_under = ExtResource("2_3rtoa")
 texture_progress = ExtResource("3_wk3x0")
 
-[node name="bleed_icon" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(53, -194)
-scale = Vector2(0.64, 0.64)
-texture = ExtResource("10_litx2")
-
-[node name="Label" type="Label" parent="bleed_icon"]
-offset_left = 10.0
-offset_top = -11.25
-offset_right = 50.0
-offset_bottom = 11.75
-text = "x0"
+[node name="debuff_container" type="HBoxContainer" parent="."]
+offset_left = 43.0
+offset_top = -203.0
+offset_right = 83.0
+offset_bottom = -163.0
+script = ExtResource("5_j7p4a")
 
 [node name="sprite" type="Node2D" parent="."]
 

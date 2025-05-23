@@ -18,4 +18,6 @@ func _do_scene_switch():
 
 	var new_scene = target_scene_instance.instantiate()
 	get_tree().root.add_child(new_scene)
+	await get_tree().process_frame
+	
 	get_tree().current_scene = new_scene

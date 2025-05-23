@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpxk63fkqwdde"]
+
+[ext_resource type="Script" path="res://start.gd" id="1_e6nyw"]
+[ext_resource type="Texture2D" uid="uid://cl31btkvguwrk" path="res://title.png" id="2_4g82x"]
+
+[node name="start_scene" type="Node2D"]
+script = ExtResource("1_e6nyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("2_4g82x")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 929.0
+offset_top = 73.0
+offset_right = 1048.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 46
+text = "PLAY"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

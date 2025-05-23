@@ -3,7 +3,7 @@ extends Node2D
 @onready var area_2d: Area2D = $Area2D
 @export var item_name = "test_name"
 @export var item_description = "does bladfljsdlafasfgbask klbdsf lkjsbdflk sadk bsadffk bjkbs kbsafd kbfasd ksdfk jasfdk afsdkbasd fk"
-
+const MAP_VIEW = preload("res://map/map_view.tscn")
 var item_file_name 
 var item_path 
 var entered = false
@@ -35,7 +35,8 @@ func _process(delta: float) -> void:
 				var item_script = item.new()
 				PlayerController.add_item(item_script)
 				Tooltip.hide_tooltip()
-				queue_free()
+				SceneManager.switch_to_scene("res://map/map_view.tscn")
+				GameState.on_map_screen = true
 				GameState.leave_shop_triggered = true
 
 # Assign item properties for the item

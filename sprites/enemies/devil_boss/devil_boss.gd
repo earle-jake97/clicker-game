@@ -2,6 +2,7 @@ extends BaseEnemy
 signal died(enemy_node)
 var controller = PlayerController
 var player_model = TestPlayer
+@onready var debuff_container: HBoxContainer = $debuff_container
 @onready var minion_ball: Node2D = $sprite/Minion_ball
 @onready var animation_player: AnimationPlayer = $sprite/AnimationPlayer
 @onready var head: Sprite2D = $sprite/Head_Node/Head
@@ -11,9 +12,6 @@ var player_model = TestPlayer
 const DIVING_MINION = preload("res://sprites/enemies/devil/diving_minion.tscn")
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var sprite: Node2D = $sprite
-@onready var bleed_label: Label = $"bleed stacks/Label"
-
-@onready var bleed_icon: Sprite2D = $"bleed stacks"
 const SHOCKWAVE = preload("res://sprites/enemies/devil_boss/shockwave.tscn")
 const HEAD = preload("res://sprites/enemies/devil_boss/head.png")
 const HEAD_POG = preload("res://sprites/enemies/devil_boss/head_pog.png")
@@ -30,8 +28,9 @@ const FIREBALL = preload("res://sprites/enemies/devil_boss/fireball.tscn")
 @onready var shadow: Sprite2D = $sprite/shadow
 
 var debuffs = []
+var previous_debuffs = []
 
-var health = 2000
+@export var health = 2000
 var max_health = 2000
 var bleed_stacks = 0
 var dead = false
@@ -58,7 +57,6 @@ func _ready() -> void:
 	animation_player.animation_set_next("slam", "idle")
 	animation_player.animation_set_next("meditate", "idle")
 	animation_player.animation_set_next("throw_minions", "idle")
-	bleed_icon.visible = false
 	if PlayerController.difficulty >= 15:
 		max_health = max_health * pow(1 + 0.12, PlayerController.difficulty)
 	else:
@@ -79,13 +77,6 @@ func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageTy
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if bleed_stacks > 0:
-		debuffs.append(debuff.Debuff.BLEED)
-		
-		bleed_icon.visible = true
-		bleed_label.text = "x" + str(bleed_stacks)
-	else:
-		bleed_icon.visible = false
 	mouth_timer += delta
 	if health <= max_health/2:
 		fireball_cooldown += delta * 2
@@ -194,7 +185,7 @@ func meditate():
 
 func slam():
 	animation_player.play("slam")
-	var ran = controller.position_map[randi_range(1,3)].global_position
+	var ran = controller.position_map[randi_range(0,controller.position_map.size()-1)].global_position
 	var shockwave = SHOCKWAVE.instantiate()
 	add_child(shockwave)
 	shockwave.chosen_pos = ran
@@ -203,7 +194,7 @@ func slam():
 	
 
 func die():
-	bleed_icon.visible = false
+	debuff_container.hide()
 	head.texture = HEAD_POG_EYES_CLOSED
 	animation_player_head.pause()
 	health_bar.hide()
@@ -211,3 +202,6 @@ func die():
 	animation_player.play("die")
 	dead = true
 	died.emit()
+
+func apply_debuff():
+	debuff_container.update_debuffs()

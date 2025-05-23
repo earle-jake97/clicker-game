@@ -3,9 +3,10 @@ extends Node
 
 var items := []
 var hearts := []
-
+var starter_items := []
 func _ready():
 	register_items()
+	set_starter_items()
 
 func register_items():
 	# Add all items here
@@ -33,7 +34,6 @@ func register_items():
 		preload("res://items/scripts/1/stat_stick.gd"),
 		preload("res://items/scripts/1/bloody_syringe.gd"),
 		preload("res://items/scripts/2/contaminated_syringe.gd"),
-		preload("res://items/scripts/3/windtwister_scroll.gd"),
 		preload("res://items/scripts/3/siphoning_soul.gd"),
 		preload("res://items/scripts/4/the_meal.gd"),
 		preload("res://items/scripts/2/gas_station_donut.gd"),
@@ -52,6 +52,26 @@ func register_items():
 func get_random_item_by_rarity(rarity: int):
 	var filtered = items.filter(func(i): return i.new().rarity == rarity)
 	return filtered.pick_random() if filtered.size() > 0 else null
+
+func set_starter_items():
+	var filtered = items.filter(func(i): return i.new().rarity == 2)
+	var count = 3  # or however many starter items you want
+
+	starter_items.clear()
+	var attempts = 0
+
+	while starter_items.size() < count and attempts < 100:
+		var candidate = filtered.pick_random()
+		var instance = candidate.new()
+		if instance not in starter_items:
+			starter_items.append(instance)
+		attempts += 1
+
+func get_starter_items():
+	if starter_items.is_empty():
+		return null
+	return starter_items.pop_back()
+
 
 func get_random_heart_by_rarity(rarity: int):
 	var filtered = hearts.filter(func(i): return i.new().rarity == rarity)

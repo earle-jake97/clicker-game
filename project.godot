@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="clicker game"
-run/main_scene="res://systems/map/MapView.tscn"
+run/main_scene="res://start_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=600
 config/icon="res://icon.svg"
 
 [autoload]
 
+MapState="*res://map/map_state.gd"
 PlayerController="*res://scenes/player_controller.gd"
 GameState="*res://systems/map/GameState.gd"
 TestPlayer="*res://scenes/test_player.tscn"
@@ -27,7 +28,6 @@ HealthBar="*res://scenes/Health_bar.tscn"
 Tooltip="*res://systems/shop/tooltip.tscn"
 EnemyDeathListener="*res://systems/EnemyDeathListener.gd"
 Crosshair="*res://scenes/crosshair.tscn"
-Map="*res://systems/map/map_data.gd"
 SceneManager="*res://systems/SceneManager.gd"
 
 [display]
@@ -49,6 +49,7 @@ spawner=""
 item=""
 boss=""
 heart=""
+elite=""
 
 [input]
 
@@ -97,6 +98,8 @@ Pause={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 viewport/hdr_2d=true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://pad5r8i2uemg"]
+[gd_scene load_steps=24 format=3 uid="uid://pad5r8i2uemg"]
 
 [ext_resource type="Texture2D" uid="uid://18rwdlhenv1p" path="res://sprites/enemies/ent/body_dead.png" id="1_0c0ri"]
 [ext_resource type="Script" path="res://scenes/enemies/ent.gd" id="1_5ty2f"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c1tmm4qu44aji" path="res://items/misc/bleed_icon.png" id="14_ch8nq"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="15_5iltg"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="16_en7jo"]
+[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="17_0a7g4"]
 
 [sub_resource type="Animation" id="Animation_s2mtj"]
 length = 0.001
@@ -1232,6 +1233,13 @@ z_as_relative = false
 position = Vector2(6, 6)
 scale = Vector2(0.14646, 0.222496)
 texture = ExtResource("16_en7jo")
+
+[node name="debuff_container" type="HBoxContainer" parent="."]
+offset_left = 47.0
+offset_top = -184.0
+offset_right = 87.0
+offset_bottom = -144.0
+script = ExtResource("17_0a7g4")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -4,21 +4,20 @@ extends Node2D
 var crit = false
 var finished_callback: Callable = Callable()
 var original_z = 3000
+const LIFETIME := 5.0 # seconds before force despawn
 
 func _ready() -> void:
-	z_index = 3000
+	z_index = original_z
+	start_despawn_timer() # Ensure cleanup happens eventually
 
 func show_number(amount: int, color: Color = Color.WHITE, update_only: bool = false):
 	if amount > 0:
 		var amount_str = format_large_number(amount)
 		label.text = amount_str
 
-		# Scale font size based on amount (clamped)
-		# Base font size
 		var scaled_size = clamp(8 + log(amount) * 3.5, 8, 64)
 		label.add_theme_font_size_override("font_size", int(scaled_size))
-	
-		# Also scale z_index so bigger hits appear on top
+
 		z_index = original_z - int(scaled_size)
 	else:
 		label.text = ""
@@ -29,19 +28,14 @@ func show_number(amount: int, color: Color = Color.WHITE, update_only: bool = fa
 
 func animate():
 	var tween = create_tween()
-	# Batching for 0.4 seconds (upwards movement)
 	tween.tween_property(self, "position", position + Vector2(0, -40), 0.5).set_trans(Tween.TRANS_SINE)
-	# Fading out over 0.2 seconds after batching
 	tween.tween_property(self, "modulate:a", 0.0, 0.2).set_delay(0.5)
 
 func animate_and_destroy():
 	var tween = create_tween()
-	# Batching for 0.4 seconds (upwards movement)
-	tween.tween_property(self, "position", position + Vector2(0, -0), 0.5).set_trans(Tween.TRANS_SINE)
-	# Fading out over 0.2 seconds after batching
+	tween.tween_property(self, "position", position + Vector2(0, -40), 0.5).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "modulate:a", 0.0, 0.2).set_delay(0.5)
 
-	# After the animation is complete, invoke the callback and queue the node for deletion
 	tween.tween_callback(func():
 		if finished_callback.is_valid():
 			finished_callback.call()
@@ -64,3 +58,8 @@ func format_large_number(number: int) -> String:
 		formatted = formatted.left(formatted.length() - 1)
 
 	return formatted + suffixes[magnitude]
+
+func start_despawn_timer():
+	await get_tree().create_timer(LIFETIME).timeout
+	if is_inside_tree(): # still valid
+		queue_free()

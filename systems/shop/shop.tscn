@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c0ut06fy2scrm"]
 
-[ext_resource type="Script" path="res://systems/shop/shop.gd" id="1_uu8u0"]
+[ext_resource type="Script" path="res://systems/shop/secret shop.gd" id="1_a2nv7"]
 [ext_resource type="Texture2D" uid="uid://bvul46pxm8stu" path="res://systems/shop/shop background.png" id="2_f72hq"]
 [ext_resource type="PackedScene" uid="uid://diamu2563shgv" path="res://systems/shop/wizard.tscn" id="3_lwegq"]
 [ext_resource type="PackedScene" uid="uid://drg84m4gd4tv3" path="res://systems/shop/shop_item.tscn" id="3_pfojo"]
@@ -14,7 +14,7 @@ size = Vector2(208, 99)
 
 [node name="shop" type="Node2D"]
 texture_filter = 2
-script = ExtResource("1_uu8u0")
+script = ExtResource("1_a2nv7")
 
 [node name="background" type="Sprite2D" parent="."]
 position = Vector2(576, 324)

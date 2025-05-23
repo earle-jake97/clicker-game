@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		cloud.scale = Vector2(1.2, 1.2)
 		cloud.global_position = global_position + Vector2(offset_x, offset_y)
 		cloud.z_index = cloud.global_position.y
-	
+
 	global_position = global_position.move_toward(Vector2(-300, chosen_pos.y), 700 * delta)
 
 	

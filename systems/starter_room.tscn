@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://qmjcnsyj3i0x"]
+
+[ext_resource type="Texture2D" uid="uid://p1hoonap2d5" path="res://sprites/test_player/starter_room.png" id="1_pok55"]
+[ext_resource type="Script" path="res://systems/starter_room.gd" id="1_xf5pv"]
+[ext_resource type="PackedScene" uid="uid://cy0s10jfhtpyo" path="res://systems/shop/room_item.tscn" id="2_qufd4"]
+[ext_resource type="Script" path="res://systems/starter_room_item.gd" id="4_kiblw"]
+
+[node name="starter_room" type="Node2D"]
+script = ExtResource("1_xf5pv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("1_pok55")
+
+[node name="Room_Item" parent="." instance=ExtResource("2_qufd4")]
+position = Vector2(412, 530)
+script = ExtResource("4_kiblw")
+
+[node name="Room_Item2" parent="." instance=ExtResource("2_qufd4")]
+position = Vector2(511, 444)
+script = ExtResource("4_kiblw")
+
+[node name="Room_Item3" parent="." instance=ExtResource("2_qufd4")]
+position = Vector2(563, 533)
+script = ExtResource("4_kiblw")

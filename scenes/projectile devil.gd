@@ -4,10 +4,9 @@ signal died
 @export var min_speed: float
 @export var max_speed: float
 @onready var progress_bar: TextureProgressBar = $ProgressBar
+@onready var debuff_container: HBoxContainer = $debuff_container
 
 var health: float
-@onready var bleed_icon: Sprite2D = $bleed_icon
-@onready var bleed_label: Label = $bleed_icon/Label
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var limbs: AnimationPlayer = $limbs
 @onready var sprite: Node2D = $sprite
@@ -17,7 +16,7 @@ var health: float
 @export var max_health: float
 @onready var health_bar: TextureProgressBar = $ProgressBar
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@onready var player_positions = {}
+@onready var player_positions = []
 @export var projectile_scene: PackedScene = preload("res://scenes/mad projectile.tscn")
 @export var telegraph_scene: PackedScene = preload("res://scenes/telegraph.tscn")
 @export var damage: int
@@ -45,6 +44,7 @@ var paid_out = false
 var bleed_stacks = 0
 var spitting = false
 var debuffs = []
+var previous_debuffs = []
 
 var spit_timer = 0.0
 @onready var tween := get_tree().create_tween()
@@ -56,8 +56,8 @@ func _ready() -> void:
 	shadow.scale = Vector2(0, 0)
 	tween.tween_property(shadow, "scale", Vector2(0.22, 0.22), 0.75).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	attack_speed /= (max(player_controller.difficulty/10, 0.8))
-	for pos in get_tree().get_nodes_in_group("player_positions"):
-		player_positions[pos.pos] = pos
+	for node in PlayerController.position_map:
+		player_positions.append(node)
 		
 	health_bar.visible = false
 	health_bar.max_value = max_health
@@ -76,9 +76,6 @@ func _process(delta: float) -> void:
 		limbs.play("idle")
 		spitting = false
 	spit_timer += delta
-	if bleed_stacks > 0:
-		bleed_icon.visible = true
-	bleed_label.text = "x" + str(bleed_stacks)
 	if dead:
 		head.texture = HEAD_DEAD
 		var color = sprite.modulate
@@ -122,7 +119,7 @@ func launch_projectile():
 	var telegraph = telegraph_scene.instantiate()
 	telegraph.damage = 20
 	telegraph.armor_penetration = armor_penetration
-	chosen_position = player_positions[randi_range(1, 3)]
+	chosen_position = player_positions[randi_range(0, player_positions.size()-1)]
 	telegraph.global_position = chosen_position.global_position
 	get_tree().current_scene.add_child(telegraph)
 	
@@ -164,8 +161,11 @@ func move_forward(delta):
 func die():
 	died.emit()
 	shadow.visible = false
-	bleed_icon.visible = false
+	debuff_container.hide()
 	limbs.play("die")
 	progress_bar.hide()
 	remove_from_group("enemy")
 	dead = true
+
+func apply_debuff():
+	debuff_container.update_debuffs()

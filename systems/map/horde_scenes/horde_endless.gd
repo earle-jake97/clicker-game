@@ -6,13 +6,13 @@ const BOSS_ENDLESS = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	PlayerController.reset_positions()
+	GameState.on_map_screen = false
+	HealthBar.button.visible = true
+	HealthBar.fast_forward = false
 	TestPlayer.visible = true
 	GameState.endless_counter += 1
 	PlayerController.difficulty += 1
-	
-
-
+	PlayerController.reset_positions()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,11 +34,7 @@ func check_level_completion():
 			SceneManager.switch_to_scene("res://systems/shop/shop_endless.tscn")
 		elif rand <= 0.55:
 			print("going to item")
-			
 			SceneManager.switch_to_scene("res://systems/shop/item_room_endless.tscn")
-		elif rand <= 0.90:
-			print("going to horde")
-			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
 		else:
-			print("going to boss")
-			SceneManager.switch_to_scene("res://systems/map/boss_scenes/boss_1_map.tscn")
+			print("going to horde")
+			SceneManager.switch_to_scene("res://horde_transition_fix.tscn")

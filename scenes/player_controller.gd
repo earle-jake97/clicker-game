@@ -5,7 +5,7 @@ extends Node
 @onready var player = TestPlayer
 
 var hold_click_timer := Timer.new()
-var position_map := {}
+@export var position_map := []
 var base_attack_damage = 10
 var base_max_hp = 100.0
 var max_hp = 0.0
@@ -20,7 +20,7 @@ var base_crit_damage = 1.5
 var crit_chance = 0.01
 var crit_damage = 1.5
 var damage = base_attack_damage
-var cash = 10
+var cash = 0
 var difficulty = 0
 var paused = false
 var base_clicks_per_second = 6.0
@@ -62,8 +62,6 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Pause"):
 		get_tree().paused = not get_tree().paused
-	if GameState.leave_shop_triggered:
-		Tooltip.hide_tooltip()
 	
 	if get_nearest_enemy():
 		Crosshair.target_enemy(get_nearest_enemy())
@@ -97,8 +95,8 @@ func move_player() -> void:
 	elif position > position_map.size():
 		position = position_map.size()
 	
-	if position_map.has(position) and not GameState.on_map_screen:
-		var pos_node = position_map[position]
+	if not position_map.is_empty():
+		var pos_node = position_map[position-1]
 		if pos_node and is_instance_valid(pos_node):
 			player.global_position = pos_node.global_position
 
@@ -263,5 +261,39 @@ func add_cash(amount) -> void:
 
 func reset_positions():
 	position_map.clear()
-	for pos in get_tree().get_nodes_in_group("player_positions"):
-		position_map[pos.pos] = pos
+	if get_tree().get_root().find_child("Positions", true, false):
+		for child in get_tree().get_root().find_child("Positions", true, false).get_children():
+			position_map.append(child)
+		position = 1
+
+func reset_to_defaults():
+	base_attack_damage = 10
+	base_max_hp = 100.0
+	max_hp = 0.0
+	max_hp_percentage = 1.0
+	base_armor = 1
+	additional_dmg = 0
+	mult_dmg = 0
+	current_hp = 0.0
+	base_crit_chance = 0.01
+	base_crit_damage = 1.5
+	crit_chance = 0.01
+	crit_damage = 1.5
+	damage = base_attack_damage
+	cash = 0
+	difficulty = 0
+	base_clicks_per_second = 6.0
+	clicks_per_second
+	base_passive_regen = 1.0
+	passive_regen = 1.0
+	regen_timer = 0.0
+	base_luck = 0
+	luck = base_luck
+	clicks_per_second = base_clicks_per_second
+	current_hp = base_max_hp
+	total_armor = base_armor
+	max_hp = base_max_hp
+	GameState.endless_mode = false
+	GameState.endless_counter = 0
+	MapState.reset_map()
+	SceneManager.switch_to_scene("res://start_scene.tscn")

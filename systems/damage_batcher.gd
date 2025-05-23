@@ -50,7 +50,7 @@ func add_damage(amount: int, type: int = DamageType.NORMAL):
 
 func _on_timer_timeout(type: int):
 	var batch = batches[type]
-	if batch.number_instance:
+	if is_instance_valid(batch.number_instance):
 		batch.number_instance.animate_and_destroy()
 		batch.number_instance = null
 	batch.total_damage = 0

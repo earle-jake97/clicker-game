@@ -39,10 +39,9 @@ func _process(delta: float) -> void:
 				Tooltip.hide_tooltip()
 				var rand = randf()
 				var room
-				if rand <= 0.9:
-					SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
-				else:
-					SceneManager.switch_to_scene("res://systems/map/boss_scenes/boss_1_map.tscn")
+				queue_free()
+				SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
+
 
 
 
@@ -71,17 +70,3 @@ func _on_area_2d_mouse_exited() -> void:
 	entered = false
 	Tooltip.hide_tooltip()
 	quality_sprite.visible = false
-
-func go_to_horde_room():
-	PlayerController.difficulty += 1
-	var horde_room = HORDE.instantiate()
-	get_tree().root.add_child(horde_room)
-	get_tree().current_scene = horde_room
-	PlayerController.reset_positions()
-	TestPlayer.visible = true
-	PlayerController.position = 2
-	GameState.on_map_screen = false
-
-func _switch_to_room(room: Node):
-	get_tree().root.add_child(room)
-	get_tree().current_scene = room

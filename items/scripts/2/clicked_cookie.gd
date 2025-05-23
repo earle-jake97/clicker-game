@@ -10,7 +10,6 @@ var file_name = "res://items/scripts/2/clicked_cookie.gd"
 
 func add_to_inventory():
 	player.add_item(self)
-	print("Added " + self.name + " to inventory.")
 
 func get_cps():
 	for item in player.inventory:

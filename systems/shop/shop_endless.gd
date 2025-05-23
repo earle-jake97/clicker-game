@@ -12,27 +12,25 @@ const BROKE = preload("res://systems/shop/player_hands2.png")
 const WOKE = preload("res://systems/shop/player_hands.png")
 const SHOPKEEP = preload("res://systems/shop/shopkeep.png")
 const SHOPKEEP_MAD = preload("res://systems/shop/shopkeep_mad.png")
-const BOSS = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
 const HORDE = preload("res://systems/map/horde_scenes/horde_endless.tscn")
-
+const BOSS_1_MAP = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
 var difficulty_scaling = 0.15
 var lowest_price = 30
 
 func _ready() -> void:
+	HealthBar.button.visible = false
+	HealthBar.fast_forward = false
 	TestPlayer.visible = false
+	GameState.on_map_screen = false
 	set_up_items()
 
 func _process(delta: float) -> void:
 	if hover_exit and Input.is_action_just_pressed("Click"):
 		var rand = randf()
-		var room
-		if rand <= 0.9:
+		if GameState.endless_mode:
 			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
 		else:
-			SceneManager.switch_to_scene("res://systems/map/boss_scenes/boss_1_map.tscn")
-
-
-
+			SceneManager.switch_to_scene("res://map/map_view.tscn")
 
 	hands.texture = WOKE if PlayerController.cash > lowest_price else BROKE
 
@@ -150,8 +148,4 @@ func _on_area_2d_mouse_entered() -> void:
 
 
 func _on_area_2d_mouse_exited() -> void:
-		hover_exit = false
-
-func _switch_to_room(room: Node):
-	get_tree().root.add_child(room)
-	get_tree().current_scene = room
+	hover_exit = false

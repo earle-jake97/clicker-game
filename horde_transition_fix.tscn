@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq3uevwmtj325"]
+
+[ext_resource type="Script" path="res://endless_horde_transition.gd" id="1_dar8x"]
+[ext_resource type="Texture2D" uid="uid://cdffq8rklpevx" path="res://transition.png" id="2_owuep"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_dar8x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(579, 319)
+texture = ExtResource("2_owuep")

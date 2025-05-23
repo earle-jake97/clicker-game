@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="2_tgymw"]
 
 [node name="Node2D" type="Node2D"]
+process_mode = 1
 z_index = 3000
 script = ExtResource("1_uyli1")
 

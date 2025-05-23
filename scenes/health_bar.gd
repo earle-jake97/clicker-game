@@ -11,8 +11,6 @@ var player = PlayerController
 const HEART_CASH_DEAD = preload("res://systems/heart_cash_dead.png")
 @onready var cash_sprite: Sprite2D = $Cash_Sprite
 @onready var animation_player: AnimationPlayer = $ColorRect/AnimationPlayer
-@onready var label: Label = $Label
-@onready var temp: AnimationPlayer = $Label/temp
 @onready var endless_sprite: Sprite2D = $endless_sprite
 @onready var room_count: Label = $endless_sprite/room_count
 @onready var button: TextureButton = $Button
@@ -26,12 +24,22 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if fast_forward:
+			Engine.time_scale = 5.0
+	else:
+		Engine.time_scale = 1.0
+	if GameState.on_map_screen:
+		modulate.a = 0.5
+	else: modulate.a = 1.0
 	room_count.text = str(GameState.endless_counter)
 	var percentage = float(player.current_hp) / player.max_hp
 	if percentage <= 0.0 and not dead:
 		dead = true
-		temp.play("text")
 		animation_player.play("death")
+		await get_tree().create_timer(4.0).timeout
+		TestPlayer.visible = false
+		animation_player.play("default")
+		PlayerController.reset_to_defaults()
 	switch_sprite(percentage)
 	hp.text = str(format_large_number(player.current_hp)) + "/" + str(format_large_number(player.max_hp))
 	cash.text = format_large_number(player.cash)
@@ -73,7 +81,3 @@ func format_large_number(number: int) -> String:
 
 func _on_button_pressed() -> void:
 	fast_forward = not fast_forward
-	if fast_forward:
-			Engine.time_scale = 5.0
-	else:
-		Engine.time_scale = 1.0

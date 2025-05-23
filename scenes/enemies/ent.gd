@@ -21,6 +21,7 @@ var health: float
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Node2D = $sprite
 @onready var face: Sprite2D = $sprite/spritebody/face
+@onready var debuff_container: HBoxContainer = $debuff_container
 
 var debuffs = []
 
@@ -132,9 +133,11 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		touching_player = false
 		reached_player = false
 
-
+func apply_debuff():
+	debuff_container.update_debuffs()
 
 func die():
+	debuff_container.hide()
 	face.visible = true
 	bleed_icon.visible = false
 	progress_bar.hide()
