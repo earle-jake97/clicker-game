@@ -230,6 +230,16 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 	}
 
 func take_damage(damage, penetration) -> void:
+	var block = randf()
+	for i in range(luck):
+		var new_block = randf()
+		if new_block > block:
+			block = new_block
+	if block <= get_block_chance():
+		var miss = preload("res://items/misc/miss.tscn").instantiate()
+		miss.global_position = TestPlayer.global_position + Vector2(randf_range(-50.0, 10.0), randf_range(-80, -40.0))
+		get_tree().current_scene.add_child(miss)
+		return
 	var damage_reduction = (total_armor - penetration)/(100.0 + total_armor - penetration)
 	damage *= (1 - damage_reduction)
 	damage = round(damage)
@@ -246,13 +256,17 @@ func proc_items(target, source_item: BaseItem = null):
 		if item.item_name == "Parrot":
 			proc_count += 1
 	var used_thunderbolt = false
+	var used_lava_cake = false
 	for item in inventory:
 		for i in range(proc_count):
 			if item.has_method("proc"):
 				if item.tags.has("thunderbolt") and not used_thunderbolt:
 					item.proc(target, source_item)
 					used_thunderbolt = true
-				elif not item.tags.has("thunderbolt"):
+				elif item.item_name == "Molten Lava Cake" and not used_lava_cake:
+					item.proc(target, source_item)
+					used_lava_cake = true
+				else:
 					item.proc(target, source_item)
 
 
@@ -265,6 +279,16 @@ func reset_positions():
 		for child in get_tree().get_root().find_child("Positions", true, false).get_children():
 			position_map.append(child)
 		position = 1
+
+func get_block_chance():
+	var count = 0
+	for item in inventory:
+		if item.item_name == "Rougher Times":
+			count += 1
+	if count == 0:
+		return 0
+	else:
+		return 1 - pow(0.95, count)
 
 func reset_to_defaults():
 	base_attack_damage = 10

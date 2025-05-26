@@ -14,7 +14,7 @@ const SHOPKEEP = preload("res://systems/shop/shopkeep.png")
 const SHOPKEEP_MAD = preload("res://systems/shop/shopkeep_mad.png")
 const HORDE = preload("res://systems/map/horde_scenes/horde_endless.tscn")
 const BOSS_1_MAP = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
-var difficulty_scaling = 0.15
+var difficulty_scaling = 0.3
 var lowest_price = 30
 
 func _ready() -> void:
@@ -89,7 +89,7 @@ func roll_rarity():
 		return 4
 	elif rand <= 0.15:
 		return 3
-	elif rand <= 0.4:
+	elif rand <= 0.35:
 		return 2
 	else:
 		return 1

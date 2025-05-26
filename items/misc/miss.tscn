@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnmrwmkchahe3"]
+
+[ext_resource type="Script" path="res://items/misc/miss.gd" id="1_8krd1"]
+
+[sub_resource type="Animation" id="Animation_lio5l"]
+resource_name = "new_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2ulfp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ftunu"]
+_data = {
+"RESET": SubResource("Animation_2ulfp"),
+"new_animation": SubResource("Animation_lio5l")
+}
+
+[node name="Node2D" type="Node2D"]
+z_index = 3800
+z_as_relative = false
+script = ExtResource("1_8krd1")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+pivot_offset = Vector2(19, 11)
+text = "MISS"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ftunu")
+}
+autoplay = "new_animation"

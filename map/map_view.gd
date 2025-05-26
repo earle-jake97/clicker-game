@@ -39,11 +39,9 @@ func _ready() -> void:
 	current_layer = 0
 
 	if MapState.nodes.is_empty():
-		print("Empty map!")
 		generate_map()
 		save_map_to_state()
 	else:
-		print("Non empty map!")
 		for data in MapState.nodes:
 			var node = MAP_NODE_SCENE.instantiate()
 			node.map_id = data["id"]
@@ -478,3 +476,7 @@ func _on_trigger_save():
 
 func switch_to_scene(scene):
 	SceneManager.switch_to_scene(scene)
+
+
+func _on_texture_button_pressed() -> void:
+	SceneManager.switch_to_scene("res://systems/test_room.tscn")

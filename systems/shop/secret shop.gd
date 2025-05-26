@@ -16,6 +16,7 @@ var difficulty_scaling = 0.15
 var lowest_price = 30
 
 func _ready() -> void:
+	TestPlayer.visible = false
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
 	set_up_items()
@@ -23,6 +24,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if hover_exit and Input.is_action_just_pressed("Click"):
 		Tooltip.hide_tooltip()
+		if GameState.endless_mode:
+			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
 		SceneManager.switch_to_scene("res://map/map_view.tscn")
 		GameState.on_map_screen = true
 

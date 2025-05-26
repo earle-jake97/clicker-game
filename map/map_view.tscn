@@ -42,7 +42,15 @@ position = Vector2(1017, 25)
 position = Vector2(575, 323)
 texture = ExtResource("1_wqbe1")
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 1065.0
+offset_top = 73.0
+offset_right = 1105.0
+offset_bottom = 113.0
+
 [node name="cover" type="Sprite2D" parent="."]
 z_index = 3
 position = Vector2(575, 323)
 texture = ExtResource("2_jlhvv")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

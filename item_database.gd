@@ -40,6 +40,10 @@ func register_items():
 		preload("res://items/scripts/2/cast_iron.gd"),
 		preload("res://items/scripts/4/lucky_horseshoe.gd"),
 		preload("res://items/scripts/4/parrot.gd"),
+		preload("res://items/scripts/3/test_item.gd"),
+		preload("res://items/scripts/4/michaels_burrito.gd"),
+		preload("res://items/scripts/1/rougher_times.gd"),
+		preload("res://items/scripts/3/molten_lava_cake.gd"),
 		# preload more items here...
 	]
 	hearts = [
