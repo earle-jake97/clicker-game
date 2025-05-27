@@ -3,7 +3,7 @@ extends BaseItem
 var tags = ["cast_iron"]
 var rarity = 2
 const item_name = "Cast Iron"
-const item_description = "Your attacks have a 5% cance to stun an enemy for 1 second."
+const item_description = "Your attacks have a 5% chance to stun an enemy for 1 second."
 const item_icon = preload("res://items/icons/cast_iron.png")
 var file_name = "res://items/scripts/2/cast_iron.gd"
 var chance = 0.05 
