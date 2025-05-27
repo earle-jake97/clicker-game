@@ -9,3 +9,5 @@ var shopkeeper_mad = false
 var leave_shop_triggered = false
 var endless_mode = false
 var endless_counter = 0
+var current_world = 1
+var last_background 

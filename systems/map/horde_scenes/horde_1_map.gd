@@ -2,8 +2,11 @@ extends Node2D
 
 var spawners = []
 const MapView = "res://map/map_view.tscn"
+@onready var background: Sprite2D = $background
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	background.texture = Backgrounds.get_random_background()
 	GameState.on_map_screen = false
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false

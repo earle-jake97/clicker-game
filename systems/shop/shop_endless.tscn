@@ -29,22 +29,22 @@ position = Vector2(665, 324)
 texture = ExtResource("4_kxmse")
 
 [node name="Shop_Item" parent="." instance=ExtResource("5_f0aji")]
-position = Vector2(332, 430)
+position = Vector2(954, 547)
 
 [node name="Shop_Item2" parent="." instance=ExtResource("5_f0aji")]
 position = Vector2(303, 542)
 
 [node name="Shop_Item3" parent="." instance=ExtResource("5_f0aji")]
-position = Vector2(423, 542)
+position = Vector2(302, 432)
 
 [node name="Shop_Item4" parent="." instance=ExtResource("5_f0aji")]
 position = Vector2(666, 591)
 
 [node name="Shop_Item5" parent="." instance=ExtResource("5_f0aji")]
-position = Vector2(863, 545)
+position = Vector2(377, 268)
 
 [node name="Shop_Item6" parent="." instance=ExtResource("5_f0aji")]
-position = Vector2(1010, 541)
+position = Vector2(423, 444)
 
 [node name="Shop_Item7" parent="." instance=ExtResource("5_f0aji")]
 position = Vector2(973, 442)
@@ -65,16 +65,13 @@ position = Vector2(16, -5.5)
 shape = SubResource("RectangleShape2D_jfj14")
 
 [node name="Health_Item1" parent="." instance=ExtResource("8_803iw")]
-position = Vector2(459, 435)
+position = Vector2(451, 542)
 
 [node name="Health_Item2" parent="." instance=ExtResource("8_803iw")]
 position = Vector2(236, 267)
 
 [node name="Health_Item3" parent="." instance=ExtResource("8_803iw")]
 position = Vector2(852, 440)
-
-[node name="Health_Item4" parent="." instance=ExtResource("8_803iw")]
-position = Vector2(374, 266)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

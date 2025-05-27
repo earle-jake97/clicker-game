@@ -1,56 +1,45 @@
 extends BaseItem
 const item_name = "Bowling Ball"
-const item_description = "Roll a bowling ball in a straight line towards the nearest enemy every two seconds."
+const item_description = "3% chance to roll a bowling ball at the nearest enemy on hit."
 const item_icon = preload("res://items/icons/bowling_ball.png")
-const tags = ["timer"]
+const tags = []
 const rarity = 2
 var file_name = "res://items/scripts/2/bowling_ball.gd"
-var occurrences = 1
 var player_body = TestPlayer
 
 @export var ball_scene = preload("res://items/misc/bowling_ball_projectile.tscn")
-var cooldown_timer := 0.0
-var cooldown := 2.0 
-var delay_between_throws = 0
 
-func _process(delta):
-	if not player:
+func proc(target: Node, source_item: BaseItem = null):
+	var location = target.global_position
+	if not player or not target or not is_instance_valid(target):
 		return
-	
-	delay_between_throws += delta
-	
-	cooldown_timer += delta
-	if cooldown_timer >= cooldown:
-		cooldown_timer = 0.0
-		throw_ball()
+
+	var tree = player.get_tree() if player.is_inside_tree() else null
+	if not tree:
+		return
+
+	# Determine damage
+	var ran = randf()
+	for i in range(player.luck):
+		var new_ran = randf()
+		if new_ran < ran:
+			ran = new_ran
+	if ran > 0.03:
+		return
+	var strength = 0
+	for item in player.inventory:
+		if "Bowling Ball" in item.item_name:
+			strength += 1
+	strength * 0.75
+	instantiate_ball(target, tree, strength)
 
 
-func throw_ball():
-	var first_target = get_nearest_enemy(player_body.global_position, null)
-	if first_target:
-		instantiate_ball(first_target)
-		for item in PlayerController.inventory:
-			if "timer_procs" in item.tags:
-				for i in range(item.occurrences):
-					instantiate_ball(first_target)
-		
-func get_nearest_enemy(from_pos: Vector2, exclude: Node) -> Node:
-	var nearest = null
-	var shortest = INF
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		if enemy != exclude and enemy.is_inside_tree():
-			var dist = from_pos.distance_to(enemy.global_position)
-			if dist < shortest:
-				shortest = dist
-				nearest = enemy
-	return nearest
-
-func instantiate_ball(target: Node):
+func instantiate_ball(target: Node, tree, multiplier):
 	var proj = ball_scene.instantiate()
 	var result = player.calculate_damage()
-	proj.damage = result.damage
+	proj.damage = result.damage * multiplier
 	proj.speed = randf_range(1000.0, 1200.0)
 	proj.start_pos = player_body.global_position - Vector2(0, 10)
 	proj.target_pos = target.global_position
 	proj.crit = result.crit
-	get_tree().current_scene.add_child(proj)
+	tree.current_scene.add_child(proj)

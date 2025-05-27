@@ -29,6 +29,7 @@ Tooltip="*res://systems/shop/tooltip.tscn"
 EnemyDeathListener="*res://systems/EnemyDeathListener.gd"
 Crosshair="*res://scenes/crosshair.tscn"
 SceneManager="*res://systems/SceneManager.gd"
+Backgrounds="*res://backgrounds.gd"
 
 [display]
 

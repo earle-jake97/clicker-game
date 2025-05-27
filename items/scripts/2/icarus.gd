@@ -1,5 +1,5 @@
 extends BaseItem
-var dmg_increase = 3
+var dmg_increase = 2
 var crit_rate = 0.1
 var tags = ["add_damage", "add_crit_rate"]
 var rarity = 2

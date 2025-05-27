@@ -254,9 +254,11 @@ func proc_items(target, source_item: BaseItem = null):
 	var proc_count = 1
 	for item in inventory:
 		if item.item_name == "Parrot":
-			proc_count += 1
+			if item.get_trigger():
+				proc_count += 1
 	var used_thunderbolt = false
 	var used_lava_cake = false
+	var used_bowling_ball = false
 	for item in inventory:
 		for i in range(proc_count):
 			if item.has_method("proc"):
@@ -266,6 +268,9 @@ func proc_items(target, source_item: BaseItem = null):
 				elif item.item_name == "Molten Lava Cake" and not used_lava_cake:
 					item.proc(target, source_item)
 					used_lava_cake = true
+				elif item.item_name == "Bowling Ball" and not used_bowling_ball:
+					item.proc(target, source_item)
+					used_bowling_ball = true
 				else:
 					item.proc(target, source_item)
 
