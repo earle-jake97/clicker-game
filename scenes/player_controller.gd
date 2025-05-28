@@ -213,11 +213,7 @@ func update_modifiers():
 func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, specific_multiplier : float = 1.0 ):
 	damage = (base_attack_damage + additional_dmg) * specific_multiplier
 	damage *= (mult_dmg + 1)
-	var crit_roll = randf()
-	for i in range(luck):
-		var roll = randf()
-		if roll < crit_roll:
-			crit_roll = roll
+	var crit_roll = calculate_luck()
 	var is_crit = damage_type
 	if crit_roll <= crit_chance:
 		damage = round(damage*crit_damage) #Crit damage
@@ -230,11 +226,7 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 	}
 
 func take_damage(damage, penetration) -> void:
-	var block = randf()
-	for i in range(luck):
-		var new_block = randf()
-		if new_block > block:
-			block = new_block
+	var block = calculate_luck()
 	if block <= get_block_chance():
 		var miss = preload("res://items/misc/miss.tscn").instantiate()
 		miss.global_position = TestPlayer.global_position + Vector2(randf_range(-50.0, 10.0), randf_range(-80, -40.0))
@@ -326,3 +318,14 @@ func reset_to_defaults():
 	GameState.endless_counter = 0
 	MapState.reset_map()
 	SceneManager.switch_to_scene("res://start_scene.tscn")
+
+func calculate_luck():
+	var chance = randf()
+	if luck > 0:
+		for i in range(luck):
+			var rand = randf()
+			if rand < chance:
+				chance = rand
+		return chance
+	else:
+		return chance

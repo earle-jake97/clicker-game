@@ -46,7 +46,7 @@ func _ready() -> void:
 		min_spawns = max(min_spawns, round(difficulty/8.0))
 		max_spawns = min_spawns
 	if enemy_scene == EYEBALL_ENEMY:
-		if difficulty <= 1:
+		if difficulty == 1:
 			min_spawns = 0
 			max_spawns = 0
 		else:
@@ -64,11 +64,11 @@ func _ready() -> void:
 		else:
 			min_spawns = max(difficulty * 1, max_spawns)
 	if difficulty >= 40:
-		enemy_max_health *= pow(1 + 0.14, difficulty)
+		enemy_max_health = enemy_max_health * pow(1 + 0.20, difficulty)
 	elif difficulty >= 25:
-		enemy_max_health *= pow(1 + 0.10, difficulty)
+		enemy_max_health = enemy_max_health * pow(1 + 0.14, difficulty)
 	elif difficulty >= 15:
-		enemy_max_health *= pow(1 + 0.05, difficulty)
+		enemy_max_health = enemy_max_health * pow(1 + 0.09, difficulty)
 	else:
 		enemy_max_health += difficulty * 3.5
 	spawn_cap = randi_range(min_spawns, max_spawns)

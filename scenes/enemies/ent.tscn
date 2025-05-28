@@ -1113,7 +1113,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s80iw"]
 size = Vector2(204, 167.5)
 
-[node name="Node2D" type="Node2D" groups=["enemy"]]
+[node name="Node2D" type="Node2D" groups=["elite", "enemy"]]
 position = Vector2(0, -411)
 script = ExtResource("1_5ty2f")
 

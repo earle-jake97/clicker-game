@@ -15,12 +15,7 @@ func proc(target: Node, source_item: BaseItem = null):
 	if not tree:
 		return
 
-	var ran = randf()
-	if player.luck > 0:
-		for i in range(player.luck):
-			var new_roll = randf()
-			if new_roll < ran:
-				ran = new_roll
+	var ran = PlayerController.calculate_luck()
 	if ran <= 0.1:
 		target.take_damage(player.calculate_damage().damage * 2)
 	elif ran <= 0.25:

@@ -1,6 +1,6 @@
 extends BaseItem
 const item_name = "Amazing Weapon of Power"
-const item_description = "Every 5 seconds, snipe the enemy with the highest health pool for 5x damage. Subsequent collections increase the damage multiplier."
+const item_description = "Every second, snipe the enemy with the highest health pool. Consecutive shots against the same enemy do extra damage."
 const item_icon = preload("res://items/icons/amazing_weapon_of_power.png")
 const tags = ["timer"]
 const rarity = 2
@@ -9,8 +9,10 @@ var occurrences = 1
 var player_body = TestPlayer
 
 var cooldown_timer := 0.0
-var cooldown := 5.0 
+var cooldown := 1.0
 var delay_between_shots = 0
+var last_enemy = -1
+var add_damage = 1
 
 func _process(delta):
 	if not player:
@@ -26,15 +28,32 @@ func _process(delta):
 
 func shoot():
 	var max_hp = 0
-	var strongest_enemy = Node2D
+	var strongest_enemy: Node2D = null
 	occurrences = 0
+	
 	for item in PlayerController.inventory:
-		if item.item_name == "Amazing Weapon of Power":
+		if item.item_name == "Evil Stopwatch":
 			occurrences += 1
-	if not get_tree().get_nodes_in_group("enemy").size() > 0:
+	
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	if enemies.is_empty():
 		return
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	
+	for enemy in enemies:
 		if enemy.max_health > max_hp:
 			max_hp = enemy.max_health
 			strongest_enemy = enemy
-	PlayerController.attack_specific_enemy(strongest_enemy, 5 * occurrences)
+	
+	if strongest_enemy == null:
+		return
+	
+	var enemy_id = strongest_enemy.get_instance_id()
+	if enemy_id == last_enemy:
+		add_damage += 1.5
+	else:
+		add_damage = 1
+	
+	last_enemy = enemy_id
+	
+	print("Attacking: ", enemy_id, " | Bonus Damage Multiplier: ", add_damage)
+	PlayerController.attack_specific_enemy(strongest_enemy, occurrences * add_damage)

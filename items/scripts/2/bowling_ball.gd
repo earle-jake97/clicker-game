@@ -19,11 +19,7 @@ func proc(target: Node, source_item: BaseItem = null):
 		return
 
 	# Determine damage
-	var ran = randf()
-	for i in range(player.luck):
-		var new_ran = randf()
-		if new_ran < ran:
-			ran = new_ran
+	var ran = PlayerController.calculate_luck()
 	if ran > 0.03:
 		return
 	var strength = 0

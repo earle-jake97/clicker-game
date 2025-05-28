@@ -3,11 +3,12 @@ extends BaseItem
 var tags = ["debuff"]
 var rarity = 2
 const item_name = "Oil"
-const item_description = "Step 2, cover your enemies in oil. When you hit an enemy, they are given the oil debuff. If they die, they will explode for 5% of their max HP."
+const item_description = "Step 2, cover your enemies in oil. When you hit an enemy, they are given the oil debuff. If they die, they have a 10% chance to explode."
 const item_icon = preload("res://items/icons/oil.png")
 var file_name = "res://items/scripts/2/oil.gd"
-static var explosion_damage = 0.01
-static var flat_damage = 5
+static var explosion_damage = 0.10
+static var flat_damage = 10
+static var explosion_chance = 0.10
 
 
 func proc(target: Node, source_item: BaseItem = null):

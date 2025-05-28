@@ -22,12 +22,7 @@ func proc(target: Node, source_item: BaseItem = null):
 	for item in player.inventory:
 		if "cast_iron" in item.tags:
 			duration += 1
-	var ran = randf()
-	for item in player.inventory:
-		if "lucky_horseshoe" in item.tags:
-			var new_roll = randf()
-			if new_roll < ran:
-				ran = new_roll
+	var ran = player.calculate_luck()
 	if ran <= 0.1:
 		target.stun(duration)
 		

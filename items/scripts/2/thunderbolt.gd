@@ -3,7 +3,7 @@ extends BaseItem
 var tags = ["bounce", "thunderbolt"]
 var rarity = 2
 const item_name = "Thunderbolt"
-const item_description = "Attacks will chain damage to an extra enemy."
+const item_description = "Attacks will chain damage to an extra enemy. These attacks also have a 20% chance to proc other item effects."
 const item_icon = preload("res://items/icons/thunderbolt.png")
 var file_name = "res://items/scripts/2/thunderbolt.gd"
 
@@ -45,7 +45,9 @@ func proc(target: Node, source_item: BaseItem = null):
 		if nearest:
 			nearest.take_damage(round(player.calculate_damage().damage * 0.05))
 			if player and player.has_method("proc_items"):
-				player.proc_items(nearest, self)  # mark this Thunderbolt as the source
+				var rand = PlayerController.calculate_luck()
+				if rand <= 0.2:
+					player.proc_items(nearest, self)  # mark this Thunderbolt as the source
 			already_hit.append(nearest)
 
 			var bolt = preload("res://items/misc/LightningEffect.tscn").instantiate()

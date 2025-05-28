@@ -16,7 +16,8 @@ func _on_node_added(node):
 
 func _on_enemy_died(enemy):
 	if enemy.has_meta("oil_applied") and enemy in enemy_list:
-		spawn_oil_explosion(enemy.global_position, enemy)
+		if PlayerController.calculate_luck() <= oil_item_script.explosion_chance:
+			spawn_oil_explosion(enemy.global_position, enemy)
 	if enemy.has_meta("burrito") and enemy in enemy_list:
 		var chance = burrito_script.calculate_puddle_chance()
 		if chance.puddle_chance >= chance.random_value:

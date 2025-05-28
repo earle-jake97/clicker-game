@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gplk7ebibxa0"]
+[gd_scene load_steps=9 format=3 uid="uid://gplk7ebibxa0"]
 
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_1_map.gd" id="1_bhgnr"]
 [ext_resource type="Texture2D" uid="uid://8da8fkf1ucyy" path="res://world1/background1.png" id="2_ugu1d"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="6_m4ro6"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="7_c5fqg"]
 [ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="8_72xac"]
+[ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="8_qv2ll"]
 [ext_resource type="PackedScene" uid="uid://pad5r8i2uemg" path="res://scenes/enemies/ent.tscn" id="8_vsjje"]
 
 [node name="Horde Map 1" type="Node2D"]
@@ -43,7 +44,7 @@ y_min = 50.0
 y_max = -340.0
 min_spawn_time = 8.0
 max_spawn_time = 10.0
-enemy_max_health = 150
+enemy_max_health = 200
 enemy_damage = 20
 enemy_cash_value_min = 5
 enemy_cash_value_max = 10
@@ -79,6 +80,21 @@ enemy_damage = 25
 enemy_cash_value_min = 30
 enemy_cash_value_max = 40
 enemy_speed = 20
+
+[node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1106.55, 418.605)
+scale = Vector2(1, 1)
+script = ExtResource("5_cx6uy")
+enemy_scene = ExtResource("8_qv2ll")
+y_min = 100.0
+max_spawns = 3
+min_spawn_time = 5.0
+max_spawn_time = 7.5
+enemy_max_health = 180
+enemy_damage = 1
+enemy_cash_value_min = 1
+enemy_cash_value_max = 8
+enemy_speed = 100
 
 [node name="Positions" type="Node2D" parent="."]
 

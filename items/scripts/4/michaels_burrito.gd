@@ -23,11 +23,7 @@ func proc(target: Node, source_item: BaseItem = null):
 	target.set_meta("burrito", true)
 
 static func calculate_puddle_chance():
-	var rand = randf()
-	for i in range(PlayerController.luck):
-		var new_rand = randf()
-		if new_rand < rand:
-			rand = new_rand
+	var rand = PlayerController.calculate_luck()
 	return {
 		"random_value": rand,
 		"puddle_chance": puddle_chance

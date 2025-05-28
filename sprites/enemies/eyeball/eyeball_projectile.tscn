@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5rdqcntxpgwh"]
+
+[ext_resource type="Script" path="res://sprites/enemies/eyeball/eyeball_projectile.gd" id="1_m748j"]
+[ext_resource type="Texture2D" uid="uid://camis74dfy2li" path="res://sprites/enemies/eyeball/blood1.png" id="1_xy047"]
+[ext_resource type="Texture2D" uid="uid://xqrjpl34cjsu" path="res://sprites/enemies/eyeball/blood2.png" id="2_gsraw"]
+[ext_resource type="Texture2D" uid="uid://wf7dv3w3i0wb" path="res://sprites/enemies/eyeball/blood3.png" id="3_mbmua"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iepds"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xy047")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gsraw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mbmua")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kcjo7"]
+radius = 33.0606
+
+[node name="Node2D" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_m748j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iepds")
+autoplay = "default"
+frame_progress = 0.150432
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.319999, 1.28)
+shape = SubResource("CircleShape2D_kcjo7")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

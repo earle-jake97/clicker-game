@@ -17,10 +17,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if get_tree().get_nodes_in_group("elite"):
-		pass
-	else:
-		check_spawner_complete()
+	check_spawner_complete()
 
 func check_spawner_complete():
 	for spawner in spawners:

@@ -6,10 +6,11 @@
 [node name="Node2D" type="Node2D"]
 process_mode = 1
 z_index = 3000
+texture_filter = 1
 script = ExtResource("1_uyli1")
 
 [node name="Label" type="Label" parent="."]
-texture_filter = 2
+texture_filter = 1
 offset_right = 179.0
 offset_bottom = 22.0
 theme_override_constants/outline_size = 12
