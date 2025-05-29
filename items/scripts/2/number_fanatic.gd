@@ -1,6 +1,6 @@
 extends BaseItem
 const item_name = "Number Fanatic"
-const item_description = "Toss a projectile that bounces to two more enemies, with ramping up damage."
+const item_description = "Toss a projectile that bounces to enemies, with ramping up damage each bounce."
 const item_icon = preload("res://items/icons/number_fanatic.png")
 const tags = ["timer", "bounce"]
 const rarity = 2

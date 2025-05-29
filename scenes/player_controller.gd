@@ -171,7 +171,9 @@ func add_item(item: BaseItem):
 	if item.has_method("_process"):
 		if not item.is_inside_tree():
 			add_child(item)
-		item.set_process(true)  # <-- ensure it's active
+		item.set_process(true)  # <-- ensure it's activ
+	PauseMenu.update_inventory_display()
+	
 
 func update_modifiers():
 	additional_dmg = 0
@@ -209,6 +211,7 @@ func update_modifiers():
 	max_hp = max_hp * (1 + max_hp_percentage)
 	if inventory.back().has_method("heal"):
 		inventory.back().heal()
+	PauseMenu.update_labels()
 
 func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, specific_multiplier : float = 1.0 ):
 	damage = (base_attack_damage + additional_dmg) * specific_multiplier
@@ -217,7 +220,6 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 	var is_crit = damage_type
 	if crit_roll <= crit_chance:
 		damage = round(damage*crit_damage) #Crit damage
-		is_crit = DamageBatcher.DamageType.CRIT
 	else:
 		damage = round(damage) #Crit damage
 	return {

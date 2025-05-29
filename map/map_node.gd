@@ -110,6 +110,10 @@ func go_to_map(type):
 		SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_timer.tscn")
 		GameState.on_map_screen = false
 	elif type == "event":
-		SceneManager.switch_to_scene("res://systems/shop/secret_shop.tscn")
+		var rande = randi()
+		if rande <= 0.5:
+			SceneManager.switch_to_scene("res://systems/shop/secret_shop.tscn")
+		else:
+			SceneManager.switch_to_scene("res://systems/map/horde_scenes/tank_devil_map.tscn")
 	
 		

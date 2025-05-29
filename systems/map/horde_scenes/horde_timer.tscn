@@ -15,7 +15,7 @@ default_font = ExtResource("8_7tgdk")
 default_font_size = 32
 
 [node name="Timer Room" type="Node2D"]
-texture_filter = 2
+texture_filter = 1
 position = Vector2(-2, 0)
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_83vy7")
@@ -94,7 +94,6 @@ enemy_speed = 20
 
 [node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
 position = Vector2(1055.83, 562.984)
-scale = Vector2(1, 1)
 script = ExtResource("3_ldxr3")
 enemy_scene = ExtResource("8_1o1t5")
 y_min = 50.0

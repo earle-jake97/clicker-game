@@ -54,7 +54,6 @@ func _ready() -> void:
 	health = max_health
 	health_bar.value = health
 	speed = randf_range(min_speed, max_speed)
-	base_speed = speed
 	attack_speed = base_attack_speed
 
 func _process(delta: float) -> void:

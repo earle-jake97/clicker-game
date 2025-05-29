@@ -1467,6 +1467,7 @@ _data = {
 }
 
 [node name="devil" type="Node2D" groups=["enemy"]]
+texture_filter = 1
 script = ExtResource("1_31ic6")
 max_health = 80.0
 

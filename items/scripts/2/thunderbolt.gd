@@ -34,6 +34,7 @@ func proc(target: Node, source_item: BaseItem = null):
 	for i in range(bounce_count):
 		var nearest = null
 		var shortest = INF
+		var procs = false
 
 		for enemy in tree.get_nodes_in_group("enemy"):
 			if enemy != current_target and enemy not in already_hit and enemy.is_inside_tree():
@@ -47,11 +48,12 @@ func proc(target: Node, source_item: BaseItem = null):
 			if player and player.has_method("proc_items"):
 				var rand = PlayerController.calculate_luck()
 				if rand <= 0.2:
+					procs = true
 					player.proc_items(nearest, self)  # mark this Thunderbolt as the source
 			already_hit.append(nearest)
 
 			var bolt = preload("res://items/misc/LightningEffect.tscn").instantiate()
-			bolt.setup(current_target.global_position, nearest.global_position)
+			bolt.setup(current_target.global_position, nearest.global_position, procs)
 			tree.current_scene.add_child(bolt)
 
 			current_target = nearest

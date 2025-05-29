@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6cybsr0021lh"]
+
+[ext_resource type="Script" path="res://systems/map/horde_scenes/horde_1_map.gd" id="1_ni5fe"]
+[ext_resource type="Texture2D" uid="uid://8da8fkf1ucyy" path="res://world1/background1.png" id="2_tnjlb"]
+[ext_resource type="Script" path="res://systems/map/horde_scenes/tank_spawner.gd" id="3_oje1a"]
+[ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="4_lmxqy"]
+
+[node name="Tank Devil Random" type="Node2D"]
+texture_filter = 1
+position = Vector2(-2, 0)
+scale = Vector2(1.06457, 1.032)
+script = ExtResource("1_ni5fe")
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -100
+texture_filter = 1
+position = Vector2(294.955, 224.806)
+scale = Vector2(0.96, 0.844961)
+texture = ExtResource("2_tnjlb")
+
+[node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1091.52, 434.109)
+script = ExtResource("3_oje1a")
+enemy_scene = ExtResource("4_lmxqy")
+y_min = 0.0
+y_max = 0.0
+min_spawn_time = 1.0
+max_spawn_time = 1.0
+enemy_max_health = 1000
+enemy_damage = 50
+enemy_cash_value_min = 69
+enemy_cash_value_max = 190
+enemy_speed = 30
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Positions"]
+position = Vector2(114.6, 302.326)
+
+[node name="Marker2D2" type="Marker2D" parent="Positions"]
+position = Vector2(114.6, 434.109)
+
+[node name="Marker2D3" type="Marker2D" parent="Positions"]
+position = Vector2(114.6, 558.14)

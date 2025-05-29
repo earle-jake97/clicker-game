@@ -1,10 +1,10 @@
 extends BaseItem
 
 var elapsed_time := 0.0
-const TIMER_DURATION := 8.0
+const TIMER_DURATION := 5.0
 var amount_of_times_to_click = 1
 const item_name = "Super Stopwatch"
-const item_description = "Every 8s you attack everything on screen automatically."
+const item_description = "Every 5s you attack everything on screen automatically."
 var tags = ["timer"]
 var rarity = 4
 var item_icon = preload("res://items/icons/super_stopwatch.png")

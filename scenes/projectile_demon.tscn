@@ -946,6 +946,7 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D" groups=["enemy"]]
+texture_filter = 1
 script = ExtResource("1_magoy")
 
 [node name="shadow" type="Sprite2D" parent="."]

@@ -3,6 +3,7 @@ const ITEM_ROOM = preload("res://systems/shop/item_room_endless.tscn")
 const SHOP = preload("res://systems/shop/shop_endless.tscn")
 const HORDE_ENDLESS = preload("res://systems/map/horde_scenes/horde_endless.tscn")
 const BOSS_ENDLESS = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
+@onready var background: Sprite2D = $background
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +14,13 @@ func _ready() -> void:
 	GameState.endless_counter += 1
 	PlayerController.difficulty += 1
 	PlayerController.reset_positions()
+	var difficulty = PlayerController.difficulty
+	if GameState.endless_counter >= 40:
+		background.texture = preload("res://backgrounds/doom.png")
+	elif GameState.endless_counter >= 25:
+		background.texture = preload("res://backgrounds/despair.png")
+	elif GameState.endless_counter >= 15:
+		background.texture = preload("res://backgrounds/2_hell.png")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://pad5r8i2uemg" path="res://scenes/enemies/ent.tscn" id="8_wctcs"]
 
 [node name="Endless Map" type="Node2D"]
-texture_filter = 2
+texture_filter = 1
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_h4i6l")
 
@@ -68,7 +68,6 @@ enemy_speed = 275
 
 [node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
 position = Vector2(1106.55, 418.605)
-scale = Vector2(1, 1)
 script = ExtResource("4_6ib1t")
 enemy_scene = ExtResource("7_e1qwb")
 y_min = 100.0

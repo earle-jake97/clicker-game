@@ -34,43 +34,14 @@ func _ready() -> void:
 		decayRate = 0.1
 	var difficulty = PlayerController.difficulty
 	var spawn_threshold = 0.05
-	min_spawn_time = min_spawn_time * pow(1 - decayRate, difficulty);
-	max_spawn_time = max_spawn_time * pow(1 - decayRate/2, difficulty)
-	if enemy_scene == DEVIL:
-		min_spawns = max(difficulty * 15, max_spawns)
-		max_spawns = min_spawns + randi_range(0, 5) 
-	if enemy_scene == PROJECTILE_DEMON:
-		min_spawns = max(min_spawns, round(difficulty/2.0))
-		max_spawns = min_spawns
-	if enemy_scene == PROJECTILE_DEMON_ELITE:
-		min_spawns = max(min_spawns, round(difficulty/8.0))
-		max_spawns = min_spawns
-	if enemy_scene == EYEBALL_ENEMY:
-		if difficulty <= 1:
-			min_spawns = 0
-			max_spawns = 0
-		else:
-			min_spawns = max(min_spawns, difficulty/2.0)
-	if enemy_scene == IMP:
-		if difficulty <= 2:
-			min_spawns = 0
-			max_spawns = 0
-		else:
-			min_spawns = max(difficulty * 3, max_spawns)
-	if enemy_scene == ENT:
-		if difficulty <= 5:
-			min_spawns = 0
-			max_spawns = 0
-		else:
-			min_spawns = max(difficulty * 1, max_spawns)
-	if GameState.endless_counter >= 36:
+	if difficulty >= 40:
 		enemy_max_health *= pow(1 + 0.14, difficulty)
-	elif GameState.endless_counter >= 20:
+	elif difficulty >= 25:
 		enemy_max_health *= pow(1 + 0.10, difficulty)
-	elif GameState.endless_counter >= 10:
+	elif difficulty >= 15:
 		enemy_max_health *= pow(1 + 0.05, difficulty)
 	else:
-		enemy_max_health += difficulty * 3.5
+		enemy_max_health *= (difficulty*0.5)
 	spawn_cap = randi_range(min_spawns, max_spawns)
 	next_spawn_time = randf_range(min_spawn_time, max_spawn_time)
 
@@ -91,13 +62,13 @@ func spawn_devil():
 	enemy.armor_penetration = enemy_max_armor_penetration
 	enemy.value_min = enemy_cash_value_min
 	enemy.value_max = enemy_cash_value_max
-	enemy.min_speed = enemy_speed - 25
-	enemy.max_speed = enemy_speed + 25
+	enemy.min_speed = enemy_speed
+	enemy.max_speed = enemy_speed
 	var rand_value = randi_range(1, 100)
 	if rand_value == 1:
 		sprite.modulate = Color.GOLD
-		enemy.value_min *= 10
-		enemy.value_max *= 10
+		enemy.value_min *= 1
+		enemy.value_max *= 1
 	else:
 		var base_color = Color.SALMON
 		var red_variation
@@ -122,6 +93,7 @@ func spawn_devil():
 	var spawn_pos = global_position
 	spawn_pos.y += randf_range(y_min, y_max)
 	enemy.global_position = spawn_pos
+	enemy.scale *= 2.5 
 	get_tree().current_scene.add_child(enemy)
 	spawn_count += 1
 

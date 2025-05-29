@@ -29,7 +29,7 @@ func _process(delta):
 func shoot():
 	var max_hp = 0
 	var strongest_enemy: Node2D = null
-	occurrences = 0
+	occurrences = 1
 	
 	for item in PlayerController.inventory:
 		if item.item_name == "Evil Stopwatch":

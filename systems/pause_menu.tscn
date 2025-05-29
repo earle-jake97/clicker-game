@@ -1,30 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://uteyjrh5xtyh"]
+[gd_scene load_steps=4 format=3 uid="uid://uteyjrh5xtyh"]
 
 [ext_resource type="Script" path="res://systems/pause.gd" id="1_t6q6d"]
-
-[sub_resource type="GDScript" id="GDScript_l3h6n"]
-script/source = "extends Label
-
-var player = PlayerController
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	text = (\"Damage: \" + str(player.damage) 
-	+ \"\\nDamage multiplier: \" + str(player.mult_dmg * 100) + \"%\" 
-	+ \"\\nHealth: \" + str(player.current_hp) + \"/\" + str(player.max_hp)
-	+ \"\\nCritical Chance: \" + str(player.crit_chance*100) + \"%\"
-	+ \"\\nCritical Damage Modifier: \" + str(player.crit_damage*100) + \"%\"
-	+ \"\\nArmor: \" + str(player.total_armor)
-	+ \"\\nCash: \" + str(player.cash))
-"
+[ext_resource type="Texture2D" uid="uid://ccfl4glo4vas0" path="res://systems/pause_background.png" id="2_fu1gk"]
+[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="3_6get5"]
 
 [node name="Pause_Menu" type="Control"]
-z_index = 4096
+z_index = 4095
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_t6q6d")
@@ -36,22 +18,73 @@ offset_bottom = 40.0
 scale = Vector2(28.9381, 16.3065)
 color = Color(0, 0, 0, 0.34902)
 
-[node name="Label" type="Label" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 338.0
-offset_top = 218.0
-offset_right = 824.0
-offset_bottom = 390.0
-theme_override_font_sizes/font_size = 126
-text = "PAUSED"
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 1157.0
+offset_bottom = 652.0
+texture = ExtResource("2_fu1gk")
 
-[node name="Label2" type="Label" parent="."]
+[node name="ItemGrid" type="GridContainer" parent="."]
 layout_mode = 1
-offset_left = 893.0
-offset_right = 1059.0
-offset_bottom = 75.0
-text = "Base Damage: 10
-Additional Damage: 0
-Damage Multiplier: 0"
-horizontal_alignment = 2
-script = SubResource("GDScript_l3h6n")
+offset_left = 52.0
+offset_top = 75.0
+offset_right = 1097.0
+offset_bottom = 609.0
+columns = 15
+
+[node name="dmg_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 42.0
+offset_right = 206.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+text = "10000"
+
+[node name="as_label" type="Label" parent="."]
+offset_left = 319.0
+offset_top = 40.0
+offset_right = 396.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+text = "10000"
+
+[node name="crit_rate_label" type="Label" parent="."]
+offset_left = 537.0
+offset_top = 41.0
+offset_right = 614.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+text = "10000"
+
+[node name="crit_dmg_label" type="Label" parent="."]
+offset_left = 750.0
+offset_top = 40.0
+offset_right = 827.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+text = "10000"
+
+[node name="armor_label" type="Label" parent="."]
+offset_left = 931.0
+offset_top = 39.0
+offset_right = 1008.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+text = "10000"
+
+[node name="luck_label" type="Label" parent="."]
+offset_left = 1065.0
+offset_top = 38.0
+offset_right = 1142.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+text = "10000"

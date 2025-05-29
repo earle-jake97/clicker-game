@@ -4,7 +4,8 @@
 
 [node name="Tooltip" type="Control"]
 visible = false
-z_index = 1000
+z_index = 4096
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2

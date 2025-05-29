@@ -8,7 +8,7 @@ extends Node2D
 
 var timer: float = 0.0
 
-func setup(start_pos: Vector2, end_pos: Vector2):
+func setup(start_pos: Vector2, end_pos: Vector2, procs: bool = false):
 	line = $Line2D
 
 	# Optional Y offset to raise the lightning above the feet
@@ -46,6 +46,10 @@ func setup(start_pos: Vector2, end_pos: Vector2):
 		lightning_points.append(point)
 
 	line.points = lightning_points
+	line.default_color = Color.WHITE
+	if procs:
+		line.width = 3
+		line.default_color = Color.CYAN
 
 
 func _process(delta):

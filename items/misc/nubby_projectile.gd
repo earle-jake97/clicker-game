@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed: float = 300.0
 @export var arc_height: float = 550.0
-@export var max_bounces: int = 3
+@export var max_bounces: int = 6
 
 var rotation_speed := 0.0
 var rotation_direction := 1.0
