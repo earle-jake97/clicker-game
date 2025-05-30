@@ -52,8 +52,5 @@ func shoot():
 		add_damage += 1.5
 	else:
 		add_damage = 1
-	
 	last_enemy = enemy_id
-	
-	print("Attacking: ", enemy_id, " | Bonus Damage Multiplier: ", add_damage)
 	PlayerController.attack_specific_enemy(strongest_enemy, occurrences * add_damage)

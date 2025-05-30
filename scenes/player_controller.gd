@@ -30,6 +30,9 @@ var passive_regen = 1.0
 var regen_timer = 0.0
 var luck
 var base_luck = 0
+var overshields = 0
+var overshields_cap = 0
+var overshield_timer = 0.0
 
 var dash_animation_timer = 0.0
 
@@ -51,10 +54,22 @@ func _ready():
 	hold_click_timer.timeout.connect(attack)
 	add_child(hold_click_timer)
 	hold_click_timer.start()
+	overshields_cap = max_hp * 0.3
 
 func _process(delta: float) -> void:
 	dash_animation_timer += delta
 	regen_timer += delta
+	overshield_timer += delta
+	
+	if overshields > overshields_cap:
+		overshields = overshields_cap
+	if overshields < 0:
+			overshields = 0
+	
+	if overshields > 0 and overshield_timer >= 0.333333:
+		overshield_timer = 0.0
+		overshields -= 1
+	
 	
 	if regen_timer >= 1.0 and TestPlayer.visible:
 		heal(passive_regen)
@@ -174,6 +189,9 @@ func add_item(item: BaseItem):
 		item.set_process(true)  # <-- ensure it's activ
 	PauseMenu.update_inventory_display()
 	
+	if item.item_name == "Shielding Scythe":
+		GameState.scythe_amount += 1
+	print("Scythes: " + str(GameState.scythe_amount))
 
 func update_modifiers():
 	additional_dmg = 0
@@ -212,6 +230,9 @@ func update_modifiers():
 	if inventory.back().has_method("heal"):
 		inventory.back().heal()
 	PauseMenu.update_labels()
+	overshields_cap = max_hp * 0.3
+	HealthBar.progress_bar.max_value = overshields_cap
+
 
 func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, specific_multiplier : float = 1.0 ):
 	damage = (base_attack_damage + additional_dmg) * specific_multiplier
@@ -237,7 +258,10 @@ func take_damage(damage, penetration) -> void:
 	var damage_reduction = (total_armor - penetration)/(100.0 + total_armor - penetration)
 	damage *= (1 - damage_reduction)
 	damage = round(damage)
-	current_hp -= damage
+	var leftover_damage = overshields - damage
+	overshields -= damage
+	if leftover_damage < 0:
+		current_hp -= abs(leftover_damage)
 
 func heal(amount):
 	current_hp += amount
@@ -320,6 +344,9 @@ func reset_to_defaults():
 	GameState.endless_counter = 0
 	MapState.reset_map()
 	SceneManager.switch_to_scene("res://start_scene.tscn")
+
+func grant_shields(amount):
+	overshields += amount
 
 func calculate_luck():
 	var chance = randf()

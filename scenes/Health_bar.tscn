@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://fyxev4jdy2xn"]
+[gd_scene load_steps=12 format=3 uid="uid://fyxev4jdy2xn"]
 
 [ext_resource type="Script" path="res://scenes/health_bar.gd" id="1_csnks"]
 [ext_resource type="Texture2D" uid="uid://bi0jr2hyhkl48" path="res://systems/heart_icon_healthy.png" id="1_jrxhb"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="2_p52ks"]
 [ext_resource type="Texture2D" uid="uid://cc855ynf4mlm5" path="res://systems/endless_sign.png" id="5_7hopj"]
 [ext_resource type="Texture2D" uid="uid://b1r7a8xuwltie" path="res://sprites/fast_forward.png" id="6_qq41d"]
+[ext_resource type="Texture2D" uid="uid://dggeegbs6kdfs" path="res://systems/shield_bar.png" id="7_mt2i2"]
 
 [sub_resource type="Animation" id="Animation_ain3o"]
 length = 0.001
@@ -77,6 +78,14 @@ texture_filter = 1
 position = Vector2(152, 37)
 texture = ExtResource("1_jrxhb")
 
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 66.0
+texture_progress = ExtResource("7_mt2i2")
+
 [node name="HP" type="Label" parent="."]
 texture_filter = 2
 layout_mode = 0
@@ -89,6 +98,19 @@ theme_override_fonts/font = ExtResource("2_p52ks")
 text = "123/123"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Shields" type="Label" parent="."]
+texture_filter = 2
+offset_left = 116.0
+offset_top = 49.0
+offset_right = 211.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(1, 0.783333, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_p52ks")
+theme_override_font_sizes/font_size = 10
+text = "+10"
+horizontal_alignment = 1
 
 [node name="Cash" type="Label" parent="."]
 texture_filter = 2
@@ -104,6 +126,7 @@ text = "1233
 horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

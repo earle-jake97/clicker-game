@@ -4,6 +4,7 @@ var burrito_script := preload("res://items/scripts/4/michaels_burrito.gd")
 var oil_item_script := preload("res://items/scripts/2/oil.gd")
 const OIL_EXPLOSION = preload("res://items/misc/oil_explosion.tscn")
 const BURRITO_PUDDLE = preload("res://items/misc/burrito_puddle.tscn")
+const SCRIMBLO = preload("res://items/scrimblo/scrimblo.tscn")
 var enemy_list = []
 func _ready():
 	# Optionally, watch for enemies added dynamically
@@ -15,6 +16,9 @@ func _on_node_added(node):
 		node.died.connect(_on_enemy_died.bind(node))
 
 func _on_enemy_died(enemy):
+	if enemy not in enemy_list:
+		return
+	enemy_list.erase(enemy)
 	if enemy.has_meta("oil_applied") and enemy in enemy_list:
 		if PlayerController.calculate_luck() <= oil_item_script.explosion_chance:
 			spawn_oil_explosion(enemy.global_position, enemy)
@@ -22,8 +26,23 @@ func _on_enemy_died(enemy):
 		var chance = burrito_script.calculate_puddle_chance()
 		if chance.puddle_chance >= chance.random_value:
 			spawn_blood_puddle(enemy.global_position)
-	enemy_list.erase(enemy)
+	PlayerController.grant_shields(GameState.scythe_amount * 5)
+	var scrimblo_random = PlayerController.calculate_luck()
+	if scrimblo_random <= 0.03:
+		spawn_scrimblo(TestPlayer.global_position + Vector2(randf_range(80, 400), randf_range(-50, 50)))
 	
+	
+func spawn_scrimblo(position: Vector2):
+	var health = 0
+	for item in PlayerController.inventory:
+		if item.item_name == "Scrimblo":
+			health += 80
+	if health == 0:
+		return
+	var scrimblo = SCRIMBLO.instantiate()
+	scrimblo.global_position = position
+	scrimblo.max_hp = health
+	add_child(scrimblo)
 
 func spawn_blood_puddle(position: Vector2):
 	var strength = 0

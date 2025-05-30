@@ -50,3 +50,6 @@ func _process(delta: float) -> void:
 		head.texture = HEAD_NORMAL
 	elif percentage >= 0.60:
 		head.texture = HEAD
+
+func is_alive():
+	return true

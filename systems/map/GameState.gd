@@ -11,3 +11,4 @@ var endless_mode = false
 var endless_counter = 0
 var current_world = 1
 var last_background 
+var scythe_amount = 0

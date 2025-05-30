@@ -45,6 +45,7 @@ theme_override_fonts/font = ExtResource("3_6get5")
 text = "10000"
 
 [node name="as_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 319.0
 offset_top = 40.0
 offset_right = 396.0
@@ -54,6 +55,7 @@ theme_override_fonts/font = ExtResource("3_6get5")
 text = "10000"
 
 [node name="crit_rate_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 537.0
 offset_top = 41.0
 offset_right = 614.0
@@ -63,6 +65,7 @@ theme_override_fonts/font = ExtResource("3_6get5")
 text = "10000"
 
 [node name="crit_dmg_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 750.0
 offset_top = 40.0
 offset_right = 827.0
@@ -72,6 +75,7 @@ theme_override_fonts/font = ExtResource("3_6get5")
 text = "10000"
 
 [node name="armor_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 931.0
 offset_top = 39.0
 offset_right = 1008.0
@@ -81,6 +85,7 @@ theme_override_fonts/font = ExtResource("3_6get5")
 text = "10000"
 
 [node name="luck_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 1065.0
 offset_top = 38.0
 offset_right = 1142.0

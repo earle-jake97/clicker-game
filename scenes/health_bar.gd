@@ -14,16 +14,29 @@ const HEART_CASH_DEAD = preload("res://systems/heart_cash_dead.png")
 @onready var endless_sprite: Sprite2D = $endless_sprite
 @onready var room_count: Label = $endless_sprite/room_count
 @onready var button: TextureButton = $Button
+@onready var progress_bar: TextureProgressBar = $ProgressBar
+@onready var shields: Label = $Shields
+
+
 var fast_forward = false
 
 var dead = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
+	progress_bar.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	progress_bar.value = PlayerController.overshields
+	if PlayerController.overshields > 0:
+		progress_bar.visible = true
+		shields.visible = true
+		shields.text = str("+", format_large_number(progress_bar.value))
+	else:
+		progress_bar.visible = false
+		shields.visible = false
 	if fast_forward:
 			Engine.time_scale = 5.0
 	else:

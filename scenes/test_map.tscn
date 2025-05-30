@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnv4t6agl2tpu"]
+[gd_scene load_steps=6 format=3 uid="uid://bnv4t6agl2tpu"]
 
-[ext_resource type="Script" path="res://scenes/elite_thrower_map.gd" id="1_0lcff"]
+[ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
 [ext_resource type="Texture2D" uid="uid://c4nj7w0dbrmt5" path="res://backgrounds/1.png" id="2_j02u5"]
 [ext_resource type="Script" path="res://scenes/elite_spawner.gd" id="3_cfk5i"]
-[ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="4_wdwm8"]
+[ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="4_ot71d"]
+[ext_resource type="PackedScene" uid="uid://t8h2llx3dng1" path="res://items/scrimblo/scrimblo.tscn" id="5_s277r"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
 position = Vector2(-2, 0)
 scale = Vector2(1.06457, 1.032)
-script = ExtResource("1_0lcff")
+script = ExtResource("1_q8yj5")
 
 [node name="background" type="Sprite2D" parent="."]
 z_index = -100
@@ -19,14 +20,16 @@ scale = Vector2(0.96, 0.844961)
 texture = ExtResource("2_j02u5")
 
 [node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(936.528, 440.892)
+position = Vector2(1060.52, 372.093)
 script = ExtResource("3_cfk5i")
-enemy_scene = ExtResource("4_wdwm8")
-y_min = 50.0
-enemy_max_health = 300
+enemy_scene = ExtResource("4_ot71d")
+y_min = 0.0
+y_max = 0.0
+enemy_max_health = 123132
 enemy_damage = 33
 enemy_cash_value_min = 140
 enemy_cash_value_max = 180
+enemy_speed = 100
 
 [node name="Positions" type="Node2D" parent="."]
 
@@ -38,3 +41,6 @@ position = Vector2(149.356, 432.171)
 
 [node name="Marker2D3" type="Marker2D" parent="Positions"]
 position = Vector2(168.143, 561.047)
+
+[node name="scrimblo" parent="." instance=ExtResource("5_s277r")]
+position = Vector2(315.62, 401.163)

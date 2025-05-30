@@ -965,7 +965,7 @@ _data = {
 "move_up": SubResource("Animation_pwp8i")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["player"]]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_t3wex")
 
