@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 
 	# Move toward player only if not waiting after attack
 	if player and not is_attacking and not dead and not is_pushed and not is_frozen:
-		global_position = global_position.move_toward(player.player.global_position + Vector2(400, 0), speed * delta)
+		global_position = global_position.move_toward(player.player.global_position + Vector2(500, 0), speed * delta)
 
 	if health <= 0:
 		if not paid_out:

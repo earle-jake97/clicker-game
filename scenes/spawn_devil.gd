@@ -63,6 +63,8 @@ func _ready() -> void:
 			max_spawns = 0
 		else:
 			min_spawns = max(difficulty * 1, max_spawns)
+	if GameState.endless_counter >= 45:
+		enemy_max_health *= pow(1 + 0.25, difficulty)
 	if GameState.endless_counter >= 36:
 		enemy_max_health *= pow(1 + 0.14, difficulty)
 	elif GameState.endless_counter >= 20:

@@ -27,5 +27,5 @@ func _process(delta):
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	enemy = area.get_parent()
-	if enemy.has_method("take_damage"):
+	if enemy.has_method("take_damage") and enemy.is_in_group("enemy"):
 			enemy.take_damage(round(damage), crit)

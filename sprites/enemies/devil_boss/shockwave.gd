@@ -37,5 +37,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.get_groups().has("player_hitbox"):
+	if area.get_groups().has("player_hitbox") and area.get_parent().is_in_group("main"):
 		PlayerController.take_damage(20, 5)
+	if area.is_in_group("scrimblo") and area.get_parent().has_meta("take_damage"):
+		area.get_parent().take_damage(20, 5)

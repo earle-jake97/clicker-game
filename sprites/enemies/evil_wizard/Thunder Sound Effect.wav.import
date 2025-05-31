@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cc1ssdaqqcuie"
+path="res://.godot/imported/Thunder Sound Effect.wav-d811e5671532fe001d4ef57023137f8a.sample"
+
+[deps]
+
+source_file="res://sprites/enemies/evil_wizard/Thunder Sound Effect.wav"
+dest_files=["res://.godot/imported/Thunder Sound Effect.wav-d811e5671532fe001d4ef57023137f8a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://uwkrine8svdd"]
+[gd_scene load_steps=3 format=3 uid="uid://uwkrine8svdd"]
 
 [ext_resource type="Script" path="res://systems/map/boss_scenes/boss_1_map.gd" id="1_45nq4"]
 [ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="2_cx4q6"]
-[ext_resource type="PackedScene" uid="uid://27xngsos4sod" path="res://sprites/enemies/devil_boss/devil_boss.tscn" id="5_rkbwp"]
 
 [node name="boss1" type="Node2D"]
 texture_filter = 1
@@ -15,10 +14,9 @@ position = Vector2(543, 311.922)
 scale = Vector2(0.96, 0.844961)
 texture = ExtResource("2_cx4q6")
 
-[node name="Devil_Boss" parent="." instance=ExtResource("5_rkbwp")]
-z_index = 470
-position = Vector2(887.682, 311.047)
-scale = Vector2(0.4, 0.4)
+[node name="boss_spawn" type="Marker2D" parent="."]
+position = Vector2(887.682, 328.488)
+scale = Vector2(1, 1)
 
 [node name="Positions" type="Node2D" parent="."]
 position = Vector2(-7.51477, 2.38419e-07)

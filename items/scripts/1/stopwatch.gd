@@ -12,6 +12,7 @@ func add_to_inventory():
 	player.add_item(self)
 
 func get_cps():
+	amount_of_times_to_click = 0
 	for item in player.inventory:
 		if item.item_name == "Evil Stopwatch":
 			amount_of_times_to_click += 1

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnv4t6agl2tpu"]
+
+[ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
+[ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="2_kgj2o"]
+[ext_resource type="PackedScene" uid="uid://c34fphmkl4u62" path="res://sprites/enemies/evil_wizard/evil_wizard.tscn" id="4_0gk2n"]
+[ext_resource type="PackedScene" uid="uid://8ejuyhgqoysc" path="res://scenes/damage_number.tscn" id="5_hmfx1"]
+[ext_resource type="PackedScene" uid="uid://t8h2llx3dng1" path="res://items/scrimblo/scrimblo.tscn" id="5_s277r"]
+
+[node name="Horde Map 1" type="Node2D"]
+texture_filter = 2
+position = Vector2(-2, 0)
+scale = Vector2(1.06457, 1.032)
+script = ExtResource("1_q8yj5")
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -100
+texture_filter = 2
+position = Vector2(543, 311.922)
+scale = Vector2(0.96, 0.844961)
+texture = ExtResource("2_kgj2o")
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Positions"]
+position = Vector2(135.266, 299.419)
+
+[node name="Marker2D2" type="Marker2D" parent="Positions"]
+position = Vector2(149.356, 432.171)
+
+[node name="Marker2D3" type="Marker2D" parent="Positions"]
+position = Vector2(168.143, 561.047)
+
+[node name="scrimblo" parent="." instance=ExtResource("5_s277r")]
+position = Vector2(667.875, 593.023)
+
+[node name="Evil Wizard" parent="." instance=ExtResource("4_0gk2n")]
+position = Vector2(964.709, 414.729)
+damage_number_scene = ExtResource("5_hmfx1")
+health = 2000

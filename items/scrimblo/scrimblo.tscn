@@ -30,8 +30,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_fni0y"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_66ekg"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -133,8 +133,8 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_66ekg"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_fni0y"]
+resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -228,7 +228,7 @@ value = 37.0
 texture_progress = ExtResource("5_ol4oc")
 tint_progress = Color(0.36, 0.968, 1, 1)
 
-[node name="Area2D" type="Area2D" parent="." groups=["player_hitbox"]]
+[node name="Area2D" type="Area2D" parent="." groups=["player_hitbox", "scrimblo"]]
 position = Vector2(-1, -47)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["player_hitbox"]]

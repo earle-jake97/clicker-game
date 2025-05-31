@@ -13,14 +13,16 @@ var tree
 @onready var mouth: Marker2D = $mouth
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 var decay_timer = 0.0
+var health_percentage
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SceneManager.scene_switched.connect(queue_free)
-	progress_bar.max_value = health
 	progress_bar.value = health
 	health = max_hp
+	progress_bar.max_value = max_hp
 	projectile_cooldown = PlayerController.clicks_per_second * 0.3333333
+	health_percentage = max_hp / 50.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,7 +30,7 @@ func _process(delta: float) -> void:
 	decay_timer += delta
 	if decay_timer >= 0.2:
 		decay_timer = 0.0
-		health -= 1
+		health -= health_percentage
 	
 	projectile_timer += delta
 	if health < max_hp and is_alive():
