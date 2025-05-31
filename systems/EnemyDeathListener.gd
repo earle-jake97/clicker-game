@@ -14,18 +14,16 @@ func _on_node_added(node):
 	if node.is_in_group("enemy") and "died" in node:
 		enemy_list.append(node)
 		node.died.connect(_on_enemy_died.bind(node))
-
 func _on_enemy_died(enemy):
 	if enemy not in enemy_list:
 		return
 	enemy_list.erase(enemy)
-	if enemy.has_meta("oil_applied") and enemy in enemy_list:
+	if enemy.debuffs.has(debuff.Debuff.OIL):
 		if PlayerController.calculate_luck() <= oil_item_script.explosion_chance:
 			spawn_oil_explosion(enemy.global_position, enemy)
-	if enemy.has_meta("burrito") and enemy in enemy_list:
-		var chance = burrito_script.calculate_puddle_chance()
-		if chance.puddle_chance >= chance.random_value:
-			spawn_blood_puddle(enemy.global_position)
+	var chance = burrito_script.calculate_puddle_chance()
+	if chance.puddle_chance >= chance.random_value:
+		spawn_blood_puddle(enemy.global_position)
 	PlayerController.grant_shields(GameState.scythe_amount * 5)
 	var scrimblo_random = PlayerController.calculate_luck()
 	if scrimblo_random <= 0.03:
@@ -50,7 +48,8 @@ func spawn_blood_puddle(position: Vector2):
 	for item in PlayerController.inventory:
 		if item.item_name == "Michael's Burrito":
 			strength += 1
-	
+	if strength == 0:
+		return
 	var puddle = BURRITO_PUDDLE.instantiate()
 	puddle.puddle_damage = (burrito_script.percent_dmg + (0.1 * strength)) * PlayerController.calculate_damage().damage
 	puddle.global_position = position

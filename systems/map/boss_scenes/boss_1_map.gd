@@ -5,6 +5,7 @@ extends Node2D
 const DEVIL_BOSS = preload("res://sprites/enemies/devil_boss/devil_boss.tscn")
 const EVIL_WIZARD = preload("res://sprites/enemies/evil_wizard/evil_wizard.tscn")
 var boss
+var can_process = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var rand = randf()
@@ -14,7 +15,9 @@ func _ready() -> void:
 	else:
 		boss = EVIL_WIZARD.instantiate()
 	boss.global_position = boss_spawn.global_position
-	get_tree().current_scene.add_child(boss)
+	boss.add_to_group("boss")
+	add_child(boss)
+	boss.died.connect(_on_boss_died)
 	
 	GameState.on_map_screen = false
 	TestPlayer.visible = true
@@ -25,17 +28,14 @@ func _ready() -> void:
 		GameState.endless_counter += 1
 	PlayerController.reset_positions()
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	clear()
 
-func clear():
-	if get_tree().get_nodes_in_group("boss").size() < 1:
-		GameState.endless_mode = true
-		HealthBar.endless_sprite.visible = true
-		var rand = randf()
-		queue_free()
-		if rand <= 0.3:
-			SceneManager.switch_to_scene("res://systems/shop/shop_endless.tscn")
-		else:
-			SceneManager.switch_to_scene("res://systems/shop/item_room_endless.tscn")
+func _on_boss_died():
+	await get_tree().create_timer(2.0).timeout
+	GameState.endless_mode = true
+	HealthBar.endless_sprite.visible = true
+	var rand = randf()
+	queue_free()
+	if rand <= 0.3:
+		SceneManager.switch_to_scene("res://systems/shop/shop_endless.tscn")
+	else:
+		SceneManager.switch_to_scene("res://systems/shop/item_room_endless.tscn")

@@ -16,7 +16,6 @@ texture = ExtResource("2_cx4q6")
 
 [node name="boss_spawn" type="Marker2D" parent="."]
 position = Vector2(887.682, 328.488)
-scale = Vector2(1, 1)
 
 [node name="Positions" type="Node2D" parent="."]
 position = Vector2(-7.51477, 2.38419e-07)
