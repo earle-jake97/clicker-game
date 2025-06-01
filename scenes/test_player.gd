@@ -51,5 +51,8 @@ func _process(delta: float) -> void:
 	elif percentage >= 0.60:
 		head.texture = HEAD
 
+func take_damage(damage, pen):
+	PlayerController.take_damage(damage, pen)
+	
 func is_alive():
 	return true

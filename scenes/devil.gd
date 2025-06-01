@@ -21,6 +21,8 @@ var health: float
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Node2D = $sprite
 @onready var head: Sprite2D = $sprite/head
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+const DEVON = preload("res://sprites/enemies/devil/devon.wav")
 const NEW_DEVIL_HEAD = preload("res://sprites/enemies/devil/new_devil_head.png")
 const NEW_DEVIL_HEAD_DEAD = preload("res://sprites/enemies/devil/new_devil_head_dead.png")
 const NEW_DEVIL_HEAD_SMILE = preload("res://sprites/enemies/devil/new_devil_head_smile.png")
@@ -48,6 +50,7 @@ var pushback_timer = 0.0
 var is_pushed = false
 var target = TestPlayer
 var moving = true
+var pitch_scale = randf_range(0.7, 1.3)
 
 func _ready() -> void:
 	value = randi_range(value_min, value_max)
@@ -58,6 +61,9 @@ func _ready() -> void:
 	speed = randf_range(min_speed, max_speed)
 	base_speed = speed
 	attack_speed = base_attack_speed
+	if SoundManager.imp_spawn_sound():
+		audio_stream_player_2d.pitch_scale = pitch_scale
+		audio_stream_player_2d.play()
 
 func _process(delta: float) -> void:
 	for entity in get_tree().get_nodes_in_group("player"):
@@ -150,10 +156,9 @@ func process_attack(delta):
 	attack_duration += delta
 
 	if attack_duration >= 0.5333 and is_attacking:
-		if target.has_method("take_damage"):
+		if target.has_method("take_damage") and touching_player:
 			target.take_damage(damage, armor_penetration)
-		else:
-			PlayerController.take_damage(damage, armor_penetration)
+
 		is_attacking = false
 		waiting_after_attack = true
 		attack_duration = 0.0
@@ -169,13 +174,19 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		reached_player = false
 
 func die():
+	if dead:
+		return
+	dead = true
+	audio_stream_player_2d.stream = DEVON
 	head.texture = NEW_DEVIL_HEAD_DEAD
 	progress_bar.hide()
 	debuff_container.hide()
 	remove_from_group("enemy")
 	animation_player.play("die")
-	dead = true
 	died.emit()
+	if SoundManager.imp_death_sound():
+		audio_stream_player_2d.pitch_scale = pitch_scale
+		audio_stream_player_2d.play()
 
 func apply_debuff():
 	debuff_container.update_debuffs()

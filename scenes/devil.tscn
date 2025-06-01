@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c46jces8nqyq6"]
+[gd_scene load_steps=22 format=3 uid="uid://c46jces8nqyq6"]
 
 [ext_resource type="Script" path="res://scenes/devil.gd" id="1_31ic6"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_j47kg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b3u0v01gh02jt" path="res://sprites/enemies/devil/new_devil_body_leg2.png" id="10_kspa4"]
 [ext_resource type="Texture2D" uid="uid://bexle8apjq6xo" path="res://sprites/enemies/devil/new_devil_body.png" id="11_py8l2"]
 [ext_resource type="Texture2D" uid="uid://cnlf514o0hift" path="res://sprites/enemies/devil/new_devil_head.png" id="12_yf2rc"]
+[ext_resource type="AudioStream" uid="uid://c3mosv60pkrc" path="res://sprites/enemies/devil/devon_spawn.wav" id="13_uicv7"]
 [ext_resource type="Texture2D" uid="uid://b7o1eake3sb8m" path="res://sprites/enemies/devil/new_devil_arm1.png" id="13_vkbpf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjubl"]
@@ -1546,6 +1547,9 @@ libraries = {
 "": SubResource("AnimationLibrary_hlxsp")
 }
 autoplay = "walk"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_uicv7")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

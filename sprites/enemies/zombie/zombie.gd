@@ -138,11 +138,10 @@ func start_attack():
 func process_attack(delta):
 	attack_duration += delta
 
-	if attack_duration >= 1.10 and is_attacking:
-		if target.has_method("take_damage"):
+	if attack_duration >= 1.1 and is_attacking:
+		if target.has_method("take_damage") and touching_player:
 			target.take_damage(damage, armor_penetration)
-		else:
-			PlayerController.take_damage(damage, armor_penetration)
+
 		is_attacking = false
 		waiting_after_attack = true
 		attack_duration = 0.0
