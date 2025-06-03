@@ -29,6 +29,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if fast_forward:
+		button.modulate = Color.YELLOW
+	else:
+		button.modulate = Color.WHITE
 	progress_bar.value = PlayerController.overshields
 	if PlayerController.overshields > 0:
 		progress_bar.visible = true

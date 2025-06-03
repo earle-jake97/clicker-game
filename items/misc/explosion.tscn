@@ -32,6 +32,7 @@ animations = [{
 }]
 
 [node name="Explosion" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_tls7e")
 
 [node name="Timer" type="Timer" parent="."]

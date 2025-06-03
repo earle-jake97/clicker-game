@@ -5,6 +5,7 @@ signal died
 @export var max_speed: float
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var debuff_container: HBoxContainer = $debuff_container
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var health: float
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
@@ -69,6 +70,8 @@ func _ready() -> void:
 	initial_y = global_position.y
 	initial_x = player.global_position.x
 	value = randi_range(value_min, value_max)
+	if SoundManager.thrower_spawn_sound():
+		audio_stream_player_2d.play()
 
 func _process(delta: float) -> void:
 	if spit_timer >= 0.2 and spitting:

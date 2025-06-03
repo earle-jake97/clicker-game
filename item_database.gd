@@ -46,7 +46,8 @@ func register_items():
 		preload("res://items/scripts/3/molten_lava_cake.gd"),
 		preload("res://items/scripts/3/headtaker.gd"),
 		preload("res://items/scripts/2/scythe.gd"),
-		preload("res://items/scripts/3/scrimblo.gd")
+		preload("res://items/scripts/3/scrimblo.gd"),
+		preload("res://items/scripts/1/sus_shroom.gd")
 		# preload more items here...
 	]
 	hearts = [
@@ -86,3 +87,6 @@ func get_random_heart_by_rarity(rarity: int):
 
 func get_random_item():
 	return items.pick_random()
+
+func reset_items():
+	set_starter_items()

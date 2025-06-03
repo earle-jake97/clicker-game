@@ -5,6 +5,7 @@ const smoke_scene = preload("res://items/misc/smoke_cloud.tscn")
 @onready var explosion: AnimatedSprite2D = $explosion
 
 func _ready():
+	scale = GameState.get_size_modifier()
 	explosion.play("explode")
 	for i in range(cloud_count):
 		var cloud = smoke_scene.instantiate()

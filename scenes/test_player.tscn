@@ -461,30 +461,6 @@ tracks/14/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("shadow:position")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-2, 3), Vector2(-70.6667, 2.66667)]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("shadow:rotation")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_cwi2m"]
 resource_name = "idle"
@@ -497,10 +473,10 @@ tracks/0/path = NodePath("sprite/leg1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.36667, 2.56667, 2.7, 2.83333, 4.43333, 7.26667, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.6, 1.93333, 2.13333, 2.36667, 2.56667, 2.7, 2.83333, 4.43333, 7.26667, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(8.33333, -28.3333), Vector2(12.5, -39.1667), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(2.5, -30.8333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333)]
+"values": [Vector2(8.33333, -28.3333), Vector2(12.5, -39.1667), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(10.8333, -50), Vector2(2.5, -30.8333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333), Vector2(8.33333, -28.3333)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -509,10 +485,10 @@ tracks/1/path = NodePath("sprite/leg1:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.36667, 2.56667, 2.7, 2.83333, 4.43333, 7.26667, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.6, 1.93333, 2.13333, 2.36667, 2.56667, 2.7, 2.83333, 4.43333, 7.26667, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.912214, -1.56452, -1.45728, -1.93278, -1.32262, -1.71143, -1.32657, -1.8692, -1.56452, -1.45728, -1.93278, -1.32262, -1.71143, -1.32657, -1.8692, -1.56452, -1.45728, -1.93278, -1.32262, -1.71143, -1.32657, -1.8692, 0.225493, 0.0, 0.112112, 0.0, -0.0753912, 0.0126884, 0.00416693]
+"values": [0.0, -0.912214, -1.56452, -1.32262, -1.8692, 0.225493, 0.0, 0.112112, 0.0, -0.0753912, 0.0126884, 0.00416693]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -633,6 +609,18 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.0, 0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("sprite:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_vl5q4"]
@@ -996,9 +984,7 @@ texture = ExtResource("5_q22f3")
 z_index = 1
 position = Vector2(-0.833333, -12.5)
 sprite_frames = SubResource("SpriteFrames_rjapy")
-animation = &"gun"
 autoplay = "default"
-frame_progress = 0.898605
 offset = Vector2(16.6667, 8.33334)
 
 [node name="head" type="Sprite2D" parent="sprite/body"]

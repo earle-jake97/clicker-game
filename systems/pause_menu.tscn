@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://uteyjrh5xtyh"]
+[gd_scene load_steps=6 format=3 uid="uid://uteyjrh5xtyh"]
 
 [ext_resource type="Script" path="res://systems/pause.gd" id="1_t6q6d"]
 [ext_resource type="Texture2D" uid="uid://ccfl4glo4vas0" path="res://systems/pause_background.png" id="2_fu1gk"]
 [ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="3_6get5"]
+[ext_resource type="Texture2D" uid="uid://da2bwhaew8t81" path="res://systems/reset.png" id="4_j0jyv"]
+[ext_resource type="Texture2D" uid="uid://dqdr84o7v24pk" path="res://systems/you_sure.png" id="5_l5o60"]
 
 [node name="Pause_Menu" type="Control"]
 z_index = 4095
@@ -31,7 +33,7 @@ layout_mode = 1
 offset_left = 52.0
 offset_top = 75.0
 offset_right = 1097.0
-offset_bottom = 609.0
+offset_bottom = 588.0
 columns = 15
 
 [node name="dmg_label" type="Label" parent="."]
@@ -42,7 +44,7 @@ offset_right = 206.0
 offset_bottom = 65.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_6get5")
-text = "10000"
+text = "?"
 
 [node name="as_label" type="Label" parent="."]
 layout_mode = 0
@@ -52,7 +54,7 @@ offset_right = 396.0
 offset_bottom = 63.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_6get5")
-text = "10000"
+text = "?"
 
 [node name="crit_rate_label" type="Label" parent="."]
 layout_mode = 0
@@ -62,7 +64,7 @@ offset_right = 614.0
 offset_bottom = 64.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_6get5")
-text = "10000"
+text = "?"
 
 [node name="crit_dmg_label" type="Label" parent="."]
 layout_mode = 0
@@ -72,7 +74,7 @@ offset_right = 827.0
 offset_bottom = 63.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_6get5")
-text = "10000"
+text = "?"
 
 [node name="armor_label" type="Label" parent="."]
 layout_mode = 0
@@ -82,7 +84,7 @@ offset_right = 1008.0
 offset_bottom = 62.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_6get5")
-text = "10000"
+text = "?"
 
 [node name="luck_label" type="Label" parent="."]
 layout_mode = 0
@@ -92,4 +94,73 @@ offset_right = 1142.0
 offset_bottom = 61.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_6get5")
-text = "10000"
+text = "?"
+
+[node name="RestartButton" type="TextureButton" parent="."]
+offset_left = 982.0
+offset_top = 589.0
+offset_right = 1114.0
+offset_bottom = 629.0
+texture_normal = ExtResource("4_j0jyv")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+offset_left = -10.0
+offset_top = -6.0
+offset_right = 31.0
+offset_bottom = 35.0
+scale = Vector2(28.9381, 16.3065)
+color = Color(0, 0, 0, 0.34902)
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect2"]
+position = Vector2(20.2847, 19.3788)
+scale = Vector2(0.0345565, 0.0613252)
+texture = ExtResource("5_l5o60")
+
+[node name="yes_button" type="Button" parent="ColorRect2/Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -106.0
+offset_top = 44.0
+offset_right = -38.0001
+offset_bottom = 84.0
+
+[node name="prompt_label" type="Label" parent="ColorRect2/Sprite2D"]
+offset_left = -348.0
+offset_top = -21.0
+offset_right = 377.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_font_sizes/font_size = 16
+text = "Are you sure you want to reset your current run?"
+
+[node name="yes" type="Label" parent="ColorRect2/Sprite2D"]
+offset_left = -97.0001
+offset_top = 52.0
+offset_right = -48.0001
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_font_sizes/font_size = 16
+text = "yes"
+
+[node name="no" type="Label" parent="ColorRect2/Sprite2D"]
+offset_left = 59.9999
+offset_top = 59.0
+offset_right = 109.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_font_sizes/font_size = 16
+text = "no"
+
+[node name="no_button" type="Button" parent="ColorRect2/Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 45.9999
+offset_top = 51.0
+offset_right = 114.0
+offset_bottom = 91.0
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="ColorRect2/Sprite2D/yes_button" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="ColorRect2/Sprite2D/no_button" to="." method="_on_no_button_pressed"]

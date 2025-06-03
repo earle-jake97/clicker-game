@@ -31,6 +31,7 @@ var all_nodes: Array[Node2D] = []
 var layer_nodes = []  # <-- untyped to avoid nested typed collection error
 
 func _ready() -> void:
+	TestPlayer.visible = false
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
 	load_decorative_textures_from_folder("res://map/decorations/")

@@ -6,6 +6,7 @@ const smoke_scene = preload("res://items/misc/smoke_cloud.tscn")
 var enemy
 var explosion_damage
 func _ready():
+	scale = GameState.get_size_modifier()
 	explosion.play("explode")
 	if get_tree().get_nodes_in_group("enemy").size() >= 50:
 		explosion.visible = false
@@ -22,4 +23,4 @@ func _ready():
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	enemy = area.get_parent()
 	if enemy.has_method("take_damage"):
-			enemy.take_damage(round(explosion_damage))
+			enemy.take_damage(round(explosion_damage), DamageBatcher.DamageType.NORMAL)

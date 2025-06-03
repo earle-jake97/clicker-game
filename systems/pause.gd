@@ -9,6 +9,12 @@ const ITEM_DISPLAY = preload("res://systems/item_display.tscn")
 @onready var crit_dmg_label: Label = $crit_dmg_label
 @onready var armor_label: Label = $armor_label
 @onready var luck_label: Label = $luck_label
+@onready var color_rect_2: ColorRect = $ColorRect2
+@onready var yes_button: Button = $ColorRect2/Sprite2D/yes_button
+@onready var no_button: Button = $ColorRect2/Sprite2D/no_button
+@onready var restart_button: TextureButton = $RestartButton
+
+
 
 var paused = false
 # Called when the node enters the scene tree for the first time.
@@ -21,8 +27,10 @@ func _process(delta: float) -> void:
 		pause_menu.visible = true
 	else:
 		pause_menu.visible = false
-	if Input.is_action_just_pressed("Pause"):
-		if paused:
+	if Input.is_action_just_pressed("Pause") and not GameState.on_start_screen:
+		if color_rect_2.visible:
+			color_rect_2.visible = false
+		elif paused:
 			Tooltip.hide_tooltip()
 			get_tree().paused = false
 			paused = false
@@ -84,3 +92,23 @@ func format_large_number(number: int) -> String:
 		formatted = formatted.left(formatted.length() - 1)
 
 	return formatted + suffixes[magnitude]
+
+
+func _on_restart_button_pressed() -> void:
+	color_rect_2.visible = true
+
+
+
+func _on_yes_button_pressed() -> void:
+	color_rect_2.visible = false
+	Tooltip.hide_tooltip()
+	paused = false
+	TestPlayer.visible = false
+	get_tree().paused = false
+	PlayerController.reset_to_defaults()
+	
+
+
+func _on_no_button_pressed() -> void:
+	Tooltip.hide_tooltip()
+	color_rect_2.visible = false

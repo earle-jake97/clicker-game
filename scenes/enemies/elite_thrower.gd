@@ -11,6 +11,7 @@ var health: float
 @onready var limbs: AnimationPlayer = $limbs
 @onready var sprite: Node2D = $sprite
 @onready var shadow: Sprite2D = $shadow
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @onready var head: Sprite2D = $sprite/head
 @export var max_health: float
@@ -65,6 +66,8 @@ func _ready() -> void:
 	initial_y = global_position.y
 	initial_x = player.global_position.x
 	value = randi_range(value_min, value_max)
+	if SoundManager.thrower_spawn_sound():
+		audio_stream_player_2d.play()
 
 func _process(delta: float) -> void:
 	if spit_timer >= 0.2 and spitting:

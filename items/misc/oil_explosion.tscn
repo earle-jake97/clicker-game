@@ -35,6 +35,7 @@ animations = [{
 radius = 129.035
 
 [node name="Explosion" type="Node2D"]
+texture_filter = 1
 position = Vector2(0, -29)
 script = ExtResource("1_1g1hx")
 

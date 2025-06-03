@@ -22,6 +22,7 @@ animations = [{
 radius = 114.28
 
 [node name="ghost_projectile" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_lhc1g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

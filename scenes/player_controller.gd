@@ -57,6 +57,9 @@ func _ready():
 	overshields_cap = max_hp * 0.3
 
 func _process(delta: float) -> void:
+	if current_hp <= 0:
+		hold_click_timer.stop()
+		current_hp = 0
 	dash_animation_timer += delta
 	regen_timer += delta
 	overshield_timer += delta
@@ -71,11 +74,11 @@ func _process(delta: float) -> void:
 		overshields -= 1
 	
 	
-	if regen_timer >= 1.0 and TestPlayer.visible:
+	if regen_timer >= 1.0 and TestPlayer.visible and not current_hp <= 0:
 		heal(passive_regen)
 		regen_timer = 0
 	
-	if Input.is_action_just_pressed("Pause"):
+	if Input.is_action_just_pressed("Pause") and not GameState.on_start_screen:
 		get_tree().paused = not get_tree().paused
 	
 	if get_nearest_enemy():
@@ -227,7 +230,7 @@ func update_modifiers():
 			clicks_per_second += item.get_cps()
 			hold_click_timer.wait_time = 1.0 / clicks_per_second
 	max_hp = max_hp * (1 + max_hp_percentage)
-	if inventory.back().has_method("heal"):
+	if inventory.size() > 0 and inventory.back().has_method("heal"):
 		inventory.back().heal()
 	PauseMenu.update_labels()
 	overshields_cap = max_hp * 0.3
@@ -249,6 +252,8 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 	}
 
 func take_damage(damage, penetration) -> void:
+	if current_hp <= 0:
+		return
 	var block = calculate_luck()
 	if block <= get_block_chance():
 		var miss = preload("res://items/misc/miss.tscn").instantiate()
@@ -314,36 +319,27 @@ func get_block_chance():
 		return 1 - pow(0.95, count)
 
 func reset_to_defaults():
-	base_attack_damage = 10
-	base_max_hp = 100.0
-	max_hp = 0.0
-	max_hp_percentage = 1.0
-	base_armor = 1
-	additional_dmg = 0
-	mult_dmg = 0
-	current_hp = 0.0
-	base_crit_chance = 0.01
-	base_crit_damage = 1.5
-	crit_chance = 0.01
-	crit_damage = 1.5
-	damage = base_attack_damage
-	cash = 0
 	difficulty = 0
-	base_clicks_per_second = 6.0
-	clicks_per_second
-	base_passive_regen = 1.0
+	inventory.clear()
+	hold_click_timer.start()
+	cash = 0
 	passive_regen = 1.0
+	overshields = 0
 	regen_timer = 0.0
 	base_luck = 0
 	luck = base_luck
-	clicks_per_second = base_clicks_per_second
 	current_hp = base_max_hp
-	total_armor = base_armor
-	max_hp = base_max_hp
-	GameState.endless_mode = false
-	GameState.endless_counter = 0
+	update_modifiers()
+	HealthBar.dead = false
+	ItemDatabase.reset_items()
+	TestPlayer.reset_player_model()
+	GameState.reset_all()
 	MapState.reset_map()
+	PauseMenu.update_inventory_display()
+	PauseMenu.update_labels()
 	SceneManager.switch_to_scene("res://start_scene.tscn")
+	
+
 
 func grant_shields(amount):
 	overshields += amount

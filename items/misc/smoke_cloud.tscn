@@ -66,6 +66,7 @@ _data = {
 
 [node name="smoke cloud" type="Node2D"]
 z_index = 4096
+texture_filter = 1
 script = ExtResource("1_4f47r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

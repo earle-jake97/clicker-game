@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://beh2xii6o6pcp"]
+[gd_scene load_steps=23 format=3 uid="uid://beh2xii6o6pcp"]
 
 [ext_resource type="Script" path="res://scenes/enemies/elite_thrower.gd" id="1_tjf5k"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_41l14"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://rp0v4mws8crt" path="res://sprites/enemies/elite_toss/arm_front.png" id="11_ttaa2"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="12_x14sl"]
 [ext_resource type="PackedScene" uid="uid://c8rr8yob6kshw" path="res://items/misc/smoke_cloud.tscn" id="13_n6wtf"]
+[ext_resource type="AudioStream" uid="uid://cmujlprienkbl" path="res://sprites/enemies/toss_devil/spawn.wav" id="15_jkyob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fvuer"]
 radius = 14.1836
@@ -1079,3 +1080,6 @@ position = Vector2(330, -27)
 
 [node name="crosshair" type="Marker2D" parent="."]
 position = Vector2(-59, -99)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_jkyob")

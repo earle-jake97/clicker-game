@@ -188,7 +188,7 @@ func shoot_magic_missile():
 	var telegraph = TELEGRAPH.instantiate()
 	telegraph.damage = 20 + (controller.difficulty * 0.2)
 	telegraph.armor_penetration = 0
-	telegraph.duration = 1.0
+	telegraph.duration = 1.3
 	var chosen_position = player_model.global_position
 	telegraph.global_position = chosen_position
 	get_tree().current_scene.add_child(telegraph)

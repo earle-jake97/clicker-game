@@ -50,7 +50,7 @@ var pushback_timer = 0.0
 var is_pushed = false
 var target = TestPlayer
 var moving = true
-var pitch_scale = randf_range(0.7, 1.3)
+var pitch_scale = randf_range(0.9, 1.3)
 
 func _ready() -> void:
 	value = randi_range(value_min, value_max)
@@ -174,8 +174,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		reached_player = false
 
 func die():
-	if dead:
-		return
 	dead = true
 	audio_stream_player_2d.stream = DEVON
 	head.texture = NEW_DEVIL_HEAD_DEAD
@@ -184,9 +182,6 @@ func die():
 	remove_from_group("enemy")
 	animation_player.play("die")
 	died.emit()
-	if SoundManager.imp_death_sound():
-		audio_stream_player_2d.pitch_scale = pitch_scale
-		audio_stream_player_2d.play()
 
 func apply_debuff():
 	debuff_container.update_debuffs()

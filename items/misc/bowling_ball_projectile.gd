@@ -13,6 +13,7 @@ var lifetime = 0.0
 var enemy
 
 func _ready():
+	scale = GameState.get_size_modifier()
 	global_position = start_pos
 	rotation_speed = randf_range(40.0, 50.0)
 	direction = (target_pos - start_pos).normalized()

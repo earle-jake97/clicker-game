@@ -68,9 +68,9 @@ func _ready() -> void:
 	if GameState.endless_counter >= 36:
 		enemy_max_health *= pow(1 + 0.14, difficulty)
 	elif GameState.endless_counter >= 20:
-		enemy_max_health *= pow(1 + 0.10, difficulty)
+		enemy_max_health *= pow(1 + 0.092, difficulty)
 	elif GameState.endless_counter >= 10:
-		enemy_max_health *= pow(1 + 0.05, difficulty)
+		enemy_max_health *= pow(1 + 0.04, difficulty)
 	else:
 		enemy_max_health += difficulty * 3.5
 	spawn_cap = randi_range(min_spawns, max_spawns)

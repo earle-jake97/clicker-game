@@ -37,7 +37,7 @@ enemy_cash_value_max = 2
 enemy_speed = 100
 
 [node name="thrower spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(1158.21, 562.985)
+position = Vector2(1090.58, 562.985)
 script = ExtResource("5_cx6uy")
 enemy_scene = ExtResource("6_m4ro6")
 y_min = 50.0

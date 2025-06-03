@@ -12,6 +12,8 @@ const BODY_DEAD = preload("res://sprites/test_player/body_dead.png")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var arms: AnimatedSprite2D = $sprite/body/arms
 @onready var body: Sprite2D = $sprite/body
+@onready var shadow: Sprite2D = $shadow
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,11 +38,11 @@ func _process(delta: float) -> void:
 	var percentage = float(player.current_hp) / player.max_hp
 	if player.current_hp <= 0:
 		dead = true
+		shadow.visible = false
 		arms.play("die")
 		animation_player.play("die")
 		head.texture = HEAD_DEAD
 		body.texture = BODY_DEAD
-		PlayerController.paused = true
 	elif percentage <= 0.10:
 		head.texture = HEAD_DIRE
 		body.texture = BODY_DIRE
@@ -56,3 +58,9 @@ func take_damage(damage, pen):
 	
 func is_alive():
 	return true
+
+func reset_player_model():
+	shadow.visible = true
+	dead = false
+	arms.play("default")
+	animation_player.play("idle")
