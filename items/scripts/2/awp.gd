@@ -14,6 +14,9 @@ var delay_between_shots = 0
 var last_enemy = -1
 var add_damage = 1
 
+func _ready() -> void:
+	connect("reset", Callable(self, "queue_free"))
+
 func _process(delta):
 	if not player:
 		return

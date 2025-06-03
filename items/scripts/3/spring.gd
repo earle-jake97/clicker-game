@@ -7,9 +7,5 @@ const rarity = 3
 var file_name = "res://items/scripts/3/spring.gd"
 var occurrences = 3
 
-
-func _process(delta: float) -> void:
-	pass
-
 func get_bounces():
 	return occurrences

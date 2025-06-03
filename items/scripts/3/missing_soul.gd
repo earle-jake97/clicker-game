@@ -12,6 +12,9 @@ var file_name = "res://items/scripts/3/missing_soul.gd"
 var timer_procs = 0
 var projectile_scene = preload("res://items/misc/ghost_projectile.tscn")
 
+func _ready() -> void:
+	connect("reset", Callable(self, "queue_free"))
+
 func check_timers():
 	timer_procs = 0
 	for item in player.inventory:

@@ -17,7 +17,6 @@ script = ExtResource("1_cblr7")
 
 [node name="djungelskog" parent="." instance=ExtResource("3_met8w")]
 position = Vector2(853.866, 388.566)
-scale = Vector2(1, 1)
 
 [node name="background" type="Sprite2D" parent="."]
 z_index = -100

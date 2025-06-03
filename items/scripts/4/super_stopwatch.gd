@@ -10,6 +10,9 @@ var rarity = 4
 var item_icon = preload("res://items/icons/super_stopwatch.png")
 var file_name = "res://items/scripts/4/super_stopwatch.gd"
 
+func _ready() -> void:
+	connect("reset", Callable(self, "queue_free"))
+
 func _process(delta: float) -> void:
 	elapsed_time += delta
 	if elapsed_time >= TIMER_DURATION:

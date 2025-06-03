@@ -33,9 +33,9 @@ var base_luck = 0
 var overshields = 0
 var overshields_cap = 0
 var overshield_timer = 0.0
-
+signal reset
 var dash_animation_timer = 0.0
-
+var processed_items = []
 var inventory: Array = []
 
 var last_enemy_attacked = null # For use in chain attacks
@@ -188,6 +188,7 @@ func add_item(item: BaseItem):
 	
 	if item.has_method("_process"):
 		if not item.is_inside_tree():
+			processed_items.append(item)
 			add_child(item)
 		item.set_process(true)  # <-- ensure it's activ
 	PauseMenu.update_inventory_display()
@@ -337,6 +338,8 @@ func reset_to_defaults():
 	MapState.reset_map()
 	PauseMenu.update_inventory_display()
 	PauseMenu.update_labels()
+	reset.emit()
+	free_items()
 	SceneManager.switch_to_scene("res://start_scene.tscn")
 	
 
@@ -354,3 +357,14 @@ func calculate_luck():
 		return chance
 	else:
 		return chance
+
+func timed_bleed():
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy.is_in_group("boss") or enemy.is_in_group("elite"):
+			enemy.take_damage(round(enemy.bleed_stacks * 0.5), DamageBatcher.DamageType.BLEED)
+		else:
+			enemy.take_damage(enemy.bleed_stacks, DamageBatcher.DamageType.BLEED)
+
+func free_items():
+	for item in processed_items:
+		item.queue_free()

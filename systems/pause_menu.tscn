@@ -97,6 +97,7 @@ theme_override_fonts/font = ExtResource("3_6get5")
 text = "?"
 
 [node name="RestartButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 982.0
 offset_top = 589.0
 offset_right = 1114.0
@@ -105,6 +106,7 @@ texture_normal = ExtResource("4_j0jyv")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -10.0
 offset_top = -6.0
 offset_right = 31.0

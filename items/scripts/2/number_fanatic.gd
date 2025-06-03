@@ -13,6 +13,9 @@ var cooldown_timer := 0.0
 var cooldown := 2.5 # Time between automatic chain lightning casts
 var delay_between_throws = 0
 
+func _ready() -> void:
+	connect("reset", Callable(self, "queue_free"))
+
 func _process(delta):
 	if not player:
 		return

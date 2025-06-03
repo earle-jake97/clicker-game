@@ -6,7 +6,3 @@ const tags = ["timer_procs"]
 const rarity = 4
 var file_name = "res://items/scripts/4/evil_stopwatch.gd"
 var occurrences = 1
-
-
-func _process(delta: float) -> void:
-	pass
