@@ -114,6 +114,6 @@ func go_to_map(type):
 		if rande <= 0.5:
 			SceneManager.switch_to_scene("res://systems/shop/secret_shop.tscn")
 		else:
-			SceneManager.switch_to_scene("res://systems/map/horde_scenes/tank_devil_map.tscn")
+			SceneManager.switch_to_scene("res://systems/map/loot_dummy.tscn")
 	
 		

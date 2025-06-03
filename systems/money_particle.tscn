@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://du4i6uerwqj2v"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_hm2ry"]
+[ext_resource type="Texture2D" uid="uid://bn45o48vaiqq2" path="res://systems/coin.png" id="2_8fm1n"]
+
+[sub_resource type="Animation" id="Animation_5k1bs"]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3lx3m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_okdwn"]
+_data = {
+"RESET": SubResource("Animation_3lx3m"),
+"fade": SubResource("Animation_5k1bs")
+}
+
+[node name="money_particle" type="Node2D"]
+script = ExtResource("1_hm2ry")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8fm1n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_okdwn")
+}
+autoplay = "fade"

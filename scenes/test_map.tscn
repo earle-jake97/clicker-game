@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnv4t6agl2tpu"]
+[gd_scene load_steps=4 format=3 uid="uid://bnv4t6agl2tpu"]
 
 [ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
 [ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="2_kgj2o"]
-[ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="4_hy6g2"]
-[ext_resource type="PackedScene" uid="uid://t8h2llx3dng1" path="res://items/scrimblo/scrimblo.tscn" id="5_s277r"]
+[ext_resource type="PackedScene" uid="uid://0woj01ejr33b" path="res://sprites/enemies/djungelskog/djungelskog.tscn" id="3_xfing"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
@@ -29,12 +28,5 @@ position = Vector2(149.356, 432.171)
 [node name="Marker2D3" type="Marker2D" parent="Positions"]
 position = Vector2(168.143, 561.047)
 
-[node name="scrimblo" parent="." instance=ExtResource("5_s277r")]
-position = Vector2(821.928, 394.38)
-
-[node name="devil2" parent="." instance=ExtResource("4_hy6g2")]
-position = Vector2(1001.34, 383.721)
-min_speed = 100.0
-max_speed = 100.0
-damage = 10
-max_health = 10000.0
+[node name="djungelskog" parent="." instance=ExtResource("3_xfing")]
+position = Vector2(873.592, 384.69)

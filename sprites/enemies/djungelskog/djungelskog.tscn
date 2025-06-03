@@ -1,0 +1,176 @@
+[gd_scene load_steps=12 format=3 uid="uid://0woj01ejr33b"]
+
+[ext_resource type="Script" path="res://sprites/enemies/djungelskog/djungelskog.gd" id="1_3olan"]
+[ext_resource type="Texture2D" uid="uid://b0gjsspwgkpf4" path="res://sprites/enemies/djungelskog/djungelskog_dummy.png" id="1_vpkix"]
+[ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="3_nubhm"]
+[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="4_78pwv"]
+[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="6_dsfa8"]
+
+[sub_resource type="Animation" id="Animation_wvyn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rjjnc"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-9, 0), Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rok0b"]
+resource_name = "hit_hard"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(21, -3), Vector2(-40, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_60exe"]
+resource_name = "hit_very_hard"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-69, 28), Vector2(-40, -34), Vector2(39, 54), Vector2(47, -62), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y6prf"]
+_data = {
+"RESET": SubResource("Animation_wvyn4"),
+"hit": SubResource("Animation_rjjnc"),
+"hit_hard": SubResource("Animation_rok0b"),
+"hit_very_hard": SubResource("Animation_60exe")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cw3qs"]
+size = Vector2(358, 404)
+
+[node name="djungelskog" type="Node2D" groups=["enemy"]]
+texture_filter = 1
+script = ExtResource("1_3olan")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.537255)
+z_as_relative = false
+position = Vector2(1, 165)
+scale = Vector2(0.306462, 0.422496)
+texture = ExtResource("3_nubhm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vpkix")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y6prf")
+}
+autoplay = "hit"
+
+[node name="debuff_container" type="HBoxContainer" parent="."]
+offset_left = 115.0
+offset_top = -241.0
+offset_right = 155.0
+offset_bottom = -201.0
+script = ExtResource("4_78pwv")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-13, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5, 4)
+shape = SubResource("RectangleShape2D_cw3qs")
+
+[node name="crosshair" type="Marker2D" parent="."]
+position = Vector2(-109, 25)
+
+[node name="cum_damage" type="Label" parent="."]
+offset_left = 3.0
+offset_top = -329.0
+offset_right = 46.0
+offset_bottom = -273.0
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("6_dsfa8")
+theme_override_font_sizes/font_size = 42
+text = "0"
