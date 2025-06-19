@@ -26,7 +26,7 @@ const DEVON = preload("res://sprites/enemies/devil/devon.wav")
 const NEW_DEVIL_HEAD = preload("res://sprites/enemies/devil/new_devil_head.png")
 const NEW_DEVIL_HEAD_DEAD = preload("res://sprites/enemies/devil/new_devil_head_dead.png")
 const NEW_DEVIL_HEAD_SMILE = preload("res://sprites/enemies/devil/new_devil_head_smile.png")
-
+var guarantee_hit = false
 var debuffs = []
 
 var base_attack_speed = 0.7
@@ -143,6 +143,8 @@ func push_back(strength: float):
 	pushback_timer = 0.0
 
 func start_attack():
+	if reached_player:
+		guarantee_hit = true
 	head.texture = NEW_DEVIL_HEAD_SMILE
 	if player.player.global_position.x > global_position.x:
 		animation_player.play("attack_right")
@@ -156,8 +158,12 @@ func process_attack(delta):
 	attack_duration += delta
 
 	if attack_duration >= 0.5333 and is_attacking:
-		if target.has_method("take_damage") and touching_player:
-			target.take_damage(damage, armor_penetration)
+		if target.has_method("take_damage"):
+			if guarantee_hit and not target.is_in_group("scrimblo"):
+				target.take_damage(damage, armor_penetration)
+				guarantee_hit = false
+			elif target.has_method("take_damage") and touching_player:
+				target.take_damage(damage, armor_penetration)
 
 		is_attacking = false
 		waiting_after_attack = true

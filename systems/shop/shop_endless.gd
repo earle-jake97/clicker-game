@@ -109,27 +109,26 @@ func get_price_for_rarity(rarity: int) -> int:
 	var difficulty = PlayerController.difficulty
 	match rarity:
 		4:
-			return 100 * ((difficulty*difficulty_scaling) + 1)
+			return round(50 + PlayerController.difficulty * 2)
 		3:
-			return 70 * ((difficulty*difficulty_scaling) + 1)
+			return round(35 + PlayerController.difficulty * 1.8)
 		2:
-			return 45 * ((difficulty*difficulty_scaling) + 1)
+			return round(20 + PlayerController.difficulty * 1.5)
 		_:
 			
-			return 30 * ((difficulty*difficulty_scaling) + 1)
+			return round(10 + PlayerController.difficulty * 1.1)
 
 func get_health_price(rarity: int) -> int:
-	var difficulty = PlayerController.difficulty
 	match rarity:
 		4:
-			return 50 * ((difficulty*difficulty_scaling) + 1)
+			return round(50 + PlayerController.difficulty * 2)
 		3:
-			return 35 * ((difficulty*difficulty_scaling) + 1)
+			return round(35 + PlayerController.difficulty * 1.8)
 		2:
-			return 20 * ((difficulty*difficulty_scaling) + 1)
+			return round(20 + PlayerController.difficulty * 1.5)
 		_:
 			
-			return 10 * ((difficulty*difficulty_scaling) + 1)
+			return round(10 + PlayerController.difficulty * 1.1)
 
 # Helper function to apply discount
 func apply_discount(base_price: int) -> int:

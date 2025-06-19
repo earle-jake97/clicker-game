@@ -71,14 +71,14 @@ func get_price_for_rarity(rarity: int) -> int:
 	var difficulty = PlayerController.difficulty
 	match rarity:
 		4:
-			return 120 * ((difficulty*difficulty_scaling) + 1)
+			return 120
 		3:
-			return 75 * ((difficulty*difficulty_scaling) + 1)
+			return 75
 		2:
-			return 55 * ((difficulty*difficulty_scaling) + 1)
+			return 55
 		_:
 			
-			return 40 * ((difficulty*difficulty_scaling) + 1)
+			return 40
 
 # Helper function to apply discount
 func apply_discount(base_price: int) -> int:

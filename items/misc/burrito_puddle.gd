@@ -9,6 +9,7 @@ const BURRITO_SCRIPT := preload("res://items/scripts/4/michaels_burrito.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SceneManager.connect("scene_switched", Callable(self, "queue_free"))
 	scale = GameState.get_size_modifier()
 
 

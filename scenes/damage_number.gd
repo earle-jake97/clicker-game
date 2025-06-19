@@ -4,11 +4,19 @@ extends Node2D
 var crit = false
 var finished_callback: Callable = Callable()
 var original_z = 3000
-const LIFETIME := 5.0 # seconds before force despawn
+const STALE_TIME := 1.0
+
+var stale_timer := Timer.new()
 
 func _ready() -> void:
+	SceneManager.connect("scene_switched", Callable(self, "queue_free"))
 	z_index = original_z
-	start_despawn_timer() # Ensure cleanup happens eventually
+
+	# Setup stale timer
+	stale_timer.one_shot = true
+	stale_timer.wait_time = STALE_TIME
+	stale_timer.timeout.connect(_on_stale_timeout)
+	add_child(stale_timer)
 
 func show_number(amount: int, color: Color = Color.WHITE, update_only: bool = false):
 	if amount > 0:
@@ -21,7 +29,11 @@ func show_number(amount: int, color: Color = Color.WHITE, update_only: bool = fa
 		z_index = original_z - int(scaled_size)
 	else:
 		label.text = ""
+
+	modulate.a = 1.0  # Force fully visible
 	label.modulate = color
+
+	stale_timer.start()  # Restart idle timer on every update
 
 	if not update_only:
 		animate()
@@ -29,18 +41,18 @@ func show_number(amount: int, color: Color = Color.WHITE, update_only: bool = fa
 func animate():
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + Vector2(0, -40), 0.5).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "modulate:a", 0.0, 0.2).set_delay(0.5)
 
 func animate_and_destroy():
 	var tween = create_tween()
-	tween.tween_property(self, "position", position + Vector2(0, -40), 0.5).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "modulate:a", 0.0, 0.2).set_delay(0.5)
-
 	tween.tween_callback(func():
 		if finished_callback.is_valid():
 			finished_callback.call()
 		queue_free()
 	).set_delay(0.6)
+
+func _on_stale_timeout():
+	animate_and_destroy()
 
 func format_large_number(number: int) -> String:
 	var suffixes = ["", "k", "m", "b", "t", "q", "Q", "s", "S", "o", "n", "d"]
@@ -59,7 +71,5 @@ func format_large_number(number: int) -> String:
 
 	return formatted + suffixes[magnitude]
 
-func start_despawn_timer():
-	await get_tree().create_timer(LIFETIME).timeout
-	if is_inside_tree(): # still valid
-		queue_free()
+func _free():
+	queue_free()

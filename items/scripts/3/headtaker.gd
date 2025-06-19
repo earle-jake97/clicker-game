@@ -29,5 +29,5 @@ func proc(target: Node, source_item: BaseItem = null):
 
 func get_execute_threshold(item_count):
 	var max_threshold = 0.99
-	var scale = 0.25
+	var scale = 0.05
 	return min_threshold + (max_threshold - min_threshold) * (1.0 - exp(-scale * item_count))

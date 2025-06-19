@@ -15,6 +15,7 @@ var tree
 var decay_timer = 0.0
 var health_percentage
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SceneManager.scene_switched.connect(queue_free)

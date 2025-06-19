@@ -1,11 +1,12 @@
 extends BaseItem
 const item_name = "Bowling Ball"
-const item_description = "3% chance to roll a bowling ball at the nearest enemy on hit."
+const item_description = "5% chance to roll a bowling ball at the nearest enemy on hit."
 const item_icon = preload("res://items/icons/bowling_ball.png")
 const tags = []
 const rarity = 2
 var file_name = "res://items/scripts/2/bowling_ball.gd"
 var player_body = TestPlayer
+var chance = 0.05
 
 @export var ball_scene = preload("res://items/misc/bowling_ball_projectile.tscn")
 
@@ -20,7 +21,7 @@ func proc(target: Node, source_item: BaseItem = null):
 
 	# Determine damage
 	var ran = PlayerController.calculate_luck()
-	if ran > 0.03:
+	if ran > chance:
 		return
 	var strength = 0
 	for item in player.inventory:

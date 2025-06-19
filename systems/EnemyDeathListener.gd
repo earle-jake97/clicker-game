@@ -26,7 +26,7 @@ func _on_enemy_died(enemy):
 		spawn_blood_puddle(enemy.global_position)
 	PlayerController.grant_shields(GameState.scythe_amount * 5)
 	var scrimblo_random = PlayerController.calculate_luck()
-	if scrimblo_random <= 0.03:
+	if scrimblo_random <= 0.08:
 		spawn_scrimblo(TestPlayer.global_position + Vector2(randf_range(120, 400), randf_range(-60, 60)))
 		
 	

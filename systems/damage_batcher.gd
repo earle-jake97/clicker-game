@@ -12,7 +12,7 @@ func _ready():
 	for type in DamageType.values():
 		var timer := Timer.new()
 		timer.one_shot = true
-		timer.wait_time = 1.25
+		timer.wait_time = 5
 		timer.timeout.connect(_on_timer_timeout.bind(type))
 		add_child(timer)
 

@@ -7,7 +7,7 @@ var debuffs = []
 @onready var area_2d: Area2D = $Area2D
 @onready var cum_damage: Label = $cum_damage
 const MONEY_PARTICLE = preload("res://systems/money_particle.tscn")
-const DAMAGE_THRESHOLD = 20.0
+const DAMAGE_THRESHOLD = 50.0
 @onready var sprite_2d: Sprite2D = $Sprite2D
 var max_health = 500
 var health = 500
@@ -26,7 +26,8 @@ func _process(delta: float) -> void:
 	if damage_accumulated >= DAMAGE_THRESHOLD:
 		damage_accumulated -= DAMAGE_THRESHOLD
 		PlayerController.add_cash(1)
-		spawn_money()
+		for i in range(3):
+			spawn_money()
 
 func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
 	damage_accumulated += amount
@@ -59,3 +60,6 @@ func spawn_money():
 	var money = MONEY_PARTICLE.instantiate()
 	money.global_position = sprite_2d.global_position + Vector2(-50, 0)
 	get_tree().current_scene.add_child(money)
+
+func apply_debuff():
+	debuff_container.update_debuffs()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2twchfapgqgq"]
+[gd_scene load_steps=12 format=3 uid="uid://b2twchfapgqgq"]
 
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_83vy7"]
 [ext_resource type="Texture2D" uid="uid://c4nj7w0dbrmt5" path="res://backgrounds/1.png" id="2_gwip4"]
 [ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="3_ldxr3"]
 [ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="4_gdv8s"]
+[ext_resource type="PackedScene" uid="uid://beh2xii6o6pcp" path="res://scenes/enemies/projectile_demon_elite.tscn" id="5_xwcmq"]
 [ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="5_yx1x3"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="6_xua7o"]
 [ext_resource type="PackedScene" uid="uid://pad5r8i2uemg" path="res://scenes/enemies/ent.tscn" id="7_8fuqv"]
@@ -26,87 +27,6 @@ texture_filter = 1
 position = Vector2(543, 311.922)
 scale = Vector2(0.96, 0.844961)
 texture = ExtResource("2_gwip4")
-
-[node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(1055.83, 562.984)
-script = ExtResource("3_ldxr3")
-enemy_scene = ExtResource("4_gdv8s")
-y_min = 50.0
-y_max = -380.0
-min_spawns = 9999
-max_spawns = 9999
-min_spawn_time = 1.0
-max_spawn_time = 1.5
-enemy_max_health = 65
-enemy_damage = 5
-enemy_cash_value_min = 1
-enemy_cash_value_max = 2
-enemy_speed = 100
-
-[node name="thrower spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(1158.21, 562.985)
-script = ExtResource("3_ldxr3")
-enemy_scene = ExtResource("5_yx1x3")
-y_min = 50.0
-y_max = -340.0
-min_spawns = 100
-max_spawns = 100
-min_spawn_time = 7.0
-max_spawn_time = 10.0
-enemy_max_health = 200
-enemy_damage = 20
-enemy_cash_value_min = 5
-enemy_cash_value_max = 10
-enemy_speed = 100
-
-[node name="imp spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(1057.7, 562.985)
-script = ExtResource("3_ldxr3")
-enemy_scene = ExtResource("6_xua7o")
-y_min = 50.0
-y_max = -380.0
-min_spawns = 9999
-max_spawns = 9999
-min_spawn_time = 3.0
-max_spawn_time = 5.0
-enemy_max_health = 80
-enemy_damage = 5
-enemy_cash_value_min = 1
-enemy_cash_value_max = 2
-enemy_speed = 275
-
-[node name="ent spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(1094.34, 390.504)
-script = ExtResource("3_ldxr3")
-enemy_scene = ExtResource("7_8fuqv")
-y_min = 200.0
-y_max = -200.0
-min_spawns = 100
-max_spawns = 100
-min_spawn_time = 15.0
-max_spawn_time = 20.0
-enemy_max_health = 800
-enemy_max_armor_penetration = 10
-enemy_damage = 25
-enemy_cash_value_min = 30
-enemy_cash_value_max = 40
-enemy_speed = 20
-
-[node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
-position = Vector2(1055.83, 562.984)
-script = ExtResource("3_ldxr3")
-enemy_scene = ExtResource("8_1o1t5")
-y_min = 50.0
-y_max = -380.0
-min_spawns = 9999
-max_spawns = 9999
-min_spawn_time = 5.0
-max_spawn_time = 7.0
-enemy_max_health = 180
-enemy_damage = 5
-enemy_cash_value_min = 5
-enemy_cash_value_max = 8
-enemy_speed = 100
 
 [node name="Positions" type="Node2D" parent="."]
 
@@ -139,3 +59,93 @@ theme_override_constants/outline_size = 8
 text = "60
 "
 horizontal_alignment = 1
+
+[node name="eliet thrower spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1158.21, 562.985)
+script = ExtResource("3_ldxr3")
+enemy_scene = ExtResource("5_xwcmq")
+y_min = 50.0
+y_max = -340.0
+min_spawns = 1233
+min_spawn_time = 15.0
+max_spawn_time = 15.0
+enemy_max_health = 1200
+enemy_damage = 20
+enemy_cash_value_min = 5
+enemy_cash_value_max = 10
+enemy_speed = 100
+
+[node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1055.83, 562.984)
+script = ExtResource("3_ldxr3")
+enemy_scene = ExtResource("4_gdv8s")
+y_min = 50.0
+y_max = -380.0
+min_spawns = 1233
+min_spawn_time = 1.1
+max_spawn_time = 1.3
+enemy_max_health = 60
+enemy_damage = 5
+enemy_cash_value_min = 1
+enemy_cash_value_max = 2
+enemy_speed = 100
+
+[node name="thrower spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1090.58, 562.985)
+script = ExtResource("3_ldxr3")
+enemy_scene = ExtResource("5_yx1x3")
+y_min = 50.0
+y_max = -340.0
+min_spawns = 1233
+min_spawn_time = 10.0
+max_spawn_time = 10.0
+enemy_max_health = 200
+enemy_damage = 20
+enemy_cash_value_min = 5
+enemy_cash_value_max = 10
+enemy_speed = 100
+
+[node name="imp spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1057.7, 562.985)
+script = ExtResource("3_ldxr3")
+enemy_scene = ExtResource("6_xua7o")
+y_min = 50.0
+y_max = -380.0
+min_spawns = 1233
+min_spawn_time = 2.0
+max_spawn_time = 2.5
+enemy_max_health = 65
+enemy_damage = 5
+enemy_cash_value_min = 1
+enemy_cash_value_max = 2
+enemy_speed = 275
+
+[node name="ent spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1094.34, 390.504)
+script = ExtResource("3_ldxr3")
+enemy_scene = ExtResource("7_8fuqv")
+y_min = 200.0
+y_max = -200.0
+min_spawns = 1233
+min_spawn_time = 5.0
+max_spawn_time = 10.0
+enemy_max_health = 800
+enemy_max_armor_penetration = 10
+enemy_damage = 25
+enemy_cash_value_min = 30
+enemy_cash_value_max = 40
+enemy_speed = 20
+
+[node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
+position = Vector2(1106.55, 418.605)
+script = ExtResource("3_ldxr3")
+enemy_scene = ExtResource("8_1o1t5")
+y_min = 100.0
+min_spawns = 12333
+min_spawn_time = 10.0
+max_spawn_time = 10.0
+enemy_max_health = 180
+enemy_damage = 1
+enemy_cash_value_min = 1
+enemy_cash_value_max = 8
+enemy_speed = 100
