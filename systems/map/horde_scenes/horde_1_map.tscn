@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://gplk7ebibxa0"]
+[gd_scene load_steps=11 format=3 uid="uid://gplk7ebibxa0"]
 
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_1_map.gd" id="1_bhgnr"]
 [ext_resource type="Texture2D" uid="uid://8da8fkf1ucyy" path="res://world1/background1.png" id="2_ugu1d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="8_72xac"]
 [ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="8_qv2ll"]
 [ext_resource type="PackedScene" uid="uid://pad5r8i2uemg" path="res://scenes/enemies/ent.tscn" id="8_vsjje"]
+[ext_resource type="Script" path="res://systems/camera.gd" id="10_wpgga"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
@@ -122,3 +123,7 @@ enemy_damage = 1
 enemy_cash_value_min = 5
 enemy_cash_value_max = 5
 enemy_speed = 100
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(542.942, 313.954)
+script = ExtResource("10_wpgga")

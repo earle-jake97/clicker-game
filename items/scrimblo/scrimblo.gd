@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 		projectile_timer = 0.0
 		shoot_projectile()
 
-func take_damage(damage, armor_pen):
+func take_damage(damage, pen):
 	health -= damage
 
 func is_alive():

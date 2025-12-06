@@ -9,6 +9,7 @@ const HEAD_DIRE = preload("res://sprites/test_player/head_dire.png")
 const HEAD_DEAD = preload("res://sprites/test_player/head_dead.png")
 const BODY_DIRE = preload("res://sprites/test_player/body_dire.png")
 const BODY_DEAD = preload("res://sprites/test_player/body_dead.png")
+const BODY_NORMAL = preload("res://sprites/test_player/body.png")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var arms: AnimatedSprite2D = $sprite/body/arms
 @onready var body: Sprite2D = $sprite/body
@@ -30,9 +31,9 @@ func _process(delta: float) -> void:
 		arms.play("gun")
 		arms.set_speed_scale(1.0)
 	elif PlayerController.clicks_per_second >= 15:
-		arms.set_speed_scale(1.2)
+		arms.set_speed_scale(2.0)
 	elif PlayerController.clicks_per_second >= 10:
-		arms.set_speed_scale(1.2)
+		arms.set_speed_scale(1.4)
 
 	z_index = round(global_position.y)
 	var percentage = float(player.current_hp) / player.max_hp
@@ -46,11 +47,16 @@ func _process(delta: float) -> void:
 	elif percentage <= 0.10:
 		head.texture = HEAD_DIRE
 		body.texture = BODY_DIRE
+		body.texture = BODY_NORMAL
 	elif percentage < 0.30:
 			head.texture = HEAD_PAIN
+			body.texture = BODY_NORMAL
+			
 	elif percentage < 0.60:
+		body.texture = BODY_NORMAL
 		head.texture = HEAD_NORMAL
 	elif percentage >= 0.60:
+		body.texture = BODY_NORMAL
 		head.texture = HEAD
 
 func take_damage(damage, pen):

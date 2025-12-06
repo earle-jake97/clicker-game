@@ -1,5 +1,5 @@
-extends Control
-@onready var pause_menu: Control = $"."
+extends CanvasLayer
+@onready var pause_menu: CanvasLayer = $"."
 @onready var restart: Button = $Restart
 @onready var item_grid: GridContainer = $ItemGrid
 const ITEM_DISPLAY = preload("res://systems/item_display.tscn")
@@ -13,6 +13,7 @@ const ITEM_DISPLAY = preload("res://systems/item_display.tscn")
 @onready var yes_button: Button = $ColorRect2/Sprite2D/yes_button
 @onready var no_button: Button = $ColorRect2/Sprite2D/no_button
 @onready var restart_button: TextureButton = $RestartButton
+@onready var ms_label: Label = $ms_label
 
 
 
@@ -75,6 +76,8 @@ func update_labels():
 	armor_label.text = str(PlayerController.total_armor)
 	
 	luck_label.text = str(PlayerController.luck)
+	
+	ms_label.text = str(PlayerController.movement_speed)
 
 func format_large_number(number: int) -> String:
 	var suffixes = ["", "k", "m", "b", "t", "q", "Q", "s", "S", "o", "n", "d"]

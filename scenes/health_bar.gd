@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 const HEART_ICON_DIRE = preload("res://systems/heart_icon_dire.png")
 const HEART_ICON_HEALTHY = preload("res://systems/heart_icon_healthy.png")
 const HEART_ICON_LOW = preload("res://systems/heart_icon_low.png")
@@ -46,8 +46,14 @@ func _process(delta: float) -> void:
 	else:
 		Engine.time_scale = 1.0
 	if GameState.on_map_screen:
-		modulate.a = 0.5
-	else: modulate.a = 1.0
+		for child in get_children():
+			if child is CanvasItem or child is Sprite2D or child is ProgressBar or child is Label or child is ColorRect or child is TextureButton:
+				child.modulate.a = 0.5
+		
+	else: 
+		for child in get_children():
+			if child is CanvasItem or child is Sprite2D or child is ProgressBar or child is Label or child is ColorRect or child is TextureButton:
+				child.modulate.a = 1.0
 	room_count.text = str(GameState.endless_counter)
 	var percentage = float(player.current_hp) / player.max_hp
 	if percentage <= 0.0 and not dead:

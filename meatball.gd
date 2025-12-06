@@ -46,9 +46,8 @@ func _process(delta: float) -> void:
 	if t >= 1.0:
 		queue_free()
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
-	if enemy.has_method("take_damage"):
+	if enemy.is_in_group("enemy") and enemy.has_method("take_damage"):
 		enemy.take_damage(damage)
 		queue_free()

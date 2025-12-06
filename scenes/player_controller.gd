@@ -37,6 +37,8 @@ signal reset
 var dash_animation_timer = 0.0
 var processed_items = []
 var inventory: Array = []
+var base_movement_speed = 180.0
+var movement_speed = 0.0
 
 var last_enemy_attacked = null # For use in chain attacks
 
@@ -47,6 +49,7 @@ func _ready():
 	current_hp = base_max_hp
 	total_armor = base_armor
 	max_hp = base_max_hp
+	movement_speed = base_movement_speed
 	# Set up the click-hold timer
 	hold_click_timer.wait_time = 1.0 / clicks_per_second # 6.2 clicks per second
 	hold_click_timer.one_shot = false
@@ -96,8 +99,39 @@ func _physics_process(delta: float) -> void:
 		#hold_click_timer.stop()
 	#elif Input.is_action_just_pressed("Click"):
 		#attack()
-
 func move_player() -> void:
+	if TestPlayer.dead:
+		return
+
+	var dir := Vector2.ZERO
+
+	# Cardinal directions
+	if Input.is_action_pressed("up"):
+		dir.y -= 1
+	if Input.is_action_pressed("down"):
+		dir.y += 1
+	if Input.is_action_pressed("left"):
+		dir.x -= 1
+	if Input.is_action_pressed("right"):
+		dir.x += 1
+
+	# Normalize so diagonal isn't faster
+	if dir != Vector2.ZERO:
+		dir = dir.normalized()
+
+	# Move the player (no collision yet)
+	TestPlayer.global_position += dir * movement_speed * get_physics_process_delta_time()
+	
+	if dir != Vector2.ZERO:
+		var anim_speed = 1.0 + (movement_speed - 200.0) * 0.01
+		anim_speed = clamp(anim_speed, 2.0, 6.0)
+		player.animation_player.speed_scale = anim_speed
+		player.animation_player.play("walk")
+	else:
+		player.animation_player.speed_scale = 1.0
+		player.animation_player.play("idle")
+
+func move_player_old() -> void:
 	if Input.is_action_just_pressed("up") and not TestPlayer.dead:
 		position -= 1
 		if position >= 1:
@@ -131,6 +165,10 @@ func attack() -> void:
 				closest_enemy = node
 
 	if closest_enemy:
+		if closest_enemy.global_position.x < TestPlayer.global_position.x:
+			TestPlayer.scale.x = -abs(TestPlayer.scale.x)
+		else:
+			TestPlayer.scale.x = abs(TestPlayer.scale.x)
 		last_enemy_attacked = closest_enemy
 		var result = calculate_damage()
 		closest_enemy.take_damage(result.damage, result.crit)
@@ -208,6 +246,7 @@ func update_modifiers():
 	clicks_per_second = base_clicks_per_second
 	passive_regen = base_passive_regen
 	luck = base_luck
+	movement_speed = base_movement_speed
 	for item in inventory:
 		if item.has_method("get_luck"):
 			luck += item.get_luck()
@@ -230,6 +269,8 @@ func update_modifiers():
 		if item.has_method("get_cps"):
 			clicks_per_second += item.get_cps()
 			hold_click_timer.wait_time = 1.0 / clicks_per_second
+		if item.has_method("get_movement_speed"):
+			movement_speed += item.get_movement_speed() 
 	max_hp = max_hp * (1 + max_hp_percentage)
 	if inventory.size() > 0 and inventory.back().has_method("heal"):
 		inventory.back().heal()
@@ -330,6 +371,7 @@ func reset_to_defaults():
 	base_luck = 0
 	luck = base_luck
 	current_hp = base_max_hp
+	movement_speed = base_movement_speed
 	update_modifiers()
 	HealthBar.dead = false
 	ItemDatabase.reset_items()

@@ -17,10 +17,11 @@ var health: float
 @export var value_max: int
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var shadow: Sprite2D = $shadow
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite: Node2D = $sprite
-@onready var head: Sprite2D = $sprite/head
+@onready var shadow: Sprite2D = $container/shadow
+@onready var animation_player: AnimationPlayer = $container/AnimationPlayer
+@onready var container: Node = $container
+@onready var sprite: Node2D = $container/sprite
+@onready var head: Sprite2D = $container/sprite/head
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 const DEVON = preload("res://sprites/enemies/devil/devon.wav")
 const NEW_DEVIL_HEAD = preload("res://sprites/enemies/devil/new_devil_head.png")
@@ -69,7 +70,11 @@ func _process(delta: float) -> void:
 	for entity in get_tree().get_nodes_in_group("player"):
 		if not is_instance_valid(entity):
 			continue
-		
+		if not dead:
+			if global_position.x > TestPlayer.global_position.x:
+				container.scale.x = abs(container.scale.x)
+			else:
+				container.scale.x = -abs(container.scale.x)
 		var distance = global_position.distance_to(entity.global_position)
 
 		var is_closer = true
@@ -106,10 +111,7 @@ func _process(delta: float) -> void:
 		if post_attack_delay >= attack_speed:
 			waiting_after_attack = false
 			head.texture = NEW_DEVIL_HEAD
-			if player.player.global_position.x > global_position.x:
-				animation_player.play("walk_2")
-			else:
-				animation_player.play("walk")
+			animation_player.play("walk")
 				
 			post_attack_delay = 0.0
 
@@ -146,10 +148,7 @@ func start_attack():
 	if reached_player:
 		guarantee_hit = true
 	head.texture = NEW_DEVIL_HEAD_SMILE
-	if player.player.global_position.x > global_position.x:
-		animation_player.play("attack_right")
-	else:
-		animation_player.play("attack")
+	animation_player.play("attack")
 
 	is_attacking = true
 	attack_duration = 0.0
