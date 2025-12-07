@@ -7,6 +7,7 @@ var last_player_position := Vector2.ZERO
 
 func _ready() -> void:
 	if TestPlayer:
+		global_position = TestPlayer.global_position
 		last_player_position = TestPlayer.global_position
 
 func _physics_process(delta: float) -> void:

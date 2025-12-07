@@ -9,15 +9,14 @@ signal died
 
 var health: float
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var limbs: AnimationPlayer = $limbs
-@onready var sprite: Node2D = $sprite
-@onready var shadow: Sprite2D = $shadow
-
-@onready var head: Sprite2D = $sprite/head
+@onready var limbs: AnimationPlayer = $container/limbs
+@onready var sprite: Node2D = $container/sprite
+@onready var shadow: Sprite2D = $container/shadow
+@onready var container: Node2D = $container
+@onready var head: Sprite2D = $container/sprite/head
 @export var max_health: float
 @onready var health_bar: TextureProgressBar = $ProgressBar
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@onready var player_positions = []
 @export var projectile_scene: PackedScene = preload("res://scenes/mad projectile.tscn")
 @export var telegraph_scene: PackedScene = preload("res://scenes/telegraph.tscn")
 @export var damage: int
@@ -25,6 +24,7 @@ var health: float
 @export var value_min: int
 @export var value_max: int
 var death_timer = 0.0
+var shot_precision = 100.0
 var dead = false
 const HEAD_SPIT = preload("res://sprites/enemies/toss_devil/head spit.png")
 const HEAD = preload("res://sprites/enemies/toss_devil/head.png")
@@ -38,9 +38,6 @@ var base_attack_speed = 1.5
 var attack_speed
 var chosen_position
 var velocity = Vector2.ZERO
-var moving = true
-var initial_y
-var initial_x
 var paid_out = false
 var bleed_stacks = 0
 var spitting = false
@@ -53,27 +50,23 @@ var spit_timer = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn()
 	attack_speed = base_attack_speed
 	shadow.scale = Vector2(0, 0)
 	tween.tween_property(shadow, "scale", Vector2(0.22, 0.22), 0.75).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	attack_speed /= (max(player_controller.difficulty/10, 0.8))
-	for node in PlayerController.position_map:
-		player_positions.append(node)
 		
 	health_bar.visible = false
 	health_bar.max_value = max_health
 	health = max_health
 	health_bar.value = health
 	speed = randf_range(50.0, 100.0)
-	for node in get_tree().get_nodes_in_group("player"):
-		player = node
-	initial_y = global_position.y
-	initial_x = player.global_position.x
 	value = randi_range(value_min, value_max)
 	if SoundManager.thrower_spawn_sound():
 		audio_stream_player_2d.play()
 
 func _process(delta: float) -> void:
+	look_at_player()
 	if spit_timer >= 0.2 and spitting:
 		head.texture = HEAD
 		limbs.play("idle")
@@ -96,9 +89,6 @@ func _process(delta: float) -> void:
 			player_controller.add_cash(value)
 		die()
 	z_index = round(global_position.y)
-	
-	if moving:
-		move_forward(delta)
 
 func _physics_process(delta: float) -> void:
 	attack_timer += delta
@@ -122,44 +112,16 @@ func launch_projectile():
 	var telegraph = telegraph_scene.instantiate()
 	telegraph.damage = 20
 	telegraph.armor_penetration = armor_penetration
-	chosen_position = player_positions[randi_range(0, player_positions.size()-1)]
-	telegraph.global_position = chosen_position.global_position
+	chosen_position = player.global_position + Vector2(randf_range(-shot_precision, shot_precision), randf_range(-shot_precision, shot_precision))
+	telegraph.global_position = chosen_position
 	get_tree().current_scene.add_child(telegraph)
 	
 	var projectile = projectile_scene.instantiate()
 	projectile.start_pos = global_position + Vector2(30, -100)
-	projectile.target_pos = chosen_position.global_position
+	projectile.target_pos = chosen_position
 	projectile.global_position = global_position
 	projectile.chosen_area = chosen_position
 	get_tree().current_scene.add_child(projectile)
-
-func move_forward(delta):
-	var target = Vector2(initial_x + 800, initial_y) # forward-ish
-	var direction = target - global_position
-	var distance = direction.length()
-
-	if distance > 1:
-		direction = direction.normalized()
-		
-		var current_speed = 400.0
-		
-		# Slow down when getting close
-		if distance < 100.0:
-			current_speed *= distance / 100.0
-
-		velocity = direction * current_speed
-		global_position += velocity * delta
-
-		# Stop moving if very close
-		if distance < 5.0:
-			limbs.play("idle")
-			moving = false
-			velocity = Vector2.ZERO
-	else:
-		# Just in case
-		limbs.play("idle")
-		moving = false
-		velocity = Vector2.ZERO
 	
 func die():
 	died.emit()
@@ -172,3 +134,33 @@ func die():
 
 func apply_debuff():
 	debuff_container.update_debuffs()
+	
+func spawn():
+	var cam = get_viewport().get_camera_2d()
+	if cam == null:
+		return
+
+	var screen_size := get_viewport().get_visible_rect().size
+
+	var margin = 5  # how far inside the screen border to spawn
+
+	# ellipse radii INSIDE screen borders
+	var rx = screen_size.x / 2 - margin
+	var ry = screen_size.y / 2 - margin
+
+	var angle := randf() * TAU
+	var center = player.global_position
+
+	var spawn_pos := Vector2(
+		center.x + cos(angle) * rx,
+		center.y + sin(angle) * ry
+	)
+
+	global_position = spawn_pos
+
+func look_at_player():
+	if not dead:
+			if global_position.x > TestPlayer.global_position.x:
+				container.scale.x = abs(container.scale.x)
+			else:
+				container.scale.x = -abs(container.scale.x)

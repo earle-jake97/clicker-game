@@ -23,7 +23,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:rotation")
+tracks/1/path = NodePath("container/sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,7 +47,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:scale")
+tracks/2/path = NodePath("container/sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -59,7 +59,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("clouds:position")
+tracks/3/path = NodePath("container/clouds:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -71,7 +71,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("clouds:rotation")
+tracks/4/path = NodePath("container/clouds:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -83,7 +83,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("clouds:scale")
+tracks/5/path = NodePath("container/clouds:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -99,7 +99,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -111,7 +111,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:rotation")
+tracks/1/path = NodePath("container/sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -123,7 +123,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:scale")
+tracks/2/path = NodePath("container/sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -139,7 +139,7 @@ loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/tail:position")
+tracks/0/path = NodePath("container/sprite/tail:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -151,7 +151,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/tail:rotation")
+tracks/1/path = NodePath("container/sprite/tail:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -163,7 +163,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/left arm:position")
+tracks/2/path = NodePath("container/sprite/left arm:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -175,7 +175,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/left arm:rotation")
+tracks/3/path = NodePath("container/sprite/left arm:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -187,7 +187,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/leg2:position")
+tracks/4/path = NodePath("container/sprite/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -199,7 +199,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/leg2:rotation")
+tracks/5/path = NodePath("container/sprite/leg2:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -211,7 +211,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/body:position")
+tracks/6/path = NodePath("container/sprite/body:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -223,7 +223,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/body:rotation")
+tracks/7/path = NodePath("container/sprite/body:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -235,7 +235,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/leg:position")
+tracks/8/path = NodePath("container/sprite/leg:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -247,7 +247,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/leg:rotation")
+tracks/9/path = NodePath("container/sprite/leg:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -259,7 +259,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/right arm:position")
+tracks/10/path = NodePath("container/sprite/right arm:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -271,7 +271,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/right arm:rotation")
+tracks/11/path = NodePath("container/sprite/right arm:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -283,7 +283,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/head:position")
+tracks/12/path = NodePath("container/sprite/head:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -295,7 +295,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/head:rotation")
+tracks/13/path = NodePath("container/sprite/head:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -307,7 +307,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/tail:scale")
+tracks/14/path = NodePath("container/sprite/tail:scale")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -319,7 +319,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/left arm:scale")
+tracks/15/path = NodePath("container/sprite/left arm:scale")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -331,7 +331,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/leg2:scale")
+tracks/16/path = NodePath("container/sprite/leg2:scale")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -343,7 +343,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/body:scale")
+tracks/17/path = NodePath("container/sprite/body:scale")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -355,7 +355,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/leg:scale")
+tracks/18/path = NodePath("container/sprite/leg:scale")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -367,7 +367,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/right arm:scale")
+tracks/19/path = NodePath("container/sprite/right arm:scale")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -379,7 +379,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/head:scale")
+tracks/20/path = NodePath("container/sprite/head:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -395,7 +395,7 @@ length = 0.89
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/tail:position")
+tracks/0/path = NodePath("container/sprite/tail:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -407,7 +407,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/tail:rotation")
+tracks/1/path = NodePath("container/sprite/tail:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -419,7 +419,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/tail:scale")
+tracks/2/path = NodePath("container/sprite/tail:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -431,7 +431,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/left arm:position")
+tracks/3/path = NodePath("container/sprite/left arm:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -443,7 +443,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/left arm:rotation")
+tracks/4/path = NodePath("container/sprite/left arm:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -455,7 +455,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/left arm:scale")
+tracks/5/path = NodePath("container/sprite/left arm:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -467,7 +467,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/leg2:position")
+tracks/6/path = NodePath("container/sprite/leg2:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -479,7 +479,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/leg2:rotation")
+tracks/7/path = NodePath("container/sprite/leg2:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -491,7 +491,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/leg2:scale")
+tracks/8/path = NodePath("container/sprite/leg2:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -503,7 +503,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/body:position")
+tracks/9/path = NodePath("container/sprite/body:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -515,7 +515,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/body:rotation")
+tracks/10/path = NodePath("container/sprite/body:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -527,7 +527,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/body:scale")
+tracks/11/path = NodePath("container/sprite/body:scale")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -539,7 +539,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/leg:position")
+tracks/12/path = NodePath("container/sprite/leg:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -551,7 +551,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/leg:rotation")
+tracks/13/path = NodePath("container/sprite/leg:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -563,7 +563,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/leg:scale")
+tracks/14/path = NodePath("container/sprite/leg:scale")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -575,7 +575,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/right arm:position")
+tracks/15/path = NodePath("container/sprite/right arm:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -587,7 +587,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/right arm:rotation")
+tracks/16/path = NodePath("container/sprite/right arm:rotation")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -599,7 +599,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/right arm:scale")
+tracks/17/path = NodePath("container/sprite/right arm:scale")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -611,7 +611,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/head:position")
+tracks/18/path = NodePath("container/sprite/head:position")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -623,7 +623,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/head:rotation")
+tracks/19/path = NodePath("container/sprite/head:rotation")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -635,7 +635,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/head:scale")
+tracks/20/path = NodePath("container/sprite/head:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -647,19 +647,19 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("clouds:position")
+tracks/21/path = NodePath("container/clouds:position")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
 "times": PackedFloat32Array(0.466667, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(349, -20), Vector2(-347, -29)]
+"values": [Vector2(27293, 158), Vector2(-347, -29)]
 }
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("clouds:rotation")
+tracks/22/path = NodePath("container/clouds:rotation")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -671,7 +671,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("clouds:scale")
+tracks/23/path = NodePath("container/clouds:scale")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -687,7 +687,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/tail:position")
+tracks/0/path = NodePath("container/sprite/tail:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -699,7 +699,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/tail:rotation")
+tracks/1/path = NodePath("container/sprite/tail:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -711,7 +711,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/left arm:position")
+tracks/2/path = NodePath("container/sprite/left arm:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -723,7 +723,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/left arm:rotation")
+tracks/3/path = NodePath("container/sprite/left arm:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -735,7 +735,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/leg2:position")
+tracks/4/path = NodePath("container/sprite/leg2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -747,7 +747,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/leg2:rotation")
+tracks/5/path = NodePath("container/sprite/leg2:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -759,7 +759,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/body:position")
+tracks/6/path = NodePath("container/sprite/body:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -771,7 +771,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/body:rotation")
+tracks/7/path = NodePath("container/sprite/body:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -783,7 +783,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/leg:position")
+tracks/8/path = NodePath("container/sprite/leg:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -795,7 +795,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/leg:rotation")
+tracks/9/path = NodePath("container/sprite/leg:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -807,7 +807,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/right arm:position")
+tracks/10/path = NodePath("container/sprite/right arm:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -819,7 +819,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/right arm:rotation")
+tracks/11/path = NodePath("container/sprite/right arm:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -831,7 +831,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/head:position")
+tracks/12/path = NodePath("container/sprite/head:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -843,7 +843,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/head:rotation")
+tracks/13/path = NodePath("container/sprite/head:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -855,7 +855,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/tail:scale")
+tracks/14/path = NodePath("container/sprite/tail:scale")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -867,7 +867,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/left arm:scale")
+tracks/15/path = NodePath("container/sprite/left arm:scale")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -879,7 +879,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/leg2:scale")
+tracks/16/path = NodePath("container/sprite/leg2:scale")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -891,7 +891,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/body:scale")
+tracks/17/path = NodePath("container/sprite/body:scale")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -903,7 +903,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/leg:scale")
+tracks/18/path = NodePath("container/sprite/leg:scale")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -915,7 +915,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/right arm:scale")
+tracks/19/path = NodePath("container/sprite/right arm:scale")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -927,7 +927,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/head:scale")
+tracks/20/path = NodePath("container/sprite/head:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -950,12 +950,102 @@ _data = {
 texture_filter = 1
 script = ExtResource("1_magoy")
 
-[node name="shadow" type="Sprite2D" parent="."]
+[node name="container" type="Node2D" parent="."]
+
+[node name="shadow" type="Sprite2D" parent="container"]
 modulate = Color(1, 1, 1, 0.537255)
 z_as_relative = false
 position = Vector2(-7, -30)
 scale = Vector2(0.20257, 0.442415)
 texture = ExtResource("2_e7sal")
+
+[node name="sprite" type="Node2D" parent="container"]
+
+[node name="tail" type="Sprite2D" parent="container/sprite"]
+position = Vector2(897.547, -1406.75)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_gr1y5")
+
+[node name="left arm" type="Sprite2D" parent="container/sprite"]
+position = Vector2(749.821, -1465.63)
+rotation = 2.20227
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_j5buf")
+
+[node name="leg2" type="Sprite2D" parent="container/sprite"]
+position = Vector2(845.556, -1369.59)
+rotation = 0.0109508
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_ccdv2")
+
+[node name="body" type="Sprite2D" parent="container/sprite"]
+position = Vector2(828.678, -1417.06)
+rotation = -0.0171451
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_n8ewx")
+
+[node name="leg" type="Sprite2D" parent="container/sprite"]
+position = Vector2(869.392, -1367.61)
+rotation = 0.012005
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_ccdv2")
+
+[node name="head" type="Sprite2D" parent="container/sprite"]
+position = Vector2(816.52, -1474.67)
+rotation = 0.369187
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_h0a8x")
+
+[node name="right arm" type="Sprite2D" parent="container/sprite"]
+position = Vector2(797.54, -1457.63)
+rotation = 2.69511
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_500si")
+
+[node name="Area2D" type="Area2D" parent="container"]
+visible = false
+position = Vector2(-14, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+scale = Vector2(7.28, 5)
+shape = SubResource("CircleShape2D_fvuer")
+
+[node name="limbs" type="AnimationPlayer" parent="container"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_b5orv")
+}
+autoplay = "jump"
+
+[node name="clouds" type="Node2D" parent="container"]
+position = Vector2(570, -19)
+
+[node name="smoke cloud" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(343, -6)
+
+[node name="smoke cloud2" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(311, -15)
+
+[node name="smoke cloud3" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(295, 12)
+
+[node name="smoke cloud4" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(279, -7)
+
+[node name="smoke cloud5" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(329, 12)
+
+[node name="smoke cloud6" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(362, 11)
+
+[node name="smoke cloud7" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(368, -35)
+
+[node name="smoke cloud8" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(358, -17)
+
+[node name="smoke cloud9" parent="container/clouds" instance=ExtResource("12_qgoea")]
+position = Vector2(330, -27)
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
@@ -974,98 +1064,11 @@ offset_right = 83.0
 offset_bottom = -163.0
 script = ExtResource("5_j7p4a")
 
-[node name="sprite" type="Node2D" parent="."]
-
-[node name="tail" type="Sprite2D" parent="sprite"]
-position = Vector2(897.547, -1406.75)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_gr1y5")
-
-[node name="left arm" type="Sprite2D" parent="sprite"]
-position = Vector2(749.821, -1465.63)
-rotation = 2.20227
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_j5buf")
-
-[node name="leg2" type="Sprite2D" parent="sprite"]
-position = Vector2(845.556, -1369.59)
-rotation = 0.0109508
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ccdv2")
-
-[node name="body" type="Sprite2D" parent="sprite"]
-position = Vector2(828.678, -1417.06)
-rotation = -0.0171451
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_n8ewx")
-
-[node name="leg" type="Sprite2D" parent="sprite"]
-position = Vector2(869.392, -1367.61)
-rotation = 0.012005
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ccdv2")
-
-[node name="head" type="Sprite2D" parent="sprite"]
-position = Vector2(816.52, -1474.67)
-rotation = 0.369187
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_h0a8x")
-
-[node name="right arm" type="Sprite2D" parent="sprite"]
-position = Vector2(797.54, -1457.63)
-rotation = 2.69511
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_500si")
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2(-14, -30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(7.28, 5)
-shape = SubResource("CircleShape2D_fvuer")
-
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-95, -166)
 
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("11_d3jje")
-
-[node name="limbs" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_b5orv")
-}
-autoplay = "jump"
-
-[node name="clouds" type="Node2D" parent="."]
-position = Vector2(570, -19)
-
-[node name="smoke cloud" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(343, -6)
-
-[node name="smoke cloud2" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(311, -15)
-
-[node name="smoke cloud3" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(295, 12)
-
-[node name="smoke cloud4" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(279, -7)
-
-[node name="smoke cloud5" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(329, 12)
-
-[node name="smoke cloud6" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(362, 11)
-
-[node name="smoke cloud7" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(368, -35)
-
-[node name="smoke cloud8" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(358, -17)
-
-[node name="smoke cloud9" parent="clouds" instance=ExtResource("12_qgoea")]
-position = Vector2(330, -27)
 
 [node name="crosshair" type="Marker2D" parent="."]
 position = Vector2(-59, -99)

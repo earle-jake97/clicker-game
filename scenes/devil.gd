@@ -3,6 +3,7 @@ extends BaseEnemy
 
 signal died
 var player = PlayerController
+var playerModel
 @export var min_speed: float
 @export var max_speed: float
 var speed: float
@@ -66,15 +67,11 @@ func _ready() -> void:
 		audio_stream_player_2d.pitch_scale = pitch_scale
 		audio_stream_player_2d.play()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	for entity in get_tree().get_nodes_in_group("player"):
 		if not is_instance_valid(entity):
 			continue
-		if not dead:
-			if global_position.x > TestPlayer.global_position.x:
-				container.scale.x = abs(container.scale.x)
-			else:
-				container.scale.x = -abs(container.scale.x)
+		look_at_player()
 		var distance = global_position.distance_to(entity.global_position)
 
 		var is_closer = true
@@ -85,12 +82,6 @@ func _process(delta: float) -> void:
 			target = entity
 		else:
 			target = TestPlayer
-
-	if is_pushed:
-		global_position = global_position.move_toward(Vector2(40000, global_position.y), push_strength * 300 * delta)
-	pushback_timer += delta
-	if pushback_timer >= pushback_length:
-		is_pushed = false
 
 	if dead:
 		var color = sprite.modulate
@@ -190,3 +181,10 @@ func die():
 
 func apply_debuff():
 	debuff_container.update_debuffs()
+
+func look_at_player():
+	if not dead:
+			if global_position.x > TestPlayer.global_position.x:
+				container.scale.x = abs(container.scale.x)
+			else:
+				container.scale.x = -abs(container.scale.x)
