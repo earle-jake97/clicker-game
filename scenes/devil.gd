@@ -30,6 +30,7 @@ const NEW_DEVIL_HEAD_DEAD = preload("res://sprites/enemies/devil/new_devil_head_
 const NEW_DEVIL_HEAD_SMILE = preload("res://sprites/enemies/devil/new_devil_head_smile.png")
 var guarantee_hit = false
 var debuffs = []
+var touching_entity: Node = null
 
 var base_attack_speed = 0.7
 var bleed_stacks = 0
@@ -68,6 +69,11 @@ func _ready() -> void:
 		audio_stream_player_2d.play()
 
 func _physics_process(delta: float) -> void:
+	if touching_entity and not is_instance_valid(touching_entity):
+		touching_entity = null
+		touching_player = false
+		reached_player = false
+
 	for entity in get_tree().get_nodes_in_group("player"):
 		if not is_instance_valid(entity):
 			continue
@@ -78,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		if is_instance_valid(target):
 			is_closer = distance < global_position.distance_to(target.global_position)
 		
-		if entity.has_method("is_alive") and entity.is_alive() and is_closer and entity.global_position.x <= global_position.x:
+		if entity.has_method("is_alive") and entity.is_alive() and is_closer:
 			target = entity
 		else:
 			target = TestPlayer
@@ -148,13 +154,13 @@ func process_attack(delta):
 	attack_duration += delta
 
 	if attack_duration >= 0.5333 and is_attacking:
-		if target.has_method("take_damage"):
-			if guarantee_hit and not target.is_in_group("scrimblo"):
-				target.take_damage(damage, armor_penetration)
-				guarantee_hit = false
-			elif target.has_method("take_damage") and touching_player:
-				target.take_damage(damage, armor_penetration)
-
+		if is_instance_valid(touching_entity):
+			if touching_entity.has_method("take_damage"):
+				touching_entity.take_damage(damage, armor_penetration)
+		else:
+			touching_entity = null
+			
+		guarantee_hit = false
 		is_attacking = false
 		waiting_after_attack = true
 		attack_duration = 0.0
@@ -163,11 +169,18 @@ func process_attack(delta):
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
 		touching_player = true
+		touching_entity = area.get_parent()
+
+	elif area.is_in_group("minion_hitbox"):
+		touching_player = false
+		touching_entity = area.get_parent()
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.is_in_group("player_hitbox"):
+	if touching_entity and area.get_parent() == touching_entity:
+		touching_entity = null
 		touching_player = false
 		reached_player = false
+
 
 func die():
 	dead = true

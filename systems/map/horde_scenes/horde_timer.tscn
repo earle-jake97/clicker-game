@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2twchfapgqgq"]
+[gd_scene load_steps=13 format=3 uid="uid://b2twchfapgqgq"]
 
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_83vy7"]
 [ext_resource type="Texture2D" uid="uid://c4nj7w0dbrmt5" path="res://backgrounds/1.png" id="2_gwip4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://pad5r8i2uemg" path="res://scenes/enemies/ent.tscn" id="7_8fuqv"]
 [ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="8_1o1t5"]
 [ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="8_7tgdk"]
+[ext_resource type="Script" path="res://systems/camera.gd" id="11_7kaaw"]
 
 [sub_resource type="Theme" id="Theme_0a1jv"]
 default_font = ExtResource("8_7tgdk")
@@ -149,3 +150,8 @@ enemy_damage = 1
 enemy_cash_value_min = 1
 enemy_cash_value_max = 8
 enemy_speed = 100
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(542.942, 313.954)
+zoom = Vector2(0.75, 0.75)
+script = ExtResource("11_7kaaw")

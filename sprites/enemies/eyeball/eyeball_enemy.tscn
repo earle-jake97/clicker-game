@@ -16,7 +16,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +28,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:scale")
+tracks/1/path = NodePath("container/sprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -40,7 +40,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:rotation")
+tracks/2/path = NodePath("container/sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -56,7 +56,7 @@ length = 1.1333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -72,7 +72,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,7 +84,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:scale")
+tracks/1/path = NodePath("container/sprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -96,7 +96,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:rotation")
+tracks/2/path = NodePath("container/sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -113,7 +113,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -135,18 +135,42 @@ _data = {
 texture_filter = 1
 script = ExtResource("1_anfwb")
 
-[node name="shadow" type="Sprite2D" parent="."]
+[node name="container" type="Node2D" parent="."]
+
+[node name="crosshair" type="Marker2D" parent="container"]
+position = Vector2(-28, -91)
+
+[node name="projectile_spawn" type="Marker2D" parent="container"]
+position = Vector2(-11, -117)
+
+[node name="shadow" type="Sprite2D" parent="container"]
 modulate = Color(1, 1, 1, 0.537255)
-z_as_relative = false
+z_index = -1
 position = Vector2(9, 6)
 scale = Vector2(0.066461, 0.142496)
 texture = ExtResource("2_kikbe")
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="sprite" type="Sprite2D" parent="container"]
 position = Vector2(9, -115)
 rotation = 0.0132213
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_owc5r")
+
+[node name="Area2D" type="Area2D" parent="container"]
+position = Vector2(-5, 5)
+scale = Vector2(1, 2.12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+position = Vector2(11.5, -34)
+scale = Vector2(1.66667, 0.785714)
+shape = SubResource("RectangleShape2D_rmqrv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_51lju")
+}
+autoplay = "float"
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
@@ -165,26 +189,8 @@ offset_right = 86.0
 offset_bottom = -133.0
 script = ExtResource("5_3l2ui")
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-5, 5)
-scale = Vector2(1, 2.12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(11.5, -34)
-scale = Vector2(1.66667, 0.785714)
-shape = SubResource("RectangleShape2D_rmqrv")
-
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(10, -103)
 
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("6_ob0hh")
-
-[node name="crosshair" type="Marker2D" parent="."]
-position = Vector2(-28, -91)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_51lju")
-}
-autoplay = "float"

@@ -1,21 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnv4t6agl2tpu"]
+[gd_scene load_steps=5 format=3 uid="uid://bnv4t6agl2tpu"]
 
 [ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
-[ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="2_kgj2o"]
-[ext_resource type="PackedScene" uid="uid://0woj01ejr33b" path="res://sprites/enemies/djungelskog/djungelskog.tscn" id="3_xfing"]
+[ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="3_4vo6d"]
+[ext_resource type="Script" path="res://systems/camera.gd" id="3_e7kda"]
+[ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="4_0jku0"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
 position = Vector2(-2, 0)
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_q8yj5")
-
-[node name="background" type="Sprite2D" parent="."]
-z_index = -100
-texture_filter = 2
-position = Vector2(543, 311.922)
-scale = Vector2(0.96, 0.844961)
-texture = ExtResource("2_kgj2o")
 
 [node name="Positions" type="Node2D" parent="."]
 
@@ -28,5 +22,20 @@ position = Vector2(149.356, 432.171)
 [node name="Marker2D3" type="Marker2D" parent="Positions"]
 position = Vector2(168.143, 561.047)
 
-[node name="djungelskog" parent="." instance=ExtResource("3_xfing")]
-position = Vector2(873.592, 384.69)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(542.942, 313.954)
+script = ExtResource("3_e7kda")
+
+[node name="eyeball_enemy" parent="." instance=ExtResource("3_4vo6d")]
+position = Vector2(970.345, 489.341)
+min_speed = 100.0
+max_speed = 100.0
+damage = 1
+max_health = 10000.0
+
+[node name="devil" parent="." instance=ExtResource("4_0jku0")]
+position = Vector2(1109.37, 696.705)
+min_speed = 200.0
+max_speed = 200.0
+damage = 1
+max_health = 10000.0

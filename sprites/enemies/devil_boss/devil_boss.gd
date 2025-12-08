@@ -22,7 +22,7 @@ const THROW_INTERVAL = 6
 const FIREBALL_INTERVAL = 1.5
 const MEDITATE_TIME = 2.3
 const GLOBAL_INTERVAL = 3.5
-const FIREBALL_TRAVEL_TIME = 0.5
+const FIREBALL_TRAVEL_TIME = 0.8
 const TELEGRAPH = preload("res://scenes/telegraph.tscn")
 const FIREBALL = preload("res://sprites/enemies/devil_boss/fireball.tscn")
 @onready var shadow: Sprite2D = $sprite/shadow
@@ -60,7 +60,10 @@ func _ready() -> void:
 	if PlayerController.difficulty >= 15:
 		max_health = max_health * pow(1 + 0.12, PlayerController.difficulty)
 	else:
-		max_health *= controller.difficulty
+		if controller.difficulty == 0:
+			max_health = 99999
+		else:
+			max_health *= controller.difficulty
 	health = max_health
 	health_bar.visible = false
 	health_bar.max_value = max_health
@@ -155,7 +158,7 @@ func shoot_fireball():
 	telegraph.duration = FIREBALL_TRAVEL_TIME
 	if dead:
 		telegraph.duration = FIREBALL_TRAVEL_TIME * 2.5
-	var chosen_position = player_model.global_position
+	var chosen_position = player_model.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	telegraph.global_position = chosen_position
 	get_tree().current_scene.add_child(telegraph)
 	
@@ -185,11 +188,11 @@ func meditate():
 
 func slam():
 	animation_player.play("slam")
-	var ran = controller.position_map[randi_range(0,controller.position_map.size()-1)].global_position
+	var ran = TestPlayer.global_position + Vector2(2000, randf_range( -400, 400))
 	var shockwave = SHOCKWAVE.instantiate()
 	add_child(shockwave)
 	shockwave.chosen_pos = ran
-	shockwave.global_position = Vector2(2000, ran.y)
+	shockwave.global_position = ran
 	shockwave.z_index = shockwave.global_position.y
 	
 

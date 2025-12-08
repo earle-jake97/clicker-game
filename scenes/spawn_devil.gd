@@ -123,8 +123,7 @@ func spawn_devil():
 		)
 		sprite.modulate = final_color
 	
-	var spawn_pos = global_position
-	spawn_pos.y += randf_range(y_min, y_max)
+	var spawn_pos = spawn_position_logic()
 	enemy.global_position = spawn_pos
 	get_tree().current_scene.add_child(enemy)
 	spawn_count += 1
@@ -132,3 +131,25 @@ func spawn_devil():
 func check_level_finished():
 	if all_enemies_spawned:
 		return true
+
+func spawn_position_logic():
+	var cam = get_viewport().get_camera_2d()
+	if cam == null:
+		return
+
+	var screen_size := get_viewport().get_visible_rect().size
+	var margin = -300  # how far outside the screen border to spawn
+
+	# ellipse radii INSIDE screen borders
+	var rx = screen_size.x / 2 - margin
+	var ry = screen_size.y / 2 - margin
+
+	var angle := randf() * TAU
+	var center = TestPlayer.global_position
+
+	var spawn_pos := Vector2(
+		center.x + cos(angle) * rx,
+		center.y + sin(angle) * ry
+	)
+
+	return spawn_pos

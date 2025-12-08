@@ -6,6 +6,7 @@ signal died
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var debuff_container: HBoxContainer = $debuff_container
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+const SMOKE_CLOUD = preload("res://items/misc/smoke_cloud.tscn")
 
 var health: float
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
@@ -43,6 +44,8 @@ var bleed_stacks = 0
 var spitting = false
 var debuffs = []
 var previous_debuffs = []
+var hop_cooldown = 5.0
+var hop_timer = 0.0
 
 var spit_timer = 0.0
 @onready var tween := get_tree().create_tween()
@@ -50,10 +53,9 @@ var spit_timer = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn()
+	hop()
 	attack_speed = base_attack_speed
-	shadow.scale = Vector2(0, 0)
-	tween.tween_property(shadow, "scale", Vector2(0.22, 0.22), 0.75).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	initialize()
 	attack_speed /= (max(player_controller.difficulty/10, 0.8))
 		
 	health_bar.visible = false
@@ -62,11 +64,15 @@ func _ready() -> void:
 	health_bar.value = health
 	speed = randf_range(50.0, 100.0)
 	value = randi_range(value_min, value_max)
-	if SoundManager.thrower_spawn_sound():
-		audio_stream_player_2d.play()
 
 func _process(delta: float) -> void:
+	hop_timer -= delta
 	look_at_player()
+	if hop_timer <= 0.0 and check_distance() and not dead:
+		hop_timer = hop_cooldown
+		initialize()
+		hop()
+
 	if spit_timer >= 0.2 and spitting:
 		head.texture = HEAD
 		limbs.play("idle")
@@ -135,7 +141,7 @@ func die():
 func apply_debuff():
 	debuff_container.update_debuffs()
 	
-func spawn():
+func hop():
 	var cam = get_viewport().get_camera_2d()
 	if cam == null:
 		return
@@ -164,3 +170,30 @@ func look_at_player():
 				container.scale.x = abs(container.scale.x)
 			else:
 				container.scale.x = -abs(container.scale.x)
+
+func check_distance():
+	var cam = get_viewport().get_camera_2d()
+	if cam == null:
+		return false
+	var screen_size = get_viewport().get_visible_rect().size
+	var half = screen_size / 2
+	
+	var buffer = 500
+	
+	var center = TestPlayer.global_position
+	var dx = abs(global_position.x - center.x)
+	var dy = abs(global_position.y - center.y)
+	
+	return (dx > half.x + buffer or dy > half.y + buffer)
+
+func initialize():
+	tween = get_tree().create_tween()
+	shadow.scale = Vector2(0, 0)
+	tween.tween_property(shadow, "scale", Vector2(0.22, 0.22), 0.75).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	spit_timer = 0.0
+	attack_timer = 0.0
+	limbs.stop()
+	limbs.play("jump")
+	
+	if SoundManager.thrower_spawn_sound():
+		audio_stream_player_2d.play()

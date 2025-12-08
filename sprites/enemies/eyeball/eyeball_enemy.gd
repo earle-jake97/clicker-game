@@ -17,9 +17,12 @@ var health: float
 @export var value_max: int
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var shadow: Sprite2D = $shadow
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite: Sprite2D = $sprite
+@onready var shadow: Sprite2D = $container/shadow
+@onready var animation_player: AnimationPlayer = $container/AnimationPlayer
+@onready var sprite: Sprite2D = $container/sprite
+@onready var projectile_spawn: Marker2D = $container/projectile_spawn
+@onready var container: Node2D = $container
+
 
 const EYEBALL = preload("res://sprites/enemies/eyeball/eyeball.png")
 const EYEBALL_ATTACK = preload("res://sprites/enemies/eyeball/eyeball2.png")
@@ -51,15 +54,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	attack_timer += delta
-	
+	look_at_player()
 	if attack_timer >= attack_cooldown and not is_attacking:
 		attack()
-	
-	if is_pushed:
-		global_position = global_position.move_toward(Vector2(40000, global_position.y), push_strength * 100 * delta)
-	pushback_timer += delta
-	if pushback_timer >= pushback_length:
-		is_pushed = false
 
 	if dead:
 		var color = sprite.modulate
@@ -75,7 +72,19 @@ func _process(delta: float) -> void:
 
 	# Move toward player only if not waiting after attack
 	if player and not is_attacking and not dead and not is_pushed and not is_frozen:
-		global_position = global_position.move_toward(player.player.global_position + Vector2(500, 0), speed * delta)
+		var direction = TestPlayer.global_position - global_position
+		var distance = direction.length()
+		if distance != 0:
+			direction = direction.normalized()
+		
+		var desired_distance = 400.0
+		
+		if distance > desired_distance:
+			# Move toward the player
+			global_position += direction * speed * delta
+		elif distance < desired_distance:
+			# Move away from the player
+			global_position -= direction * speed * delta
 
 	if health <= 0:
 		if not paid_out:
@@ -118,7 +127,7 @@ func attack():
 
 func fire_projectile():
 	var projectile = EYEBALL_PROJECTILE.instantiate()
-	projectile.global_position = global_position + Vector2(-30, -125)
+	projectile.global_position = projectile_spawn.global_position
 	get_tree().current_scene.add_child(projectile)
 
 func die():
@@ -132,3 +141,10 @@ func die():
 
 func apply_debuff():
 	debuff_container.update_debuffs()
+
+func look_at_player():
+	if not dead:
+			if global_position.x > TestPlayer.global_position.x:
+				container.scale.x = abs(container.scale.x)
+			else:
+				container.scale.x = -abs(container.scale.x)

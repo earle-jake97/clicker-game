@@ -952,9 +952,12 @@ script = ExtResource("1_magoy")
 
 [node name="container" type="Node2D" parent="."]
 
+[node name="crosshair" type="Marker2D" parent="container"]
+position = Vector2(-59, -99)
+
 [node name="shadow" type="Sprite2D" parent="container"]
 modulate = Color(1, 1, 1, 0.537255)
-z_as_relative = false
+z_index = -1
 position = Vector2(-7, -30)
 scale = Vector2(0.20257, 0.442415)
 texture = ExtResource("2_e7sal")
@@ -1069,9 +1072,6 @@ position = Vector2(-95, -166)
 
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("11_d3jje")
-
-[node name="crosshair" type="Marker2D" parent="."]
-position = Vector2(-59, -99)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_w63su")

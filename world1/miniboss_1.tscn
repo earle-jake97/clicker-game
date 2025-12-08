@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccu5o58p2wf5e"]
+[gd_scene load_steps=7 format=3 uid="uid://ccu5o58p2wf5e"]
 
 [ext_resource type="Script" path="res://scenes/elite_thrower_map.gd" id="1_4208q"]
 [ext_resource type="Texture2D" uid="uid://c4nj7w0dbrmt5" path="res://backgrounds/1.png" id="2_i3t2d"]
 [ext_resource type="Script" path="res://scenes/elite_spawner.gd" id="3_qiefb"]
 [ext_resource type="PackedScene" uid="uid://beh2xii6o6pcp" path="res://scenes/enemies/projectile_demon_elite.tscn" id="4_0bu36"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="5_0g6ys"]
+[ext_resource type="Script" path="res://systems/camera.gd" id="6_plgpr"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
@@ -53,3 +54,8 @@ max_spawn_time = 2.0
 enemy_max_health = 70
 enemy_damage = 5
 enemy_speed = 180
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(542.942, 313.954)
+zoom = Vector2(0.75, 0.75)
+script = ExtResource("6_plgpr")

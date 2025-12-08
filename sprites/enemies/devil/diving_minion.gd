@@ -2,7 +2,7 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 const DEVIL = preload("res://scenes/devil.tscn")
 var target_pos
-var final_color
+var final_color = Color.SALMON
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 
 func spawn_devil():
 	var enemy = DEVIL.instantiate()
-	var sprite = enemy.get_node("sprite")
+	var sprite = enemy.find_child("sprite", 1, 1)
 	enemy.max_health = 40 * PlayerController.difficulty
 	enemy.damage = 10
 	enemy.armor_penetration = 1

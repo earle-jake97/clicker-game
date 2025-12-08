@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://m7k7jv0bo14f" path="res://sprites/enemies/imp/arm1.png" id="7_mv1j5"]
 [ext_resource type="Script" path="res://systems/damage_batcher.gd" id="8_m1l0c"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjubl"]
+size = Vector2(67.75, 74)
+
 [sub_resource type="Animation" id="Animation_q0fod"]
 length = 0.001
 tracks/0/type = "value"
@@ -563,12 +566,61 @@ _data = {
 "move": SubResource("Animation_y6b1v")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjubl"]
-size = Vector2(67.75, 74)
-
 [node name="devil" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_hdgym")
 max_health = 80.0
+
+[node name="container" type="Node2D" parent="."]
+
+[node name="crosshair" type="Marker2D" parent="container"]
+position = Vector2(-15, -104)
+
+[node name="shadow" type="Sprite2D" parent="container"]
+modulate = Color(1, 1, 1, 0.537255)
+z_index = -1
+position = Vector2(9, 6)
+scale = Vector2(0.0792833, 0.132945)
+texture = ExtResource("2_h7qfv")
+
+[node name="sprite" type="Node2D" parent="container"]
+position = Vector2(8, -111)
+scale = Vector2(0.5, 0.5)
+
+[node name="arm2" type="Sprite2D" parent="container/sprite"]
+position = Vector2(-5, 14)
+texture = ExtResource("3_mnf50")
+
+[node name="tail" type="Sprite2D" parent="container/sprite"]
+position = Vector2(-7, 54)
+texture = ExtResource("4_qsbnw")
+
+[node name="body" type="Sprite2D" parent="container/sprite"]
+position = Vector2(21, 11)
+texture = ExtResource("5_j5bog")
+
+[node name="head" type="Sprite2D" parent="container/sprite"]
+position = Vector2(-26, -50)
+texture = ExtResource("6_16gse")
+
+[node name="arm1" type="Sprite2D" parent="container/sprite"]
+position = Vector2(22, 25)
+texture = ExtResource("7_mv1j5")
+
+[node name="Area2D" type="Area2D" parent="container"]
+visible = false
+position = Vector2(-5, -114)
+scale = Vector2(1, 1.44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+position = Vector2(12, 47)
+shape = SubResource("RectangleShape2D_tjubl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+root_node = NodePath("../sprite")
+libraries = {
+"": SubResource("AnimationLibrary_rw0yy")
+}
+autoplay = "move"
 
 [node name="debuff_container" type="HBoxContainer" parent="."]
 offset_left = 37.0
@@ -576,44 +628,6 @@ offset_top = -177.0
 offset_right = 77.0
 offset_bottom = -137.0
 script = ExtResource("2_6irr7")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../sprite")
-libraries = {
-"": SubResource("AnimationLibrary_rw0yy")
-}
-autoplay = "move"
-
-[node name="shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.537255)
-z_as_relative = false
-position = Vector2(9, 6)
-scale = Vector2(0.0792833, 0.132945)
-texture = ExtResource("2_h7qfv")
-
-[node name="sprite" type="Node2D" parent="."]
-position = Vector2(8, -111)
-scale = Vector2(0.5, 0.5)
-
-[node name="arm2" type="Sprite2D" parent="sprite"]
-position = Vector2(-5, 14)
-texture = ExtResource("3_mnf50")
-
-[node name="tail" type="Sprite2D" parent="sprite"]
-position = Vector2(-7, 54)
-texture = ExtResource("4_qsbnw")
-
-[node name="body" type="Sprite2D" parent="sprite"]
-position = Vector2(21, 11)
-texture = ExtResource("5_j5bog")
-
-[node name="head" type="Sprite2D" parent="sprite"]
-position = Vector2(-26, -50)
-texture = ExtResource("6_16gse")
-
-[node name="arm1" type="Sprite2D" parent="sprite"]
-position = Vector2(22, 25)
-texture = ExtResource("7_mv1j5")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
@@ -625,23 +639,11 @@ scale = Vector2(0.437226, 0.402117)
 texture_under = ExtResource("5_umo2t")
 texture_progress = ExtResource("6_f4ftq")
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2(-5, -114)
-scale = Vector2(1, 1.44)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(12, 47)
-shape = SubResource("RectangleShape2D_tjubl")
-
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-58, -65)
 
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("8_m1l0c")
 
-[node name="crosshair" type="Marker2D" parent="."]
-position = Vector2(-54, -111)
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="container/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="container/Area2D" to="." method="_on_area_2d_area_exited"]

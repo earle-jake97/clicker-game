@@ -13,25 +13,22 @@ var health: float
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
 @export var value_min: int
 @export var value_max: int
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite: Node2D = $sprite
+@onready var animation_player: AnimationPlayer = $container/AnimationPlayer
+@onready var sprite: Node2D = $container/sprite
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var shadow: Sprite2D = $shadow
+@onready var shadow: Sprite2D = $container/shadow
 @onready var debuff_container: HBoxContainer = $debuff_container
+@onready var container: Node2D = $container
 
 var debuffs = []
-var previous_debuffs = []
 
 var base_attack_speed = 0.7
-var bleed_stacks = 0
 var damage_cooldown = 0.0
-var touching_player = false
 var attack_duration = 0.0
 var is_attacking = false
-var reached_player = false
-var post_attack_delay = 0.0
 var waiting_after_attack = false
+var post_attack_delay = 0.0
 var death_timer = 0.0
 var dead = false
 var paid_out = false
@@ -42,7 +39,8 @@ var push_strength = 0.0
 var pushback_length = 2.0
 var pushback_timer = 0.0
 var is_pushed = false
-var target = TestPlayer
+var target: Node = TestPlayer
+var touching_entity: Node = null
 
 func _ready() -> void:
 	value = randi_range(value_min, value_max)
@@ -54,28 +52,25 @@ func _ready() -> void:
 	base_speed = speed
 	attack_speed = base_attack_speed
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	# Clear invalid target
+	if touching_entity and not is_instance_valid(touching_entity):
+		touching_entity = null
+
+	# Target selection
 	for entity in get_tree().get_nodes_in_group("player"):
 		if not is_instance_valid(entity):
 			continue
-		
+		look_at_player()
 		var distance = global_position.distance_to(entity.global_position)
-
 		var is_closer = true
 		if is_instance_valid(target):
 			is_closer = distance < global_position.distance_to(target.global_position)
-		
 		if entity.has_method("is_alive") and entity.is_alive() and is_closer and entity.global_position.x <= global_position.x:
 			target = entity
 		else:
 			target = TestPlayer
-	
-	if is_pushed:
-		global_position = global_position.move_toward(Vector2(40000, global_position.y), push_strength * 300 * delta)
-	pushback_timer += delta
-	
-	if pushback_timer >= pushback_length:
-		is_pushed = false
+
 	if dead:
 		var color = sprite.modulate
 		shadow.visible = false
@@ -95,12 +90,12 @@ func _process(delta: float) -> void:
 		if post_attack_delay >= attack_speed:
 			waiting_after_attack = false
 			animation_player.play("move")
-				
 			post_attack_delay = 0.0
 
-	# Move toward player only if not waiting after attack
-	elif player and not is_attacking and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
-		global_position = global_position.move_toward(target.global_position, speed * delta)
+	# Move toward target if not attacking, dead, or pushed
+	elif not is_attacking and not dead and not is_pushed and not is_frozen:
+		if is_instance_valid(target):
+			global_position = global_position.move_toward(target.global_position, speed * delta)
 
 	if health <= 0:
 		if not paid_out:
@@ -110,34 +105,34 @@ func _process(delta: float) -> void:
 
 	z_index = round(global_position.y)
 
-	if touching_player and damage_cooldown >= player.iframe_duration and not is_attacking and not dead:
-		reached_player = true
+	# Start attack if touching entity
+	if touching_entity and damage_cooldown >= player.iframe_duration and not is_attacking and not dead:
 		start_attack()
 
 	if is_attacking and not dead:
 		process_attack(delta)
-func push_back(strength: float):
-	is_pushed = true
-	push_strength = strength
-	pushback_timer = 0.0
-	
+
 func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
 	health -= amount
 	health_bar.value = health
 	damage_batcher.add_damage(amount, damage_type)
 
+func push_back(strength: float):
+	is_pushed = true
+	push_strength = strength
+	pushback_timer = 0.0
+
 func start_attack():
 	animation_player.play("attack")
-
 	is_attacking = true
 	attack_duration = 0.0
+
 func process_attack(delta):
 	attack_duration += delta
-
 	if attack_duration >= 0.8666 and is_attacking:
-		if target.has_method("take_damage") and touching_player:
-			target.take_damage(damage, armor_penetration)
-
+		if touching_entity and is_instance_valid(touching_entity):
+			if touching_entity.has_method("take_damage"):
+				touching_entity.take_damage(damage, armor_penetration)
 		is_attacking = false
 		waiting_after_attack = true
 		attack_duration = 0.0
@@ -145,12 +140,11 @@ func process_attack(delta):
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
-		touching_player = true
+		touching_entity = area.get_parent()
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.is_in_group("player_hitbox"):
-		touching_player = false
-		reached_player = false
+	if touching_entity and area.get_parent() == touching_entity:
+		touching_entity = null
 
 func die():
 	debuff_container.hide()
@@ -162,3 +156,10 @@ func die():
 
 func apply_debuff():
 	debuff_container.update_debuffs()
+
+func look_at_player():
+	if not dead:
+		if global_position.x > TestPlayer.global_position.x:
+			container.scale.x = abs(container.scale.x)
+		else:
+			container.scale.x = -abs(container.scale.x)

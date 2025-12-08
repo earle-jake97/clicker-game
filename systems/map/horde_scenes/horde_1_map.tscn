@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://gplk7ebibxa0"]
+[gd_scene load_steps=10 format=3 uid="uid://gplk7ebibxa0"]
 
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_1_map.gd" id="1_bhgnr"]
-[ext_resource type="Texture2D" uid="uid://8da8fkf1ucyy" path="res://world1/background1.png" id="2_ugu1d"]
 [ext_resource type="PackedScene" uid="uid://beh2xii6o6pcp" path="res://scenes/enemies/projectile_demon_elite.tscn" id="4_2wmkb"]
 [ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="5_cx6uy"]
 [ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="6_m4ro6"]
@@ -16,13 +15,6 @@ texture_filter = 2
 position = Vector2(-2, 0)
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_bhgnr")
-
-[node name="background" type="Sprite2D" parent="."]
-z_index = -100
-texture_filter = 1
-position = Vector2(294.955, 224.806)
-scale = Vector2(0.96, 0.844961)
-texture = ExtResource("2_ugu1d")
 
 [node name="Positions" type="Node2D" parent="."]
 
@@ -126,5 +118,5 @@ enemy_speed = 100
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(542.942, 313.954)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)
 script = ExtResource("10_wpgga")

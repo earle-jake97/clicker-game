@@ -18,7 +18,7 @@ func hide_crosshair():
 
 
 func get_crosshair_position(enemy) -> Vector2:
-	var crosshair_node = enemy.get_node_or_null("crosshair")
+	var crosshair_node = enemy.find_child("crosshair", 1, 1)
 	if crosshair_node:
 		return crosshair_node.global_position
 	else:
