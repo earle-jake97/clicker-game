@@ -1519,6 +1519,9 @@ position = Vector2(-5, -30)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_py8l2")
 
+[node name="pivot" type="Marker2D" parent="container/sprite/body"]
+position = Vector2(2, 0)
+
 [node name="head" type="Sprite2D" parent="container/sprite"]
 position = Vector2(-21, -61)
 scale = Vector2(0.5, 0.5)

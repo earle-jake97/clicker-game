@@ -965,43 +965,47 @@ texture = ExtResource("2_e7sal")
 [node name="sprite" type="Node2D" parent="container"]
 
 [node name="tail" type="Sprite2D" parent="container/sprite"]
-position = Vector2(897.547, -1406.75)
+position = Vector2(114.903, -201.117)
+rotation = -1.00116
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_gr1y5")
 
 [node name="left arm" type="Sprite2D" parent="container/sprite"]
-position = Vector2(749.821, -1465.63)
-rotation = 2.20227
+position = Vector2(-13.4786, -147.175)
+rotation = 1.49032
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_j5buf")
 
 [node name="leg2" type="Sprite2D" parent="container/sprite"]
-position = Vector2(845.556, -1369.59)
-rotation = 0.0109508
+position = Vector2(70.3704, -138.906)
+rotation = 0.501546
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ccdv2")
 
 [node name="body" type="Sprite2D" parent="container/sprite"]
-position = Vector2(828.678, -1417.06)
-rotation = -0.0171451
+position = Vector2(58.9785, -162.604)
+rotation = -0.785248
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_n8ewx")
 
+[node name="pivot" type="Marker2D" parent="container/sprite/body"]
+position = Vector2(-16, 4)
+
 [node name="leg" type="Sprite2D" parent="container/sprite"]
-position = Vector2(869.392, -1367.61)
-rotation = 0.012005
+position = Vector2(86.8928, -137.841)
+rotation = 0.549829
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ccdv2")
 
 [node name="head" type="Sprite2D" parent="container/sprite"]
-position = Vector2(816.52, -1474.67)
-rotation = 0.369187
+position = Vector2(9.63458, -198.178)
+rotation = -0.419893
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_h0a8x")
 
 [node name="right arm" type="Sprite2D" parent="container/sprite"]
-position = Vector2(797.54, -1457.63)
-rotation = 2.69511
+position = Vector2(8.36926, -142.909)
+rotation = 1.60905
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_500si")
 

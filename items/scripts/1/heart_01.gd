@@ -7,7 +7,7 @@ const item_description = "Heals you for 15% of your max HP."
 const item_icon = preload("res://systems/shop/heart0.png")
 const file_name = "res://items/scripts/1/heart_01.gd"
 func add_to_inventory():
-	player.add_item(self)
+	print("fart")
 
 func heal():
 	player.heal(player.max_hp*health_percent)

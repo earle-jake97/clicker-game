@@ -156,6 +156,9 @@ rotation = 0.0132213
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_owc5r")
 
+[node name="pivot" type="Marker2D" parent="container/sprite"]
+position = Vector2(-5.43048, 21.5022)
+
 [node name="Area2D" type="Area2D" parent="container"]
 position = Vector2(-5, 5)
 scale = Vector2(1, 2.12)

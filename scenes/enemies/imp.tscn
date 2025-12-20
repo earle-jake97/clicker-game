@@ -598,6 +598,9 @@ texture = ExtResource("4_qsbnw")
 position = Vector2(21, 11)
 texture = ExtResource("5_j5bog")
 
+[node name="pivot" type="Marker2D" parent="container/sprite/body"]
+position = Vector2(1, -3)
+
 [node name="head" type="Sprite2D" parent="container/sprite"]
 position = Vector2(-26, -50)
 texture = ExtResource("6_16gse")

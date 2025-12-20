@@ -95,7 +95,7 @@ func go_to_map(type):
 		PlayerController.position = 2
 		SceneManager.switch_to_scene("res://world1/miniboss_1.tscn")
 	elif type == "shop":
-		SceneManager.switch_to_scene("res://systems/shop/shop_endless.tscn")
+		SceneManager.switch_to_scene("res://systems/shop/shop.tscn")
 	elif type == "item":
 		SceneManager.switch_to_scene("res://systems/shop/item_room.tscn")
 	elif type == "boss":

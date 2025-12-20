@@ -10,47 +10,41 @@ var timer: float = 0.0
 
 func setup(start_pos: Vector2, end_pos: Vector2, procs: bool = false):
 	line = $Line2D
+	line.position = Vector2.ZERO
+	line.rotation = 0
+	line.scale = Vector2.ONE
 
-	# Optional Y offset to raise the lightning above the feet
-	var vertical_offset = -40.0
-	start_pos.y += vertical_offset
-	end_pos.y += vertical_offset
+	# Position node at start (simpler + more stable)
+	global_position = start_pos
+
+	# Convert end into local space relative to start
+	var local_start := Vector2.ZERO
+	var local_end := to_local(end_pos)
+
 	z_index = start_pos.y - 1
 
-	# Determine left and right so we can offset outward
-	if start_pos.x < end_pos.x:
-		start_pos.x -= 50.0  # move left
-		end_pos.x -= 40.0    # move right
-	else:
-		start_pos.x += 50.0  # move right
-		end_pos.x += 40.0    # move left
-
-	# Center the effect on the midpoint
-	var midpoint = start_pos.lerp(end_pos, 0.5)
-	global_position = midpoint
-
-	# Convert points to local space
-	start_pos = to_local(start_pos)
-	end_pos = to_local(end_pos)
-
-	# Build lightning path
 	var lightning_points: Array = []
-	var direction = (end_pos - start_pos).normalized()
+	var direction = (local_end - local_start).normalized()
 	var perpendicular = Vector2(-direction.y, direction.x)
 
 	for i in range(points + 1):
 		var t = i / float(points)
-		var point = start_pos.lerp(end_pos, t)
-		var offset = perpendicular * randf_range(-jaggedness, jaggedness) * (1.0 - abs(t - 0.5) * 2.0)
-		point += offset
+		var point = local_start.lerp(local_end, t)
+
+		# DO NOT offset endpoints
+		if i != 0 and i != points:
+			var strength = 1.0 - abs(t - 0.5) * 2.0
+			point += perpendicular * randf_range(-jaggedness, jaggedness) * strength
+
 		lightning_points.append(point)
 
 	line.points = lightning_points
 	line.default_color = Color.WHITE
+	line.width = 2
+
 	if procs:
 		line.width = 3
 		line.default_color = Color.CYAN
-
 
 func _process(delta):
 	timer += delta
@@ -61,8 +55,8 @@ func _process(delta):
 	var remaining = 1.0 - (timer / lifespan)
 	line.modulate.a = remaining
 
-	# Slight jitter/flicker
-	for i in range(line.points.size()):
+	# Jitter only interior points
+	for i in range(1, line.points.size() - 1):
 		var p = line.points[i]
 		p += Vector2(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5))
 		line.set_point_position(i, p)

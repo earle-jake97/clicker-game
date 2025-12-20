@@ -8,12 +8,16 @@ func _ready() -> void:
 	set_up_items()
 
 func set_up_items():
-	for item in item_tree:
-		var rarity = roll_rarity()
-		var script = ItemDatabase.get_random_item_by_rarity(rarity)
-		if script:
-			var instance = script.new()
-			item.assign_item(instance.item_icon, instance.item_name, instance.item_description, script.resource_path, 0, rarity)
+	var ok = ItemSpawner.populate_items(item_tree)
+	if not ok:
+		queue_free()
+	#
+	#for item in item_tree:
+		#var rarity = roll_rarity()
+		#var script = ItemDatabase.get_random_item_by_rarity(rarity)
+		#if script:
+			#var instance = script.new()
+			#item.assign_item(instance.item_icon, instance.item_name, instance.item_description, script.resource_path, 0, rarity)
 
 func roll_rarity():
 	var rand = randf()

@@ -28,16 +28,17 @@ func _process(delta: float) -> void:
 		Tooltip.update_position(mouse_pos)
 
 		if Input.is_action_just_pressed("Click"):
-				item_path = item_file_name
-				item = load(item_path)
-				if item == null:
-					return
-				var item_script = item.new()
-				PlayerController.add_item(item_script)
-				Tooltip.hide_tooltip()
-				SceneManager.switch_to_scene("res://map/map_view.tscn")
-				GameState.on_map_screen = true
-				GameState.leave_shop_triggered = true
+			item_path = item_file_name
+			item = load(item_path)
+			if item == null:
+				return
+			var item_script = item.new()
+			PlayerController.add_item(item_script)
+			ItemDatabase.remove_item(item)
+			Tooltip.hide_tooltip()
+			SceneManager.switch_to_scene("res://map/map_view.tscn")
+			GameState.on_map_screen = true
+			GameState.leave_shop_triggered = true
 
 # Assign item properties for the item
 func assign_item(item_icon, item_name, item_description, item_file_name, price, rarity):

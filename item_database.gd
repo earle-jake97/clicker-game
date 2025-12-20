@@ -90,3 +90,7 @@ func get_random_item():
 
 func reset_items():
 	set_starter_items()
+
+func remove_item(script: Script):
+	if script in items:
+		items.erase(script)

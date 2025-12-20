@@ -23,13 +23,10 @@ func proc(target: Node, source_item: BaseItem = null):
 	# Count how many Thunderbolt items the player has
 	var bounce_count = 3
 	for item in player.inventory:
-		if item.item_name == item_name:
-			bounce_count += 1
 		if "bounce_extend" in item.tags:
 			bounce_count += item.get_bounces()  # optional
 
 	var current_target = target
-	var already_hit: Array[Node] = [target]
 
 	for i in range(bounce_count):
 		var nearest = null
@@ -37,7 +34,7 @@ func proc(target: Node, source_item: BaseItem = null):
 		var procs = false
 
 		for enemy in tree.get_nodes_in_group("enemy"):
-			if enemy != current_target and enemy not in already_hit and enemy.is_inside_tree():
+			if enemy != current_target and enemy.is_inside_tree():
 				var dist = current_target.global_position.distance_to(enemy.global_position)
 				if dist < shortest:
 					shortest = dist
@@ -50,10 +47,20 @@ func proc(target: Node, source_item: BaseItem = null):
 				if rand <= 0.2:
 					procs = true
 					player.proc_items(nearest, self)  # mark this Thunderbolt as the source
-			already_hit.append(nearest)
 
 			var bolt = preload("res://items/misc/LightningEffect.tscn").instantiate()
-			bolt.setup(current_target.global_position, nearest.global_position, procs)
+			bolt.top_level = true
+			var target_pivot_1
+			var target_pivot_2
+			if current_target.find_child("pivot", 1, 1):
+				target_pivot_1 = current_target.find_child("pivot", 1, 1).global_position
+			else:
+				target_pivot_1 = current_target.global_position
+			if nearest.find_child("pivot", 1, 1):
+				target_pivot_2 = nearest.find_child("pivot", 1, 1).global_position
+			else:
+				target_pivot_2 = nearest.global_position
+			bolt.setup(target_pivot_1, target_pivot_2, procs)
 			tree.current_scene.add_child(bolt)
 
 			current_target = nearest

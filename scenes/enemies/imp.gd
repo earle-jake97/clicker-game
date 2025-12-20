@@ -22,7 +22,7 @@ var health: float
 @onready var container: Node2D = $container
 
 var debuffs = []
-
+var touching_player = false
 var base_attack_speed = 0.7
 var damage_cooldown = 0.0
 var attack_duration = 0.0
@@ -41,6 +41,9 @@ var pushback_timer = 0.0
 var is_pushed = false
 var target: Node = TestPlayer
 var touching_entity: Node = null
+var guarantee_hit = false
+var reached_player = false
+
 
 func _ready() -> void:
 	value = randi_range(value_min, value_max)
@@ -93,9 +96,12 @@ func _physics_process(delta: float) -> void:
 			post_attack_delay = 0.0
 
 	# Move toward target if not attacking, dead, or pushed
-	elif not is_attacking and not dead and not is_pushed and not is_frozen:
+	elif not dead and not is_pushed and not is_frozen:
 		if is_instance_valid(target):
-			global_position = global_position.move_toward(target.global_position, speed * delta)
+			if is_attacking:
+				global_position = global_position.move_toward(target.global_position, speed * 0.75 * delta)
+			else:
+				global_position = global_position.move_toward(target.global_position, speed * delta)
 
 	if health <= 0:
 		if not paid_out:
@@ -123,16 +129,23 @@ func push_back(strength: float):
 	pushback_timer = 0.0
 
 func start_attack():
+	if reached_player:
+		guarantee_hit = true
 	animation_player.play("attack")
 	is_attacking = true
 	attack_duration = 0.0
 
 func process_attack(delta):
 	attack_duration += delta
+
 	if attack_duration >= 0.8666 and is_attacking:
-		if touching_entity and is_instance_valid(touching_entity):
+		if is_instance_valid(touching_entity):
 			if touching_entity.has_method("take_damage"):
 				touching_entity.take_damage(damage, armor_penetration)
+		else:
+			touching_entity = null
+			
+		guarantee_hit = false
 		is_attacking = false
 		waiting_after_attack = true
 		attack_duration = 0.0
@@ -140,11 +153,18 @@ func process_attack(delta):
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
+		touching_player = true
+		touching_entity = area.get_parent()
+
+	elif area.is_in_group("minion_hitbox"):
+		touching_player = false
 		touching_entity = area.get_parent()
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if touching_entity and area.get_parent() == touching_entity:
 		touching_entity = null
+		touching_player = false
+
 
 func die():
 	debuff_container.hide()

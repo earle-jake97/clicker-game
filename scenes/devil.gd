@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> void:
 
 	z_index = round(global_position.y)
 
-	if touching_player and damage_cooldown >= player.iframe_duration and not is_attacking and not dead and not is_frozen:
+	if touching_player and damage_cooldown >= base_attack_speed + 1 and not is_attacking and not dead and not is_frozen:
 		reached_player = true
 		start_attack()
 
@@ -179,7 +179,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	if touching_entity and area.get_parent() == touching_entity:
 		touching_entity = null
 		touching_player = false
-		reached_player = false
 
 
 func die():

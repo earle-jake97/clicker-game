@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 				if item == null:
 					return
 				var item_script = item.new()
+				ItemDatabase.remove_item(item)
 				PlayerController.add_item(item_script)
 				PlayerController.cash -= cost
 				Tooltip.hide_tooltip()

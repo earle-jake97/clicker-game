@@ -1,6 +1,8 @@
 extends Node2D
 @onready var text_edit: TextEdit = $TextEdit
 @onready var leave_button: Button = $leave_button
+@onready var testmap: Button = $testmap
+@onready var itemdb: Button = $itemdb
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,3 +23,12 @@ func _on_button_pressed() -> void:
 
 func _on_leave_button_pressed() -> void:
 	SceneManager.switch_to_scene("res://map/map_view.tscn")
+
+
+func _on_testmap_pressed() -> void:
+	SceneManager.switch_to_scene("res://scenes/test_map.tscn")
+
+
+func _on_itemdb_pressed() -> void:
+	for item in ItemDatabase.items:
+		print(item.resource_path)

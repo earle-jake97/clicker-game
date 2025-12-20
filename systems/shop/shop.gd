@@ -16,6 +16,10 @@ const HORDE = preload("res://systems/map/horde_scenes/horde_endless.tscn")
 const BOSS_1_MAP = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
 var difficulty_scaling = 0.15
 var lowest_price = 30
+var used_item_paths: Array[String] = []
+
+const MAX_ATTEMPTS := 30
+
 
 func _ready() -> void:
 	HealthBar.button.visible = false
@@ -35,29 +39,16 @@ func _process(delta: float) -> void:
 	hands.texture = WOKE if PlayerController.cash > lowest_price else BROKE
 
 func set_up_items():
-	for item in item_tree:
-		var rarity = roll_rarity()
-		var base_price = get_price_for_rarity(rarity)
-
-		var script = ItemDatabase.get_random_item_by_rarity(rarity)
-		if script:
-			var instance = script.new()
-			var price = apply_discount(base_price)
+	var ok = ItemSpawner.populate_shop(
+		item_tree,
+		PlayerController.difficulty,
+		func(price):
 			if price < lowest_price:
 				lowest_price = price
-			var discounted = false
-			if price != base_price:
-				discounted = true
+	)
 
-			item.assign_item(
-				instance.item_icon,
-				instance.item_name,
-				instance.item_description,
-				script.resource_path,
-				price,
-				discounted,
-				rarity
-			)
+	if not ok:
+		queue_free()
 	for heart in heart_tree:
 		var rarity = roll_heart_rarity()
 		var base_price = get_health_price(rarity)
@@ -146,3 +137,16 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	hover_exit = false
+
+func _get_unique_item_script(get_script_func: Callable, used_paths: Array[String]):
+	for i in range(MAX_ATTEMPTS):
+		var script = get_script_func.call()
+		if not script:
+			return null
+
+		if script.resource_path not in used_paths:
+			used_paths.append(script.resource_path)
+			return script
+
+	# Could not find a unique item
+	return null

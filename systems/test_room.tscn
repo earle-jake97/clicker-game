@@ -31,5 +31,21 @@ text = "LEAVE"
 position = Vector2(907, 448)
 texture = ExtResource("2_3d5yf")
 
+[node name="testmap" type="Button" parent="."]
+offset_left = 864.0
+offset_top = 30.0
+offset_right = 984.0
+offset_bottom = 61.0
+text = "go to test map"
+
+[node name="itemdb" type="Button" parent="."]
+offset_left = 451.0
+offset_top = 512.0
+offset_right = 545.0
+offset_bottom = 543.0
+text = "print item db"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="leave_button" to="." method="_on_leave_button_pressed"]
+[connection signal="pressed" from="testmap" to="." method="_on_testmap_pressed"]
+[connection signal="pressed" from="itemdb" to="." method="_on_itemdb_pressed"]

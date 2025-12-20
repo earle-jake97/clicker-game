@@ -44,9 +44,9 @@ func spawn_ghost():
 		return
 
 	var projectile = projectile_scene.instantiate()
-	var randy = randi_range(-200, 15)
+	var randy = randi_range(-15, 15)
 	var randx = randi_range(-20, 20)
-	projectile.global_position = Vector2((target_enemy.global_position.x - 30) + randx, -20 + randy)  # Off-screen above
+	projectile.global_position = Vector2((target_enemy.global_position.x - 30) + randx, -800 + randy)  # Off-screen above
 	projectile.target_position = target_enemy.global_position
 	projectile.player = player  # So it knows who to use for damage
 	projectile.damage_multiplier = 3.0
