@@ -10,7 +10,7 @@ var player_body = TestPlayer
 
 @export var bounce_projectile_scene = preload("res://items/misc/nubby_projectile.tscn")
 var cooldown_timer := 0.0
-var cooldown := 2.5 # Time between automatic chain lightning casts
+var cooldown := 2.5 # Time between attacks
 var delay_between_throws = 0
 
 func _ready() -> void:

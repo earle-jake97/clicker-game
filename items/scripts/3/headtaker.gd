@@ -3,7 +3,7 @@ extends BaseItem
 var tags = ["execute"]
 var rarity = 3
 const item_name = "Headtaker"
-const item_description = "If this item procs on a target below its execution threshold, the target will die."
+const item_description = "If this item procs on a target below 8% HP, the target will die."
 const item_icon = preload("res://items/icons/headtaker.png")
 var file_name = "res://items/scripts/3/headtaker.gd"
 var min_threshold = 0.08

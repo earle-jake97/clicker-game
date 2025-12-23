@@ -2,7 +2,7 @@ extends BaseItem
 
 var amount_of_times_to_click = 2
 const item_name = "Clicked Cookie"
-const item_description = "Grandma says this will add 2 clicks per second."
+const item_description = "Your attack speed increases by 2 clicks- I mean attacks per second."
 var tags = ["timer"]
 var rarity = 2
 var item_icon = preload("res://items/icons/clicked_cookie.png")

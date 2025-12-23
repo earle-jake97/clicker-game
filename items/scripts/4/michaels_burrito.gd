@@ -1,6 +1,6 @@
 extends BaseItem
 const item_name = "Michael's Burrito"
-const item_description = "Killing an enemy has a 10% chance to drop a blood puddle that deals 20% of your damage every second. The blood is yours, not theirs. (colitis)"
+const item_description = "Killing an enemy has a 10% chance to drop a blood puddle that deals 20% of your damage every second. You have colitis."
 const item_icon = preload("res://items/icons/michaels_burrito.png")
 const tags = []
 const rarity = 4

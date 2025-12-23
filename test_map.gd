@@ -10,7 +10,7 @@ func _ready() -> void:
 	TestPlayer.visible = true
 	PlayerController.reset_positions()
 	PlayerController.position = 2
-	PlayerController.movement_speed = 600
+	#PlayerController.movement_speed = 600
 	for spawner in get_tree().get_nodes_in_group("spawner"):
 		spawners.append(spawner)
 	await get_tree().create_timer(0.5).timeout

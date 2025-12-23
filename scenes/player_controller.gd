@@ -25,8 +25,8 @@ var difficulty = 0
 var paused = false
 var base_clicks_per_second = 6.0
 var clicks_per_second
-var base_passive_regen = 1.0
-var passive_regen = 1.0
+var base_passive_regen = 0.2 # 1 HP / 5 seconds
+var passive_regen = 0.2
 var regen_timer = 0.0
 var luck
 var base_luck = 0
@@ -265,7 +265,7 @@ func update_modifiers():
 		if item.has_method("get_armor"):
 			total_armor += item.get_armor()
 		if item.has_method("get_regen"):
-			passive_regen += item.get_region()
+			passive_regen += item.get_regen()
 		if item.has_method("get_cps"):
 			clicks_per_second += item.get_cps()
 			hold_click_timer.wait_time = 1.0 / clicks_per_second
@@ -351,14 +351,13 @@ func reset_positions():
 		position = 1
 
 func get_block_chance():
-	var count = 0
+	var rougher_times = load("res://items/scripts/1/rougher_times.gd")
+	var block_percent = 0.0
 	for item in inventory:
-		if item.item_name == "Rougher Times":
-			count += 1
-	if count == 0:
-		return 0
-	else:
-		return 1 - pow(0.95, count)
+		if item.block_percent:
+			block_percent += item.block_percent
+			
+	return block_percent
 
 func reset_to_defaults():
 	difficulty = 0

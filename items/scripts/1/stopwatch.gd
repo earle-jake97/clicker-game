@@ -2,7 +2,7 @@ extends BaseItem
 
 var amount_of_times_to_click = 1
 const item_name = "Stopwatch"
-const item_description = "Adds one extra click per second."
+const item_description = "Adds one extra hit per second."
 var tags = ["timer"]
 var rarity = 1
 var item_icon = preload("res://items/icons/stopwatch.png")

@@ -54,7 +54,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2qkx"]
-size = Vector2(45, 52)
+size = Vector2(45, 95.706)
 
 [sub_resource type="Animation" id="Animation_aykxm"]
 length = 0.001
@@ -1147,11 +1147,13 @@ offset = Vector2(-10, -30)
 position = Vector2(-6.66667, -70)
 texture = ExtResource("7_5fqil")
 
+[node name="pivot" type="Marker2D" parent="sprite/body"]
+position = Vector2(6.5, 22.1667)
+
 [node name="Area2D" type="Area2D" parent="." groups=["player_hitbox"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.833333, -12.5)
+position = Vector2(-0.833333, -24.8833)
 scale = Vector2(1, 0.566666)
 shape = SubResource("RectangleShape2D_c2qkx")
 

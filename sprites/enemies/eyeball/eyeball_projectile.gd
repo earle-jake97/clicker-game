@@ -1,35 +1,63 @@
 extends Node2D
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 var target = TestPlayer
 
-# Called when the node enters the scene tree for the first time.
+@export var speed: float = 400.0
+@export var turn_speed: float = 2 # radians per second (lower = wider turns)
+@export var lifetime: float = 4.5
+var timer = 0.0
+
+var velocity: Vector2 = Vector2.RIGHT
+
 func _ready() -> void:
-	pass # Replace with function body.
+	# Start moving in the facing direction
+	if is_instance_valid(target):
+		var dir = (target.global_position - global_position).normalized()
+		velocity = dir * speed
+		rotation = dir.angle() + PI
+	else:
+		velocity = Vector2.RIGHT * speed
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	timer += delta
+	if timer >= lifetime:
+		destroy_projectile()
+	# === TARGET SELECTION (unchanged logic) ===
 	for entity in get_tree().get_nodes_in_group("player"):
 		if not is_instance_valid(entity):
 			continue
-		
+
 		var distance = global_position.distance_to(entity.global_position)
 
 		var is_closer = true
 		if is_instance_valid(target):
 			is_closer = distance < global_position.distance_to(target.global_position)
-		
+
 		if entity.has_method("is_alive") and entity.is_alive() and is_closer and entity.global_position.x <= global_position.x:
-			target = entity
+			if target.find_child("pivot", 1, 1):
+				target = entity.find_child("pivot", 1, 1)
+			else:
+				target = entity
 		else:
-			target = TestPlayer
+			target = TestPlayer.find_child("pivot", 1, 1)
 
-	global_position = global_position.move_toward(target.global_position, 500 * delta)
+	# === STEERING LOGIC ===
+	if is_instance_valid(target):
+		var desired_direction = (target.global_position - global_position).normalized()
+		var current_direction = velocity.normalized()
+
+		# Gradually rotate toward target direction
+		var new_direction = current_direction.slerp(desired_direction, turn_speed * delta)
+		velocity = new_direction * speed
+
+	# === MOVE ===
+	global_position += velocity * delta
+
+	# === VISUAL ROTATION ===
+	rotation = velocity.angle() + PI
 	z_index = global_position.y - 1
-	
-	look_at(target.global_position)
-	rotation += deg_to_rad(180)
-
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
