@@ -124,8 +124,7 @@ func _physics_process(delta: float) -> void:
 
 	z_index = round(global_position.y)
 
-	if touching_player and damage_cooldown >= base_attack_speed + 1 and not is_attacking and not dead and not is_frozen:
-		reached_player = true
+	if touching_entity != null and damage_cooldown >= base_attack_speed + 1 and not is_attacking and not dead and not is_frozen:
 		start_attack()
 
 	if is_attacking and not dead:
@@ -142,8 +141,6 @@ func push_back(strength: float):
 	pushback_timer = 0.0
 
 func start_attack():
-	if reached_player:
-		guarantee_hit = true
 	head.texture = NEW_DEVIL_HEAD_SMILE
 	animation_player.play("attack")
 
@@ -154,12 +151,13 @@ func process_attack(delta):
 	attack_duration += delta
 
 	if attack_duration >= 0.5333 and is_attacking:
-		if is_instance_valid(touching_entity):
+		if is_instance_valid(touching_entity) and not dead:
 			if touching_entity.has_method("take_damage"):
 				touching_entity.take_damage(damage, armor_penetration)
+		elif guarantee_hit and not dead:
+			player.take_damage(damage, armor_penetration)
 		else:
 			touching_entity = null
-			
 		guarantee_hit = false
 		is_attacking = false
 		waiting_after_attack = true
@@ -169,6 +167,7 @@ func process_attack(delta):
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
 		touching_player = true
+		guarantee_hit = true
 		touching_entity = area.get_parent()
 
 	elif area.is_in_group("minion_hitbox"):
@@ -178,7 +177,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if touching_entity and area.get_parent() == touching_entity:
 		touching_entity = null
-		touching_player = false
 
 
 func die():

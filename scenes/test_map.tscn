@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnv4t6agl2tpu"]
+[gd_scene load_steps=6 format=3 uid="uid://bnv4t6agl2tpu"]
 
 [ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
 [ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="3_4vo6d"]
 [ext_resource type="Script" path="res://systems/camera.gd" id="3_e7kda"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="4_0jku0"]
+[ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="5_w38lh"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
@@ -38,4 +39,11 @@ position = Vector2(1109.37, 696.705)
 min_speed = 200.0
 max_speed = 200.0
 damage = 1
+max_health = 10000.0
+
+[node name="devil2" parent="." instance=ExtResource("5_w38lh")]
+position = Vector2(703.57, 262.597)
+min_speed = 100.0
+max_speed = 100.0
+damage = 5
 max_health = 10000.0

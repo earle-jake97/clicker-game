@@ -142,6 +142,8 @@ func process_attack(delta):
 		if is_instance_valid(touching_entity):
 			if touching_entity.has_method("take_damage"):
 				touching_entity.take_damage(damage, armor_penetration)
+		elif guarantee_hit:
+			player.take_damage(damage, armor_penetration)
 		else:
 			touching_entity = null
 			
@@ -154,6 +156,7 @@ func process_attack(delta):
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
 		touching_player = true
+		guarantee_hit = true
 		touching_entity = area.get_parent()
 
 	elif area.is_in_group("minion_hitbox"):
