@@ -16,6 +16,8 @@ const HEART_CASH_DEAD = preload("res://systems/heart_cash_dead.png")
 @onready var button: TextureButton = $Button
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var shields: Label = $Shields
+@onready var count_container: Control = $Count_Container
+@onready var enemy_count_label: Label = $Count_Container/Enemy_Count_Label
 
 
 var fast_forward = false
@@ -29,10 +31,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if GameState.horde_bool:
+		count_container.visible = true
+	else:
+		count_container.visible = false
 	if fast_forward:
 		button.modulate = Color.YELLOW
 	else:
 		button.modulate = Color.WHITE
+	enemy_count_label.text = "x " + str(GameState.enemy_count)
 	progress_bar.value = PlayerController.overshields
 	if PlayerController.overshields > 0:
 		progress_bar.visible = true

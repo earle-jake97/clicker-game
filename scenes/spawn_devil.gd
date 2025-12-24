@@ -76,6 +76,7 @@ func _ready() -> void:
 	else:
 		enemy_max_health += difficulty * 3.5
 	spawn_cap = randi_range(min_spawns, max_spawns)
+	GameState.enemy_count += spawn_cap
 	next_spawn_time = randf_range(min_spawn_time, max_spawn_time)
 
 func _process(delta: float) -> void:

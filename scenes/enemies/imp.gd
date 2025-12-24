@@ -22,6 +22,7 @@ var health: float
 @onready var container: Node2D = $container
 
 var debuffs = []
+var bleed_stacks = 0
 var touching_player = false
 var base_attack_speed = 0.7
 var damage_cooldown = 0.0

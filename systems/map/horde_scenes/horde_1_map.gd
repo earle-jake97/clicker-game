@@ -5,6 +5,7 @@ const MapView = "res://map/map_view.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameState.horde_bool = true
 	GameState.on_map_screen = false
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
@@ -32,4 +33,5 @@ func check_spawner_complete():
 	TestPlayer.visible = false
 	PlayerController.position = 2
 	GameState.on_map_screen = true
+	GameState.horde_bool = false
 	SceneManager.switch_to_scene(MapView)

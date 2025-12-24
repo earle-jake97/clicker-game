@@ -39,8 +39,9 @@ var processed_items = []
 var inventory: Array = []
 var base_movement_speed = 180.0
 var movement_speed = 0.0
-
 var last_enemy_attacked = null # For use in chain attacks
+var bleed_timer = 0
+var bleed_cooldown = 1
 
 
 func _ready():
@@ -66,6 +67,11 @@ func _process(delta: float) -> void:
 	dash_animation_timer += delta
 	regen_timer += delta
 	overshield_timer += delta
+	bleed_timer += delta
+	
+	if bleed_timer >= bleed_cooldown:
+		bleed_timer = 0
+		timed_bleed()
 	
 	if overshields > overshields_cap:
 		overshields = overshields_cap
@@ -91,6 +97,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	move_player()
+	
 	#if Input.is_action_pressed("Hold_Click"):
 		#if not hold_click_timer.is_stopped():
 			#return
@@ -351,12 +358,10 @@ func reset_positions():
 		position = 1
 
 func get_block_chance():
-	var rougher_times = load("res://items/scripts/1/rougher_times.gd")
 	var block_percent = 0.0
 	for item in inventory:
-		if item.block_percent:
+		if "block_percent" in item:
 			block_percent += item.block_percent
-			
 	return block_percent
 
 func reset_to_defaults():
@@ -400,11 +405,13 @@ func calculate_luck():
 		return chance
 
 func timed_bleed():
+	var bleed_dmg = 0
+	for item in inventory:
+			if "bleed_tick" in item:
+				bleed_dmg += item.bleed_tick
 	for enemy in get_tree().get_nodes_in_group("enemy"):
-		if enemy.is_in_group("boss") or enemy.is_in_group("elite"):
-			enemy.take_damage(round(enemy.bleed_stacks * 0.5), DamageBatcher.DamageType.BLEED)
-		else:
-			enemy.take_damage(enemy.bleed_stacks, DamageBatcher.DamageType.BLEED)
+		print("Bleeding!")
+		enemy.take_damage(enemy.bleed_stacks * bleed_dmg, DamageBatcher.DamageType.BLEED)
 
 func free_items():
 	for item in processed_items:

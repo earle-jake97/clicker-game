@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fyxev4jdy2xn"]
+[gd_scene load_steps=13 format=3 uid="uid://fyxev4jdy2xn"]
 
 [ext_resource type="Script" path="res://scenes/health_bar.gd" id="1_duub2"]
 [ext_resource type="Texture2D" uid="uid://cmpeyckcg31u0" path="res://systems/heart_cash.png" id="2_phrsh"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="5_uctdi"]
 [ext_resource type="Texture2D" uid="uid://cc855ynf4mlm5" path="res://systems/endless_sign.png" id="6_2qdl4"]
 [ext_resource type="Texture2D" uid="uid://b1r7a8xuwltie" path="res://sprites/fast_forward.png" id="7_cjxs3"]
+[ext_resource type="Texture2D" uid="uid://ndrgx1altv4a" path="res://sprites/enemy_count_icon.png" id="8_5opy3"]
 
 [sub_resource type="Animation" id="Animation_ain3o"]
 length = 0.001
@@ -163,5 +164,26 @@ offset_right = -5.0
 offset_bottom = 84.0
 grow_horizontal = 0
 texture_normal = ExtResource("7_cjxs3")
+
+[node name="Count_Container" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Enemy_Count_Sprite" type="Sprite2D" parent="Count_Container"]
+texture_filter = 2
+position = Vector2(38, 605)
+texture = ExtResource("8_5opy3")
+
+[node name="Enemy_Count_Label" type="Label" parent="Count_Container"]
+texture_filter = 1
+offset_left = 71.0
+offset_top = 594.0
+offset_right = 166.0
+offset_bottom = 617.0
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("5_uctdi")
+text = "x 0"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
