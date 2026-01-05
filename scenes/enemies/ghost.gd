@@ -1,4 +1,9 @@
 extends BaseEnemy
+var has_hidden = false
+var hiding = false
+var hide_timer = 0
+var hide_duration = 2.0
+@onready var body: AnimatedSprite2D = $container/sprite/body
 
 func _ready() -> void:
 	attack_animation_length = 0.8666
@@ -12,12 +17,23 @@ func _ready() -> void:
 	attack_speed = base_attack_speed
 
 func _physics_process(delta: float) -> void:
+	hide_timer += delta
+	if hiding and not hide_timer >= hide_duration:
+		handle_death(delta)
+		return
+	
 	check_touch()
 	get_target()
+	if not dead and has_hidden and hide_timer >= hide_duration:
+		add_to_group('enemy')
+		hiding = false
 
 	handle_death(delta)
 	damage_cooldown += delta
-
+	
+	if not dead and health <= max_health/2 and not has_hidden:
+		invlun()
+	
 	if health < max_health:
 		health_bar.visible = true
 
@@ -30,7 +46,7 @@ func _physics_process(delta: float) -> void:
 			post_attack_delay = 0.0
 
 	# Move toward target if not attacking, dead, or pushed
-	elif not dead and not is_pushed and not is_frozen:
+	elif not dead and not is_pushed and not is_frozen and not hiding:
 		if is_instance_valid(target):
 			if is_attacking:
 				global_position = global_position.move_toward(target.global_position, speed * 0.75 * delta)
@@ -57,6 +73,17 @@ func start_attack():
 	is_attacking = true
 	attack_duration = 0.0
 
+func invlun():
+	if has_hidden:
+		return
+	hide_timer = 0
+	remove_from_group("enemy")
+	has_hidden = true
+	hiding = true
+	health = min(health + max_health / 2, max_health)
+	body.play("hide")
+	animation_player.play("hide")
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
 		touching_player = true
@@ -67,7 +94,17 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		touching_player = false
 		touching_entity = area.get_parent()
 
+func attack_check():
+	if not hiding and touching_entity != null and damage_cooldown >= base_attack_speed + 1 and not is_attacking and not dead and not is_frozen:
+		start_attack()
+
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if touching_entity and area.get_parent() == touching_entity:
 		touching_entity = null
 		touching_player = false
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "hide":
+		body.play("idle")
+		animation_player.play("idle")

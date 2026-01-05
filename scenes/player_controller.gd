@@ -410,7 +410,6 @@ func timed_bleed():
 			if "bleed_tick" in item:
 				bleed_dmg += item.bleed_tick
 	for enemy in get_tree().get_nodes_in_group("enemy"):
-		print("Bleeding!")
 		enemy.take_damage(enemy.bleed_stacks * bleed_dmg, DamageBatcher.DamageType.BLEED)
 
 func free_items():
