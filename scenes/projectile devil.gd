@@ -1,48 +1,21 @@
 extends BaseEnemy
-signal died
-@export var speed: float
-@export var min_speed: float
-@export var max_speed: float
-@onready var progress_bar: TextureProgressBar = $ProgressBar
-@onready var debuff_container: HBoxContainer = $debuff_container
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 const SMOKE_CLOUD = preload("res://items/misc/smoke_cloud.tscn")
 
-var health: float
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var limbs: AnimationPlayer = $container/limbs
-@onready var sprite: Node2D = $container/sprite
-@onready var shadow: Sprite2D = $container/shadow
-@onready var container: Node2D = $container
 @onready var head: Sprite2D = $container/sprite/head
-@export var max_health: float
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
 @export var projectile_scene: PackedScene = preload("res://scenes/mad projectile.tscn")
 @export var telegraph_scene: PackedScene = preload("res://scenes/telegraph.tscn")
-@export var damage: int
-@export var armor_penetration: int
-@export var value_min: int
-@export var value_max: int
-var death_timer = 0.0
 var shot_precision = 100.0
-var dead = false
 const HEAD_SPIT = preload("res://sprites/enemies/toss_devil/head spit.png")
 const HEAD = preload("res://sprites/enemies/toss_devil/head.png")
 const HEAD_DEAD = preload("res://sprites/enemies/toss_devil/head_dead.png")
 const HEAD_SMILE = preload("res://sprites/enemies/toss_devil/head_smile.png")
-var player = TestPlayer
 var player_controller = PlayerController
-var value = 0
 var attack_timer := 0.0
-var base_attack_speed = 1.5
-var attack_speed
 var chosen_position
 var velocity = Vector2.ZERO
-var paid_out = false
-var bleed_stacks = 0
 var spitting = false
-var debuffs = []
 var previous_debuffs = []
 var hop_cooldown = 5.0
 var hop_timer = 0.0
@@ -53,6 +26,8 @@ var spit_timer = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	base_attack_speed = 1.5
+	attack_speed = base_attack_speed
 	hop()
 	attack_speed = base_attack_speed
 	initialize()

@@ -1,46 +1,22 @@
 extends BaseEnemy
-signal died
-@export var speed: float
-@export var min_speed: float
-@export var max_speed: float
-@onready var progress_bar: TextureProgressBar = $ProgressBar
-@onready var debuff_container: HBoxContainer = $debuff_container
-
-var health: float
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
 @onready var limbs: AnimationPlayer = $limbs
-@onready var sprite: Node2D = $sprite
-@onready var shadow: Sprite2D = $shadow
+
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @onready var head: Sprite2D = $sprite/head
-@export var max_health: float
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
+
 @onready var player_positions = []
 @export var projectile_scene: PackedScene = preload("res://scenes/mad projectile.tscn")
 @export var telegraph_scene: PackedScene = preload("res://scenes/telegraph.tscn")
-@export var damage: int
-@export var armor_penetration: int
-@export var value_min: int
-@export var value_max: int
-var death_timer = 0.0
-var dead = false
-var player = TestPlayer
+
 var player_controller = PlayerController
-var value = 0
+
 var attack_timer := 0.0
-var base_attack_speed = 1.0
-var attack_speed
 var chosen_position
 var velocity = Vector2.ZERO
-var moving = true
 var initial_y
 var initial_x
-var paid_out = false
-var bleed_stacks = 0
 var spitting = false
-var debuffs = []
 var previous_debuffs = []
 
 var spit_timer = 0.0

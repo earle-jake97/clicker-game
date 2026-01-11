@@ -1,51 +1,11 @@
 extends BaseEnemy
 
-signal died
-var player = PlayerController
-@export var min_speed: float
-@export var max_speed: float
-var speed: float
-@export var damage: int
-@export var armor_penetration: int
-var health: float
-@export var max_health: float
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@export var value_min: int
-@export var value_max: int
-@onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var bleed_icon: Sprite2D = $"bleed stacks"
 @onready var bleed_label: Label = $"bleed stacks/Label"
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var shadow: Sprite2D = $shadow
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite: Node2D = $sprite
 @onready var face: Sprite2D = $sprite/spritebody/face
-@onready var debuff_container: HBoxContainer = $debuff_container
-
-var debuffs = []
-
-var base_attack_speed = 2.0
-var bleed_stacks = 0
-var damage_cooldown = 0.0
-var touching_player = false
-var attack_duration = 0.0
-var is_attacking = false
-var reached_player = false
-var post_attack_delay = 0.0
-var waiting_after_attack = false
-var death_timer = 0.0
-var dead = false
-var paid_out = false
-var value = 0
-var base_speed
-var attack_speed
-var push_strength = 0.0
-var pushback_length = 2.0
-var pushback_timer = 0.0
-var is_pushed = false
 
 func _ready() -> void:
+	base_attack_speed = 2.0
 	face.visible = false
 	value = randi_range(value_min, value_max)
 	health_bar.visible = false

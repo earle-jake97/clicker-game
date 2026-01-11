@@ -3,6 +3,7 @@ var has_hidden = false
 var hiding = false
 var hide_timer = 0
 var hide_duration = 2.0
+var health_snapshot = 0.0
 @onready var body: AnimatedSprite2D = $container/sprite/body
 
 func _ready() -> void:
@@ -19,6 +20,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	hide_timer += delta
 	if hiding and not hide_timer >= hide_duration:
+		var t = hide_timer / hide_duration
+		t = clamp(t, 0.0, 1.0)
+		health = lerp(health_snapshot, max_health, t)
+		if t >= 1.0:
+			health = max_health
+		health_bar.value = health
 		handle_death(delta)
 		return
 	
@@ -32,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	damage_cooldown += delta
 	
 	if not dead and health <= max_health/2 and not has_hidden:
-		invlun()
+		invlun(delta)
 	
 	if health < max_health:
 		health_bar.visible = true
@@ -73,14 +80,14 @@ func start_attack():
 	is_attacking = true
 	attack_duration = 0.0
 
-func invlun():
+func invlun(delta):
 	if has_hidden:
 		return
 	hide_timer = 0
+	health_snapshot = health
 	remove_from_group("enemy")
 	has_hidden = true
 	hiding = true
-	health = min(health + max_health / 2, max_health)
 	body.play("hide")
 	animation_player.play("hide")
 
