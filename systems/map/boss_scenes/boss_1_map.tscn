@@ -48,20 +48,16 @@ position = Vector2(542.942, 313.954)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(552.502, 76.8798)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_rqb8a")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(3.75739, 322.674)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_7bqso")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1077.43, 358.527)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_h0d4t")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(557.032, 669.574)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ce0kq")
