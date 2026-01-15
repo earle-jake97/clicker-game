@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bypvp1j3qy5qf"]
+[gd_scene load_steps=10 format=3 uid="uid://bypvp1j3qy5qf"]
 
 [ext_resource type="Script" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_cblr7"]
 [ext_resource type="Texture2D" uid="uid://dtktt3jd6rhub" path="res://backgrounds/happy.png" id="2_2g4ff"]
@@ -8,6 +8,18 @@
 [sub_resource type="Theme" id="Theme_0a1jv"]
 default_font = ExtResource("9_x7pln")
 default_font_size = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs66e"]
+size = Vector2(1125, 173.76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8x0ji"]
+size = Vector2(25.0295, 652.442)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rmff"]
+size = Vector2(30.6656, 660.194)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yb4g0"]
+size = Vector2(1165.4, 89.3024)
 
 [node name="Timer Room" type="Node2D"]
 texture_filter = 1
@@ -31,7 +43,7 @@ texture = ExtResource("2_2g4ff")
 position = Vector2(485.642, 274.225)
 
 [node name="Marker2D2" type="Marker2D" parent="Positions"]
-position = Vector2(79.8445, 273.256)
+position = Vector2(319.378, 393.411)
 
 [node name="Marker2D3" type="Marker2D" parent="Positions"]
 position = Vector2(286.501, 509.69)
@@ -56,3 +68,25 @@ theme_override_constants/outline_size = 8
 text = "60
 "
 horizontal_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(548.578, 108.527)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_cs66e")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3.75739, 322.674)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8x0ji")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1077.43, 358.527)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2rmff")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(557.032, 669.574)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_yb4g0")

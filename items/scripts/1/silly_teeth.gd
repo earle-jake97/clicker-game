@@ -1,9 +1,9 @@
 extends BaseItem
 
 var elapsed_time := 0.0
-var bleed_tick := 0.2
+var bleed_tick := 1
 const item_name = "Silly Teeth"
-const item_description = "Every attack adds a bleed stack. Each bleed stack deals 0.2 damage."
+const item_description = "Every attack adds a bleed stack. Each bleed stack deals 1 damage."
 var tags = ["bleed"]
 var rarity = 1
 var item_icon = preload("res://items/icons/silly_teeth.png")

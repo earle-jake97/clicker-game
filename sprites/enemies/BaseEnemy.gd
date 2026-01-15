@@ -4,7 +4,7 @@ class_name BaseEnemy
 var is_frozen = false
 signal died
 var player = PlayerController
-var playerModel
+var player_model = TestPlayer
 @export var min_speed: float
 @export var max_speed: float
 var speed: float

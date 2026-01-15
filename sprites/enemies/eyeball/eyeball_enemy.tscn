@@ -141,7 +141,7 @@ script = ExtResource("1_anfwb")
 position = Vector2(-28, -91)
 
 [node name="projectile_spawn" type="Marker2D" parent="container"]
-position = Vector2(-11, -117)
+position = Vector2(4, -101)
 
 [node name="shadow" type="Sprite2D" parent="container"]
 modulate = Color(1, 1, 1, 0.537255)

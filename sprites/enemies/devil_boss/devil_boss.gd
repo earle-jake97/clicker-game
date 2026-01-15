@@ -1,17 +1,11 @@
 extends BaseEnemy
-signal died(enemy_node)
 var controller = PlayerController
-var player_model = TestPlayer
-@onready var debuff_container: HBoxContainer = $debuff_container
-@onready var minion_ball: Node2D = $sprite/Minion_ball
-@onready var animation_player: AnimationPlayer = $sprite/AnimationPlayer
-@onready var head: Sprite2D = $sprite/Head_Node/Head
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@onready var animation_player_head: AnimationPlayer = $sprite/Head_Node/Head/AnimationPlayer
+@onready var minion_ball: Node2D = $container/sprite/Minion_ball
+@onready var head: Sprite2D = $container/sprite/Head_Node/Head
+@onready var animation_player_head: AnimationPlayer = $container/sprite/Head_Node/Head/AnimationPlayer
+@onready var label: Label = $Label
+
 const DIVING_MINION = preload("res://sprites/enemies/devil/diving_minion.tscn")
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var sprite: Node2D = $sprite
 const SHOCKWAVE = preload("res://sprites/enemies/devil_boss/shockwave.tscn")
 const HEAD = preload("res://sprites/enemies/devil_boss/head.png")
 const HEAD_POG = preload("res://sprites/enemies/devil_boss/head_pog.png")
@@ -25,18 +19,10 @@ const GLOBAL_INTERVAL = 3.5
 const FIREBALL_TRAVEL_TIME = 0.8
 const TELEGRAPH = preload("res://scenes/telegraph.tscn")
 const FIREBALL = preload("res://sprites/enemies/devil_boss/fireball.tscn")
-@onready var shadow: Sprite2D = $sprite/shadow
+@onready var pivot: Marker2D = $container/sprite/Body/pivot
 
-var debuffs = []
 var previous_debuffs = []
 
-@export var health = 2000
-var max_health = 2000
-var bleed_stacks = 0
-var dead = false
-var paid_out = false
-var value = 200
-var death_timer = 0.0
 var mouth_timer = 0.0
 var armor = 50
 var meditate_timer = 0.0
@@ -51,9 +37,8 @@ var global_cooldown = 0.0
 var throw_cooldown = 0.0
 var meditate_cooldown = 0.0
 
-var is_attacking = false
-
 func _ready() -> void:
+	animation_player = $container/sprite/AnimationPlayer
 	animation_player.animation_set_next("slam", "idle")
 	animation_player.animation_set_next("meditate", "idle")
 	animation_player.animation_set_next("throw_minions", "idle")
@@ -63,7 +48,7 @@ func _ready() -> void:
 		if controller.difficulty == 0:
 			max_health = 99999
 		else:
-			max_health *= controller.difficulty
+			max_health = controller.difficulty * 500 + 2000
 	health = max_health
 	health_bar.visible = false
 	health_bar.max_value = max_health
@@ -80,6 +65,8 @@ func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageTy
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	label.text = "hp: " + str(health)
+	z_index = pivot.global_position.y
 	mouth_timer += delta
 	if health <= max_health/2:
 		fireball_cooldown += delta * 2
@@ -94,8 +81,9 @@ func _process(delta: float) -> void:
 	meditate_timer += delta
 	
 	if meditate_timer >= MEDITATE_TIME and meditating:
-		bleed_stacks /= 2
-		health += round(max_health/18.0)
+		bleed_stacks = 0
+		debuffs = []
+		debuff_container.update_debuffs()
 		meditating = false
 	
 	if not is_attacking and global_cooldown >= GLOBAL_INTERVAL and not dead:
@@ -153,7 +141,7 @@ func throw_minions():
 func shoot_fireball():
 	open_mouth()
 	var telegraph = TELEGRAPH.instantiate()
-	telegraph.damage = 20 + (controller.difficulty * 0.2)
+	telegraph.damage = damage + (controller.difficulty * 0.2)
 	telegraph.armor_penetration = 0
 	telegraph.duration = FIREBALL_TRAVEL_TIME
 	if dead:
@@ -188,7 +176,7 @@ func meditate():
 
 func slam():
 	animation_player.play("slam")
-	var ran = TestPlayer.global_position + Vector2(2000, randf_range( -400, 400))
+	var ran = TestPlayer.global_position + Vector2(2000, randf_range( -200, 200))
 	var shockwave = SHOCKWAVE.instantiate()
 	add_child(shockwave)
 	shockwave.chosen_pos = ran

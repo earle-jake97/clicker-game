@@ -1,32 +1,15 @@
 extends BaseEnemy
-signal died(enemy_node)
 var controller = PlayerController
-var player_model = TestPlayer
-@onready var debuff_container: HBoxContainer = $debuff_container
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var sprite: Node2D = $sprite
+
 const TELEGRAPH = preload("res://scenes/telegraph.tscn")
 const ZOMBIE = preload("res://sprites/enemies/zombie/zombie.tscn")
 const LIGHTNING_ATTACK = preload("res://sprites/enemies/evil_wizard/lightning_attack.tscn")
 const WALL_FIRE_DUO = preload("res://sprites/enemies/evil_wizard/wall_fire_duo.tscn")
 const MAGIC_MISSILE = preload("res://sprites/enemies/evil_wizard/magic_missile.tscn")
 @onready var cast_origin: Marker2D = $sprite/wand/cast_origin
-
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var shadow: Sprite2D = $shadow
 @export var zombie_count = 5
-var debuffs = []
 var previous_debuffs = []
 
-@export var health = 2000
-var max_health = 2000
-var bleed_stacks = 0
-var dead = false
-var paid_out = false
-var value = 200
-var death_timer = 0.0
 var armor = 50
 var attacking = false
 
@@ -48,9 +31,9 @@ var choose_position_timer = 0.0
 var choose_position_location = Vector2(0,0)
 var last_position = null
 
-var is_attacking = false
 
 func _ready() -> void:
+	animation_player = $AnimationPlayer
 	animation_player.animation_set_next("basic_attack", "idle")
 	animation_player.animation_set_next("lightning_attack", "idle")
 	animation_player.animation_set_next("raise_zombie", "idle")
@@ -89,14 +72,6 @@ func _process(delta: float) -> void:
 		animation_player.play("basic_attack")
 		shoot_magic_missile()
 	
-	if attacking:
-		firewall()
-	
-	if choose_position_timer >= 2.0:
-		choose_position_timer = 0
-		firewall_duration = -0.33
-		get_new_random_pos()
-	
 	if global_timer >= global_cooldown and not attacking:
 		global_timer = 0.0
 		var available_attacks = []
@@ -114,15 +89,16 @@ func _process(delta: float) -> void:
 				"zombies":
 					raise_zombies()
 				"lightning":
-					lightning_strike()
+					#lightning_strike()
+					raise_zombies()
 				"firewall":
-					animation_player.play("firewall")
-					attacking = true
-					firewall_full_cast = 0.0
-					firewall_duration = 0.0
-			
+					#animation_player.play("firewall")
+					#attacking = true
+					#firewall_full_cast = 0.0
+					#firewall_duration = 0.0
+					raise_zombies()
+
 	if dead:
-		shadow.visible = false
 		var color = modulate
 		color.a = max(color.a - delta * 0.5, 0.0)
 		modulate = color

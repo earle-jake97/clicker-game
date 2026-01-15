@@ -23,4 +23,4 @@ func _ready():
 
 func _process(delta: float) -> void:
 	global_position += random_vec * random_speed * delta
-	z_index = global_position.y + 6
+	z_index = global_position.y

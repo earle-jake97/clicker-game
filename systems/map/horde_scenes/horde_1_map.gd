@@ -33,5 +33,6 @@ func check_spawner_complete():
 	TestPlayer.visible = false
 	PlayerController.position = 2
 	GameState.on_map_screen = true
+	GameState.enemy_count = 0
 	GameState.horde_bool = false
 	SceneManager.switch_to_scene(MapView)

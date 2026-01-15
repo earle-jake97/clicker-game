@@ -1,50 +1,12 @@
 extends BaseEnemy
 
-
-signal died
-var player = PlayerController
-var speed: float
-@export var damage = 5
-@export var armor_penetration = 10
-var health: float
-@export var max_health: float
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@onready var debuff_container: HBoxContainer = $debuff_container
-@onready var progress_bar: TextureProgressBar = $ProgressBar
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var shadow: Sprite2D = $shadow
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite: Node2D = $sprite
 @onready var head: Sprite2D = $sprite/head
 @onready var head_anim: AnimationPlayer = $head_anim
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
-var debuffs = []
-
-var base_attack_speed = 1.0
-var bleed_stacks = 0
-var damage_cooldown = 0.0
-var touching_player = false
-var attack_duration = 0.0
-var is_attacking = false
-var reached_player = false
-var post_attack_delay = 0.0
-var waiting_after_attack = false
-var death_timer = 0.0
-var dead = false
-var paid_out = false
-var base_speed = 0
-var attack_speed
-var push_strength = 0.0
-var pushback_length = 2.0
-var pushback_timer = 0.0
-var is_pushed = false
-var target = TestPlayer
-var moving = true
 var rise_timer = 0.0
 
 func _ready() -> void:
+	base_attack_speed = 1.0
 	audio_stream_player_2d.pitch_scale = randf_range(0.8, 1.05)
 	health_bar.visible = false
 	max_health = PlayerController.difficulty * 35

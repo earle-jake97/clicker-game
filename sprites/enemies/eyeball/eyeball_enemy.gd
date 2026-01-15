@@ -1,50 +1,15 @@
 extends BaseEnemy
-
-
-signal died
-var player = PlayerController
-@export var min_speed: float
-@export var max_speed: float
-var speed: = 50
-@export var damage: int
-@export var armor_penetration: int
-var health: float
-@export var max_health: float
-@onready var health_bar: TextureProgressBar = $ProgressBar
-@export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
-@onready var debuff_container: HBoxContainer = $debuff_container
-@export var value_min: int
-@export var value_max: int
-@onready var progress_bar: TextureProgressBar = $ProgressBar
-@onready var damage_batcher: DamageBatcher = $Node2D/batcher
-@onready var shadow: Sprite2D = $container/shadow
-@onready var animation_player: AnimationPlayer = $container/AnimationPlayer
-@onready var sprite: Sprite2D = $container/sprite
 @onready var projectile_spawn: Marker2D = $container/projectile_spawn
-@onready var container: Node2D = $container
-
-
 const EYEBALL = preload("res://sprites/enemies/eyeball/eyeball.png")
 const EYEBALL_ATTACK = preload("res://sprites/enemies/eyeball/eyeball2.png")
 
 const EYEBALL_PROJECTILE = preload("res://sprites/enemies/eyeball/eyeball_projectile.tscn")
-var debuffs = []
-
-var bleed_stacks = 0
-var post_attack_delay = 0.0
-var death_timer = 0.0
-var dead = false
-var paid_out = false
-var value = 0
-var push_strength = 0.0
-var pushback_length = 2.0
-var pushback_timer = 0.0
-var is_pushed = false
-var is_attacking = false
 var attack_cooldown = 5.0
 var attack_timer = 3.0
 
 func _ready() -> void:
+	speed = 60
+	base_speed = speed
 	animation_player.animation_set_next("attack", "float")
 	value = randi_range(value_min, value_max)
 	health_bar.visible = false
@@ -57,7 +22,10 @@ func _process(delta: float) -> void:
 	look_at_player()
 	if attack_timer >= attack_cooldown and not is_attacking:
 		attack()
-
+	if is_attacking:
+		speed = base_speed/2
+	else:
+		speed = base_speed
 	if dead:
 		var color = sprite.modulate
 		shadow.visible = false
@@ -71,7 +39,7 @@ func _process(delta: float) -> void:
 		health_bar.visible = true
 
 	# Move toward player only if not waiting after attack
-	if player and not is_attacking and not dead and not is_pushed and not is_frozen:
+	if player and not dead and not is_pushed and not is_frozen:
 		var direction = TestPlayer.global_position - global_position
 		var distance = direction.length()
 		if distance != 0:
@@ -99,11 +67,6 @@ func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORM
 	health -= amount
 	health_bar.value = health
 	damage_batcher.add_damage(amount, damage_type)
-	
-func push_back(strength: float):
-	is_pushed = true
-	push_strength = strength
-	pushback_timer = 0.0
 
 func attack():
 	is_attacking = true

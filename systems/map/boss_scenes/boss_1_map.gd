@@ -4,17 +4,23 @@ extends Node2D
 
 const DEVIL_BOSS = preload("res://sprites/enemies/devil_boss/devil_boss.tscn")
 const EVIL_WIZARD = preload("res://sprites/enemies/evil_wizard/evil_wizard.tscn")
+@onready var marker_2d_2: Marker2D = $Positions/Marker2D2
+
 var boss
 var can_process = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var rand = randf()
+	TestPlayer.global_position = marker_2d_2.global_position
+	#var rand = randf()
+	var rand = 0.1
 	if rand <= 0.3:
 		boss = DEVIL_BOSS.instantiate()
 		boss.scale = Vector2(0.4, 0.4)
 	else:
 		boss = EVIL_WIZARD.instantiate()
 	boss.global_position = boss_spawn.global_position
+	boss.damage = 20
+	boss.health = 2500
 	boss.add_to_group("boss")
 	add_child(boss)
 	boss.died.connect(_on_boss_died)

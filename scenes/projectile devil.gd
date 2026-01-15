@@ -93,7 +93,7 @@ func launch_projectile():
 	var telegraph = telegraph_scene.instantiate()
 	telegraph.damage = 20
 	telegraph.armor_penetration = armor_penetration
-	chosen_position = player.global_position + Vector2(randf_range(-shot_precision, shot_precision), randf_range(-shot_precision, shot_precision))
+	chosen_position = player_model.global_position + Vector2(randf_range(-shot_precision, shot_precision), randf_range(-shot_precision, shot_precision))
 	telegraph.global_position = chosen_position
 	get_tree().current_scene.add_child(telegraph)
 	
@@ -130,7 +130,7 @@ func hop():
 	var ry = screen_size.y / 2 - margin
 
 	var angle := randf() * TAU
-	var center = player.global_position
+	var center = player_model.global_position
 
 	var spawn_pos := Vector2(
 		center.x + cos(angle) * rx,

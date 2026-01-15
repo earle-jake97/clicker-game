@@ -1,12 +1,12 @@
 extends BaseItem
 
 const item_name = "Siphoning Soul"
-const item_description = "Every attack heals you for 0.05% of your max HP."
+const item_description = "Every attack heals you for 0.2% of your max HP."
 var tags = ["heal"]
 var rarity = 3
 var item_icon = preload("res://items/icons/siphoning_soul.png")
 var file_name = "res://items/scripts/3/siphoning_soul"
-var base_heal_amount = 0.0005
+var base_heal_amount = 0.002
 
 func proc(enemy, any):
 	var count = 0

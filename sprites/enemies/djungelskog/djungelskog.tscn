@@ -11,7 +11,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("container/sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,7 +39,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("container/sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -67,7 +67,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +79,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("container/sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -95,7 +95,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("container/sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -107,7 +107,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("container/sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -132,38 +132,12 @@ size = Vector2(358, 404)
 texture_filter = 1
 script = ExtResource("1_3olan")
 
-[node name="shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.537255)
-z_as_relative = false
-position = Vector2(1, 165)
-scale = Vector2(0.306462, 0.422496)
-texture = ExtResource("3_nubhm")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vpkix")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_y6prf")
-}
-autoplay = "hit"
-
 [node name="debuff_container" type="HBoxContainer" parent="."]
 offset_left = 115.0
 offset_top = -241.0
 offset_right = 155.0
 offset_bottom = -201.0
 script = ExtResource("4_78pwv")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-13, -3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5, 4)
-shape = SubResource("RectangleShape2D_cw3qs")
-
-[node name="crosshair" type="Marker2D" parent="."]
-position = Vector2(-109, 25)
 
 [node name="cum_damage" type="Label" parent="."]
 offset_left = 3.0
@@ -174,3 +148,40 @@ theme_override_constants/outline_size = 14
 theme_override_fonts/font = ExtResource("6_dsfa8")
 theme_override_font_sizes/font_size = 42
 text = "0"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-71, 146, 108, 167, 130, 142, 109, -22, -56, -22, -113, 67)
+
+[node name="container" type="Node2D" parent="."]
+
+[node name="shadow" type="Sprite2D" parent="container"]
+modulate = Color(1, 1, 1, 0.537255)
+z_as_relative = false
+position = Vector2(1, 165)
+scale = Vector2(0.306462, 0.422496)
+texture = ExtResource("3_nubhm")
+
+[node name="sprite" type="Sprite2D" parent="container"]
+texture = ExtResource("1_vpkix")
+
+[node name="pivot" type="Marker2D" parent="container/sprite"]
+position = Vector2(-1, 123)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_y6prf")
+}
+autoplay = "hit"
+
+[node name="Area2D" type="Area2D" parent="container"]
+position = Vector2(-13, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+position = Vector2(5, 4)
+shape = SubResource("RectangleShape2D_cw3qs")
+
+[node name="crosshair" type="Marker2D" parent="container"]
+position = Vector2(-109, 25)

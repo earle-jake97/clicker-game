@@ -18,6 +18,7 @@ animations = [{
 radius = 15.6792
 
 [node name="Shockwave" type="Node2D"]
+z_as_relative = false
 script = ExtResource("1_ntc48")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

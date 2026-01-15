@@ -36,3 +36,5 @@ func reset_all():
 	current_world = 1
 	last_background 
 	scythe_amount = 0
+	horde_bool = false
+	enemy_count = 0

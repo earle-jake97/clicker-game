@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnv4t6agl2tpu"]
 
 [ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
+[ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="3_6pywe"]
 [ext_resource type="Script" path="res://systems/camera.gd" id="3_e7kda"]
-[ext_resource type="PackedScene" uid="uid://px47tge8r383" path="res://scenes/enemies/ghost.tscn" id="3_e8bxm"]
 
 [node name="Horde Map 1" type="Node2D"]
 texture_filter = 2
@@ -25,9 +25,21 @@ position = Vector2(168.143, 561.047)
 position = Vector2(542.942, 313.954)
 script = ExtResource("3_e7kda")
 
-[node name="ghost" parent="." instance=ExtResource("3_e8bxm")]
-position = Vector2(913.984, 432.171)
-min_speed = 100.0
-max_speed = 100.0
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(515.701, -300.388)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(-97.692, -54.2636)
+polygon = PackedVector2Array(0.939331, -8.72092, 448.068, -23.2558, 0, 298.45)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(43.6796, 85.7558)
+scale = Vector2(14.0432, 14.9709)
+polygon = PackedVector2Array(-9.93311, -10, 22.709, -11.2298, -10.0669, 10.5825)
+
+[node name="eyeball_enemy" parent="." instance=ExtResource("3_6pywe")]
+position = Vector2(1012.62, 595.93)
+min_speed = 111.0
+max_speed = 111.0
 damage = 1
-max_health = 1000.0
+max_health = 1111.0

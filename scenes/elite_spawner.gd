@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 func spawn_devil():
 	var enemy = enemy_scene.instantiate()
 	var sprite = enemy.find_child("sprite", 1, 1)
-	enemy.max_health = enemy_max_health
+	enemy.max_health = 3000
 	enemy.damage = enemy_damage
 	enemy.armor_penetration = enemy_max_armor_penetration
 	enemy.value_min = enemy_cash_value_min

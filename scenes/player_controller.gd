@@ -43,7 +43,6 @@ var last_enemy_attacked = null # For use in chain attacks
 var bleed_timer = 0
 var bleed_cooldown = 1
 
-
 func _ready():
 	luck = base_luck
 	clicks_per_second = base_clicks_per_second
@@ -94,71 +93,6 @@ func _process(delta: float) -> void:
 		Crosshair.target_enemy(get_nearest_enemy())
 	else:
 		Crosshair.hide_crosshair()
-
-func _physics_process(delta: float) -> void:
-	move_player()
-	
-	#if Input.is_action_pressed("Hold_Click"):
-		#if not hold_click_timer.is_stopped():
-			#return
-		#hold_click_timer.start()
-	#elif Input.is_action_just_released("Hold_Click"):
-		#hold_click_timer.stop()
-	#elif Input.is_action_just_pressed("Click"):
-		#attack()
-func move_player() -> void:
-	if TestPlayer.dead:
-		return
-
-	var dir := Vector2.ZERO
-
-	# Cardinal directions
-	if Input.is_action_pressed("up"):
-		dir.y -= 1
-	if Input.is_action_pressed("down"):
-		dir.y += 1
-	if Input.is_action_pressed("left"):
-		dir.x -= 1
-	if Input.is_action_pressed("right"):
-		dir.x += 1
-
-	# Normalize so diagonal isn't faster
-	if dir != Vector2.ZERO:
-		dir = dir.normalized()
-
-	# Move the player (no collision yet)
-	TestPlayer.global_position += dir * movement_speed * get_physics_process_delta_time()
-	
-	if dir != Vector2.ZERO:
-		var anim_speed = 1.0 + (movement_speed - 200.0) * 0.01
-		anim_speed = clamp(anim_speed, 2.0, 6.0)
-		player.animation_player.speed_scale = anim_speed
-		player.animation_player.play("walk")
-	else:
-		player.animation_player.speed_scale = 1.0
-		player.animation_player.play("idle")
-
-func move_player_old() -> void:
-	if Input.is_action_just_pressed("up") and not TestPlayer.dead:
-		position -= 1
-		if position >= 1:
-			player.animation_player.play("move_up")
-		dash_animation_timer = 0
-	elif Input.is_action_just_pressed("down") and not TestPlayer.dead:
-		position += 1
-		if position <= position_map.size():
-			player.animation_player.play("move_down")
-		dash_animation_timer = 0
-	if position < 1:
-		position = 1
-	elif position > position_map.size():
-		position = position_map.size()
-	
-	if not position_map.is_empty():
-		var pos_node = position_map[position-1]
-		if pos_node and is_instance_valid(pos_node):
-			player.global_position = pos_node.global_position
-
 	
 func attack() -> void:
 	var closest_enemy = null
@@ -172,10 +106,6 @@ func attack() -> void:
 				closest_enemy = node
 
 	if closest_enemy:
-		if closest_enemy.global_position.x < TestPlayer.global_position.x:
-			TestPlayer.scale.x = -abs(TestPlayer.scale.x)
-		else:
-			TestPlayer.scale.x = abs(TestPlayer.scale.x)
 		last_enemy_attacked = closest_enemy
 		var result = calculate_damage()
 		closest_enemy.take_damage(result.damage, result.crit)
@@ -386,7 +316,7 @@ func reset_to_defaults():
 	PauseMenu.update_labels()
 	reset.emit()
 	free_items()
-	SceneManager.switch_to_scene("res://start_scene.tscn")
+	SceneManager.switch_to_scene("res://map/map_view.tscn")
 	
 
 

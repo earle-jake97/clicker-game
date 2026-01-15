@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://uwkrine8svdd"]
+[gd_scene load_steps=7 format=3 uid="uid://uwkrine8svdd"]
 
 [ext_resource type="Script" path="res://systems/map/boss_scenes/boss_1_map.gd" id="1_45nq4"]
 [ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="2_cx4q6"]
-[ext_resource type="Script" path="res://systems/camera.gd" id="3_knllw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqb8a"]
+size = Vector2(1125, 173.76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bqso"]
+size = Vector2(25.0295, 652.442)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0d4t"]
+size = Vector2(30.6656, 660.194)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce0kq"]
+size = Vector2(1165.4, 89.3024)
 
 [node name="boss1" type="Node2D"]
 texture_filter = 1
@@ -32,5 +43,25 @@ position = Vector2(168.143, 561.047)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(542.942, 313.954)
-zoom = Vector2(0.75, 0.75)
-script = ExtResource("3_knllw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(552.502, 76.8798)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_rqb8a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3.75739, 322.674)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_7bqso")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1077.43, 358.527)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_h0d4t")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(557.032, 669.574)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ce0kq")

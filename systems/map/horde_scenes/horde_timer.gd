@@ -4,8 +4,10 @@ var spawners = []
 const MapView = "res://map/map_view.tscn"
 @onready var timer: Timer = $Timer
 @onready var label: Label = $Label
+@onready var marker_2d: Marker2D = $Positions/Marker2D
 
 func _ready() -> void:
+	TestPlayer.global_position = marker_2d.global_position
 	GameState.on_map_screen = false
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false

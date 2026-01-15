@@ -1,17 +1,12 @@
 extends BaseEnemy
 var damage_accumulated = 0
 var total_damage = 0
-var debuffs = []
-@onready var debuff_container: HBoxContainer = $debuff_container
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @onready var area_2d: Area2D = $Area2D
 @onready var cum_damage: Label = $cum_damage
 const MONEY_PARTICLE = preload("res://systems/money_particle.tscn")
 const DAMAGE_THRESHOLD = 50.0
-@onready var sprite_2d: Sprite2D = $Sprite2D
-var max_health = 500
-var health = 500
-var bleed_stacks = 0
+@onready var pivot: Marker2D = $container/sprite/pivot
 
 
 
@@ -19,9 +14,9 @@ var bleed_stacks = 0
 func _ready() -> void:
 	max_health = max_health * PlayerController.difficulty
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	z_index = pivot.global_position.y
 	cum_damage.text = str(format_large_number(total_damage))
 	if damage_accumulated >= DAMAGE_THRESHOLD:
 		damage_accumulated -= DAMAGE_THRESHOLD
@@ -58,7 +53,8 @@ func format_large_number(number: int) -> String:
 
 func spawn_money():
 	var money = MONEY_PARTICLE.instantiate()
-	money.global_position = sprite_2d.global_position + Vector2(-50, 0)
+	money.z_index = 1000
+	money.global_position = sprite.global_position + Vector2(-50, 0)
 	get_tree().current_scene.add_child(money)
 
 func apply_debuff():
