@@ -1380,8 +1380,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfmcr"]
-radius = 22.0
-height = 70.6667
+radius = 20.0
+height = 40.0
 
 [node name="Node2D" type="CharacterBody2D" groups=["main", "player"]]
 scale = Vector2(0.75, 0.75)
@@ -1444,5 +1444,5 @@ libraries = {
 autoplay = "walk_left"
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-1.33333, -32.6667)
+position = Vector2(0, -18.6667)
 shape = SubResource("CapsuleShape2D_lfmcr")

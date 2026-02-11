@@ -8,8 +8,6 @@ const MONEY_PARTICLE = preload("res://systems/money_particle.tscn")
 const DAMAGE_THRESHOLD = 50.0
 @onready var pivot: Marker2D = $container/sprite/pivot
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	max_health = max_health * PlayerController.difficulty
@@ -24,7 +22,7 @@ func _process(delta: float) -> void:
 		for i in range(3):
 			spawn_money()
 
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
+func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL, source: String = ""):
 	damage_accumulated += amount
 	total_damage += amount
 	if amount < 50:

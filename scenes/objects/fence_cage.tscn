@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2ffjb3qiuqri"]
+
+[ext_resource type="Script" path="res://scenes/objects/static_object.gd" id="1_s35o2"]
+[ext_resource type="PackedScene" uid="uid://c1gqhl4hiqpaa" path="res://scenes/objects/single_fence_vertical.tscn" id="1_tvg8f"]
+[ext_resource type="PackedScene" uid="uid://b27u6q3rq3lvs" path="res://scenes/objects/fence_long_broken.tscn" id="2_jj5v3"]
+
+[node name="fence_cage" type="Node2D"]
+z_as_relative = false
+texture_filter = 1
+
+[node name="fence_long_broken2" parent="." instance=ExtResource("2_jj5v3")]
+position = Vector2(-1, -506)
+
+[node name="Single Fence5" parent="." instance=ExtResource("1_tvg8f")]
+position = Vector2(-155, -374)
+script = ExtResource("1_s35o2")
+
+[node name="Single Fence6" parent="." instance=ExtResource("1_tvg8f")]
+position = Vector2(700, -377)
+script = ExtResource("1_s35o2")
+
+[node name="Single Fence3" parent="." instance=ExtResource("1_tvg8f")]
+position = Vector2(-155, -237)
+script = ExtResource("1_s35o2")
+
+[node name="Single Fence4" parent="." instance=ExtResource("1_tvg8f")]
+position = Vector2(700, -244)
+script = ExtResource("1_s35o2")
+
+[node name="Single Fence" parent="." instance=ExtResource("1_tvg8f")]
+position = Vector2(-155, -101)
+script = ExtResource("1_s35o2")
+
+[node name="Single Fence2" parent="." instance=ExtResource("1_tvg8f")]
+position = Vector2(700, -108)
+script = ExtResource("1_s35o2")
+
+[node name="fence_long_broken" parent="." instance=ExtResource("2_jj5v3")]

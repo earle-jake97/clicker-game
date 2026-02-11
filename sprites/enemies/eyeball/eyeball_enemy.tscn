@@ -197,3 +197,5 @@ position = Vector2(10, -103)
 
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("6_ob0hh")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

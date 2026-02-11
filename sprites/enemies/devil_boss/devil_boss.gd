@@ -3,7 +3,6 @@ var controller = PlayerController
 @onready var minion_ball: Node2D = $container/sprite/Minion_ball
 @onready var head: Sprite2D = $container/sprite/Head_Node/Head
 @onready var animation_player_head: AnimationPlayer = $container/sprite/Head_Node/Head/AnimationPlayer
-@onready var label: Label = $Label
 
 const DIVING_MINION = preload("res://sprites/enemies/devil/diving_minion.tscn")
 const SHOCKWAVE = preload("res://sprites/enemies/devil_boss/shockwave.tscn")
@@ -54,18 +53,11 @@ func _ready() -> void:
 	health_bar.max_value = max_health
 	health_bar.value = health
 
-
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
-	health -= amount
-	health_bar.value = health
-	show_damage_number(amount, damage_type)
-
 func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
 	damage_batcher.add_damage(amount, damage_type)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	label.text = "hp: " + str(health)
 	z_index = pivot.global_position.y
 	mouth_timer += delta
 	if health <= max_health/2:

@@ -23,4 +23,4 @@ func _ready():
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	enemy = area.get_parent()
 	if enemy.has_method("take_damage"):
-			enemy.take_damage(round(explosion_damage), DamageBatcher.DamageType.NORMAL)
+			enemy.take_damage(round(explosion_damage), DamageBatcher.DamageType.NORMAL, "Oil Explosion")

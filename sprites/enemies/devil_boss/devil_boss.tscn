@@ -1705,24 +1705,23 @@ max_health = 10000.0
 [node name="debuff_container" type="HBoxContainer" parent="."]
 texture_filter = 2
 texture_repeat = 1
-offset_left = 162.0
-offset_top = -448.0
-offset_right = 202.0
-offset_bottom = -408.0
-scale = Vector2(3, 3)
+offset_left = 68.0
+offset_top = -210.0
+offset_right = 108.0
+offset_bottom = -170.0
 script = ExtResource("2_pc16v")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
-offset_left = -162.0
-offset_top = -447.0
-offset_right = -2.0
-offset_bottom = -415.0
-scale = Vector2(2, 2)
+offset_left = -99.0
+offset_top = -208.0
+offset_right = 61.0
+offset_bottom = -176.0
 texture_under = ExtResource("9_5dash")
 texture_progress = ExtResource("10_4pgjm")
 
 [node name="container" type="Node2D" parent="."]
+scale = Vector2(0.4, 0.4)
 
 [node name="shadow" type="Sprite2D" parent="container"]
 modulate = Color(1, 1, 1, 0.537255)
@@ -1785,22 +1784,22 @@ position = Vector2(1253, 316)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(6, 53)
+scale = Vector2(0.52, 0.44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 position = Vector2(41, 6)
 shape = SubResource("CircleShape2D_s526b")
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(137, -184)
+position = Vector2(-280, -182)
 
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("12_dcpko")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 257.0
-offset_top = -400.0
-offset_right = 297.0
-offset_bottom = -377.0
-scale = Vector2(6.09183, 6.52628)
-text = "hp: 0"
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(296, -283)
+polygon = PackedVector2Array(-111, 459, -456, 457, -409, 417, -158, 403)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

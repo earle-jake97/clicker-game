@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://b27u6q3rq3lvs"]
+
+[ext_resource type="Texture2D" uid="uid://bbmy77rixxvic" path="res://sprites/scenery/fence_broken_left.png" id="1_qxauw"]
+[ext_resource type="Script" path="res://scenes/objects/static_object.gd" id="1_wj7bk"]
+[ext_resource type="Texture2D" uid="uid://cuh7u72fpmrld" path="res://sprites/scenery/fence_broken_right.png" id="2_r3dtc"]
+
+[node name="fence_long_broken" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_wj7bk")
+
+[node name="left" type="Sprite2D" parent="."]
+position = Vector2(0, -29)
+texture = ExtResource("1_qxauw")
+
+[node name="right" type="Sprite2D" parent="."]
+position = Vector2(552, -29)
+texture = ExtResource("2_r3dtc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -34)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-163, 50, -162, 11, 140, 13, 140, 49)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+visible = false
+position = Vector2(0, -34)
+vertices = PackedVector2Array(-163, 50, -162, 11, 143, 9, 143, 51)
+avoidance_enabled = false
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(563, -30)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(-162, 48, -162, 11, 144, 13, 145, 48)
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="."]
+visible = false
+position = Vector2(566, -31)
+vertices = PackedVector2Array(-163, 50, -162, 11, 143, 9, 143, 51)
+avoidance_enabled = false

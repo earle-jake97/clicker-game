@@ -23,6 +23,7 @@ var health: float
 @onready var animation_player: AnimationPlayer = $container/AnimationPlayer
 @onready var container: Node = $container
 @onready var sprite: Node2D = $container/sprite
+@onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 var guarantee_hit = false
 var debuffs = []
 var touching_entity: Node = null
@@ -110,13 +111,14 @@ func health_below_zero():
 
 func die():
 	dead = true
+	damage_batcher.clear_all()
 	progress_bar.hide()
 	debuff_container.hide()
 	remove_from_group("enemy")
 	animation_player.play("die")
 	died.emit()
 
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
+func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL, source: String = ""):
 	health -= amount
 	health_bar.value = health
 	damage_batcher.add_damage(amount, damage_type)
@@ -157,3 +159,23 @@ func attack_check():
 func process_attack_check(delta):
 	if is_attacking and not dead:
 		process_attack(delta)
+
+func move_towards_target(delta):
+	# Move toward player only if not waiting after attack
+	if player and not is_attacking and post_attack_delay <= 0.01 and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
+		
+		nav2d.target_position = target.global_position
+		
+		var next_position = nav2d.get_next_path_position()
+		if next_position != Vector2.ZERO:
+			global_position = global_position.move_toward(next_position, speed * delta)
+
+func move_towards_target_flying(delta):
+	# Move toward player only if not waiting after attack
+	if player and not is_attacking and post_attack_delay <= 0.01 and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
+		
+		nav2d.target_position = target.global_position
+		
+		var next_position = nav2d.get_next_path_position()
+		if next_position != Vector2.ZERO:
+			global_position = global_position.move_toward(next_position, speed * delta)

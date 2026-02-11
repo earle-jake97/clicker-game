@@ -63,11 +63,6 @@ func _process(delta: float) -> void:
 	if is_attacking and not dead:
 		process_attack(delta)
 
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
-	health -= amount
-	health_bar.value = health
-	damage_batcher.add_damage(amount, damage_type)
-
 func start_attack():
 	animation_player.play("attack")
 

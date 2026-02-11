@@ -62,12 +62,6 @@ func _process(delta: float) -> void:
 
 	z_index = round(global_position.y)
 
-
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
-	health -= amount
-	health_bar.value = health
-	damage_batcher.add_damage(amount, damage_type)
-
 func attack():
 	is_attacking = true
 	if not dead:

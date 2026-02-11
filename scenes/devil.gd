@@ -21,6 +21,7 @@ func _ready() -> void:
 	if SoundManager.imp_spawn_sound():
 		audio_stream_player_2d.pitch_scale = pitch_scale
 		audio_stream_player_2d.play()
+	nav2d.target_position = player_model.global_position
 
 func _physics_process(delta: float) -> void:
 	check_touch()
@@ -43,8 +44,7 @@ func _physics_process(delta: float) -> void:
 			post_attack_delay = 0.0
 
 	# Move toward player only if not waiting after attack
-	elif player and not is_attacking and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
-		global_position = global_position.move_toward(target.global_position, speed * delta)
+	move_towards_target(delta)
 
 	health_below_zero()
 

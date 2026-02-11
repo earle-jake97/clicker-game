@@ -41,7 +41,7 @@ func proc(target: Node, source_item: BaseItem = null):
 					nearest = enemy
 
 		if nearest:
-			nearest.take_damage(round(player.calculate_damage().damage * 0.05))
+			nearest.take_damage(round(player.calculate_damage().damage * 0.05), DamageBatcher.DamageType.NORMAL, "Thunderbolt")
 			if player and player.has_method("proc_items"):
 				var rand = PlayerController.calculate_luck()
 				if rand <= 0.2:

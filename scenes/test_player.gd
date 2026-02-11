@@ -76,6 +76,7 @@ func _physics_process(delta: float) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	speed = PlayerController.movement_speed
 	face_enemy()
 	
 	if PlayerController.clicks_per_second >= 20:
@@ -124,7 +125,6 @@ func reset_player_model():
 
 func face_enemy():
 	if not PlayerController.get_nearest_enemy():
-		print("Returning")
 		return
 	var enemy_pos = PlayerController.get_nearest_enemy().global_position
 	if enemy_pos.x < global_position.x:

@@ -77,11 +77,6 @@ func _physics_process(delta: float) -> void:
 		attack_timer = 0.0
 		launch_projectile()
 
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
-	health -= amount
-	health_bar.value = health
-	show_damage_number(amount, damage_type)
-
 func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
 	damage_batcher.add_damage(amount, damage_type)
 

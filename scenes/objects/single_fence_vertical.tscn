@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1gqhl4hiqpaa"]
+
+[ext_resource type="Texture2D" uid="uid://peeqic0fn3ut" path="res://sprites/scenery/fence_vertical.png" id="2_bwqup"]
+
+[node name="Single Fence" type="Node2D"]
+z_as_relative = false
+texture_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -34)
+texture = ExtResource("2_bwqup")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -34)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-8, 111, -9, -112, 9, -112, 9, 111)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+visible = false
+position = Vector2(0, -34)
+vertices = PackedVector2Array(-6, 111, -7, -113, 8, -113, 9, 111)
+avoidance_enabled = false

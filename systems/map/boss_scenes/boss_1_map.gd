@@ -15,7 +15,6 @@ func _ready() -> void:
 	var rand = 0.1
 	if rand <= 0.3:
 		boss = DEVIL_BOSS.instantiate()
-		boss.scale = Vector2(0.4, 0.4)
 	else:
 		boss = EVIL_WIZARD.instantiate()
 	boss.global_position = boss_spawn.global_position

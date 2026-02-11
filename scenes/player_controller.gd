@@ -108,20 +108,20 @@ func attack() -> void:
 	if closest_enemy:
 		last_enemy_attacked = closest_enemy
 		var result = calculate_damage()
-		closest_enemy.take_damage(result.damage, result.crit)
+		closest_enemy.take_damage(result.damage, result.crit, "Player Attack")
 		proc_items(closest_enemy)
 
 func attack_specific_enemy(enemy, damage_multiplier: float = 1.0, damage_type = DamageBatcher.DamageType.NORMAL):
 	var result = calculate_damage(damage_type, damage_multiplier)
 	if enemy:
-		enemy.take_damage(result.damage, result.crit)
+		enemy.take_damage(result.damage, result.crit, "Player Attack")
 		proc_items(enemy)
 
 func attack_all_enemies():
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		last_enemy_attacked = enemy
 		var result = calculate_damage()
-		enemy.take_damage(result.damage, result.crit)
+		enemy.take_damage(result.damage, result.crit, "Player Global Attack")
 		proc_items(enemy)
 
 func get_nearest_enemy():
@@ -170,7 +170,6 @@ func add_item(item: BaseItem):
 	
 	if item.item_name == "Shielding Scythe":
 		GameState.scythe_amount += 1
-	print("Scythes: " + str(GameState.scythe_amount))
 
 func update_modifiers():
 	additional_dmg = 0
@@ -340,7 +339,7 @@ func timed_bleed():
 			if "bleed_tick" in item:
 				bleed_dmg += item.bleed_tick
 	for enemy in get_tree().get_nodes_in_group("enemy"):
-		enemy.take_damage(enemy.bleed_stacks * bleed_dmg, DamageBatcher.DamageType.BLEED)
+		enemy.take_damage(enemy.bleed_stacks * bleed_dmg, DamageBatcher.DamageType.BLEED, "Bleed Stack Damage")
 
 func free_items():
 	for item in processed_items:

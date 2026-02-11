@@ -17,6 +17,6 @@ func proc(target: Node, source_item: BaseItem = null):
 
 	var ran = PlayerController.calculate_luck()
 	if ran <= 0.1:
-		target.take_damage(player.calculate_damage().damage * 2)
+		target.take_damage(player.calculate_damage().damage * 2, DamageBatcher.DamageType.NORMAL, "Test Item 2x multiplier")
 	elif ran <= 0.25:
-		target.take_damage(player.calculate_damage().damage * 1.5)
+		target.take_damage(player.calculate_damage().damage * 1.5, DamageBatcher.DamageType.NORMAL, "Test Item 1.5x multiplier")

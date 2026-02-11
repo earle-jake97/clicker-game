@@ -18,7 +18,7 @@ func proc(target: Node, source_item: BaseItem = null):
 		return
 	
 	var damage = health_percentage * PlayerController.max_hp
-	target.take_damage(damage)
+	target.take_damage(damage, DamageBatcher.DamageType.NORMAL, "Bloody Syringe")
 
 func get_flat_hp():
 	return health

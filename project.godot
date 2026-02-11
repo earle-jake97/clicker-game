@@ -114,6 +114,11 @@ right={
 ]
 }
 
+[layer_names]
+
+2d_navigation/layer_1="Global(Stop ALL Enemies)"
+2d_navigation/layer_2="Walkers only"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

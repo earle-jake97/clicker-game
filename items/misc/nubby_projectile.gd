@@ -55,7 +55,7 @@ func _process(delta):
 		# Safe check before accessing target
 		if is_instance_valid(target) and target.is_inside_tree():
 			if target.has_method("take_damage") and target.health > 0:
-				target.take_damage(round(damage), crit)
+				target.take_damage(round(damage), crit, "Nubby Projectile")
 				if player and player.has_method("proc_items"):
 					player.proc_items(target)
 

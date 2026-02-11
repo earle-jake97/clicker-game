@@ -23,4 +23,4 @@ func proc(target: Node, source_item: BaseItem = null):
 			occurrences += 1
 	
 	var damage = occurrences * health_percentage * target.health + 1
-	target.take_damage(damage)
+	target.take_damage(damage, DamageBatcher.DamageType.NORMAL, "Contaminated Syringe")

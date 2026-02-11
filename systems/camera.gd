@@ -29,3 +29,6 @@ func _physics_process(delta: float) -> void:
 
 	# --- 4. Store player position for next frame
 	last_player_position = TestPlayer.global_position
+
+func reset_to_zero():
+	global_position = Vector2.ZERO

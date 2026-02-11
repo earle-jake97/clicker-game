@@ -648,5 +648,7 @@ position = Vector2(-58, -65)
 [node name="batcher" type="Node" parent="Node2D"]
 script = ExtResource("8_m1l0c")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
 [connection signal="area_entered" from="container/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="container/Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3a27u3lux2si"]
+
+[ext_resource type="Texture2D" uid="uid://dbrsf8omcq75m" path="res://sprites/scenery/fence.png" id="1_bilxa"]
+[ext_resource type="Script" path="res://scenes/objects/static_object.gd" id="1_dxtuf"]
+
+[node name="Single Fence" type="Node2D"]
+z_as_relative = false
+texture_filter = 1
+script = ExtResource("1_dxtuf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -34)
+texture = ExtResource("1_bilxa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -34)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-89, 47, -89, 13, 90, 13, 90, 47)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -34)
+vertices = PackedVector2Array(-97, 50, -97, 10, 102, 10, 102, 50)
+avoidance_enabled = false

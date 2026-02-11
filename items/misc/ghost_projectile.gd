@@ -46,4 +46,4 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if enemy.is_in_group("enemy") and enemy.has_method("take_damage"):
 		var result = player.calculate_damage()
 		var damage = result.damage * damage_multiplier
-		enemy.take_damage(damage, result.crit)
+		enemy.take_damage(damage, result.crit, "Lost Soul Projectile")

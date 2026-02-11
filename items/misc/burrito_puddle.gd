@@ -42,7 +42,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 func damage_all_enemies():
 	for enemy in enemy_list.keys():
 		if enemy.has_method("take_damage"):
-			enemy.take_damage(puddle_damage, DamageBatcher.DamageType.BLEED)
+			enemy.take_damage(puddle_damage, DamageBatcher.DamageType.BLEED, "Burrito Puddle")
 		#else:
 			#to_remove.append(enemy)
 	#for enemy in to_remove:

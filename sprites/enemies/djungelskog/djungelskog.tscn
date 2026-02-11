@@ -185,3 +185,5 @@ shape = SubResource("RectangleShape2D_cw3qs")
 
 [node name="crosshair" type="Marker2D" parent="container"]
 position = Vector2(-109, 25)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

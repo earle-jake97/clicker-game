@@ -22,5 +22,5 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_parent().has_method("take_damage") and area.get_parent().is_in_group("enemy"):
-		area.get_parent().take_damage(PlayerController.calculate_damage().damage, DamageBatcher.DamageType.NORMAL)
+		area.get_parent().take_damage(PlayerController.calculate_damage().damage, DamageBatcher.DamageType.NORMAL, "Scrimblo Projectile")
 		queue_free()

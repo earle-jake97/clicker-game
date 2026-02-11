@@ -47,7 +47,12 @@ func register_items():
 		preload("res://items/scripts/3/headtaker.gd"),
 		preload("res://items/scripts/2/scythe.gd"),
 		preload("res://items/scripts/3/scrimblo.gd"),
-		preload("res://items/scripts/1/sus_shroom.gd")
+		preload("res://items/scripts/1/sus_shroom.gd"),
+		preload("res://items/scripts/4/speedy_shoe.gd"),
+		preload("res://items/scripts/2/exotic_feather.gd"),
+		preload("res://items/scripts/1/moldy_boot.gd"),
+		preload("res://items/scripts/3/fossilized_tooth.gd"),
+		preload("res://items/scripts/1/needles.gd"),
 		# preload more items here...
 	]
 	hearts = [
@@ -79,7 +84,6 @@ func get_starter_items():
 	if starter_items.is_empty():
 		return null
 	return starter_items.pop_back()
-
 
 func get_random_heart_by_rarity(rarity: int):
 	var filtered = hearts.filter(func(i): return i.new().rarity == rarity)

@@ -61,7 +61,6 @@ func is_alive():
 		return false
 
 func shoot_projectile():
-	print("Shooting")
 	var proj = SCRIMBLO_PROJECTILE.instantiate()
 	var target = get_closest_enemy()
 	if not is_instance_valid(target):

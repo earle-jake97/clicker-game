@@ -31,6 +31,7 @@ var all_nodes: Array[Node2D] = []
 var layer_nodes = []  # <-- untyped to avoid nested typed collection error
 
 func _ready() -> void:
+	PauseMenu.update_labels()
 	TestPlayer.visible = false
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
@@ -432,9 +433,6 @@ func spawn_decorations(
 			add_child(sprite)
 			placed = true
 			break  # Go to next decoration
-
-		if not placed:
-			print("Could not place decoration after multiple tries.")
 
 func load_decorative_textures_from_folder(folder_path: String):
 	var dir = DirAccess.open(folder_path)

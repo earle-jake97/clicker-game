@@ -68,11 +68,6 @@ func _physics_process(delta: float) -> void:
 	attack_check()
 	process_attack_check(delta)
 
-func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
-	health -= amount
-	health_bar.value = health
-	damage_batcher.add_damage(amount, damage_type)
-
 func start_attack():
 	if reached_player:
 		guarantee_hit = true
