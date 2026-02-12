@@ -16,10 +16,14 @@ func starter_proc(target: Node, source_item: BaseItem = null):
 	
 	if not tree:
 		return
-
+	var result = {
+		"damage": damage,
+		"crit": false
+	}
+	
 	target = seek_strongest_enemy()
 	if target != null:
-		target.take_damage(damage, DamageBatcher.DamageType.NORMAL, "Splitshot")
+		player.spawn_slingshot_projectile(target, result, 0.5, "Splitshot", false)
 
 
 func seek_strongest_enemy():

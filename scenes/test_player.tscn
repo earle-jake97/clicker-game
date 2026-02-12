@@ -1427,6 +1427,9 @@ animation = &"idle"
 autoplay = "default"
 offset = Vector2(16.6667, 8.33334)
 
+[node name="slingshot_origin" type="Marker2D" parent="sprite/body/arms" unique_id=881114549]
+position = Vector2(39.333336, 0)
+
 [node name="head" type="Sprite2D" parent="sprite/body" unique_id=772031956]
 position = Vector2(0, -20.8333)
 texture = ExtResource("6_p6n45")

@@ -14,6 +14,8 @@ const BODY_NORMAL = preload("res://sprites/test_player/body.png")
 @onready var arms: AnimatedSprite2D = $sprite/body/arms
 @onready var body: Sprite2D = $sprite/body
 @onready var shadow: Sprite2D = $shadow
+@onready var slingshot_origin: Marker2D = $sprite/body/arms/slingshot_origin
+
 @export var base_speed := 180.0
 var speed := base_speed
 var facing_right = true
@@ -95,6 +97,7 @@ func _process(delta: float) -> void:
 	var percentage = float(player.current_hp) / player.max_hp
 	if player.current_hp <= 0:
 		dead = true
+		PlayerController.dead = true
 		shadow.visible = false
 		arms.play("die")
 		animation_player.play("die")
@@ -135,3 +138,6 @@ func face_enemy():
 		return false
 	else:
 		return true
+
+func get_sling_position():
+	return slingshot_origin.global_position

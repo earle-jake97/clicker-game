@@ -46,6 +46,7 @@ var last_enemy_attacked = null # For use in chain attacks
 var bleed_timer = 0
 var bleed_cooldown = 1
 var attacking = false
+var dead = false
 
 func _ready():
 	luck = base_luck
@@ -103,6 +104,8 @@ func _process(delta: float) -> void:
 		Crosshair.hide_crosshair()
 	
 func attack() -> void:
+	if dead:
+		return
 	var closest_enemy = null
 	var shortest_distance = INF
 	
@@ -116,16 +119,19 @@ func attack() -> void:
 	if closest_enemy:
 		last_enemy_attacked = closest_enemy
 		var result = calculate_damage()
-		closest_enemy.take_damage(result.damage, result.crit, "Player Attack")
-		proc_items(closest_enemy)
+		spawn_slingshot_projectile(closest_enemy, result)
 
 func attack_specific_enemy(enemy, damage_multiplier: float = 1.0, damage_type = DamageBatcher.DamageType.NORMAL):
+	if dead:
+		return
 	var result = calculate_damage(damage_type, damage_multiplier)
 	if enemy:
 		enemy.take_damage(result.damage, result.crit, "Player Attack")
 		proc_items(enemy)
 
 func attack_all_enemies():
+	if dead:
+		return
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		last_enemy_attacked = enemy
 		var result = calculate_damage()
@@ -145,6 +151,8 @@ func get_nearest_enemy():
 
 
 func attack_nearest_enemy(last_attacked_enemy: Node) -> void:
+	if dead:
+		return
 	if last_attacked_enemy:  # Only proceed if there's a valid enemy
 		var nearest_enemy = null
 		var shortest_distance = INF
@@ -303,6 +311,7 @@ func get_block_chance():
 func reset_to_defaults():
 	difficulty = 0
 	inventory.clear()
+	
 	hold_click_timer.start()
 	cash = 0
 	passive_regen = 1.0
@@ -314,10 +323,11 @@ func reset_to_defaults():
 	movement_speed = base_movement_speed
 	update_modifiers()
 	HealthBar.dead = false
+	dead = false
 	ItemDatabase.reset_items()
 	TestPlayer.reset_player_model()
 	GameState.reset_all()
-	MapState.reset_map()
+	MapManager.reset_defaults()
 	PauseMenu.update_inventory_display()
 	PauseMenu.update_labels()
 	reset.emit()
@@ -369,3 +379,22 @@ func get_enemies_in_range(center: Vector2):
 			in_range.append(enemy)
 
 	return in_range
+
+func spawn_slingshot_projectile(target, result, size: float = 1.0, damage_source: String = "Player Attack", can_proc: bool = true):
+	var projectile_scene = preload("res://characters/goblin/slingshot_projectile.tscn")
+	var projectile = projectile_scene.instantiate()
+	projectile.global_position = player.get_sling_position()
+	var target_position = target.global_position 
+	if target.find_child("pivot", 1, 1):
+		target_position = target.find_child("pivot", 1, 1).global_position
+	target_position += Vector2(randf_range(-30, 30), randf_range(-30, 30))
+	projectile.target_position = target_position
+	projectile.scale *= size
+	projectile.on_reach = Callable(self, "_deal_damage_to_enemy").bind(target, result, damage_source, can_proc)
+	get_tree().current_scene.add_child(projectile)
+
+func _deal_damage_to_enemy(enemy, damage_result, damage_source: String = "Player Attack", can_proc: bool = true):
+	if enemy and enemy.is_inside_tree():
+		enemy.take_damage(damage_result.damage, damage_result.crit, damage_source)
+		if can_proc:
+			proc_items(enemy)

@@ -29,3 +29,7 @@ var category_to_types = {
 
 func pick_room_for_category(category: RoomCategory):
 	return category_to_types[category].pick_random()
+
+func reset_defaults():
+	round = 1
+	world = 1
