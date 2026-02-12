@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		if GameState.endless_mode:
 			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
 		else:
-			SceneManager.switch_to_scene("res://map/map_view.tscn")
+			SceneManager.switch_to_scene("res://map/map_scene.tscn")
 
 	hands.texture = WOKE if PlayerController.cash > lowest_price else BROKE
 

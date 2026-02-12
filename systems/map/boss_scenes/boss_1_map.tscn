@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://uwkrine8svdd"]
+[gd_scene format=3 uid="uid://uwkrine8svdd"]
 
-[ext_resource type="Script" path="res://systems/map/boss_scenes/boss_1_map.gd" id="1_45nq4"]
+[ext_resource type="Script" uid="uid://bnte053grbry0" path="res://systems/map/boss_scenes/boss_1_map.gd" id="1_45nq4"]
 [ext_resource type="Texture2D" uid="uid://dre2a1qa28yar" path="res://backgrounds/1_hell.png" id="2_cx4q6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rqb8a"]
@@ -15,49 +15,57 @@ size = Vector2(30.6656, 660.194)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce0kq"]
 size = Vector2(1165.4, 89.3024)
 
-[node name="boss1" type="Node2D"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_g0e5y"]
+vertices = PackedVector2Array(1084.3828, 637.28906, 5.2578125, 637.28906, 3.4375, 154.60156, 16.359375, 148.53125, 1086.1797, 138)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(14.090197, 138.56589, 1096.2173, 127.906975, 1094.3386, 647.2868, -4.696732, 647.2868, -6.575425, 148.25581)])
+
+[node name="boss1" type="Node2D" unique_id=1001497368]
 texture_filter = 1
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_45nq4")
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="." unique_id=1744973426]
 z_index = -100
 position = Vector2(543, 311.922)
 scale = Vector2(0.96, 0.844961)
 texture = ExtResource("2_cx4q6")
 
-[node name="boss_spawn" type="Marker2D" parent="."]
+[node name="boss_spawn" type="Marker2D" parent="." unique_id=2044831634]
 position = Vector2(887.682, 328.488)
 
-[node name="Positions" type="Node2D" parent="."]
+[node name="Positions" type="Node2D" parent="." unique_id=1309778841]
 position = Vector2(-7.51477, 2.38419e-07)
 
-[node name="Marker2D" type="Marker2D" parent="Positions"]
+[node name="Marker2D" type="Marker2D" parent="Positions" unique_id=1234954875]
 position = Vector2(135.266, 299.419)
 
-[node name="Marker2D2" type="Marker2D" parent="Positions"]
+[node name="Marker2D2" type="Marker2D" parent="Positions" unique_id=217079745]
 position = Vector2(149.356, 432.171)
 
-[node name="Marker2D3" type="Marker2D" parent="Positions"]
+[node name="Marker2D3" type="Marker2D" parent="Positions" unique_id=517037413]
 position = Vector2(168.143, 561.047)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=848155674]
 position = Vector2(542.942, 313.954)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1263813913]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=884926088]
 position = Vector2(552.502, 76.8798)
 shape = SubResource("RectangleShape2D_rqb8a")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=488062599]
 position = Vector2(3.75739, 322.674)
 shape = SubResource("RectangleShape2D_7bqso")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=174686420]
 position = Vector2(1077.43, 358.527)
 shape = SubResource("RectangleShape2D_h0d4t")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1412640053]
 position = Vector2(557.032, 669.574)
 shape = SubResource("RectangleShape2D_ce0kq")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1953500623]
+navigation_polygon = SubResource("NavigationPolygon_g0e5y")

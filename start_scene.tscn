@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpxk63fkqwdde"]
+[gd_scene format=3 uid="uid://cpxk63fkqwdde"]
 
-[ext_resource type="Script" path="res://start.gd" id="1_e6nyw"]
+[ext_resource type="Script" uid="uid://da62l0tqrdy81" path="res://start.gd" id="1_e6nyw"]
 [ext_resource type="Texture2D" uid="uid://cl31btkvguwrk" path="res://title.png" id="2_4g82x"]
 
-[node name="start_scene" type="Node2D"]
+[node name="start_scene" type="Node2D" unique_id=349600822]
 script = ExtResource("1_e6nyw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1233583945]
 position = Vector2(576, 324)
 texture = ExtResource("2_4g82x")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=517209212]
 offset_left = 929.0
 offset_top = 73.0
 offset_right = 1048.0

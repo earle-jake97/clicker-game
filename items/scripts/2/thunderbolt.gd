@@ -6,6 +6,8 @@ const item_name = "Thunderbolt"
 const item_description = "Attacks will chain damage to an extra enemy. These attacks also have a 20% chance to proc other item effects."
 const item_icon = preload("res://items/icons/thunderbolt.png")
 var file_name = "res://items/scripts/2/thunderbolt.gd"
+var bounce_radius_x = 600
+var bounce_radius_y = 420
 
 func proc(target: Node, source_item: BaseItem = null):
 	if not player or not target or not is_instance_valid(target):
@@ -36,9 +38,12 @@ func proc(target: Node, source_item: BaseItem = null):
 		for enemy in tree.get_nodes_in_group("enemy"):
 			if enemy != current_target and enemy.is_inside_tree():
 				var dist = current_target.global_position.distance_to(enemy.global_position)
-				if dist < shortest:
-					shortest = dist
-					nearest = enemy
+				var dx = (enemy.global_position.x - current_target.global_position.x) / bounce_radius_x
+				var dy = (enemy.global_position.y - current_target.global_position.y) / bounce_radius_y
+				if (dx * dx + dy * dy) <= 1.0:
+					if dist < shortest:
+						shortest = dist
+						nearest = enemy
 
 		if nearest:
 			nearest.take_damage(round(player.calculate_damage().damage * 0.05), DamageBatcher.DamageType.NORMAL, "Thunderbolt")

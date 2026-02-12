@@ -15,4 +15,4 @@ func _on_button_pressed() -> void:
 	GameState.on_start_screen = false
 	HealthBar.visible = true
 	TestPlayer.visible = true
-	SceneManager.switch_to_scene("res://map/map_view.tscn")
+	SceneManager.switch_to_scene("res://scenes/item_rooms/starter_room/starter_room.tscn")

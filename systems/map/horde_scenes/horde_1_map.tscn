@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://gplk7ebibxa0"]
+[gd_scene format=3 uid="uid://gplk7ebibxa0"]
 
-[ext_resource type="Script" path="res://systems/map/horde_scenes/horde_1_map.gd" id="1_bhgnr"]
-[ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="5_cx6uy"]
+[ext_resource type="Script" uid="uid://bl31jagb6n2kw" path="res://systems/map/horde_scenes/horde_1_map.gd" id="1_bhgnr"]
+[ext_resource type="Script" uid="uid://1epq8eux77wq" path="res://scenes/spawn_devil.gd" id="5_cx6uy"]
 [ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="6_m4ro6"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="7_c5fqg"]
 [ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="8_72xac"]
@@ -9,31 +9,29 @@
 [ext_resource type="PackedScene" uid="uid://c3a27u3lux2si" path="res://scenes/objects/single_fence.tscn" id="8_wmsnl"]
 [ext_resource type="PackedScene" uid="uid://b27u6q3rq3lvs" path="res://scenes/objects/fence_long_broken.tscn" id="9_78mlt"]
 [ext_resource type="PackedScene" uid="uid://b2ffjb3qiuqri" path="res://scenes/objects/fence_cage.tscn" id="10_2fged"]
-[ext_resource type="Script" path="res://systems/camera.gd" id="10_wpgga"]
+[ext_resource type="Script" uid="uid://dbo7l6ar52cqe" path="res://systems/camera.gd" id="10_wpgga"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r7bkx"]
 vertices = PackedVector2Array(1780.69, -57.2734, 4414.01, 443.43, 4138.43, 1387.8, 3159.96, 2241.79, 1492.34, 2627.61, 1075.04, 985.211, 1075.04, 931.211, 1453.4, -57.2734, 2999.49, -1638.8, 4209.48, -500.648, 1779.12, -112.211, -570.781, -1952.17, 1564.04, -1841.76, 1453.4, -114.344, 1212.4, -116.203, 876.039, 985.211, -221.617, 2664.39, -1514.42, 2370.39, 890.648, -118.328, 889.141, -59.2422, -376.281, -98.5234, -376.281, -610.523, 876.039, 931.211, -376.992, -49.5234, -378.391, -98.5234, -2967.78, 1579.7, -3412.62, 854.742, -1268.24, -91.5234, -1267.52, -91.5234, -1268.54, -51.4922, 1212.4, -60.2969, -704.281, -106.594, -704.281, -49.5234, -945.281, -52.5469, -945.281, -108.453, -2105.3, -1758.65, -389.211, -610.523, -705.281, -612.594, -946.281, -614.453, -946.281, -558.547, -414.32, -341.523, -413.258, -104.68, -414.094, -555.523, -413.742, -477.523, -414.32, -477.523, -705.281, -555.523, -1269.1, -557.523, -1268.71, -470.523, -1269.32, -470.523, -1269.55, -557.523, -413.711, -341.523, -1268.71, -334.523, -1269.32, -334.523, -1231.28, -110.344, -1231.28, -557.602, -1268.02, -616.578, -3121.72, -1336.36, -1268.26, -607.523, -1269.33, -607.523, -1269.16, -572.25, -3617.54, -91.1484, -3421.34, -1072.25)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(8, 9, 1, 0, 10), PackedInt32Array(11, 12, 8, 10, 13, 14), PackedInt32Array(15, 5, 4, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 20, 19, 6), PackedInt32Array(25, 26, 27, 28, 29, 17), PackedInt32Array(30, 13, 7, 6), PackedInt32Array(13, 30, 14), PackedInt32Array(31, 32, 33, 34), PackedInt32Array(11, 14, 18, 21), PackedInt32Array(35, 11, 21, 36, 37, 38), PackedInt32Array(39, 40, 41, 31, 34), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49), PackedInt32Array(44, 50, 40, 39, 45), PackedInt32Array(48, 51, 52), PackedInt32Array(53, 54, 39, 34), PackedInt32Array(37, 45, 39, 38), PackedInt32Array(35, 38, 55, 56), PackedInt32Array(55, 57, 58, 56), PackedInt32Array(19, 30, 6), PackedInt32Array(56, 58, 59, 49), PackedInt32Array(60, 61, 56, 49, 48, 52, 26), PackedInt32Array(26, 52, 27), PackedInt32Array(15, 17, 29, 33, 32), PackedInt32Array(15, 32, 23, 22)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3430.49, -1077.52, -3127.08, -1344.96, -2107.89, -1768.41, -571.123, -1962.21, 1564.95, -1851.74, 3004.03, -1648.26, 4218.6, -505.814, 4424.32, 443.798, 4147.21, 1393.41, 3164.66, 2250.97, 1493.56, 2637.6, -222.625, 2674.42, -1517.98, 2379.84, -2974.91, 1587.21, -3422.04, 858.527, -3627.76, -91.0853)])
 
-[node name="Horde Map 1" type="Node2D"]
+[node name="Horde Map 1" type="Node2D" unique_id=1037279341]
 texture_filter = 2
-position = Vector2(-2, 0)
-scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_bhgnr")
 
-[node name="Positions" type="Node2D" parent="."]
+[node name="Positions" type="Node2D" parent="." unique_id=1472870269]
 
-[node name="Marker2D" type="Marker2D" parent="Positions"]
+[node name="Marker2D" type="Marker2D" parent="Positions" unique_id=1705274641]
 position = Vector2(114.6, 302.326)
 
-[node name="Marker2D2" type="Marker2D" parent="Positions"]
+[node name="Marker2D2" type="Marker2D" parent="Positions" unique_id=26389647]
 position = Vector2(114.6, 434.109)
 
-[node name="Marker2D3" type="Marker2D" parent="Positions"]
+[node name="Marker2D3" type="Marker2D" parent="Positions" unique_id=1624521479]
 position = Vector2(114.6, 558.14)
 
-[node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="devil spawner" type="Node2D" parent="." unique_id=1343603134 groups=["spawner"]]
 position = Vector2(1055.83, 562.984)
 script = ExtResource("5_cx6uy")
 enemy_scene = ExtResource("8_72xac")
@@ -48,7 +46,7 @@ enemy_cash_value_min = 1
 enemy_cash_value_max = 1
 enemy_speed = 100
 
-[node name="thrower spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="thrower spawner" type="Node2D" parent="." unique_id=1239346740 groups=["spawner"]]
 position = Vector2(1090.58, 562.985)
 script = ExtResource("5_cx6uy")
 enemy_scene = ExtResource("6_m4ro6")
@@ -63,7 +61,7 @@ enemy_cash_value_min = 5
 enemy_cash_value_max = 5
 enemy_speed = 100
 
-[node name="imp spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="imp spawner" type="Node2D" parent="." unique_id=1229848627 groups=["spawner"]]
 position = Vector2(1057.7, 562.985)
 script = ExtResource("5_cx6uy")
 enemy_scene = ExtResource("7_c5fqg")
@@ -78,7 +76,7 @@ enemy_cash_value_min = 2
 enemy_cash_value_max = 2
 enemy_speed = 275
 
-[node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="eye spawner" type="Node2D" parent="." unique_id=394391604 groups=["spawner"]]
 position = Vector2(1106.55, 418.605)
 script = ExtResource("5_cx6uy")
 enemy_scene = ExtResource("8_qv2ll")
@@ -91,26 +89,24 @@ enemy_cash_value_min = 5
 enemy_cash_value_max = 5
 enemy_speed = 100
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1123001442]
 position = Vector2(542.942, 313.954)
 zoom = Vector2(0.75, 0.75)
 script = ExtResource("10_wpgga")
 
-[node name="Ground Region" type="NavigationRegion2D" parent="."]
+[node name="Ground Region" type="NavigationRegion2D" parent="." unique_id=925144654]
 navigation_polygon = SubResource("NavigationPolygon_r7bkx")
 navigation_layers = 2
 
-[node name="Single Fence" parent="Ground Region" instance=ExtResource("8_wmsnl")]
+[node name="Single Fence" parent="Ground Region" unique_id=636471539 instance=ExtResource("8_wmsnl")]
 position = Vector2(975.042, 962.209)
-scale = Vector2(1, 1)
 
-[node name="fence_long_broken" parent="Ground Region" instance=ExtResource("9_78mlt")]
+[node name="fence_long_broken" parent="Ground Region" unique_id=1140224247 instance=ExtResource("9_78mlt")]
 position = Vector2(1062.4, -85.2713)
 
-[node name="fence_cage" parent="Ground Region" instance=ExtResource("10_2fged")]
+[node name="fence_cage" parent="Ground Region" unique_id=1345241701 instance=ExtResource("10_2fged")]
 position = Vector2(-1095.28, -77.5194)
 
-[node name="Air Region" type="NavigationRegion2D" parent="."]
+[node name="Air Region" type="NavigationRegion2D" parent="." unique_id=1424923752]
 visible = false
-scale = Vector2(1, 1)
 navigation_polygon = SubResource("NavigationPolygon_r7bkx")

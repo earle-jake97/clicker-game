@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://qmjcnsyj3i0x"]
+
+[ext_resource type="Script" uid="uid://ghmcvsr5yavh" path="res://scenes/item_rooms/starter_room/starter_room.gd" id="1_eyr02"]
+[ext_resource type="Texture2D" uid="uid://p1hoonap2d5" path="res://sprites/test_player/starter_room.png" id="2_2nymk"]
+[ext_resource type="PackedScene" uid="uid://mc4n2pc3es6w" path="res://scenes/item_rooms/starter_room/slingshot_1.tscn" id="3_2nymk"]
+
+[node name="starter_room" type="Node2D" unique_id=13423404]
+script = ExtResource("1_eyr02")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1517196043]
+position = Vector2(576, 324)
+texture = ExtResource("2_2nymk")
+
+[node name="Slingshot1" parent="." unique_id=1413166667 instance=ExtResource("3_2nymk")]
+position = Vector2(580, 367)

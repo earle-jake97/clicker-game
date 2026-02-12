@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://c46jces8nqyq6"]
+[gd_scene format=3 uid="uid://c46jces8nqyq6"]
 
-[ext_resource type="Script" path="res://scenes/devil.gd" id="1_31ic6"]
+[ext_resource type="Script" uid="uid://4hh6ly8jyywj" path="res://scenes/devil.gd" id="1_31ic6"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_j47kg"]
 [ext_resource type="PackedScene" uid="uid://bom1o7qorj1oo" path="res://scenes/enemies/progress_bar.tscn" id="3_swc2h"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="5_xurbf"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="5_xurbf"]
 [ext_resource type="Texture2D" uid="uid://cse6g4c2cilem" path="res://sprites/enemies/devil/new_devil_body_arm2.png" id="7_wpaiu"]
-[ext_resource type="Script" path="res://systems/damage_batcher.gd" id="7_wqoer"]
+[ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="7_wqoer"]
 [ext_resource type="Texture2D" uid="uid://d4bo2sd5ggg03" path="res://sprites/enemies/devil/new_devil_body_leg1.png" id="8_rnhnd"]
 [ext_resource type="Texture2D" uid="uid://cfmxpkenv8kph" path="res://sprites/enemies/devil/new_devil_body_tail.png" id="9_ebwqt"]
 [ext_resource type="Texture2D" uid="uid://b3u0v01gh02jt" path="res://sprites/enemies/devil/new_devil_body_leg2.png" id="10_kspa4"]
@@ -1256,7 +1256,7 @@ tracks/13/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.527345, 0.0, 0.352853, 0.0]
+"values": [0.0, -0.527345, 0.0, 0.35285300000000003, 0.0]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -1441,7 +1441,7 @@ tracks/13/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.527345, 0.0, 0.352853, 0.0]
+"values": [0.0, -0.527345, 0.0, 0.35285300000000003, 0.0]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -1458,107 +1458,105 @@ tracks/14/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hlxsp"]
 _data = {
-"RESET": SubResource("Animation_bnqgx"),
-"attack": SubResource("Animation_148fj"),
-"attack_right": SubResource("Animation_54hxe"),
-"die": SubResource("Animation_wkaol"),
-"walk": SubResource("Animation_3gr4k"),
-"walk_2": SubResource("Animation_g32wb")
+&"RESET": SubResource("Animation_bnqgx"),
+&"attack": SubResource("Animation_148fj"),
+&"attack_right": SubResource("Animation_54hxe"),
+&"die": SubResource("Animation_wkaol"),
+&"walk": SubResource("Animation_3gr4k"),
+&"walk_2": SubResource("Animation_g32wb")
 }
 
-[node name="devil" type="Node2D" groups=["enemy"]]
+[node name="devil" type="Node2D" unique_id=92870889 groups=["enemy"]]
 texture_filter = 1
 script = ExtResource("1_31ic6")
 max_health = 80.0
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=785167560]
 
-[node name="crosshair" type="Marker2D" parent="container"]
+[node name="crosshair" type="Marker2D" parent="container" unique_id=238266781]
 position = Vector2(-17, -33)
 
-[node name="shadow" type="Sprite2D" parent="container"]
+[node name="shadow" type="Sprite2D" parent="container" unique_id=173251275]
 modulate = Color(1, 1, 1, 0.537255)
 z_index = -1
 position = Vector2(9, 6)
 scale = Vector2(0.106461, 0.222496)
 texture = ExtResource("2_j47kg")
 
-[node name="Area2D" type="Area2D" parent="container"]
+[node name="Area2D" type="Area2D" parent="container" unique_id=197594566]
 position = Vector2(-13, -3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=268376407]
 position = Vector2(11.5, -20)
 shape = SubResource("RectangleShape2D_tjubl")
 
-[node name="sprite" type="Node2D" parent="container"]
+[node name="sprite" type="Node2D" parent="container" unique_id=1369696412]
 scale = Vector2(-1, 1)
 
-[node name="arm1" type="Sprite2D" parent="container/sprite"]
+[node name="arm1" type="Sprite2D" parent="container/sprite" unique_id=897039792]
 position = Vector2(-28, -37)
 scale = Vector2(0.765673, 0.5)
 texture = ExtResource("7_wpaiu")
 
-[node name="leg1" type="Sprite2D" parent="container/sprite"]
+[node name="leg1" type="Sprite2D" parent="container/sprite" unique_id=1151905930]
 position = Vector2(-12, -9)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_rnhnd")
 
-[node name="tail" type="Sprite2D" parent="container/sprite"]
+[node name="tail" type="Sprite2D" parent="container/sprite" unique_id=669721996]
 position = Vector2(19, -32)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_ebwqt")
 
-[node name="leg2" type="Sprite2D" parent="container/sprite"]
+[node name="leg2" type="Sprite2D" parent="container/sprite" unique_id=1662238101]
 z_index = 1
 position = Vector2(13, -11)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_kspa4")
 
-[node name="body" type="Sprite2D" parent="container/sprite"]
+[node name="body" type="Sprite2D" parent="container/sprite" unique_id=1772165137]
 position = Vector2(-5, -30)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_py8l2")
 
-[node name="pivot" type="Marker2D" parent="container/sprite/body"]
+[node name="pivot" type="Marker2D" parent="container/sprite/body" unique_id=401835486]
 position = Vector2(2, 0)
 
-[node name="head" type="Sprite2D" parent="container/sprite"]
+[node name="head" type="Sprite2D" parent="container/sprite" unique_id=608501797]
 position = Vector2(-21, -61)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_yf2rc")
 
-[node name="arm2" type="Sprite2D" parent="container/sprite"]
+[node name="arm2" type="Sprite2D" parent="container/sprite" unique_id=1906435983]
 position = Vector2(11, -52)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("13_vkbpf")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=1284064981]
 root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_hlxsp")
-}
-autoplay = "walk"
+libraries/ = SubResource("AnimationLibrary_hlxsp")
+autoplay = &"walk"
 
-[node name="ProgressBar" parent="." instance=ExtResource("3_swc2h")]
+[node name="ProgressBar" parent="." unique_id=1615476664 instance=ExtResource("3_swc2h")]
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=1148741263]
 offset_left = 25.0
 offset_top = -112.0
 offset_right = 65.0
 offset_bottom = -72.0
 script = ExtResource("5_xurbf")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=769053302]
 position = Vector2(-58, -65)
 
-[node name="batcher" type="Node" parent="Node2D"]
+[node name="batcher" type="Node" parent="Node2D" unique_id=2134659822]
 script = ExtResource("7_wqoer")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1669701577]
 stream = ExtResource("13_uicv7")
 volume_db = -9.454
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1368459843]
 navigation_layers = 2
 
 [connection signal="area_entered" from="container/Area2D" to="." method="_on_area_2d_area_entered"]

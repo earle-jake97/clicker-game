@@ -29,8 +29,6 @@ func _ready() -> void:
 	shadow.scale = Vector2(0, 0)
 	tween.tween_property(shadow, "scale", Vector2(0.22, 0.22), 0.75).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	attack_speed /= (max(player_controller.difficulty/10, 0.8))
-	for node in PlayerController.position_map:
-		player_positions.append(node)
 		
 	health_bar.visible = false
 	health_bar.max_value = max_health

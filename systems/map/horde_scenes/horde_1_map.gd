@@ -3,7 +3,7 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 
 var spawners = []
-const MapView = "res://map/map_view.tscn"
+const MapView = "res://map/map_scene.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,8 +15,6 @@ func _ready() -> void:
 	HealthBar.fast_forward = false
 	TestPlayer.visible = true
 	TestPlayer.global_position = Vector2.ZERO
-	PlayerController.reset_positions()
-	PlayerController.position = 2
 	for spawner in get_tree().get_nodes_in_group("spawner"):
 		spawners.append(spawner)
 	for spawner in spawners:
@@ -38,7 +36,6 @@ func check_spawner_complete():
 	if get_tree().get_nodes_in_group("enemy").size() > 0:
 		return
 	TestPlayer.visible = false
-	PlayerController.position = 2
 	GameState.on_map_screen = true
 	GameState.enemy_count = 0
 	GameState.horde_bool = false

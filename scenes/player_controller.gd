@@ -1,13 +1,16 @@
-extends Node
+extends Node2D
 
-@export var position = 2
 @export var iframe_duration = 1
 @onready var player = TestPlayer
 
 var hold_click_timer := Timer.new()
 @export var position_map := []
+var show_attack_range = true
+var attack_radius_x = 600
+var attack_radius_y = 420
 var base_attack_damage = 10
 var base_max_hp = 100.0
+var attack_range_multiplier = 1.0
 var max_hp = 0.0
 var max_hp_percentage = 1.0
 var base_armor = 1
@@ -37,11 +40,12 @@ signal reset
 var dash_animation_timer = 0.0
 var processed_items = []
 var inventory: Array = []
-var base_movement_speed = 180.0
+var base_movement_speed = 210.0
 var movement_speed = 0.0
 var last_enemy_attacked = null # For use in chain attacks
 var bleed_timer = 0
 var bleed_cooldown = 1
+var attacking = false
 
 func _ready():
 	luck = base_luck
@@ -60,6 +64,10 @@ func _ready():
 	overshields_cap = max_hp * 0.3
 
 func _process(delta: float) -> void:
+	if get_enemies_in_range(player.global_position).size() > 0:
+		attacking = true
+	else:
+		attacking = false
 	if current_hp <= 0:
 		hold_click_timer.stop()
 		current_hp = 0
@@ -98,7 +106,7 @@ func attack() -> void:
 	var closest_enemy = null
 	var shortest_distance = INF
 	
-	for node in get_tree().get_nodes_in_group("enemy"):
+	for node in get_enemies_in_range(player.global_position):
 		if node and node.is_inside_tree():
 			var distance = player.global_position.distance_to(node.global_position)
 			if distance < shortest_distance:
@@ -127,7 +135,7 @@ func attack_all_enemies():
 func get_nearest_enemy():
 	var closest_enemy = null
 	var shortest_distance = INF
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in get_enemies_in_range(player.global_position):
 		if enemy and enemy.is_inside_tree():
 			var distance = player.global_position.distance_to(enemy.global_position)
 			if distance < shortest_distance:
@@ -142,7 +150,7 @@ func attack_nearest_enemy(last_attacked_enemy: Node) -> void:
 		var shortest_distance = INF
 
 		# Find the nearest enemy to the last attacked enemy
-		for node in get_tree().get_nodes_in_group("enemy"):
+		for node in get_enemies_in_range(player.global_position):
 			if node and node.is_inside_tree() and node != last_attacked_enemy:
 				var distance = last_attacked_enemy.global_position.distance_to(node.global_position)
 				if distance < shortest_distance:
@@ -261,6 +269,8 @@ func proc_items(target, source_item: BaseItem = null):
 	var used_lava_cake = false
 	var used_bowling_ball = false
 	for item in inventory:
+		if item.has_method("starter_proc"):
+				item.starter_proc(target, source_item)
 		for i in range(proc_count):
 			if item.has_method("proc"):
 				if item.tags.has("thunderbolt") and not used_thunderbolt:
@@ -275,16 +285,13 @@ func proc_items(target, source_item: BaseItem = null):
 				else:
 					item.proc(target, source_item)
 
+func proc_starter_items(target, source_item: BaseItem = null):
+	for item in inventory:
+		if item.has_method("starter_proc"):
+			item.starter_proc(target, source_item)
 
 func add_cash(amount) -> void:
 	cash += amount
-
-func reset_positions():
-	position_map.clear()
-	if get_tree().get_root().find_child("Positions", true, false):
-		for child in get_tree().get_root().find_child("Positions", true, false).get_children():
-			position_map.append(child)
-		position = 1
 
 func get_block_chance():
 	var block_percent = 0.0
@@ -315,7 +322,7 @@ func reset_to_defaults():
 	PauseMenu.update_labels()
 	reset.emit()
 	free_items()
-	SceneManager.switch_to_scene("res://map/map_view.tscn")
+	SceneManager.switch_to_scene("res://start_scene.tscn")
 	
 
 
@@ -338,9 +345,27 @@ func timed_bleed():
 	for item in inventory:
 			if "bleed_tick" in item:
 				bleed_dmg += item.bleed_tick
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	if bleed_dmg == 0:
+		return
+	for enemy in get_tree().get_nodes_in_group("bleeding"):
 		enemy.take_damage(enemy.bleed_stacks * bleed_dmg, DamageBatcher.DamageType.BLEED, "Bleed Stack Damage")
 
 func free_items():
 	for item in processed_items:
 		item.queue_free()
+
+func is_in_attack_oval(point: Vector2, center: Vector2) -> bool:
+	var dx = (point.x - center.x) / attack_radius_x
+	var dy = (point.y - center.y) / attack_radius_y
+	return (dx * dx + dy * dy) <= 1.0
+
+func get_enemies_in_range(center: Vector2):
+	var in_range = []
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if not enemy or not enemy.is_inside_tree():
+			continue
+
+		if is_in_attack_oval(enemy.global_position, center):
+			in_range.append(enemy)
+
+	return in_range

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://clu01is6spj2o"]
+
+[ext_resource type="Script" uid="uid://cihytcauyrck4" path="res://map/ChoiceSlot.gd" id="1_43edn"]
+[ext_resource type="Texture2D" uid="uid://bld8g80bctvjn" path="res://map/icons/horde.png" id="1_i5m0t"]
+
+[node name="ChoiceSlot" type="Control" unique_id=664601632]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_43edn")
+
+[node name="Sprite2D" type="Button" parent="." unique_id=1584517053]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+icon = ExtResource("1_i5m0t")
+flat = true
+
+[connection signal="pressed" from="Sprite2D" to="." method="_on_sprite_2d_pressed"]

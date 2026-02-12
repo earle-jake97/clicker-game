@@ -3,6 +3,7 @@ extends Node2D
 @onready var item_tree = get_tree().get_nodes_in_group("item")
 
 func _ready() -> void:
+	PlayerController.difficulty -= 1 # Bandaid fix
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
 	set_up_items()

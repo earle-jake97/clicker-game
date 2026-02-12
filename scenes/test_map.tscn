@@ -1,67 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnv4t6agl2tpu"]
+[gd_scene format=3 uid="uid://bnv4t6agl2tpu"]
 
-[ext_resource type="Script" path="res://test_map.gd" id="1_q8yj5"]
-[ext_resource type="Script" path="res://systems/camera.gd" id="3_e7kda"]
+[ext_resource type="Script" uid="uid://cjrpt7fixcvvr" path="res://test_map.gd" id="1_q8yj5"]
+[ext_resource type="Script" uid="uid://dbo7l6ar52cqe" path="res://systems/camera.gd" id="3_e7kda"]
 [ext_resource type="PackedScene" uid="uid://b41mbcd7jm5er" path="res://sprites/enemies/test_enemy.tscn" id="3_efwnt"]
-[ext_resource type="PackedScene" uid="uid://b2ffjb3qiuqri" path="res://scenes/objects/fence_cage.tscn" id="5_prw5v"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ge2rf"]
-vertices = PackedVector2Array(934.188, 241.672, 2872.19, -849.156, 3268.12, -221.539, 3494.59, 514.039, 3487.1, 1220.9, 1085.26, 763.391, 490.93, 564.148, 1085.26, 1279.39, 3290.38, 1714.3, 2987.88, 2011.95, 2088.18, 2413.58, 1672.27, -1511.59, 2456.67, -1227.71, 929.5, 227.75, 646.273, -1679.76, 1593.74, 2705.31, 1084.55, 1328.39, 1083.15, 1279.39, -1756.87, -595.828, -1566.39, -995.563, -1250.36, -1248.68, -458.039, -1474.76, 479.094, 237.508, -1866, -312.961, 192, 827.102, 192.453, 827.063, 192.828, 907.391, 192.219, 907.391, 475.859, 2785.54, 757.258, 1328.39, 516.258, 1325.36, 757.258, 1271.32, 193, 1326.42, -735.781, 2785.54, -1675.04, 2457.42, -2083.1, 2036.49, -2280.01, 1353.93, 193.297, 1286.39, 194.023, 1286.39, 1047.22, 763.391, 516.258, 1269.46, 515.258, 825.359, 1047.22, 1036.39, 1048.27, 1273.22, 1047.25, 773.219, 756.258, 771.32, 515.258, 769.461, 1047.22, 900.391, 1047.83, 1036.39, 756.258, 828.391, 192.828, 1043.39, 192.219, 1043.39, -1882.99, 497.469, 1047.51, 828.391, 1047.83, 900.391, 230.258, 1267.56, 230.258, 826.289, 480.023, 558.609, 193.523, 767.328, 193.438, 770.391, 192.219, 770.391, 192.391, 810.789, -2188.86, 715.922)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 5, 4, 8, 9, 10), PackedInt32Array(11, 12, 1, 0, 13, 14), PackedInt32Array(7, 10, 15, 16, 17), PackedInt32Array(18, 19, 20, 21, 14, 13, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(16, 15, 28, 29), PackedInt32Array(29, 28, 30, 31), PackedInt32Array(32, 30, 28, 33, 34, 35, 36), PackedInt32Array(37, 38, 32), PackedInt32Array(6, 5, 39), PackedInt32Array(31, 30, 40), PackedInt32Array(41, 42, 43, 31, 40), PackedInt32Array(6, 39, 44, 45, 46), PackedInt32Array(47, 48, 42, 41, 49), PackedInt32Array(27, 50, 51, 52), PackedInt32Array(53, 54, 47, 49), PackedInt32Array(55, 56, 41, 40), PackedInt32Array(45, 49, 41, 46), PackedInt32Array(57, 6, 46, 58, 52), PackedInt32Array(58, 59, 60, 52), PackedInt32Array(52, 23, 22, 57), PackedInt32Array(52, 60, 61, 24), PackedInt32Array(52, 24, 27), PackedInt32Array(32, 36, 62, 52, 51, 37)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1892.87, 492.248, -1875.96, -314.922, -1766.06, -599.806, -1574.43, -1001.94, -1255.06, -1257.75, -460.37, -1484.5, 646.18, -1689.92, 1674.76, -1521.32, 2461.94, -1236.43, 2879.95, -855.62, 3277.29, -225.775, 3504.61, 512.597, 3497.1, 1222.87, 3298.89, 1719.96, 2993.61, 2020.35, 2092.77, 2422.48, 1596.8, 2715.12, 476.159, 2795.54, -737.477, 2795.54, -1680.58, 2466.09, -2092.01, 2041.67, -2290.22, 1354.65, -2198.16, 710.271)])
-
-[node name="Horde Map 1" type="Node2D"]
+[node name="Horde Map 1" type="Node2D" unique_id=1882805508]
 texture_filter = 2
-position = Vector2(-2, 0)
-scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_q8yj5")
 
-[node name="Positions" type="Node2D" parent="."]
+[node name="Positions" type="Node2D" parent="." unique_id=1702288943]
 
-[node name="Marker2D" type="Marker2D" parent="Positions"]
+[node name="Marker2D" type="Marker2D" parent="Positions" unique_id=1886462413]
 position = Vector2(135.266, 299.419)
 
-[node name="Marker2D2" type="Marker2D" parent="Positions"]
+[node name="Marker2D2" type="Marker2D" parent="Positions" unique_id=1137957992]
 position = Vector2(149.356, 432.171)
 
-[node name="Marker2D3" type="Marker2D" parent="Positions"]
+[node name="Marker2D3" type="Marker2D" parent="Positions" unique_id=1091295491]
 position = Vector2(168.143, 561.047)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=528090301]
 position = Vector2(542.942, 313.954)
+zoom = Vector2(0.5, 0.5)
 script = ExtResource("3_e7kda")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1470399626]
 position = Vector2(583.334, 315.891)
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D" unique_id=125847469]
 position = Vector2(-97.692, -54.2636)
 polygon = PackedVector2Array(0.939331, -8.72092, 448.068, -23.2558, 0, 298.45)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1623462253]
 position = Vector2(43.6796, 85.7558)
 scale = Vector2(14.0432, 14.9709)
 polygon = PackedVector2Array(-9.93311, -10, 22.709, -11.2298, -10.0669, 10.5825)
 
-[node name="Walkers" type="NavigationRegion2D" parent="."]
-position = Vector2(0.09, 0)
-navigation_polygon = SubResource("NavigationPolygon_ge2rf")
-navigation_layers = 2
+[node name="eyeball_enemy" parent="." unique_id=1638644247 instance=ExtResource("3_efwnt")]
+position = Vector2(1092, 1122)
+max_health = 50000.0
 
-[node name="fence_cage" parent="Walkers" instance=ExtResource("5_prw5v")]
-position = Vector2(366.255, 1300.39)
-scale = Vector2(1, 1)
+[node name="eyeball_enemy2" parent="." unique_id=511396933 instance=ExtResource("3_efwnt")]
+position = Vector2(1259, 1078)
+max_health = 10000000.0
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Walkers"]
-position = Vector2(33.8165, 11.6279)
-vertices = PackedVector2Array(485.642, 558.14, 484.703, 243.217, 945.922, 233.527)
-affect_navigation_mesh = true
-
-[node name="Flyers" type="NavigationRegion2D" parent="."]
-visible = false
-position = Vector2(0.09, 0)
-navigation_polygon = SubResource("NavigationPolygon_ge2rf")
-
-[node name="eyeball_enemy" parent="." instance=ExtResource("3_efwnt")]
-position = Vector2(914.923, 1082.36)
-max_health = 1e+07
+[node name="eyeball_enemy3" parent="." unique_id=810954105 instance=ExtResource("3_efwnt")]
+position = Vector2(1924, 1071)
+max_health = 10000000.0

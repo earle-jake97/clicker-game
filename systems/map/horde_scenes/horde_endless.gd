@@ -13,7 +13,6 @@ func _ready() -> void:
 	TestPlayer.visible = true
 	GameState.endless_counter += 1
 	PlayerController.difficulty += 1
-	PlayerController.reset_positions()
 	var difficulty = PlayerController.difficulty
 	if GameState.endless_counter >= 40:
 		background.texture = preload("res://backgrounds/doom.png")

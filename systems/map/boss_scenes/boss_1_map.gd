@@ -28,10 +28,8 @@ func _ready() -> void:
 	TestPlayer.visible = true
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
-	PlayerController.difficulty += 1
 	if GameState.endless_mode:
 		GameState.endless_counter += 1
-	PlayerController.reset_positions()
 	
 
 func _on_boss_died():

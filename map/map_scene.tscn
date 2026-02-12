@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://u6jhhkjdo4kb"]
+
+[ext_resource type="Script" uid="uid://bvwo54snfuhk5" path="res://map/map_script.gd" id="1_pqiwp"]
+[ext_resource type="Texture2D" uid="uid://dxv1vhv1p46qg" path="res://map/map_background_01.png" id="1_q2h2y"]
+[ext_resource type="Texture2D" uid="uid://cnaggmmnqmkoc" path="res://map/map_greg.png" id="2_pqiwp"]
+
+[node name="Map" type="Node2D" unique_id=1079251505]
+script = ExtResource("1_pqiwp")
+
+[node name="background" type="Sprite2D" parent="." unique_id=2136767691]
+position = Vector2(576, 324)
+texture = ExtResource("1_q2h2y")
+
+[node name="foreground" type="Sprite2D" parent="." unique_id=1389563751]
+position = Vector2(576, 324)
+texture = ExtResource("2_pqiwp")
+
+[node name="UI" type="Control" parent="." unique_id=1732652027]
+layout_mode = 3
+anchors_preset = 0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="choiceContainer" type="HBoxContainer" parent="UI" unique_id=1895324103]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 246.0
+offset_right = 594.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UI" unique_id=972512933]
+layout_mode = 0
+offset_left = 1010.0
+offset_top = 69.0
+offset_right = 1029.0
+offset_bottom = 82.0
+flat = true
+
+[connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]

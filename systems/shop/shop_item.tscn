@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://drg84m4gd4tv3"]
+[gd_scene format=3 uid="uid://drg84m4gd4tv3"]
 
-[ext_resource type="Script" path="res://systems/shop/shop_item.gd" id="1_mj7vh"]
+[ext_resource type="Script" uid="uid://dy6las8oph5o" path="res://systems/shop/shop_item.gd" id="1_mj7vh"]
 [ext_resource type="Texture2D" uid="uid://bfja06n5b8g04" path="res://items/icons/stopwatch.png" id="2_qcp7r"]
 [ext_resource type="Texture2D" uid="uid://baj0go04hwiyg" path="res://systems/shop/pricetag.png" id="3_rwyoo"]
 [ext_resource type="Texture2D" uid="uid://f4qnkvqk2e7a" path="res://items/misc/quality_1.png" id="4_eramm"]
@@ -8,22 +8,22 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl6vj"]
 radius = 38.0526
 
-[node name="Shop_Item" type="Node2D" groups=["item"]]
+[node name="Shop_Item" type="Node2D" unique_id=1373298290 groups=["item"]]
 script = ExtResource("1_mj7vh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1930588821]
 texture = ExtResource("2_qcp7r")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=768613566]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=190273269]
 shape = SubResource("CircleShape2D_vl6vj")
 
-[node name="Pricetag" type="Sprite2D" parent="."]
+[node name="Pricetag" type="Sprite2D" parent="." unique_id=754627758]
 position = Vector2(50, -2)
 texture = ExtResource("3_rwyoo")
 
-[node name="price" type="Label" parent="."]
+[node name="price" type="Label" parent="." unique_id=1740888673]
 offset_left = 46.0
 offset_top = -21.0
 offset_right = 86.0
@@ -33,7 +33,7 @@ theme_override_colors/font_color = Color(0, 0.466667, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "50"
 
-[node name="Quality_sprite" type="Sprite2D" parent="."]
+[node name="Quality_sprite" type="Sprite2D" parent="." unique_id=1106353244]
 visible = false
 z_index = 100
 position = Vector2(44, -48)

@@ -1,7 +1,7 @@
 extends Node2D
 
 var spawners = []
-const MapView = "res://map/map_view.tscn"
+const MapView = "res://map/map_scene.tscn"
 @onready var timer: Timer = $Timer
 @onready var label: Label = $Label
 @onready var marker_2d: Marker2D = $Positions/Marker2D
@@ -12,8 +12,6 @@ func _ready() -> void:
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
 	TestPlayer.visible = true
-	PlayerController.reset_positions()
-	PlayerController.position = 2
 	for spawner in get_tree().get_nodes_in_group("spawner"):
 		spawners.append(spawner)
 	await get_tree().create_timer(0.5).timeout
@@ -26,6 +24,5 @@ func _process(delta: float) -> void:
 
 func _on_timer_timout():
 	TestPlayer.visible = false
-	PlayerController.position = 2
 	GameState.on_map_screen = true
 	SceneManager.switch_to_scene(MapView)

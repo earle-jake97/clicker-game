@@ -1,15 +1,13 @@
 extends Node2D
 
 var spawners = []
-const MapView = "res://map/map_view.tscn"
+const MapView = "res://map/map_scene.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PlayerController.difficulty = 1
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
 	TestPlayer.visible = true
-	PlayerController.reset_positions()
-	PlayerController.position = 2
 	#PlayerController.movement_speed = 600
 	for spawner in get_tree().get_nodes_in_group("spawner"):
 		spawners.append(spawner)
@@ -26,6 +24,5 @@ func check_spawner_complete():
 	if get_tree().get_nodes_in_group("elite").size() > 0:
 		return
 	TestPlayer.visible = false
-	PlayerController.position = 2
 	GameState.on_map_screen = true
 	SceneManager.switch_to_scene(MapView)

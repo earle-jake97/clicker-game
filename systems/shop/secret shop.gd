@@ -10,7 +10,7 @@ extends Node2D
 var hover_exit = false
 const BROKE = preload("res://systems/shop/player_hands2.png")
 const WOKE = preload("res://systems/shop/player_hands.png")
-const MapView = preload("res://map/map_view.tscn")
+const MapView = preload("res://map/map_scene.tscn")
 
 var difficulty_scaling = 0.15
 var lowest_price = 30
@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		Tooltip.hide_tooltip()
 		if GameState.endless_mode:
 			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
-		SceneManager.switch_to_scene("res://map/map_view.tscn")
+		SceneManager.switch_to_scene("res://map/map_scene.tscn")
 		GameState.on_map_screen = true
 
 	hands.texture = WOKE if PlayerController.cash > lowest_price else BROKE

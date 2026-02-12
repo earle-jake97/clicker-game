@@ -39,7 +39,7 @@ func shoot():
 		if item.item_name == "Evil Stopwatch":
 			occurrences += 1
 	
-	var enemies = get_tree().get_nodes_in_group("enemy")
+	var enemies = player.get_tree().get_nodes_in_group("enemy")
 	if enemies.is_empty():
 		return
 	

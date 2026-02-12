@@ -1,24 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy0s10jfhtpyo"]
+[gd_scene format=3 uid="uid://cy0s10jfhtpyo"]
 
-[ext_resource type="Script" path="res://systems/shop/room_item.gd" id="1_acof1"]
+[ext_resource type="Script" uid="uid://b8b5noke077io" path="res://systems/shop/room_item.gd" id="1_acof1"]
 [ext_resource type="Texture2D" uid="uid://bfja06n5b8g04" path="res://items/icons/stopwatch.png" id="2_wfb88"]
 [ext_resource type="Texture2D" uid="uid://f4qnkvqk2e7a" path="res://items/misc/quality_1.png" id="3_a6gws"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl6vj"]
 radius = 38.0526
 
-[node name="Room_Item" type="Node2D" groups=["item"]]
+[node name="Room_Item" type="Node2D" unique_id=1413166667 groups=["item"]]
 script = ExtResource("1_acof1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=870149259]
 texture = ExtResource("2_wfb88")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1986688578]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2047828901]
 shape = SubResource("CircleShape2D_vl6vj")
 
-[node name="Quality" type="Sprite2D" parent="."]
+[node name="Quality" type="Sprite2D" parent="." unique_id=286705641]
 visible = false
 position = Vector2(45, -48)
 texture = ExtResource("3_a6gws")

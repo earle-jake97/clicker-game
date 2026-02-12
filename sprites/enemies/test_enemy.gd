@@ -8,8 +8,6 @@ var attack_cooldown = 5.0
 var attack_timer = 3.0
 
 func _ready() -> void:
-	speed = 60
-	base_speed = speed
 	animation_player.animation_set_next("attack", "float")
 	value = randi_range(value_min, value_max)
 	health_bar.visible = false

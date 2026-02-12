@@ -52,15 +52,15 @@ func _process(delta: float) -> void:
 			Engine.time_scale = 5.0
 	else:
 		Engine.time_scale = 1.0
-	if GameState.on_map_screen:
-		for child in get_children():
-			if child is CanvasItem or child is Sprite2D or child is ProgressBar or child is Label or child is ColorRect or child is TextureButton:
-				child.modulate.a = 0.5
-		
-	else: 
-		for child in get_children():
-			if child is CanvasItem or child is Sprite2D or child is ProgressBar or child is Label or child is ColorRect or child is TextureButton:
-				child.modulate.a = 1.0
+	#if GameState.on_map_screen:
+		#for child in get_children():
+			#if child is CanvasItem or child is Sprite2D or child is ProgressBar or child is Label or child is ColorRect or child is TextureButton:
+				#child.modulate.a = 0.5
+		#
+	#else: 
+		#for child in get_children():
+			#if child is CanvasItem or child is Sprite2D or child is ProgressBar or child is Label or child is ColorRect or child is TextureButton:
+				#child.modulate.a = 1.0
 	room_count.text = str(GameState.endless_counter)
 	var percentage = float(player.current_hp) / player.max_hp
 	if percentage <= 0.0 and not dead:

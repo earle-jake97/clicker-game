@@ -14,3 +14,4 @@ func proc(target, any):
 	if not target.debuffs.has(debuff.Debuff.BLEED):
 		target.debuffs.append(debuff.Debuff.BLEED)
 		target.apply_debuff()
+		target.add_to_group("bleeding")

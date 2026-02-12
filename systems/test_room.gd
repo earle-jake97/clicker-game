@@ -22,7 +22,7 @@ func _on_button_pressed() -> void:
 			print("Added ", instance.item_name, " to inventory.")
 
 func _on_leave_button_pressed() -> void:
-	SceneManager.switch_to_scene("res://map/map_view.tscn")
+	SceneManager.switch_to_scene("res://map/map_scene.tscn")
 
 
 func _on_testmap_pressed() -> void:

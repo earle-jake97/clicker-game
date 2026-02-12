@@ -1,6 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://b0j1si2atqlhf"]
+[gd_scene format=3 uid="uid://b0j1si2atqlhf"]
 
-[ext_resource type="Script" path="res://scenes/test_player.gd" id="1_t3wex"]
+[ext_resource type="Script" uid="uid://lt8uscabw0si" path="res://scenes/test_player.gd" id="1_t3wex"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_l5cuq"]
 [ext_resource type="Texture2D" uid="uid://b1u8ie74mol7s" path="res://sprites/test_player/leg1.png" id="3_d82ep"]
 [ext_resource type="Texture2D" uid="uid://cycovta23wlx5" path="res://sprites/test_player/leg2.png" id="4_oa2dy"]
@@ -51,6 +51,14 @@ animations = [{
 "loop": true,
 "name": &"gun",
 "speed": 22.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_dwl5e")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2qkx"]
@@ -1368,81 +1376,80 @@ tracks/8/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y4mo4"]
 _data = {
-"RESET": SubResource("Animation_aykxm"),
-"dead": SubResource("Animation_4ennk"),
-"die": SubResource("Animation_okorp"),
-"idle_left": SubResource("Animation_vloll"),
-"idle_right": SubResource("Animation_cwi2m"),
-"move_down": SubResource("Animation_vl5q4"),
-"move_up": SubResource("Animation_pwp8i"),
-"walk_left": SubResource("Animation_vghrv"),
-"walk_right": SubResource("Animation_7oijj")
+&"RESET": SubResource("Animation_aykxm"),
+&"dead": SubResource("Animation_4ennk"),
+&"die": SubResource("Animation_okorp"),
+&"idle_left": SubResource("Animation_vloll"),
+&"idle_right": SubResource("Animation_cwi2m"),
+&"move_down": SubResource("Animation_vl5q4"),
+&"move_up": SubResource("Animation_pwp8i"),
+&"walk_left": SubResource("Animation_vghrv"),
+&"walk_right": SubResource("Animation_7oijj")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfmcr"]
 radius = 20.0
 height = 40.0
 
-[node name="Node2D" type="CharacterBody2D" groups=["main", "player"]]
+[node name="Node2D" type="CharacterBody2D" unique_id=1834059154 groups=["main", "player"]]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_t3wex")
 
-[node name="shadow" type="Sprite2D" parent="."]
+[node name="shadow" type="Sprite2D" parent="." unique_id=97042796]
 modulate = Color(1, 1, 1, 0.537255)
 z_index = -1
 position = Vector2(-2, 3)
 scale = Vector2(0.0963802, 0.191225)
 texture = ExtResource("2_l5cuq")
 
-[node name="sprite" type="Node2D" parent="."]
+[node name="sprite" type="Node2D" parent="." unique_id=688766697]
 
-[node name="leg1" type="Sprite2D" parent="sprite"]
+[node name="leg1" type="Sprite2D" parent="sprite" unique_id=359121693]
 position = Vector2(8.33333, -28.3333)
 texture = ExtResource("3_d82ep")
 offset = Vector2(9.16667, 13.3333)
 
-[node name="leg2" type="Sprite2D" parent="sprite"]
+[node name="leg2" type="Sprite2D" parent="sprite" unique_id=444614132]
 position = Vector2(-14.1667, -28.3333)
 scale = Vector2(-1, 1)
 texture = ExtResource("4_oa2dy")
 offset = Vector2(-6.66667, 12.5)
 
-[node name="body" type="Sprite2D" parent="sprite"]
+[node name="body" type="Sprite2D" parent="sprite" unique_id=1554804164]
 position = Vector2(-2.5, -47.5)
 texture = ExtResource("5_q22f3")
 
-[node name="arms" type="AnimatedSprite2D" parent="sprite/body"]
+[node name="arms" type="AnimatedSprite2D" parent="sprite/body" unique_id=281971411]
 z_index = 1
 position = Vector2(-0.833333, -12.5)
 sprite_frames = SubResource("SpriteFrames_rjapy")
+animation = &"idle"
 autoplay = "default"
 offset = Vector2(16.6667, 8.33334)
 
-[node name="head" type="Sprite2D" parent="sprite/body"]
+[node name="head" type="Sprite2D" parent="sprite/body" unique_id=772031956]
 position = Vector2(0, -20.8333)
 texture = ExtResource("6_p6n45")
 offset = Vector2(-10, -30)
 
-[node name="fez" type="Sprite2D" parent="sprite/body/head"]
+[node name="fez" type="Sprite2D" parent="sprite/body/head" unique_id=1432612041]
 position = Vector2(-6.66667, -70)
 texture = ExtResource("7_5fqil")
 
-[node name="pivot" type="Marker2D" parent="sprite/body"]
+[node name="pivot" type="Marker2D" parent="sprite/body" unique_id=1712554464]
 position = Vector2(6.5, 22.1667)
 
-[node name="Area2D" type="Area2D" parent="." groups=["player_hitbox"]]
+[node name="Area2D" type="Area2D" parent="." unique_id=733991170 groups=["player_hitbox"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2017286258]
 position = Vector2(-0.833333, -24.8833)
 scale = Vector2(1, 0.566666)
 shape = SubResource("RectangleShape2D_c2qkx")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_y4mo4")
-}
-autoplay = "walk_left"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1970532218]
+libraries/ = SubResource("AnimationLibrary_y4mo4")
+autoplay = &"walk_left"
 
-[node name="WallCollision" type="CollisionShape2D" parent="."]
+[node name="WallCollision" type="CollisionShape2D" parent="." unique_id=43522306]
 position = Vector2(0, -18.6667)
 shape = SubResource("CapsuleShape2D_lfmcr")

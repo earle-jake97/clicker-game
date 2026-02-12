@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cdgffrgymtrl0"]
+
+[ext_resource type="Script" uid="uid://ct3ldnv2s3wwg" path="res://scenes/item_rooms/starter_room/slingshot_2.gd" id="1_jd287"]
+[ext_resource type="Texture2D" uid="uid://cmbcwqgij04qi" path="res://sprites/aaron.png" id="2_j5bvg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vl6vj"]
+radius = 38.0526
+
+[node name="Slingshot2" type="Node2D" unique_id=1413166667 groups=["item"]]
+script = ExtResource("1_jd287")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=870149259]
+texture = ExtResource("2_j5bvg")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1986688578]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2047828901]
+shape = SubResource("CircleShape2D_vl6vj")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

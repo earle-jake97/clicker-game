@@ -16,6 +16,8 @@ const BODY_NORMAL = preload("res://sprites/test_player/body.png")
 @onready var shadow: Sprite2D = $shadow
 @export var base_speed := 180.0
 var speed := base_speed
+var facing_right = true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,7 +31,6 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var dir := Vector2.ZERO
-
 	if Input.is_action_pressed("up"):
 		dir.y -= 1
 	if Input.is_action_pressed("down"):
@@ -39,50 +40,53 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		dir.x += 1
 
-	# Animation
+	if player.attacking and PlayerController.get_nearest_enemy():
+		var enemy_pos = PlayerController.get_nearest_enemy().global_position
+		facing_right = enemy_pos.x >= global_position.x
+	elif dir.x != 0:  # Only update facing if moving horizontally
+		facing_right = dir.x > 0
+
 	if dir != Vector2.ZERO:
 		var anim_speed = 1.0 + (PlayerController.movement_speed - 200.0) * 0.01
 		anim_speed = clamp(anim_speed, 2.0, 6.0)
 		animation_player.speed_scale = anim_speed
-		if face_enemy():
+
+		if facing_right:
 			animation_player.play("walk_right")
 		else:
 			animation_player.play("walk_left")
 	else:
 		animation_player.speed_scale = 1.0
-		if face_enemy():
+		if facing_right:
 			animation_player.play("idle_right")
 		else:
 			animation_player.play("idle_left")
-		return
 
-	dir = dir.normalized()
-	var motion := dir * speed * delta
+	if dir != Vector2.ZERO:
+		dir = dir.normalized()
+		var motion := dir * speed * delta
+		var collision := move_and_collide(motion)
 
-	var collision := move_and_collide(motion)
+		if collision:
+			var normal := collision.get_normal()
+			var move_dir := motion.normalized()
+			var angle = abs(move_dir.angle_to(normal))
 
-	if collision:
-		var normal := collision.get_normal()
-		var move_dir := motion.normalized()
-
-		# Angle between movement and surface normal
-		var angle = abs(move_dir.angle_to(normal))
-
-		# Allow sliding only if angle >= 45°
-		if angle >= PI / 4.0:
-			var slide_motion := motion.slide(normal)
-			move_and_collide(slide_motion)
-		# else: stop completely
+			if angle >= PI / 4.0:
+				move_and_collide(motion.slide(normal))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	queue_redraw()
 	speed = PlayerController.movement_speed
 	face_enemy()
 	
-	if PlayerController.clicks_per_second >= 20:
-		arms.play("gun")
-		arms.set_speed_scale(1.0)
-	elif PlayerController.clicks_per_second >= 15:
+	if player.attacking == false and not dead:
+		arms.play("idle")
+	if player.attacking == true and not dead:
+		arms.play("default")
+	
+	if PlayerController.clicks_per_second >= 15:
 		arms.set_speed_scale(2.0)
 	elif PlayerController.clicks_per_second >= 10:
 		arms.set_speed_scale(1.4)

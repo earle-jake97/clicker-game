@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0ut06fy2scrm"]
+[gd_scene format=3 uid="uid://c0ut06fy2scrm"]
 
-[ext_resource type="Script" path="res://systems/shop/shop.gd" id="1_vp5k6"]
+[ext_resource type="Script" uid="uid://buk0frdeqpb02" path="res://systems/shop/shop.gd" id="1_vp5k6"]
 [ext_resource type="Texture2D" uid="uid://bvul46pxm8stu" path="res://systems/shop/shop background.png" id="2_f72hq"]
 [ext_resource type="PackedScene" uid="uid://diamu2563shgv" path="res://systems/shop/wizard.tscn" id="3_lwegq"]
 [ext_resource type="PackedScene" uid="uid://drg84m4gd4tv3" path="res://systems/shop/shop_item.tscn" id="3_pfojo"]
@@ -12,68 +12,68 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfj14"]
 size = Vector2(208, 99)
 
-[node name="shop" type="Node2D"]
+[node name="shop" type="Node2D" unique_id=867492490]
 texture_filter = 2
 script = ExtResource("1_vp5k6")
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="." unique_id=527505339]
 position = Vector2(576, 324)
 texture = ExtResource("2_f72hq")
 
-[node name="Wizard" parent="." instance=ExtResource("3_lwegq")]
+[node name="Wizard" parent="." unique_id=1642083432 instance=ExtResource("3_lwegq")]
 texture_filter = 2
 position = Vector2(722, 408)
 
-[node name="foreground" type="Sprite2D" parent="."]
+[node name="foreground" type="Sprite2D" parent="." unique_id=1435193867]
 position = Vector2(665, 324)
 texture = ExtResource("4_5knm0")
 
-[node name="Shop_Item" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item" parent="." unique_id=1887376982 instance=ExtResource("3_pfojo")]
 position = Vector2(332, 430)
 
-[node name="Shop_Item2" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item2" parent="." unique_id=1976746224 instance=ExtResource("3_pfojo")]
 position = Vector2(303, 542)
 
-[node name="Shop_Item3" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item3" parent="." unique_id=1655433138 instance=ExtResource("3_pfojo")]
 position = Vector2(423, 542)
 
-[node name="Shop_Item4" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item4" parent="." unique_id=608662036 instance=ExtResource("3_pfojo")]
 position = Vector2(666, 591)
 
-[node name="Shop_Item5" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item5" parent="." unique_id=1153420384 instance=ExtResource("3_pfojo")]
 position = Vector2(863, 545)
 
-[node name="Shop_Item6" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item6" parent="." unique_id=406302405 instance=ExtResource("3_pfojo")]
 position = Vector2(1010, 541)
 
-[node name="Shop_Item7" parent="." instance=ExtResource("3_pfojo")]
+[node name="Shop_Item7" parent="." unique_id=318245318 instance=ExtResource("3_pfojo")]
 position = Vector2(973, 442)
 
-[node name="Hands" type="Sprite2D" parent="."]
+[node name="Hands" type="Sprite2D" parent="." unique_id=135839872]
 position = Vector2(688, 513)
 texture = ExtResource("4_2ohac")
 
-[node name="Exit" type="Sprite2D" parent="."]
+[node name="Exit" type="Sprite2D" parent="." unique_id=710229948]
 position = Vector2(107, 595)
 texture = ExtResource("5_pq2i5")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=206137133]
 position = Vector2(91, 601)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=65394672]
 position = Vector2(16, -5.5)
 shape = SubResource("RectangleShape2D_jfj14")
 
-[node name="Health_Item1" parent="." instance=ExtResource("8_vvdu4")]
+[node name="Health_Item1" parent="." unique_id=60633625 instance=ExtResource("8_vvdu4")]
 position = Vector2(459, 435)
 
-[node name="Health_Item2" parent="." instance=ExtResource("8_vvdu4")]
+[node name="Health_Item2" parent="." unique_id=2048704852 instance=ExtResource("8_vvdu4")]
 position = Vector2(236, 267)
 
-[node name="Health_Item3" parent="." instance=ExtResource("8_vvdu4")]
+[node name="Health_Item3" parent="." unique_id=127412422 instance=ExtResource("8_vvdu4")]
 position = Vector2(852, 440)
 
-[node name="Health_Item4" parent="." instance=ExtResource("8_vvdu4")]
+[node name="Health_Item4" parent="." unique_id=1164455705 instance=ExtResource("8_vvdu4")]
 position = Vector2(374, 266)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
