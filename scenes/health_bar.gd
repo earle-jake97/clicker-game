@@ -67,7 +67,6 @@ func _process(delta: float) -> void:
 		dead = true
 		animation_player.play("death")
 		await get_tree().create_timer(4.0).timeout
-		TestPlayer.visible = false
 		animation_player.play("default")
 		PlayerController.reset_to_defaults()
 	switch_sprite(percentage)

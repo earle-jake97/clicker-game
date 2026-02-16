@@ -12,7 +12,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	z_index = global_position.y
 	smoke_timer += delta
 	if smoke_timer >= smoke_spawn:
 		smoke_timer = 0
@@ -24,11 +23,9 @@ func _process(delta: float) -> void:
 		var offset_y = randf_range(-30, 30)
 		pebble.scale = Vector2(1.2, 1.2)
 		pebble.global_position = global_position + Vector2(offset_x, offset_y)
-		pebble.z_index = cloud.global_position.y
 		cloud.animation_player.stop()
 		cloud.scale = Vector2(1.2, 1.2)
 		cloud.global_position = global_position + Vector2(offset_x, offset_y)
-		cloud.z_index = cloud.global_position.y
 
 	global_position = global_position.move_toward(Vector2(-300, chosen_pos.y), 700 * delta)
 

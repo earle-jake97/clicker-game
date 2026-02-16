@@ -29,7 +29,7 @@ func _on_enemy_died(enemy):
 	PlayerController.grant_shields(GameState.scythe_amount * 5)
 	var scrimblo_random = PlayerController.calculate_luck()
 	if scrimblo_random <= 0.08:
-		spawn_scrimblo(TestPlayer.global_position + Vector2(randf_range(120, 400), randf_range(-60, 60)))
+		spawn_scrimblo(PlayerController.player.global_position + Vector2(randf_range(120, 400), randf_range(-60, 60)))
 		
 	
 	
@@ -68,5 +68,4 @@ func spawn_oil_explosion(position: Vector2, enemy: Node):
 	var explosion = OIL_EXPLOSION.instantiate()
 	explosion.global_position = position
 	explosion.explosion_damage = damage
-	explosion.z_index = explosion.global_position.y
 	add_child(explosion)

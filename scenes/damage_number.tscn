@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://8ejuyhgqoysc"]
+[gd_scene format=3 uid="uid://8ejuyhgqoysc"]
 
-[ext_resource type="Script" path="res://scenes/damage_number.gd" id="1_uyli1"]
-[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="2_tgymw"]
+[ext_resource type="Script" uid="uid://5t2oikxa3f4c" path="res://scenes/damage_number.gd" id="1_uyli1"]
+[ext_resource type="FontFile" uid="uid://w4754gdg1xfu" path="res://fonts/Jersey25-Regular.ttf" id="2_l4fel"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=1467484083]
 process_mode = 1
 z_index = 3000
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_uyli1")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1148223295]
 texture_filter = 1
 offset_right = 179.0
 offset_bottom = 22.0
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("2_tgymw")
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_l4fel")
+theme_override_font_sizes/font_size = 32
 text = "test number"

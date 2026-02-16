@@ -7,7 +7,6 @@ func _ready() -> void:
 	PlayerController.difficulty = 1
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
-	TestPlayer.visible = true
 	#PlayerController.movement_speed = 600
 	for spawner in get_tree().get_nodes_in_group("spawner"):
 		spawners.append(spawner)
@@ -23,6 +22,5 @@ func check_spawner_complete():
 			return
 	if get_tree().get_nodes_in_group("elite").size() > 0:
 		return
-	TestPlayer.visible = false
 	GameState.on_map_screen = true
 	SceneManager.switch_to_scene(MapView)

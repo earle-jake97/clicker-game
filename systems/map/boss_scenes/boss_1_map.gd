@@ -10,7 +10,6 @@ var boss
 var can_process = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	TestPlayer.global_position = marker_2d_2.global_position
 	#var rand = randf()
 	var rand = 0.1
 	if rand <= 0.3:
@@ -25,7 +24,6 @@ func _ready() -> void:
 	boss.died.connect(_on_boss_died)
 	
 	GameState.on_map_screen = false
-	TestPlayer.visible = true
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
 	if GameState.endless_mode:

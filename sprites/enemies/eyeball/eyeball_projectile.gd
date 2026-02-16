@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-var target = TestPlayer
+var target = PlayerController.player
 
 @export var speed: float = 400.0
 @export var turn_speed: float = 2 # radians per second (lower = wider turns)
@@ -36,12 +36,12 @@ func _physics_process(delta: float) -> void:
 			is_closer = distance < global_position.distance_to(target.global_position)
 
 		if entity.has_method("is_alive") and entity.is_alive() and is_closer and entity.global_position.x <= global_position.x:
-			if target.find_child("pivot", 1, 1):
+			if is_instance_valid(target) and entity.find_child("pivot", 1, 1):
 				target = entity.find_child("pivot", 1, 1)
 			else:
 				target = entity
 		else:
-			target = TestPlayer.find_child("pivot", 1, 1)
+			target = PlayerController.player.find_child("pivot", 1, 1)
 
 	# === STEERING LOGIC ===
 	if is_instance_valid(target):
@@ -57,7 +57,6 @@ func _physics_process(delta: float) -> void:
 
 	# === VISUAL ROTATION ===
 	rotation = velocity.angle() + PI
-	z_index = global_position.y - 1
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):

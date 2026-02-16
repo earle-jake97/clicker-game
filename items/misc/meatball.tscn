@@ -1,20 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://gqtw0ascl2u5"]
+[gd_scene format=3 uid="uid://gqtw0ascl2u5"]
 
-[ext_resource type="Script" path="res://meatball.gd" id="1_el2ck"]
+[ext_resource type="Script" uid="uid://dsqpi2v8hx3t3" path="res://meatball.gd" id="1_el2ck"]
 [ext_resource type="Texture2D" uid="uid://bll6c8382nxrg" path="res://items/misc/meatball.png" id="2_rlbsn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wb1sh"]
 radius = 14.0357
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=794061176]
+y_sort_enabled = true
 script = ExtResource("1_el2ck")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=741124107]
 texture = ExtResource("2_rlbsn")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=425394647]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=407501204]
 shape = SubResource("CircleShape2D_wb1sh")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

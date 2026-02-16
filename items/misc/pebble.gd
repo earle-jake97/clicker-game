@@ -12,7 +12,6 @@ func _ready():
 	random_speed = randf_range(230, SPREAD_SPEED)
 	rotation = randf_range(0, TAU)
 	position += Vector2(randf_range(-10, 10), randf_range(-10, 10))
-	z_index = global_position.y
 
 	# Fade out and queue free
 	var tween = create_tween()
@@ -22,4 +21,3 @@ func _ready():
 func _process(delta: float) -> void:
 	global_position += random_vec * random_speed * delta
 	rotation += rad_to_deg(15)
-	z_index = global_position.y + 6

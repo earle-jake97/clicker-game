@@ -2,22 +2,32 @@
 
 [ext_resource type="Script" uid="uid://cihytcauyrck4" path="res://map/ChoiceSlot.gd" id="1_43edn"]
 [ext_resource type="Texture2D" uid="uid://bld8g80bctvjn" path="res://map/icons/horde.png" id="1_i5m0t"]
+[ext_resource type="Texture2D" uid="uid://bqf5y47tweyoa" path="res://map/icons/deferral.png" id="3_d3m47"]
 
-[node name="ChoiceSlot" type="Control" unique_id=664601632]
-custom_minimum_size = Vector2(128, 128)
+[node name="ChoiceSlot" type="Control" unique_id=1954026689]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 128.0
-offset_bottom = 128.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
 script = ExtResource("1_43edn")
 
 [node name="Sprite2D" type="Button" parent="." unique_id=1584517053]
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+offset_right = 136.0
+offset_bottom = 136.0
 icon = ExtResource("1_i5m0t")
 flat = true
 
+[node name="deferral" type="Button" parent="." unique_id=961649059]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -57.0
+offset_right = 84.0
+offset_bottom = -19.0
+icon = ExtResource("3_d3m47")
+flat = true
+
+[connection signal="mouse_entered" from="Sprite2D" to="." method="_on_sprite_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Sprite2D" to="." method="_on_sprite_2d_mouse_exited"]
 [connection signal="pressed" from="Sprite2D" to="." method="_on_sprite_2d_pressed"]
+[connection signal="mouse_entered" from="deferral" to="." method="_on_deferral_mouse_entered"]
+[connection signal="mouse_exited" from="deferral" to="." method="_on_deferral_mouse_exited"]
+[connection signal="pressed" from="deferral" to="." method="_on_deferral_pressed"]

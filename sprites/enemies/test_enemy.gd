@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 
 	# Move toward player only if not waiting after attack
 	if player and not dead and not is_pushed and not is_frozen:
-		var direction = TestPlayer.global_position - global_position
+		var direction = player_model.global_position - global_position
 		var distance = direction.length()
 		if distance != 0:
 			direction = direction.normalized()
@@ -101,7 +101,7 @@ func apply_debuff():
 
 func look_at_player():
 	if not dead:
-			if global_position.x > TestPlayer.global_position.x:
+			if global_position.x > player_model.global_position.x:
 				container.scale.x = abs(container.scale.x)
 			else:
 				container.scale.x = -abs(container.scale.x)

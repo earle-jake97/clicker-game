@@ -14,7 +14,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	z_index = pivot.global_position.y
 	cum_damage.text = str(format_large_number(total_damage))
 	if damage_accumulated >= DAMAGE_THRESHOLD:
 		damage_accumulated -= DAMAGE_THRESHOLD

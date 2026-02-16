@@ -5,7 +5,6 @@ extends Node2D
 func _ready() -> void:
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
-	TestPlayer.visible = false
 	set_up_items()
 
 func set_up_items():

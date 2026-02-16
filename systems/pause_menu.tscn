@@ -1,106 +1,113 @@
-[gd_scene load_steps=6 format=3 uid="uid://uteyjrh5xtyh"]
+[gd_scene format=3 uid="uid://uteyjrh5xtyh"]
 
-[ext_resource type="Script" path="res://systems/pause.gd" id="1_t6q6d"]
+[ext_resource type="Script" uid="uid://wl5mxrfjyjoo" path="res://systems/pause.gd" id="1_t6q6d"]
 [ext_resource type="Texture2D" uid="uid://ccfl4glo4vas0" path="res://systems/pause_background.png" id="2_fu1gk"]
-[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="3_6get5"]
+[ext_resource type="FontFile" uid="uid://w4754gdg1xfu" path="res://fonts/Jersey25-Regular.ttf" id="3_04cus"]
 [ext_resource type="Texture2D" uid="uid://da2bwhaew8t81" path="res://systems/reset.png" id="4_j0jyv"]
 [ext_resource type="Texture2D" uid="uid://dqdr84o7v24pk" path="res://systems/you_sure.png" id="5_l5o60"]
 
-[node name="Pause_Menu" type="CanvasLayer"]
+[node name="Pause_Menu" type="CanvasLayer" unique_id=736584892]
 layer = 128
 script = ExtResource("1_t6q6d")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=625071668]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(28.9381, 16.3065)
 color = Color(0, 0, 0, 0.34902)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1683708039]
 offset_left = 5.0
 offset_top = 4.0
 offset_right = 1157.0
 offset_bottom = 652.0
 texture = ExtResource("2_fu1gk")
 
-[node name="ItemGrid" type="GridContainer" parent="."]
+[node name="ItemGrid" type="GridContainer" parent="." unique_id=1142639507]
 offset_left = 52.0
 offset_top = 75.0
 offset_right = 1097.0
 offset_bottom = 588.0
 columns = 15
 
-[node name="dmg_label" type="Label" parent="."]
+[node name="dmg_label" type="Label" parent="." unique_id=1286763559]
 offset_left = 96.0
-offset_top = 42.0
+offset_top = 35.0
 offset_right = 173.0
-offset_bottom = 65.0
+offset_bottom = 68.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="as_label" type="Label" parent="."]
-offset_left = 266.0
-offset_top = 40.0
-offset_right = 343.0
-offset_bottom = 63.0
+[node name="as_label" type="Label" parent="." unique_id=1555708641]
+offset_left = 268.0
+offset_top = 35.0
+offset_right = 345.0
+offset_bottom = 68.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="crit_rate_label" type="Label" parent="."]
+[node name="crit_rate_label" type="Label" parent="." unique_id=66578384]
 offset_left = 467.0
-offset_top = 41.0
+offset_top = 35.0
 offset_right = 544.0
-offset_bottom = 64.0
+offset_bottom = 68.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="crit_dmg_label" type="Label" parent="."]
+[node name="crit_dmg_label" type="Label" parent="." unique_id=52911807]
 offset_left = 659.0
-offset_top = 40.0
+offset_top = 36.0
 offset_right = 736.0
-offset_bottom = 63.0
+offset_bottom = 69.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="armor_label" type="Label" parent="."]
+[node name="armor_label" type="Label" parent="." unique_id=476060161]
 offset_left = 817.0
-offset_top = 39.0
+offset_top = 37.0
 offset_right = 894.0
-offset_bottom = 62.0
+offset_bottom = 70.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="luck_label" type="Label" parent="."]
+[node name="luck_label" type="Label" parent="." unique_id=98018517]
 offset_left = 937.0
-offset_top = 38.0
+offset_top = 36.0
 offset_right = 1014.0
-offset_bottom = 61.0
+offset_bottom = 69.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="ms_label" type="Label" parent="."]
+[node name="ms_label" type="Label" parent="." unique_id=1058025950]
 offset_left = 1069.0
-offset_top = 39.0
+offset_top = 38.0
 offset_right = 1146.0
-offset_bottom = 62.0
+offset_bottom = 71.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "?"
 
-[node name="RestartButton" type="TextureButton" parent="."]
+[node name="RestartButton" type="TextureButton" parent="." unique_id=314079684]
 offset_left = 982.0
 offset_top = 589.0
 offset_right = 1114.0
 offset_bottom = 629.0
 texture_normal = ExtResource("4_j0jyv")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1337233124]
 visible = false
 offset_left = -10.0
 offset_top = -6.0
@@ -109,49 +116,49 @@ offset_bottom = 35.0
 scale = Vector2(28.9381, 16.3065)
 color = Color(0, 0, 0, 0.34902)
 
-[node name="Sprite2D" type="Sprite2D" parent="ColorRect2"]
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect2" unique_id=1273878136]
 position = Vector2(20.2847, 19.3788)
 scale = Vector2(0.0345565, 0.0613252)
 texture = ExtResource("5_l5o60")
 
-[node name="yes_button" type="Button" parent="ColorRect2/Sprite2D"]
+[node name="yes_button" type="Button" parent="ColorRect2/Sprite2D" unique_id=1827737106]
 modulate = Color(1, 1, 1, 0)
 offset_left = -106.0
 offset_top = 44.0
 offset_right = -38.0001
 offset_bottom = 84.0
 
-[node name="prompt_label" type="Label" parent="ColorRect2/Sprite2D"]
-offset_left = -348.0
-offset_top = -21.0
-offset_right = 377.0
-offset_bottom = 101.0
+[node name="prompt_label" type="Label" parent="ColorRect2/Sprite2D" unique_id=1632286116]
+offset_left = -313.00085
+offset_top = -46.000412
+offset_right = 411.99915
+offset_bottom = 75.99959
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "Are you sure you want to reset your current run?"
 
-[node name="yes" type="Label" parent="ColorRect2/Sprite2D"]
+[node name="yes" type="Label" parent="ColorRect2/Sprite2D" unique_id=1023162637]
 offset_left = -97.0001
 offset_top = 52.0
 offset_right = -48.0001
 offset_bottom = 77.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "yes"
 
-[node name="no" type="Label" parent="ColorRect2/Sprite2D"]
+[node name="no" type="Label" parent="ColorRect2/Sprite2D" unique_id=1389146340]
 offset_left = 59.9999
 offset_top = 59.0
 offset_right = 109.0
 offset_bottom = 84.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_6get5")
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("3_04cus")
+theme_override_font_sizes/font_size = 32
 text = "no"
 
-[node name="no_button" type="Button" parent="ColorRect2/Sprite2D"]
+[node name="no_button" type="Button" parent="ColorRect2/Sprite2D" unique_id=280758291]
 modulate = Color(1, 1, 1, 0)
 offset_left = 45.9999
 offset_top = 51.0

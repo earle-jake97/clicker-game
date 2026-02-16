@@ -1,15 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://6xuvv0q7pqb1"]
+[gd_scene format=3 uid="uid://6xuvv0q7pqb1"]
 
 [ext_resource type="Texture2D" uid="uid://dup114uxkxwpc" path="res://sprites/enemies/zombie/arm.png" id="1_omlpy"]
-[ext_resource type="Script" path="res://sprites/enemies/zombie/zombie.gd" id="1_ymvky"]
+[ext_resource type="Script" uid="uid://devn53jogbx4t" path="res://sprites/enemies/zombie/zombie.gd" id="1_ymvky"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_8etlb"]
 [ext_resource type="Texture2D" uid="uid://how1lurif26j" path="res://sprites/enemies/zombie/leg.png" id="2_habx0"]
 [ext_resource type="Texture2D" uid="uid://by0yscc54fh7q" path="res://sprites/enemies/zombie/body.png" id="3_etvra"]
 [ext_resource type="Texture2D" uid="uid://cqe03cyqtpjoe" path="res://sprites/enemies/zombie/head.png" id="4_ifywg"]
 [ext_resource type="Texture2D" uid="uid://bxte6tbbrudb5" path="res://sprites/enemies/zombie/jaw.png" id="5_vsohu"]
 [ext_resource type="PackedScene" uid="uid://bom1o7qorj1oo" path="res://scenes/enemies/progress_bar.tscn" id="7_robvg"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="9_slkud"]
-[ext_resource type="Script" path="res://systems/damage_batcher.gd" id="10_c6chb"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="9_slkud"]
+[ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="10_c6chb"]
 [ext_resource type="AudioStream" uid="uid://bwt18l46eml6q" path="res://sprites/enemies/zombie/wuhh.wav" id="11_gleub"]
 
 [sub_resource type="Animation" id="Animation_li3hm"]
@@ -801,11 +801,11 @@ tracks/11/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ejwg1"]
 _data = {
-"RESET": SubResource("Animation_li3hm"),
-"attack": SubResource("Animation_cnee8"),
-"die": SubResource("Animation_q61am"),
-"rise": SubResource("Animation_yktrl"),
-"walk": SubResource("Animation_s7kxu")
+&"RESET": SubResource("Animation_li3hm"),
+&"attack": SubResource("Animation_cnee8"),
+&"die": SubResource("Animation_q61am"),
+&"rise": SubResource("Animation_yktrl"),
+&"walk": SubResource("Animation_s7kxu")
 }
 
 [sub_resource type="Animation" id="Animation_sg0r7"]
@@ -965,109 +965,106 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_414bj"]
 _data = {
-"RESET": SubResource("Animation_sg0r7"),
-"bite": SubResource("Animation_yhegk"),
-"bob": SubResource("Animation_he1mm")
+&"RESET": SubResource("Animation_sg0r7"),
+&"bite": SubResource("Animation_yhegk"),
+&"bob": SubResource("Animation_he1mm")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3sml"]
 size = Vector2(70, 98)
 
-[node name="zombie" type="Node2D" groups=["enemy"]]
+[node name="zombie" type="Node2D" unique_id=1568412657 groups=["enemy"]]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_ymvky")
 max_health = 50.0
 
-[node name="shadow" type="Sprite2D" parent="."]
+[node name="shadow" type="Sprite2D" parent="." unique_id=507977936]
 modulate = Color(1, 1, 1, 0.537255)
-z_as_relative = false
+z_index = -1
 position = Vector2(19, 1)
 scale = Vector2(0.0664589, 0.222496)
 texture = ExtResource("2_8etlb")
 
-[node name="sprite" type="Node2D" parent="."]
+[node name="sprite" type="Node2D" parent="." unique_id=1596380475]
 position = Vector2(0, -8)
 
-[node name="back arm" type="Sprite2D" parent="sprite"]
+[node name="back arm" type="Sprite2D" parent="sprite" unique_id=3262749]
 position = Vector2(7, -42)
 texture = ExtResource("1_omlpy")
 offset = Vector2(-23, 2)
 
-[node name="back leg" type="Sprite2D" parent="sprite"]
+[node name="back leg" type="Sprite2D" parent="sprite" unique_id=2027800359]
 position = Vector2(12, -14)
 texture = ExtResource("2_habx0")
 offset = Vector2(-5, 11)
 
-[node name="body" type="Sprite2D" parent="sprite"]
+[node name="body" type="Sprite2D" parent="sprite" unique_id=2122322020]
 position = Vector2(19, -28)
 texture = ExtResource("3_etvra")
 
-[node name="head2" type="Node2D" parent="sprite"]
+[node name="head2" type="Node2D" parent="sprite" unique_id=2145565878]
 
-[node name="head" type="Sprite2D" parent="sprite/head2"]
+[node name="head" type="Sprite2D" parent="sprite/head2" unique_id=1894522175]
 position = Vector2(28, -59)
 texture = ExtResource("4_ifywg")
 offset = Vector2(-28, -16)
 
-[node name="jaw" type="Sprite2D" parent="sprite/head2"]
+[node name="jaw" type="Sprite2D" parent="sprite/head2" unique_id=897154003]
 position = Vector2(16, -48)
 texture = ExtResource("5_vsohu")
 offset = Vector2(-16, -5)
 
-[node name="front leg" type="Sprite2D" parent="sprite"]
+[node name="front leg" type="Sprite2D" parent="sprite" unique_id=927912892]
 position = Vector2(33, -17)
 texture = ExtResource("2_habx0")
 offset = Vector2(-4, 13)
 
-[node name="front arm" type="Sprite2D" parent="sprite"]
+[node name="front arm" type="Sprite2D" parent="sprite" unique_id=1164044321]
 position = Vector2(24, -45)
 texture = ExtResource("1_omlpy")
 offset = Vector2(-25, 3)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ejwg1")
-}
-autoplay = "rise"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1282406207]
+libraries/ = SubResource("AnimationLibrary_ejwg1")
+autoplay = &"rise"
 
-[node name="head_anim" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_414bj")
-}
-autoplay = "bob"
+[node name="head_anim" type="AnimationPlayer" parent="." unique_id=1951770162]
+libraries/ = SubResource("AnimationLibrary_414bj")
+autoplay = &"bob"
 
-[node name="ProgressBar" parent="." instance=ExtResource("7_robvg")]
+[node name="ProgressBar" parent="." unique_id=304404096 instance=ExtResource("7_robvg")]
 offset_left = -30.0
 offset_top = -132.0
 offset_right = 130.0
 offset_bottom = -100.0
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=1897181141]
 offset_left = 42.0
 offset_top = -135.0
 offset_right = 82.0
 offset_bottom = -95.0
 script = ExtResource("9_slkud")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=933480514]
 position = Vector2(-40, -87)
 
-[node name="batcher" type="Node" parent="Node2D"]
+[node name="batcher" type="Node" parent="Node2D" unique_id=570354207]
 script = ExtResource("10_c6chb")
 
-[node name="crosshair" type="Marker2D" parent="."]
+[node name="crosshair" type="Marker2D" parent="." unique_id=57575644]
 position = Vector2(-38, -65)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=203502485]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=25172369]
 position = Vector2(17, -42)
 shape = SubResource("RectangleShape2D_q3sml")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=102102116]
 stream = ExtResource("11_gleub")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1797313690]
 navigation_layers = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

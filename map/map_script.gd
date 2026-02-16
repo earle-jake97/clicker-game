@@ -8,7 +8,6 @@ var choice_scene: PackedScene = preload("res://map/ChoiceSlot_Scene.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PauseMenu.update_labels()
-	TestPlayer.visible = false
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
 	GameState.on_map_screen = true
@@ -16,7 +15,12 @@ func _ready() -> void:
 
 
 func generate_choices():
+	print("Deferred rooms: " + str(manager.deferred) + "Current Round: " + str(manager.round))
 	var options: int = 0
+	if manager.round == 10 and manager.deferred.size() == 0:
+		manager.round += 1
+	if manager.round == 11 and manager.deferred.size() == 0:
+		manager.round += 1
 	match manager.round:
 		1:
 			options = randi_range(2, 3)
@@ -47,6 +51,12 @@ func generate_choices():
 			populate_powerup(2)
 		10:
 			options = 1
+			populate_deferred(manager.deferred.pop_front())
+		11:
+			options = 1
+			populate_deferred(manager.deferred.pop_front())
+		12:
+			options = 1
 			populate_boss_container(options)
 		_:
 			options = 4
@@ -58,6 +68,8 @@ func populate_boss_container(amount):
 		var room_name = manager.RoomName.BOSS
 		choice_instance.room_name = room_name
 		choice_instance.room_sprite = RoomDatabase.get_sprite_for_room(room_name)
+		choice_instance.room_description = RoomDatabase.get_description_for_room(room_name)
+		choice_instance.hide_deferral = true
 		choice_instance.connect("selected", Callable(self, "_on_choice_selected"))
 		choice_container.add_child(choice_instance)
 	return
@@ -69,9 +81,21 @@ func populate_container(amount, category):
 		choice_instance.room_name = room_name
 		choice_instance.room_category = category
 		choice_instance.room_sprite = RoomDatabase.get_sprite_for_room(room_name)
+		choice_instance.room_description = RoomDatabase.get_description_for_room(room_name)
 		choice_instance.connect("selected", Callable(self, "_on_choice_selected"))
+		choice_instance.connect("deferred", Callable(self, "_on_room_deferred"))
 		choice_container.add_child(choice_instance)
 	return
+
+func populate_deferred(room_name):
+	var choice_instance = choice_scene.instantiate()
+	choice_instance.room_name = room_name
+	choice_instance.room_sprite = RoomDatabase.get_sprite_for_room(room_name)
+	choice_instance.room_description = RoomDatabase.get_description_for_room(room_name)
+	choice_instance.hide_deferral = true
+	choice_instance.connect("selected", Callable(self, "_on_choice_selected"))
+	choice_instance.connect("deferred", Callable(self, "_on_room_deferred"))
+	choice_container.add_child(choice_instance)
 
 func populate_powerup(amount):
 	for i in range(amount):
@@ -81,9 +105,16 @@ func populate_powerup(amount):
 			room_name = manager.RoomName.ITEM
 		choice_instance.room_name = room_name
 		choice_instance.room_sprite = RoomDatabase.get_sprite_for_room(room_name)
+		choice_instance.room_description = RoomDatabase.get_description_for_room(room_name)
 		choice_instance.connect("selected", Callable(self, "_on_choice_selected"))
+		choice_instance.connect("deferred", Callable(self, "_on_room_deferred"))
 		choice_container.add_child(choice_instance)
 	return
+
+func clear_container():
+	for item in choice_container.get_children():
+		item.queue_free()
+	
 
 func _on_choice_selected(room_name):
 	print("Selected:", room_name)
@@ -97,7 +128,12 @@ func _on_choice_selected(room_name):
 		PlayerController.difficulty += 1
 		GameState.endless_counter += 1
 	SceneManager.switch_to_scene(scene_path)
-
+	
+func _on_room_deferred(room_name):
+	clear_container()
+	manager.round += 1
+	manager.deferred.append(room_name)
+	generate_choices()
 
 func _on_button_pressed() -> void:
 	SceneManager.switch_to_scene("res://systems/test_room.tscn")

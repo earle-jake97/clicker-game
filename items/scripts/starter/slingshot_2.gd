@@ -9,7 +9,7 @@ var damage = 2
 var radius = 105
 
 func starter_proc(target: Node, source_item: BaseItem = null):
-	if not player or not target or not is_instance_valid(target):
+	if player or not target or not is_instance_valid(target):
 		return
 
 	var tree = player.get_tree() if player.is_inside_tree() else null
@@ -33,7 +33,7 @@ func get_target_position(target):
 	return target_position
 
 func get_enemies_in_radius(center_position):
-	var space = player_model.get_world_2d().direct_space_state
+	var space = get_player_body().get_world_2d().direct_space_state
 	var query = PhysicsShapeQueryParameters2D.new()
 	var shape = CircleShape2D.new()
 	shape.radius = radius

@@ -27,5 +27,5 @@ func timed_blow():
 			strength += 0.5
 	var blow_scene = BLOW_BOX.instantiate()
 	blow_scene.strength = strength
-	blow_scene.global_position = TestPlayer.global_position
+	blow_scene.global_position = get_player_body().global_position
 	add_child(blow_scene)

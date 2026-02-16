@@ -20,7 +20,6 @@ var lowest_price = 30
 func _ready() -> void:
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
-	TestPlayer.visible = false
 	GameState.on_map_screen = false
 	set_up_items()
 

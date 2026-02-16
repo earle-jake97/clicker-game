@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://4rlk8wo2hajn"]
+[gd_scene format=3 uid="uid://4rlk8wo2hajn"]
 
-[ext_resource type="Script" path="res://items/misc/pebble.gd" id="1_nughl"]
+[ext_resource type="Script" uid="uid://bpwhjbireu7nn" path="res://items/misc/pebble.gd" id="1_nughl"]
 [ext_resource type="Texture2D" uid="uid://cef2owiqhsnnf" path="res://sprites/enemies/devil_boss/pebble.png" id="2_lusvx"]
 
-[node name="pebble" type="Node2D"]
+[node name="pebble" type="Node2D" unique_id=2022768741]
 z_index = 4096
+y_sort_enabled = true
 rotation = 3.14159
 scale = Vector2(2, 2)
 script = ExtResource("1_nughl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=475367534]
 texture_filter = 1
 scale = Vector2(1.6, 1.72)
 texture = ExtResource("2_lusvx")

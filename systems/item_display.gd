@@ -4,12 +4,6 @@ extends Control
 var entered = false
 var item_data
 
-
-func _process(delta: float) -> void:
-	var mouse_pos = get_viewport().get_mouse_position()
-	Tooltip.update_position(mouse_pos)
-
-
 func setup(item_data, count: int = 1):
 	self.item_data = item_data
 	texture_rect.texture = item_data.item_icon
@@ -20,7 +14,7 @@ func setup(item_data, count: int = 1):
 
 func _on_texture_rect_mouse_entered() -> void:
 	entered = true
-	Tooltip.set_text(item_data.item_name + ": " + item_data.item_description)
+	Tooltip.set_text(item_data.item_name, item_data.item_description)
 
 
 func _on_texture_rect_mouse_exited() -> void:

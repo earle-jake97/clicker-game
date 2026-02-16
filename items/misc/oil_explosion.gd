@@ -14,7 +14,6 @@ func _ready():
 			var cloud = smoke_scene.instantiate()
 			add_child(cloud)
 			cloud.global_position = global_position
-			cloud.z_index = cloud.global_position.y
 	# Auto-destroy the explosion node after a short delay
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cjsherht5kei2"]
+
+[ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="1_6ci5c"]
+[ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="2_61m5h"]
+
+[node name="ProgressBar" type="TextureProgressBar" unique_id=333788726]
+y_sort_enabled = true
+texture_filter = 1
+offset_left = -34.0
+offset_top = -204.0
+offset_right = 126.0
+offset_bottom = -172.0
+scale = Vector2(0.437226, 0.402117)
+texture_under = ExtResource("1_6ci5c")
+texture_progress = ExtResource("2_61m5h")

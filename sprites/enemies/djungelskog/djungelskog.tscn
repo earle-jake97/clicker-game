@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://0woj01ejr33b"]
+[gd_scene format=3 uid="uid://0woj01ejr33b"]
 
-[ext_resource type="Script" path="res://sprites/enemies/djungelskog/djungelskog.gd" id="1_3olan"]
+[ext_resource type="Script" uid="uid://b3e18n2ebbkdb" path="res://sprites/enemies/djungelskog/djungelskog.gd" id="1_3olan"]
 [ext_resource type="Texture2D" uid="uid://b0gjsspwgkpf4" path="res://sprites/enemies/djungelskog/djungelskog_dummy.png" id="1_vpkix"]
+[ext_resource type="FontFile" uid="uid://w4754gdg1xfu" path="res://fonts/Jersey25-Regular.ttf" id="3_cdbve"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="3_nubhm"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="4_78pwv"]
-[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="6_dsfa8"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="4_78pwv"]
 
 [sub_resource type="Animation" id="Animation_wvyn4"]
 length = 0.001
@@ -119,71 +119,70 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y6prf"]
 _data = {
-"RESET": SubResource("Animation_wvyn4"),
-"hit": SubResource("Animation_rjjnc"),
-"hit_hard": SubResource("Animation_rok0b"),
-"hit_very_hard": SubResource("Animation_60exe")
+&"RESET": SubResource("Animation_wvyn4"),
+&"hit": SubResource("Animation_rjjnc"),
+&"hit_hard": SubResource("Animation_rok0b"),
+&"hit_very_hard": SubResource("Animation_60exe")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cw3qs"]
 size = Vector2(358, 404)
 
-[node name="djungelskog" type="Node2D" groups=["enemy"]]
+[node name="djungelskog" type="Node2D" unique_id=2083811012 groups=["enemy"]]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_3olan")
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=785555539]
 offset_left = 115.0
 offset_top = -241.0
 offset_right = 155.0
 offset_bottom = -201.0
 script = ExtResource("4_78pwv")
 
-[node name="cum_damage" type="Label" parent="."]
+[node name="cum_damage" type="Label" parent="." unique_id=25632122]
 offset_left = 3.0
 offset_top = -329.0
 offset_right = 46.0
 offset_bottom = -273.0
 theme_override_constants/outline_size = 14
-theme_override_fonts/font = ExtResource("6_dsfa8")
-theme_override_font_sizes/font_size = 42
+theme_override_fonts/font = ExtResource("3_cdbve")
+theme_override_font_sizes/font_size = 64
 text = "0"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1641866430]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2084500290]
 polygon = PackedVector2Array(-71, 146, 108, 167, 130, 142, 109, -22, -56, -22, -113, 67)
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=1027864529]
 
-[node name="shadow" type="Sprite2D" parent="container"]
+[node name="shadow" type="Sprite2D" parent="container" unique_id=1426504093]
 modulate = Color(1, 1, 1, 0.537255)
 z_as_relative = false
 position = Vector2(1, 165)
 scale = Vector2(0.306462, 0.422496)
 texture = ExtResource("3_nubhm")
 
-[node name="sprite" type="Sprite2D" parent="container"]
+[node name="sprite" type="Sprite2D" parent="container" unique_id=1539780119]
 texture = ExtResource("1_vpkix")
 
-[node name="pivot" type="Marker2D" parent="container/sprite"]
+[node name="pivot" type="Marker2D" parent="container/sprite" unique_id=1597636613]
 position = Vector2(-1, 123)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=637904039]
 root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_y6prf")
-}
-autoplay = "hit"
+libraries/ = SubResource("AnimationLibrary_y6prf")
+autoplay = &"hit"
 
-[node name="Area2D" type="Area2D" parent="container"]
+[node name="Area2D" type="Area2D" parent="container" unique_id=1558732436]
 position = Vector2(-13, -3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=760094400]
 position = Vector2(5, 4)
 shape = SubResource("RectangleShape2D_cw3qs")
 
-[node name="crosshair" type="Marker2D" parent="container"]
+[node name="crosshair" type="Marker2D" parent="container" unique_id=841134413]
 position = Vector2(-109, 25)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1769997255]

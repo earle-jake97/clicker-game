@@ -29,7 +29,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	z_index = global_position.y
 	time += delta
 	var t = clamp(time / duration, 0, 1)
 

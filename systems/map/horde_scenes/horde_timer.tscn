@@ -1,49 +1,45 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2twchfapgqgq"]
+[gd_scene format=3 uid="uid://b2twchfapgqgq"]
 
-[ext_resource type="Script" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_83vy7"]
+[ext_resource type="Script" uid="uid://jl8nph4jiq51" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_83vy7"]
 [ext_resource type="Texture2D" uid="uid://c4nj7w0dbrmt5" path="res://backgrounds/1.png" id="2_gwip4"]
-[ext_resource type="Script" path="res://scenes/spawn_devil.gd" id="3_ldxr3"]
+[ext_resource type="Script" uid="uid://1epq8eux77wq" path="res://scenes/spawn_devil.gd" id="3_ldxr3"]
 [ext_resource type="PackedScene" uid="uid://c46jces8nqyq6" path="res://scenes/devil.tscn" id="4_gdv8s"]
 [ext_resource type="PackedScene" uid="uid://dop45afcxfw37" path="res://scenes/projectile_demon.tscn" id="5_yx1x3"]
 [ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="6_xua7o"]
 [ext_resource type="PackedScene" uid="uid://t8ttvohfehwf" path="res://sprites/enemies/eyeball/eyeball_enemy.tscn" id="8_1o1t5"]
-[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="8_7tgdk"]
-[ext_resource type="Script" path="res://systems/camera.gd" id="11_7kaaw"]
+[ext_resource type="PackedScene" uid="uid://cdjjjvfpsn86k" path="res://characters/goblin/goblin_model.tscn" id="9_o1wpj"]
+[ext_resource type="Script" uid="uid://dbo7l6ar52cqe" path="res://systems/camera.gd" id="11_7kaaw"]
 
-[sub_resource type="Theme" id="Theme_0a1jv"]
-default_font = ExtResource("8_7tgdk")
-default_font_size = 32
-
-[node name="Timer Room" type="Node2D"]
+[node name="Timer Room" type="Node2D" unique_id=1221475383]
 texture_filter = 1
 position = Vector2(-2, 0)
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_83vy7")
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="." unique_id=1059048026]
 z_index = -100
 texture_filter = 1
 position = Vector2(543, 311.922)
 scale = Vector2(0.96, 0.844961)
 texture = ExtResource("2_gwip4")
 
-[node name="Positions" type="Node2D" parent="."]
+[node name="Positions" type="Node2D" parent="." unique_id=1259294951]
 
-[node name="Marker2D" type="Marker2D" parent="Positions"]
+[node name="Marker2D" type="Marker2D" parent="Positions" unique_id=756837112]
 position = Vector2(135.266, 299.419)
 
-[node name="Marker2D2" type="Marker2D" parent="Positions"]
+[node name="Marker2D2" type="Marker2D" parent="Positions" unique_id=478573884]
 position = Vector2(149.356, 432.171)
 
-[node name="Marker2D3" type="Marker2D" parent="Positions"]
+[node name="Marker2D3" type="Marker2D" parent="Positions" unique_id=1310610031]
 position = Vector2(168.143, 561.047)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=358795143]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1104437189]
 texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -53,13 +49,13 @@ offset_top = 7.75194
 offset_right = 593.854
 offset_bottom = 49.7519
 grow_horizontal = 2
-theme = SubResource("Theme_0a1jv")
 theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 64
 text = "60
 "
 horizontal_alignment = 1
 
-[node name="devil spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="devil spawner" type="Node2D" parent="." unique_id=1854124357 groups=["spawner"]]
 position = Vector2(1055.83, 562.984)
 script = ExtResource("3_ldxr3")
 enemy_scene = ExtResource("4_gdv8s")
@@ -74,7 +70,7 @@ enemy_cash_value_min = 1
 enemy_cash_value_max = 2
 enemy_speed = 100
 
-[node name="thrower spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="thrower spawner" type="Node2D" parent="." unique_id=1392969353 groups=["spawner"]]
 position = Vector2(1090.58, 562.985)
 script = ExtResource("3_ldxr3")
 enemy_scene = ExtResource("5_yx1x3")
@@ -89,7 +85,7 @@ enemy_cash_value_min = 5
 enemy_cash_value_max = 10
 enemy_speed = 100
 
-[node name="imp spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="imp spawner" type="Node2D" parent="." unique_id=1721819629 groups=["spawner"]]
 position = Vector2(1057.7, 562.985)
 script = ExtResource("3_ldxr3")
 enemy_scene = ExtResource("6_xua7o")
@@ -104,7 +100,7 @@ enemy_cash_value_min = 1
 enemy_cash_value_max = 2
 enemy_speed = 275
 
-[node name="eye spawner" type="Node2D" parent="." groups=["spawner"]]
+[node name="eye spawner" type="Node2D" parent="." unique_id=150778272 groups=["spawner"]]
 position = Vector2(1106.55, 418.605)
 script = ExtResource("3_ldxr3")
 enemy_scene = ExtResource("8_1o1t5")
@@ -118,7 +114,10 @@ enemy_cash_value_min = 1
 enemy_cash_value_max = 8
 enemy_speed = 100
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1955985413]
 position = Vector2(542.942, 313.954)
 zoom = Vector2(0.75, 0.75)
 script = ExtResource("11_7kaaw")
+
+[node name="Goblin Model" parent="." unique_id=1834059154 instance=ExtResource("9_o1wpj")]
+position = Vector2(264.8957, 438.9535)

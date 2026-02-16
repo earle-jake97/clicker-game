@@ -58,7 +58,6 @@ func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageTy
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	z_index = pivot.global_position.y
 	mouth_timer += delta
 	if health <= max_health/2:
 		fireball_cooldown += delta * 2
@@ -168,13 +167,11 @@ func meditate():
 
 func slam():
 	animation_player.play("slam")
-	var ran = TestPlayer.global_position + Vector2(2000, randf_range( -200, 200))
+	var ran = player_model.global_position + Vector2(2000, randf_range( -200, 200))
 	var shockwave = SHOCKWAVE.instantiate()
 	add_child(shockwave)
 	shockwave.chosen_pos = ran
 	shockwave.global_position = ran
-	shockwave.z_index = shockwave.global_position.y
-	
 
 func die():
 	debuff_container.hide()

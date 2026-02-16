@@ -63,7 +63,6 @@ func _process(delta: float) -> void:
 			paid_out = true
 			player_controller.add_cash(value)
 		die()
-	z_index = round(global_position.y)
 	
 	if moving:
 		move_forward(delta)

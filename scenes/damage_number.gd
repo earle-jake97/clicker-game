@@ -10,7 +10,6 @@ var stale_timer := Timer.new()
 
 func _ready() -> void:
 	SceneManager.connect("scene_switched", Callable(self, "queue_free"))
-	z_index = original_z
 
 	# Setup stale timer
 	stale_timer.one_shot = true
@@ -26,7 +25,6 @@ func show_number(amount: int, color: Color = Color.WHITE, update_only: bool = fa
 		var scaled_size = clamp(8 + log(amount) * 3.5, 8, 64)
 		label.add_theme_font_size_override("font_size", int(scaled_size))
 
-		z_index = original_z - int(scaled_size)
 	else:
 		label.text = ""
 

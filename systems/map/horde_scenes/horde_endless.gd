@@ -10,7 +10,6 @@ func _ready() -> void:
 	GameState.on_map_screen = false
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
-	TestPlayer.visible = true
 	GameState.endless_counter += 1
 	PlayerController.difficulty += 1
 	var difficulty = PlayerController.difficulty

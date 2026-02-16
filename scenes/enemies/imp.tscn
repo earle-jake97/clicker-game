@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://b0vaiulul6fbm"]
+[gd_scene format=3 uid="uid://b0vaiulul6fbm"]
 
-[ext_resource type="Script" path="res://scenes/enemies/imp.gd" id="1_hdgym"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="2_6irr7"]
+[ext_resource type="Script" uid="uid://dvtb054ufc0kq" path="res://scenes/enemies/imp.gd" id="1_hdgym"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="2_6irr7"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_h7qfv"]
 [ext_resource type="Texture2D" uid="uid://dudba01qk7bcw" path="res://sprites/enemies/imp/arm2.png" id="3_mnf50"]
 [ext_resource type="Texture2D" uid="uid://6bu82kni8vbn" path="res://sprites/enemies/imp/tail.png" id="4_qsbnw"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dw6o4uafkf0gb" path="res://sprites/enemies/imp/head.png" id="6_16gse"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="6_f4ftq"]
 [ext_resource type="Texture2D" uid="uid://m7k7jv0bo14f" path="res://sprites/enemies/imp/arm1.png" id="7_mv1j5"]
-[ext_resource type="Script" path="res://systems/damage_batcher.gd" id="8_m1l0c"]
+[ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="8_m1l0c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjubl"]
 size = Vector2(67.75, 74)
@@ -560,79 +560,78 @@ tracks/9/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rw0yy"]
 _data = {
-"RESET": SubResource("Animation_q0fod"),
-"attack": SubResource("Animation_0xnkx"),
-"die": SubResource("Animation_fm6ug"),
-"move": SubResource("Animation_y6b1v")
+&"RESET": SubResource("Animation_q0fod"),
+&"attack": SubResource("Animation_0xnkx"),
+&"die": SubResource("Animation_fm6ug"),
+&"move": SubResource("Animation_y6b1v")
 }
 
-[node name="devil" type="Node2D" groups=["enemy"]]
+[node name="devil" type="Node2D" unique_id=390845229 groups=["enemy"]]
+y_sort_enabled = true
 script = ExtResource("1_hdgym")
 max_health = 80.0
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=84471236]
 
-[node name="crosshair" type="Marker2D" parent="container"]
+[node name="crosshair" type="Marker2D" parent="container" unique_id=1707733515]
 position = Vector2(-15, -104)
 
-[node name="shadow" type="Sprite2D" parent="container"]
+[node name="shadow" type="Sprite2D" parent="container" unique_id=1232431753]
 modulate = Color(1, 1, 1, 0.537255)
 z_index = -1
 position = Vector2(9, 6)
 scale = Vector2(0.0792833, 0.132945)
 texture = ExtResource("2_h7qfv")
 
-[node name="sprite" type="Node2D" parent="container"]
+[node name="sprite" type="Node2D" parent="container" unique_id=1626581891]
 position = Vector2(8, -111)
 scale = Vector2(0.5, 0.5)
 
-[node name="arm2" type="Sprite2D" parent="container/sprite"]
+[node name="arm2" type="Sprite2D" parent="container/sprite" unique_id=1273312523]
 position = Vector2(-5, 14)
 texture = ExtResource("3_mnf50")
 
-[node name="tail" type="Sprite2D" parent="container/sprite"]
+[node name="tail" type="Sprite2D" parent="container/sprite" unique_id=828439225]
 position = Vector2(-7, 54)
 texture = ExtResource("4_qsbnw")
 
-[node name="body" type="Sprite2D" parent="container/sprite"]
+[node name="body" type="Sprite2D" parent="container/sprite" unique_id=87879427]
 position = Vector2(21, 11)
 texture = ExtResource("5_j5bog")
 
-[node name="pivot" type="Marker2D" parent="container/sprite/body"]
+[node name="pivot" type="Marker2D" parent="container/sprite/body" unique_id=668131947]
 position = Vector2(1, -3)
 
-[node name="head" type="Sprite2D" parent="container/sprite"]
+[node name="head" type="Sprite2D" parent="container/sprite" unique_id=1356052915]
 position = Vector2(-26, -50)
 texture = ExtResource("6_16gse")
 
-[node name="arm1" type="Sprite2D" parent="container/sprite"]
+[node name="arm1" type="Sprite2D" parent="container/sprite" unique_id=2050402902]
 position = Vector2(22, 25)
 texture = ExtResource("7_mv1j5")
 
-[node name="Area2D" type="Area2D" parent="container"]
+[node name="Area2D" type="Area2D" parent="container" unique_id=220105809]
 visible = false
 position = Vector2(-5, -114)
 scale = Vector2(1, 1.44)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=288625223]
 position = Vector2(12, 47)
 shape = SubResource("RectangleShape2D_tjubl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=1933662902]
 root_node = NodePath("../sprite")
-libraries = {
-"": SubResource("AnimationLibrary_rw0yy")
-}
-autoplay = "move"
+libraries/ = SubResource("AnimationLibrary_rw0yy")
+autoplay = &"move"
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=2057800452]
 offset_left = 37.0
 offset_top = -177.0
 offset_right = 77.0
 offset_bottom = -137.0
 script = ExtResource("2_6irr7")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=606938991]
 texture_filter = 1
 offset_left = -36.0
 offset_top = -178.0
@@ -642,13 +641,13 @@ scale = Vector2(0.437226, 0.402117)
 texture_under = ExtResource("5_umo2t")
 texture_progress = ExtResource("6_f4ftq")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=229317932]
 position = Vector2(-58, -65)
 
-[node name="batcher" type="Node" parent="Node2D"]
+[node name="batcher" type="Node" parent="Node2D" unique_id=836427563]
 script = ExtResource("8_m1l0c")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=132159806]
 
 [connection signal="area_entered" from="container/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="container/Area2D" to="." method="_on_area_2d_area_exited"]

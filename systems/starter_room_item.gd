@@ -27,9 +27,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if entered:
-		var mouse_pos = get_viewport().get_mouse_position()
-		Tooltip.update_position(mouse_pos)
-
 		if Input.is_action_just_pressed("Click"):
 				item_path = item_file_name
 				item = load(item_path)
@@ -38,7 +35,6 @@ func _process(delta: float) -> void:
 				var item_script = item.new()
 				PlayerController.add_item(item_script)
 				Tooltip.hide_tooltip()
-				TestPlayer.visible = false
 				GameState.on_map_screen = true
 				GameState.leave_shop_triggered = true
 				leave_room.emit()
@@ -61,7 +57,7 @@ func assign_item(item_icon, item_name, item_description, item_file_name, price, 
 
 func _on_area_2d_mouse_entered() -> void:
 	entered = true
-	Tooltip.set_text(item_name + ": " + item_description)
+	Tooltip.set_text(item_name, item_description)
 	quality_sprite.visible = true
 
 func _on_area_2d_mouse_exited() -> void:

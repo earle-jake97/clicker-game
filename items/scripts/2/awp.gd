@@ -6,7 +6,6 @@ const tags = ["timer"]
 const rarity = 2
 var file_name = "res://items/scripts/2/awp.gd"
 var occurrences = 1
-var player_body = TestPlayer
 var multiplier = 1.2
 
 var cooldown_timer := 0.0

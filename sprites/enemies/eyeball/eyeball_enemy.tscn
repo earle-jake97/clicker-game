@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://t8ttvohfehwf"]
+[gd_scene format=3 uid="uid://t8ttvohfehwf"]
 
-[ext_resource type="Script" path="res://sprites/enemies/eyeball/eyeball_enemy.gd" id="1_anfwb"]
+[ext_resource type="Script" uid="uid://prqke1qrswxl" path="res://sprites/enemies/eyeball/eyeball_enemy.gd" id="1_anfwb"]
 [ext_resource type="Texture2D" uid="uid://ckn4am4nt5x70" path="res://sprites/enemies/eyeball/eyeball.png" id="1_owc5r"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_kikbe"]
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="3_6iygs"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="4_ovq8j"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="5_3l2ui"]
-[ext_resource type="Script" path="res://systems/damage_batcher.gd" id="6_ob0hh"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="5_3l2ui"]
+[ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="6_ob0hh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmqrv"]
 size = Vector2(43, 88)
@@ -125,57 +125,56 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51lju"]
 _data = {
-"RESET": SubResource("Animation_3rrg6"),
-"attack": SubResource("Animation_mp3df"),
-"die": SubResource("Animation_ywchr"),
-"float": SubResource("Animation_vwpno")
+&"RESET": SubResource("Animation_3rrg6"),
+&"attack": SubResource("Animation_mp3df"),
+&"die": SubResource("Animation_ywchr"),
+&"float": SubResource("Animation_vwpno")
 }
 
-[node name="eyeball_enemy" type="Node2D" groups=["enemy"]]
+[node name="eyeball_enemy" type="Node2D" unique_id=2130876883 groups=["enemy"]]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_anfwb")
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=1217225744]
 
-[node name="crosshair" type="Marker2D" parent="container"]
+[node name="crosshair" type="Marker2D" parent="container" unique_id=188499973]
 position = Vector2(-28, -91)
 
-[node name="projectile_spawn" type="Marker2D" parent="container"]
+[node name="projectile_spawn" type="Marker2D" parent="container" unique_id=209016104]
 position = Vector2(4, -101)
 
-[node name="shadow" type="Sprite2D" parent="container"]
+[node name="shadow" type="Sprite2D" parent="container" unique_id=1268072582]
 modulate = Color(1, 1, 1, 0.537255)
 z_index = -1
 position = Vector2(9, 6)
 scale = Vector2(0.066461, 0.142496)
 texture = ExtResource("2_kikbe")
 
-[node name="sprite" type="Sprite2D" parent="container"]
+[node name="sprite" type="Sprite2D" parent="container" unique_id=292801387]
 position = Vector2(9, -115)
 rotation = 0.0132213
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_owc5r")
 
-[node name="pivot" type="Marker2D" parent="container/sprite"]
+[node name="pivot" type="Marker2D" parent="container/sprite" unique_id=916002340]
 position = Vector2(-5.43048, 21.5022)
 
-[node name="Area2D" type="Area2D" parent="container"]
+[node name="Area2D" type="Area2D" parent="container" unique_id=1270326880]
 position = Vector2(-5, 5)
 scale = Vector2(1, 2.12)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=786745709]
 position = Vector2(11.5, -34)
 scale = Vector2(1.66667, 0.785714)
 shape = SubResource("RectangleShape2D_rmqrv")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=912814356]
 root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_51lju")
-}
-autoplay = "float"
+libraries/ = SubResource("AnimationLibrary_51lju")
+autoplay = &"float"
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=1123196392]
 texture_filter = 1
 offset_left = -26.0
 offset_top = -172.0
@@ -185,17 +184,17 @@ scale = Vector2(0.437226, 0.402117)
 texture_under = ExtResource("3_6iygs")
 texture_progress = ExtResource("4_ovq8j")
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=172408591]
 offset_left = 46.0
 offset_top = -173.0
 offset_right = 86.0
 offset_bottom = -133.0
 script = ExtResource("5_3l2ui")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1525476056]
 position = Vector2(10, -103)
 
-[node name="batcher" type="Node" parent="Node2D"]
+[node name="batcher" type="Node" parent="Node2D" unique_id=1312910332]
 script = ExtResource("6_ob0hh")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1311654109]

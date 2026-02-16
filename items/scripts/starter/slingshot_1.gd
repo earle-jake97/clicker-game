@@ -29,7 +29,7 @@ func starter_proc(target: Node, source_item: BaseItem = null):
 func seek_strongest_enemy():
 	var max_hp = 0
 	var strongest_enemy: Node2D = null
-	var enemies = player.get_enemies_in_range(player_model.global_position)
+	var enemies = player.get_enemies_in_range(get_player_body().global_position)
 	
 	if enemies.is_empty():
 		return

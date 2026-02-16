@@ -1392,12 +1392,12 @@ radius = 20.0
 height = 40.0
 
 [node name="Node2D" type="CharacterBody2D" unique_id=1834059154 groups=["main", "player"]]
+y_sort_enabled = true
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_t3wex")
 
 [node name="shadow" type="Sprite2D" parent="." unique_id=97042796]
 modulate = Color(1, 1, 1, 0.537255)
-z_index = -1
 position = Vector2(-2, 3)
 scale = Vector2(0.0963802, 0.191225)
 texture = ExtResource("2_l5cuq")
@@ -1420,7 +1420,6 @@ position = Vector2(-2.5, -47.5)
 texture = ExtResource("5_q22f3")
 
 [node name="arms" type="AnimatedSprite2D" parent="sprite/body" unique_id=281971411]
-z_index = 1
 position = Vector2(-0.833333, -12.5)
 sprite_frames = SubResource("SpriteFrames_rjapy")
 animation = &"idle"

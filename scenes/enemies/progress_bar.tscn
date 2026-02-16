@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bom1o7qorj1oo"]
+[gd_scene format=3 uid="uid://bom1o7qorj1oo"]
 
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="1_ej3ho"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="2_v13bj"]
 
-[node name="ProgressBar" type="TextureProgressBar"]
+[node name="ProgressBar" type="TextureProgressBar" unique_id=379169]
 texture_filter = 1
 offset_left = -52.0
 offset_top = -109.0

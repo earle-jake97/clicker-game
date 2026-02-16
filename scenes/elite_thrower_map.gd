@@ -6,7 +6,6 @@ const MapView = "res://map/map_scene.tscn"
 func _ready() -> void:
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
-	TestPlayer.visible = true
 	for spawner in get_tree().get_nodes_in_group("spawner"):
 		spawners.append(spawner)
 	await get_tree().create_timer(0.5).timeout
@@ -23,6 +22,5 @@ func check_spawner_complete():
 			return
 	if get_tree().get_nodes_in_group("elite").size() > 0:
 		return
-	TestPlayer.visible = false
 	GameState.on_map_screen = true
 	SceneManager.switch_to_scene(MapView)

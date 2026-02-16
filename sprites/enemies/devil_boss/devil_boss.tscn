@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://27xngsos4sod"]
+[gd_scene format=3 uid="uid://27xngsos4sod"]
 
-[ext_resource type="Script" path="res://sprites/enemies/devil_boss/devil_boss.gd" id="1_i6dqg"]
+[ext_resource type="Script" uid="uid://ck1q5h6mniok7" path="res://sprites/enemies/devil_boss/devil_boss.gd" id="1_i6dqg"]
 [ext_resource type="Texture2D" uid="uid://pfbshj7x4cra" path="res://sprites/enemies/devil_boss/arm_1.png" id="1_k8u28"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_4u6d6"]
 [ext_resource type="Texture2D" uid="uid://b07wlip3fehrk" path="res://sprites/enemies/devil_boss/leg_1.png" id="2_mkqc8"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="2_pc16v"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="2_pc16v"]
 [ext_resource type="Texture2D" uid="uid://texojamrwdb0" path="res://sprites/enemies/devil_boss/body.png" id="3_6ibbh"]
 [ext_resource type="Texture2D" uid="uid://5oif148hfo8n" path="res://sprites/enemies/devil_boss/arm_2.png" id="4_2g6vc"]
 [ext_resource type="Texture2D" uid="uid://cgnrpf68a0jat" path="res://sprites/enemies/devil_boss/head.png" id="5_6quf5"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dhqmkx1oukr5d" path="res://sprites/enemies/devil_boss/minion_ball.tscn" id="8_owrt7"]
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="9_5dash"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="10_4pgjm"]
-[ext_resource type="Script" path="res://systems/damage_batcher.gd" id="12_dcpko"]
+[ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="12_dcpko"]
 
 [sub_resource type="Animation" id="Animation_0j7eb"]
 length = 0.001
@@ -1563,12 +1563,12 @@ tracks/21/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_st71r"]
 _data = {
-"RESET": SubResource("Animation_0j7eb"),
-"die": SubResource("Animation_xx0cn"),
-"idle": SubResource("Animation_n8sol"),
-"meditate": SubResource("Animation_ofjvm"),
-"slam": SubResource("Animation_t51e4"),
-"throw_minions": SubResource("Animation_r8x5j")
+&"RESET": SubResource("Animation_0j7eb"),
+&"die": SubResource("Animation_xx0cn"),
+&"idle": SubResource("Animation_n8sol"),
+&"meditate": SubResource("Animation_ofjvm"),
+&"slam": SubResource("Animation_t51e4"),
+&"throw_minions": SubResource("Animation_r8x5j")
 }
 
 [sub_resource type="Animation" id="Animation_0yltk"]
@@ -1691,115 +1691,114 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0045u"]
 _data = {
-"RESET": SubResource("Animation_0yltk"),
-"head_twitch": SubResource("Animation_tgjj4")
+&"RESET": SubResource("Animation_0yltk"),
+&"head_twitch": SubResource("Animation_tgjj4")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s526b"]
 radius = 417.81
 
-[node name="Devil_Boss" type="Node2D" groups=["boss", "enemy"]]
+[node name="Devil_Boss" type="Node2D" unique_id=1695056971 groups=["boss", "enemy"]]
+y_sort_enabled = true
 script = ExtResource("1_i6dqg")
 max_health = 10000.0
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=1933764444]
 texture_filter = 2
 texture_repeat = 1
 offset_left = 68.0
-offset_top = -210.0
+offset_top = -402.0
 offset_right = 108.0
-offset_bottom = -170.0
+offset_bottom = -362.0
 script = ExtResource("2_pc16v")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=183857341]
 texture_filter = 1
 offset_left = -99.0
-offset_top = -208.0
+offset_top = -400.0
 offset_right = 61.0
-offset_bottom = -176.0
+offset_bottom = -368.0
 texture_under = ExtResource("9_5dash")
 texture_progress = ExtResource("10_4pgjm")
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=1016366365]
+position = Vector2(0, -191.99997)
 scale = Vector2(0.4, 0.4)
 
-[node name="shadow" type="Sprite2D" parent="container"]
+[node name="shadow" type="Sprite2D" parent="container" unique_id=59013010]
 modulate = Color(1, 1, 1, 0.537255)
 z_as_relative = false
 position = Vector2(-6, 454)
 scale = Vector2(1.08222, 0.948467)
 texture = ExtResource("2_4u6d6")
 
-[node name="sprite" type="Node2D" parent="container"]
+[node name="sprite" type="Node2D" parent="container" unique_id=373623615]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container/sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container/sprite" unique_id=718321596]
 root_node = NodePath("../../..")
-libraries = {
-"": SubResource("AnimationLibrary_st71r")
-}
-autoplay = "idle"
+libraries/ = SubResource("AnimationLibrary_st71r")
+autoplay = &"idle"
 
-[node name="Arm1" type="Sprite2D" parent="container/sprite"]
+[node name="Arm1" type="Sprite2D" parent="container/sprite" unique_id=1043016322]
 position = Vector2(-361, 172)
 texture = ExtResource("1_k8u28")
 
-[node name="Leg1" type="Sprite2D" parent="container/sprite"]
+[node name="Leg1" type="Sprite2D" parent="container/sprite" unique_id=161914424]
 position = Vector2(-3, 250)
 texture = ExtResource("2_mkqc8")
 offset = Vector2(-5, 93)
 
-[node name="Body" type="Sprite2D" parent="container/sprite"]
+[node name="Body" type="Sprite2D" parent="container/sprite" unique_id=988229290]
 texture = ExtResource("3_6ibbh")
 
-[node name="crosshair" type="Marker2D" parent="container/sprite/Body"]
+[node name="crosshair" type="Marker2D" parent="container/sprite/Body" unique_id=223995955]
 position = Vector2(-262, 79)
 
-[node name="pivot" type="Marker2D" parent="container/sprite/Body"]
-position = Vector2(48, 455)
+[node name="pivot" type="Marker2D" parent="container/sprite/Body" unique_id=1824921016]
+position = Vector2(47.5, 317.49994)
 
-[node name="Arm2" type="Sprite2D" parent="container/sprite"]
+[node name="Arm2" type="Sprite2D" parent="container/sprite" unique_id=1697103981]
 position = Vector2(21, 160)
 texture = ExtResource("4_2g6vc")
 
-[node name="Head_Node" type="Node2D" parent="container/sprite"]
+[node name="Head_Node" type="Node2D" parent="container/sprite" unique_id=1283653519]
 
-[node name="Head" type="Sprite2D" parent="container/sprite/Head_Node"]
+[node name="Head" type="Sprite2D" parent="container/sprite/Head_Node" unique_id=920299263]
 position = Vector2(-211, -279)
 texture = ExtResource("5_6quf5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container/sprite/Head_Node/Head"]
-libraries = {
-"": SubResource("AnimationLibrary_0045u")
-}
-autoplay = "head_twitch"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container/sprite/Head_Node/Head" unique_id=792206976]
+libraries/ = SubResource("AnimationLibrary_0045u")
+autoplay = &"head_twitch"
 
-[node name="Leg2" type="Sprite2D" parent="container/sprite"]
+[node name="Leg2" type="Sprite2D" parent="container/sprite" unique_id=340382362]
 position = Vector2(261, 237)
 texture = ExtResource("6_pxwa2")
 offset = Vector2(56.6848, 111.776)
 
-[node name="Minion_ball" parent="container/sprite" instance=ExtResource("8_owrt7")]
+[node name="Minion_ball" parent="container/sprite" unique_id=652382837 instance=ExtResource("8_owrt7")]
 modulate = Color(1, 0.243137, 0.207843, 1)
 position = Vector2(1253, 316)
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(6, 53)
+[node name="Area2D" type="Area2D" parent="." unique_id=718215283]
+position = Vector2(6, -139.00006)
 scale = Vector2(0.52, 0.44)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1370853369]
 position = Vector2(41, 6)
 shape = SubResource("CircleShape2D_s526b")
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-280, -182)
+[node name="Node2D" type="Node2D" parent="." unique_id=901639547]
+position = Vector2(-280, -374)
 
-[node name="batcher" type="Node" parent="Node2D"]
+[node name="batcher" type="Node" parent="Node2D" unique_id=1864234324]
 script = ExtResource("12_dcpko")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=113578888]
+position = Vector2(0, -192)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1570392956]
 position = Vector2(296, -283)
 polygon = PackedVector2Array(-111, 459, -456, 457, -409, 417, -158, 403)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=480784]

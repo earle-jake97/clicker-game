@@ -51,7 +51,6 @@ func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageTy
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	z_index = global_position.y
 	zombie_timer += delta
 	firewall_timer += delta
 	lightning_timer += delta
@@ -140,7 +139,6 @@ func raise_zombies():
 func set_up_zombie():
 	var zombie = ZOMBIE.instantiate()
 	zombie.global_position = global_position + Vector2(randf_range(-400.0, 100.0), randf_range(-200.0, 200.0))
-	zombie.z_index = zombie.global_position.y
 	await get_tree().create_timer(randf_range(0.2, 2.3)).timeout
 	get_tree().current_scene.add_child(zombie)
 

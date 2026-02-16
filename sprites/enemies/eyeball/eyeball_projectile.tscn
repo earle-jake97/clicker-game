@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5rdqcntxpgwh"]
+[gd_scene format=3 uid="uid://b5rdqcntxpgwh"]
 
-[ext_resource type="Script" path="res://sprites/enemies/eyeball/eyeball_projectile.gd" id="1_m748j"]
+[ext_resource type="Script" uid="uid://crsgidex8ggn8" path="res://sprites/enemies/eyeball/eyeball_projectile.gd" id="1_m748j"]
 [ext_resource type="Texture2D" uid="uid://camis74dfy2li" path="res://sprites/enemies/eyeball/blood1.png" id="1_xy047"]
 [ext_resource type="Texture2D" uid="uid://xqrjpl34cjsu" path="res://sprites/enemies/eyeball/blood2.png" id="2_gsraw"]
 [ext_resource type="Texture2D" uid="uid://wf7dv3w3i0wb" path="res://sprites/enemies/eyeball/blood3.png" id="3_mbmua"]
@@ -57,29 +57,29 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fcwn3"]
 _data = {
-"RESET": SubResource("Animation_5c300"),
-"default": SubResource("Animation_he6el")
+&"RESET": SubResource("Animation_5c300"),
+&"default": SubResource("Animation_he6el")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=1514267337]
+z_index = 1
+z_as_relative = false
 texture_filter = 1
 script = ExtResource("1_m748j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1275118324]
 sprite_frames = SubResource("SpriteFrames_iepds")
 autoplay = "default"
 frame_progress = 0.150432
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2113116760]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=103845534]
 scale = Vector2(0.319999, 0.16)
 shape = SubResource("CircleShape2D_kcjo7")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fcwn3")
-}
-autoplay = "default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1785520365]
+libraries/ = SubResource("AnimationLibrary_fcwn3")
+autoplay = &"default"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

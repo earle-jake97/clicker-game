@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8rr8yob6kshw"]
+[gd_scene format=3 uid="uid://c8rr8yob6kshw"]
 
-[ext_resource type="Script" path="res://items/misc/smoke_cloud.gd" id="1_4f47r"]
+[ext_resource type="Script" uid="uid://2jxq1ttjvh3q" path="res://items/misc/smoke_cloud.gd" id="1_4f47r"]
 [ext_resource type="Texture2D" uid="uid://b7b7jutov0ncw" path="res://items/sprites/smoke_puff.png" id="2_ul1qu"]
 
 [sub_resource type="Animation" id="Animation_0byjj"]
@@ -60,23 +60,21 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yfew8"]
 _data = {
-"RESET": SubResource("Animation_0byjj"),
-"new_animation": SubResource("Animation_6jvt8")
+&"RESET": SubResource("Animation_0byjj"),
+&"new_animation": SubResource("Animation_6jvt8")
 }
 
-[node name="smoke cloud" type="Node2D"]
-z_index = 4096
-z_as_relative = false
+[node name="smoke cloud" type="Node2D" unique_id=575643201]
+z_index = 100
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_4f47r")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2085452139]
 texture_filter = 2
 scale = Vector2(1.6, 1.72)
 texture = ExtResource("2_ul1qu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_yfew8")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1147642319]
+libraries/ = SubResource("AnimationLibrary_yfew8")
+autoplay = &"new_animation"

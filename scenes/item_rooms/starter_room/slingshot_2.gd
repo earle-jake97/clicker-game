@@ -18,9 +18,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if entered:
-		var mouse_pos = get_viewport().get_mouse_position()
-		Tooltip.update_position(mouse_pos)
-
 		if Input.is_action_just_pressed("Click"):
 			var item_script = item.new()
 			PlayerController.add_item(item_script)
@@ -31,7 +28,7 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_mouse_entered() -> void:
 	entered = true
-	Tooltip.set_text(item_name + ": " + item_description)
+	Tooltip.set_text(item_name, item_description)
 
 func _on_area_2d_mouse_exited() -> void:
 	entered = false

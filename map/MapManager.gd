@@ -4,6 +4,8 @@ enum RoomCategory { COMBAT, POWERUP, BONUS, VARIED, VARIED_NO_ITEM, DANGER, ENDL
 enum RoomName { HORDE, TRAVERSAL, MINIBOSS, SHOP, ITEM, TIMER, DUMMY, BOSS, SECRET_SHOP }
 var round = 1
 var world = 1
+var deferrals = 1
+var deferred = []
 
 var category_to_types = {
 	RoomCategory.COMBAT: 
@@ -33,3 +35,13 @@ func pick_room_for_category(category: RoomCategory):
 func reset_defaults():
 	round = 1
 	world = 1
+	deferrals = 1
+	deferred = []
+
+func clear_deferred():
+	deferred = []
+
+func can_defer():
+	if deferred.size() >= deferrals:
+		return false
+	return true

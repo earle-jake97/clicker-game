@@ -6,7 +6,6 @@ const tags = ["timer", "bounce"]
 const rarity = 2
 var file_name = "res://items/scripts/2/number_fanatic.gd"
 var occurrences = 1
-var player_body = TestPlayer
 
 @export var bounce_projectile_scene = preload("res://items/misc/nubby_projectile.tscn")
 var cooldown_timer := 0.0
@@ -19,6 +18,8 @@ func _ready() -> void:
 func _process(delta):
 	if not player:
 		return
+	if get_player_body() == null:
+		return
 	
 	delay_between_throws += delta
 	
@@ -29,7 +30,7 @@ func _process(delta):
 
 
 func fire_chain_lightning():
-	var first_target = get_nearest_enemy(player_body.global_position, null)
+	var first_target = get_nearest_enemy(get_player_body().global_position, null)
 	if first_target:
 		launch_bounce_projectile(first_target, 0, [])
 		for item in PlayerController.inventory:
@@ -52,7 +53,7 @@ func launch_bounce_projectile(target: Node, bounce_index: int, hit_chain: Array)
 	var proj = bounce_projectile_scene.instantiate()
 	var result = player.calculate_damage()
 	proj.global_position = Vector2(-10000, -10000)
-	proj.start_pos = player_body.global_position
+	proj.start_pos = get_player_body().global_position
 	proj.target = target
 	proj.bounce_index = bounce_index
 	proj.hit_chain = hit_chain.duplicate()

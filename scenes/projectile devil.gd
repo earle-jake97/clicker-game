@@ -69,7 +69,6 @@ func _process(delta: float) -> void:
 			paid_out = true
 			player_controller.add_cash(value)
 		die()
-	z_index = round(global_position.y)
 
 func _physics_process(delta: float) -> void:
 	attack_timer += delta
@@ -136,7 +135,7 @@ func hop():
 
 func look_at_player():
 	if not dead:
-			if global_position.x > TestPlayer.global_position.x:
+			if global_position.x > player_model.global_position.x:
 				container.scale.x = abs(container.scale.x)
 			else:
 				container.scale.x = -abs(container.scale.x)
@@ -150,7 +149,7 @@ func check_distance():
 	
 	var buffer = 500
 	
-	var center = TestPlayer.global_position
+	var center = player_model.global_position
 	var dx = abs(global_position.x - center.x)
 	var dy = abs(global_position.y - center.y)
 	

@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://fyxev4jdy2xn"]
+[gd_scene format=3 uid="uid://fyxev4jdy2xn"]
 
-[ext_resource type="Script" path="res://scenes/health_bar.gd" id="1_duub2"]
+[ext_resource type="Script" uid="uid://b5eoeq4onr83p" path="res://scenes/health_bar.gd" id="1_duub2"]
 [ext_resource type="Texture2D" uid="uid://cmpeyckcg31u0" path="res://systems/heart_cash.png" id="2_phrsh"]
 [ext_resource type="Texture2D" uid="uid://bi0jr2hyhkl48" path="res://systems/heart_icon_healthy.png" id="3_uaro4"]
 [ext_resource type="Texture2D" uid="uid://dggeegbs6kdfs" path="res://systems/shield_bar.png" id="4_vvhdn"]
-[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="5_uctdi"]
+[ext_resource type="FontFile" uid="uid://w4754gdg1xfu" path="res://fonts/Jersey25-Regular.ttf" id="5_5xgdr"]
 [ext_resource type="Texture2D" uid="uid://cc855ynf4mlm5" path="res://systems/endless_sign.png" id="6_2qdl4"]
 [ext_resource type="Texture2D" uid="uid://b1r7a8xuwltie" path="res://sprites/fast_forward.png" id="7_cjxs3"]
 [ext_resource type="Texture2D" uid="uid://ndrgx1altv4a" path="res://sprites/enemy_count_icon.png" id="8_5opy3"]
@@ -57,70 +57,73 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f4vu0"]
 _data = {
-"RESET": SubResource("Animation_ain3o"),
-"death": SubResource("Animation_jct0u"),
-"default": SubResource("Animation_gorx1")
+&"RESET": SubResource("Animation_ain3o"),
+&"death": SubResource("Animation_jct0u"),
+&"default": SubResource("Animation_gorx1")
 }
 
-[node name="Control" type="CanvasLayer"]
+[node name="Control" type="CanvasLayer" unique_id=458819921]
 layer = 127
 script = ExtResource("1_duub2")
 
-[node name="Cash_Sprite" type="Sprite2D" parent="."]
+[node name="Cash_Sprite" type="Sprite2D" parent="." unique_id=387327702]
 texture_filter = 1
 position = Vector2(129, 118)
 texture = ExtResource("2_phrsh")
 
-[node name="HP_Sprite" type="Sprite2D" parent="."]
+[node name="HP_Sprite" type="Sprite2D" parent="." unique_id=1381282087]
 texture_filter = 1
 position = Vector2(152, 37)
 texture = ExtResource("3_uaro4")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=1089755743]
+texture_filter = 1
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
 offset_bottom = 66.0
 texture_progress = ExtResource("4_vvhdn")
 
-[node name="HP" type="Label" parent="."]
-texture_filter = 2
+[node name="HP" type="Label" parent="." unique_id=910819917]
+texture_filter = 1
 offset_left = 117.0
-offset_top = 23.0
+offset_top = 17.0
 offset_right = 212.0
-offset_bottom = 46.0
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("5_uctdi")
+offset_bottom = 50.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_5xgdr")
+theme_override_font_sizes/font_size = 32
 text = "123/123"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Shields" type="Label" parent="."]
-texture_filter = 2
-offset_left = 116.0
-offset_top = 49.0
-offset_right = 211.0
-offset_bottom = 72.0
+[node name="Shields" type="Label" parent="." unique_id=375686428]
+texture_filter = 1
+offset_left = 109.0
+offset_top = 38.0
+offset_right = 204.0
+offset_bottom = 64.0
 theme_override_colors/font_color = Color(1, 0.783333, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("5_uctdi")
-theme_override_font_sizes/font_size = 10
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("5_5xgdr")
+theme_override_font_sizes/font_size = 25
 text = "+10"
 horizontal_alignment = 1
 
-[node name="Cash" type="Label" parent="."]
-texture_filter = 2
+[node name="Cash" type="Label" parent="." unique_id=2113858330]
+texture_filter = 1
 offset_left = 93.0
-offset_top = 120.0
+offset_top = 116.0
 offset_right = 220.0
-offset_bottom = 143.0
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("5_uctdi")
+offset_bottom = 185.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_5xgdr")
+theme_override_font_sizes/font_size = 32
 text = "1233
 "
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1109277208]
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
@@ -128,33 +131,32 @@ scale = Vector2(29.2082, 16.6792)
 mouse_filter = 2
 color = Color(0.474797, 8.48304e-07, 2.40654e-07, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect" unique_id=1508830477]
 root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_f4vu0")
-}
-autoplay = "default"
+libraries/ = SubResource("AnimationLibrary_f4vu0")
+autoplay = &"default"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=2002203120]
 
-[node name="endless_sprite" type="Sprite2D" parent="."]
+[node name="endless_sprite" type="Sprite2D" parent="." unique_id=64498588]
 visible = false
 texture_filter = 2
 position = Vector2(1076, 600)
 texture = ExtResource("6_2qdl4")
 
-[node name="room_count" type="Label" parent="endless_sprite"]
-texture_filter = 2
+[node name="room_count" type="Label" parent="endless_sprite" unique_id=399772891]
+texture_filter = 1
 offset_left = -47.0
 offset_top = -11.0
 offset_right = 48.0
 offset_bottom = 12.0
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("5_uctdi")
+theme_override_fonts/font = ExtResource("5_5xgdr")
 text = "123/123"
 horizontal_alignment = 1
 
-[node name="Button" type="TextureButton" parent="."]
+[node name="Button" type="TextureButton" parent="." unique_id=175871188]
+texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -165,24 +167,25 @@ offset_bottom = 84.0
 grow_horizontal = 0
 texture_normal = ExtResource("7_cjxs3")
 
-[node name="Count_Container" type="Control" parent="."]
-visible = false
+[node name="Count_Container" type="Control" parent="." unique_id=2067515694]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Enemy_Count_Sprite" type="Sprite2D" parent="Count_Container"]
-texture_filter = 2
+[node name="Enemy_Count_Sprite" type="Sprite2D" parent="Count_Container" unique_id=500117786]
+texture_filter = 1
 position = Vector2(38, 605)
 texture = ExtResource("8_5opy3")
 
-[node name="Enemy_Count_Label" type="Label" parent="Count_Container"]
+[node name="Enemy_Count_Label" type="Label" parent="Count_Container" unique_id=1530765882]
 texture_filter = 1
+layout_mode = 0
 offset_left = 71.0
 offset_top = 594.0
 offset_right = 166.0
 offset_bottom = 617.0
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("5_uctdi")
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("5_5xgdr")
+theme_override_font_sizes/font_size = 32
 text = "x 0"
 metadata/_edit_use_anchors_ = true
 

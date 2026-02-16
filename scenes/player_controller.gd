@@ -1,13 +1,14 @@
 extends Node2D
 
 @export var iframe_duration = 1
-@onready var player = TestPlayer
+signal player_ready(player)
+@onready var player: Node2D = null
 
-var hold_click_timer := Timer.new()
 @export var position_map := []
 var show_attack_range = true
 var attack_radius_x = 600
 var attack_radius_y = 420
+var attack_cooldown = 0.0
 var base_attack_damage = 10
 var base_max_hp = 100.0
 var attack_range_multiplier = 1.0
@@ -40,7 +41,7 @@ signal reset
 var dash_animation_timer = 0.0
 var processed_items = []
 var inventory: Array = []
-var base_movement_speed = 210.0
+var base_movement_speed = 240.0
 var movement_speed = 0.0
 var last_enemy_attacked = null # For use in chain attacks
 var bleed_timer = 0
@@ -56,21 +57,22 @@ func _ready():
 	max_hp = base_max_hp
 	movement_speed = base_movement_speed
 	# Set up the click-hold timer
-	hold_click_timer.wait_time = 1.0 / clicks_per_second # 6.2 clicks per second
-	hold_click_timer.one_shot = false
-	hold_click_timer.autostart = false
-	hold_click_timer.timeout.connect(attack)
-	add_child(hold_click_timer)
-	hold_click_timer.start()
+
 	overshields_cap = max_hp * 0.3
 
 func _process(delta: float) -> void:
-	if get_enemies_in_range(player.global_position).size() > 0:
-		attacking = true
-	else:
-		attacking = false
+	if player == null:
+		return
+	var enemies = get_enemies_in_range(player.global_position)
+	attacking = enemies.size() > 0
+	
+	if attacking and not dead:
+		attack_cooldown -= delta
+		if attack_cooldown <= 0.0:
+			attack()
+			attack_cooldown = 1.0 / clicks_per_second
+	
 	if current_hp <= 0:
-		hold_click_timer.stop()
 		current_hp = 0
 	dash_animation_timer += delta
 	regen_timer += delta
@@ -91,7 +93,7 @@ func _process(delta: float) -> void:
 		overshields -= 1
 	
 	
-	if regen_timer >= 1.0 and TestPlayer.visible and not current_hp <= 0:
+	if regen_timer >= 1.0 and player.visible and not current_hp <= 0:
 		heal(passive_regen)
 		regen_timer = 0
 	
@@ -220,7 +222,6 @@ func update_modifiers():
 			passive_regen += item.get_regen()
 		if item.has_method("get_cps"):
 			clicks_per_second += item.get_cps()
-			hold_click_timer.wait_time = 1.0 / clicks_per_second
 		if item.has_method("get_movement_speed"):
 			movement_speed += item.get_movement_speed() 
 	max_hp = max_hp * (1 + max_hp_percentage)
@@ -251,7 +252,7 @@ func take_damage(damage, penetration) -> void:
 	var block = calculate_luck()
 	if block <= get_block_chance():
 		var miss = preload("res://items/misc/miss.tscn").instantiate()
-		miss.global_position = TestPlayer.global_position + Vector2(randf_range(-50.0, 10.0), randf_range(-80, -40.0))
+		miss.global_position = player.global_position + Vector2(randf_range(-50.0, 10.0), randf_range(-80, -40.0))
 		get_tree().current_scene.add_child(miss)
 		return
 	var damage_reduction = (total_armor - penetration)/(100.0 + total_armor - penetration)
@@ -312,7 +313,6 @@ func reset_to_defaults():
 	difficulty = 0
 	inventory.clear()
 	
-	hold_click_timer.start()
 	cash = 0
 	passive_regen = 1.0
 	overshields = 0
@@ -325,7 +325,7 @@ func reset_to_defaults():
 	HealthBar.dead = false
 	dead = false
 	ItemDatabase.reset_items()
-	TestPlayer.reset_player_model()
+	player.reset_player_model()
 	GameState.reset_all()
 	MapManager.reset_defaults()
 	PauseMenu.update_inventory_display()
@@ -398,3 +398,10 @@ func _deal_damage_to_enemy(enemy, damage_result, damage_source: String = "Player
 		enemy.take_damage(damage_result.damage, damage_result.crit, damage_source)
 		if can_proc:
 			proc_items(enemy)
+
+func set_player(p):
+	player = p
+	emit_signal("player_ready")
+
+func get_player_body():
+	return player

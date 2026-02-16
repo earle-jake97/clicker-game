@@ -25,7 +25,6 @@ func _ready() -> void:
 	PlayerController.difficulty -= 1 # Bandaid fix
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
-	TestPlayer.visible = false
 	GameState.on_map_screen = false
 	set_up_items()
 

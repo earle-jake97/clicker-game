@@ -54,7 +54,6 @@ func _process(delta: float) -> void:
 			player.add_cash(value)
 		die()
 
-	z_index = round(global_position.y)
 
 	if touching_player and damage_cooldown >= player.iframe_duration and not is_attacking and not dead and not is_frozen:
 		reached_player = true

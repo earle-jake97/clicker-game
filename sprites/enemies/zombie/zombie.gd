@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		if entity.has_method("is_alive") and entity.is_alive() and is_closer and entity.global_position.x <= global_position.x:
 			target = entity
 		else:
-			target = TestPlayer
+			target = player_model
 
 	if is_pushed:
 		global_position = global_position.move_toward(Vector2(40000, global_position.y), push_strength * 300 * delta)
@@ -71,8 +71,6 @@ func _process(delta: float) -> void:
 
 	if health <= 0:
 		die()
-
-	z_index = round(global_position.y)
 
 	if touching_player and damage_cooldown >= player.iframe_duration and not is_attacking and not dead and not is_frozen:
 		reached_player = true

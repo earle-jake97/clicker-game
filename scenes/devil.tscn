@@ -1467,6 +1467,7 @@ _data = {
 }
 
 [node name="devil" type="Node2D" unique_id=92870889 groups=["enemy"]]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_31ic6")
 max_health = 80.0
@@ -1478,7 +1479,6 @@ position = Vector2(-17, -33)
 
 [node name="shadow" type="Sprite2D" parent="container" unique_id=173251275]
 modulate = Color(1, 1, 1, 0.537255)
-z_index = -1
 position = Vector2(9, 6)
 scale = Vector2(0.106461, 0.222496)
 texture = ExtResource("2_j47kg")
@@ -1509,7 +1509,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_ebwqt")
 
 [node name="leg2" type="Sprite2D" parent="container/sprite" unique_id=1662238101]
-z_index = 1
 position = Vector2(13, -11)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_kspa4")
@@ -1538,6 +1537,7 @@ libraries/ = SubResource("AnimationLibrary_hlxsp")
 autoplay = &"walk"
 
 [node name="ProgressBar" parent="." unique_id=1615476664 instance=ExtResource("3_swc2h")]
+metadata/_edit_use_anchors_ = true
 
 [node name="debuff_container" type="HBoxContainer" parent="." unique_id=1148741263]
 offset_left = 25.0
@@ -1545,6 +1545,7 @@ offset_top = -112.0
 offset_right = 65.0
 offset_bottom = -72.0
 script = ExtResource("5_xurbf")
+metadata/_edit_use_anchors_ = true
 
 [node name="Node2D" type="Node2D" parent="." unique_id=769053302]
 position = Vector2(-58, -65)

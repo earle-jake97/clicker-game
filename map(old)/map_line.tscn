@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://ckg5utts75nk5"]
-
-[ext_resource type="Texture2D" uid="uid://g7crrnxfq2rw" path="res://map(old)/line.png" id="1_t1h3n"]
-
-[node name="Node2D" type="Line2D"]
-texture_filter = 2
-points = PackedVector2Array(-1, 0, 22, 0)
-texture = ExtResource("1_t1h3n")
-texture_mode = 1

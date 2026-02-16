@@ -1,20 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0nrbiyicj10i"]
+[gd_scene format=3 uid="uid://c0nrbiyicj10i"]
 
-[ext_resource type="Script" path="res://items/scrimblo/scrimblo_projectile.gd" id="1_0l3y2"]
+[ext_resource type="Script" uid="uid://c01qewrcam4gy" path="res://items/scrimblo/scrimblo_projectile.gd" id="1_0l3y2"]
 [ext_resource type="Texture2D" uid="uid://c2bkpk4qhc2n1" path="res://items/scrimblo/scrimblo_goop.png" id="2_pnrnt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_banb0"]
 radius = 11.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=880632931]
+y_sort_enabled = true
 script = ExtResource("1_0l3y2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=531020497]
 texture = ExtResource("2_pnrnt")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=440994566]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1523255142]
 shape = SubResource("CircleShape2D_banb0")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

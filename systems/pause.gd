@@ -106,7 +106,6 @@ func _on_yes_button_pressed() -> void:
 	color_rect_2.visible = false
 	Tooltip.hide_tooltip()
 	paused = false
-	TestPlayer.visible = false
 	get_tree().paused = false
 	PlayerController.reset_to_defaults()
 	

@@ -21,8 +21,6 @@ func setup(start_pos: Vector2, end_pos: Vector2, procs: bool = false):
 	var local_start := Vector2.ZERO
 	var local_end := to_local(end_pos)
 
-	z_index = -4000
-
 	var lightning_points: Array = []
 	var direction = (local_end - local_start).normalized()
 	var perpendicular = Vector2(-direction.y, direction.x)

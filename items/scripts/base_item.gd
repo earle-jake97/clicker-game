@@ -1,9 +1,10 @@
-# res://items/effects/effect.gd
 extends Node2D
 class_name BaseItem
 
 var player = PlayerController
-var player_model = TestPlayer
+
+func _ready() -> void:
+	print("buh")
 
 func on_pickup(player):
 	pass
@@ -15,3 +16,6 @@ func resolve_enemy_from_node(node):
 			return current
 		current = current.get_parent()
 	return null
+
+func get_player_body():
+	return player.get_player_body()

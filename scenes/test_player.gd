@@ -93,7 +93,6 @@ func _process(delta: float) -> void:
 	elif PlayerController.clicks_per_second >= 10:
 		arms.set_speed_scale(1.4)
 
-	z_index = round(global_position.y)
 	var percentage = float(player.current_hp) / player.max_hp
 	if player.current_hp <= 0:
 		dead = true

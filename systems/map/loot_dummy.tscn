@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bypvp1j3qy5qf"]
+[gd_scene format=3 uid="uid://bypvp1j3qy5qf"]
 
-[ext_resource type="Script" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_cblr7"]
+[ext_resource type="Script" uid="uid://jl8nph4jiq51" path="res://systems/map/horde_scenes/horde_timer.gd" id="1_cblr7"]
 [ext_resource type="Texture2D" uid="uid://dtktt3jd6rhub" path="res://backgrounds/happy.png" id="2_2g4ff"]
 [ext_resource type="PackedScene" uid="uid://0woj01ejr33b" path="res://sprites/enemies/djungelskog/djungelskog.tscn" id="3_met8w"]
-[ext_resource type="FontFile" uid="uid://c54lr7aq8hjd" path="res://fonts/Daydream.ttf" id="9_x7pln"]
-
-[sub_resource type="Theme" id="Theme_0a1jv"]
-default_font = ExtResource("9_x7pln")
-default_font_size = 32
+[ext_resource type="FontFile" uid="uid://w4754gdg1xfu" path="res://fonts/Jersey25-Regular.ttf" id="4_r3fbf"]
+[ext_resource type="PackedScene" uid="uid://cdjjjvfpsn86k" path="res://characters/goblin/goblin_model.tscn" id="5_44fa1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cs66e"]
 size = Vector2(1125, 173.76)
@@ -21,68 +18,72 @@ size = Vector2(30.6656, 660.194)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yb4g0"]
 size = Vector2(1165.4, 89.3024)
 
-[node name="Timer Room" type="Node2D"]
+[node name="Timer Room" type="Node2D" unique_id=584451619]
 texture_filter = 1
-position = Vector2(-2, 0)
-scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_cblr7")
 
-[node name="djungelskog" parent="." instance=ExtResource("3_met8w")]
-position = Vector2(853.866, 388.566)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=903001143]
 
-[node name="background" type="Sprite2D" parent="."]
-z_index = -100
-texture_filter = 1
-position = Vector2(543, 311.922)
-scale = Vector2(0.96, 0.844961)
-texture = ExtResource("2_2g4ff")
-
-[node name="Positions" type="Node2D" parent="."]
-
-[node name="Marker2D" type="Marker2D" parent="Positions"]
-position = Vector2(485.642, 274.225)
-
-[node name="Marker2D2" type="Marker2D" parent="Positions"]
-position = Vector2(319.378, 393.411)
-
-[node name="Marker2D3" type="Marker2D" parent="Positions"]
-position = Vector2(286.501, 509.69)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
-autostart = true
-
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=398239626]
 texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 497.854
-offset_top = 7.75194
-offset_right = 593.854
-offset_bottom = 49.7519
+offset_left = -47.999573
+offset_top = 8.000001
+offset_right = 48.000427
+offset_bottom = 141.0
 grow_horizontal = 2
-theme = SubResource("Theme_0a1jv")
 theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_r3fbf")
+theme_override_font_sizes/font_size = 64
 text = "60
 "
 horizontal_alignment = 1
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="djungelskog" parent="." unique_id=265886674 instance=ExtResource("3_met8w")]
+position = Vector2(853.866, 388.566)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="background" type="Sprite2D" parent="." unique_id=2108526418]
+z_index = -100
+texture_filter = 1
+position = Vector2(579.51996, 322.34088)
+scale = Vector2(1.0248091, 0.8724515)
+texture = ExtResource("2_2g4ff")
+
+[node name="Positions" type="Node2D" parent="." unique_id=1629538958]
+
+[node name="Marker2D" type="Marker2D" parent="Positions" unique_id=1331350735]
+position = Vector2(485.642, 274.225)
+
+[node name="Marker2D2" type="Marker2D" parent="Positions" unique_id=999025116]
+position = Vector2(319.378, 393.411)
+
+[node name="Marker2D3" type="Marker2D" parent="Positions" unique_id=213354845]
+position = Vector2(286.501, 509.69)
+
+[node name="Timer" type="Timer" parent="." unique_id=759028204]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1662212802]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=753431247]
 position = Vector2(548.578, 108.527)
 shape = SubResource("RectangleShape2D_cs66e")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1460161952]
 position = Vector2(3.75739, 322.674)
 shape = SubResource("RectangleShape2D_8x0ji")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=974402875]
 position = Vector2(1077.43, 358.527)
 shape = SubResource("RectangleShape2D_2rmff")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1282063220]
 position = Vector2(557.032, 669.574)
 shape = SubResource("RectangleShape2D_yb4g0")
+
+[node name="Goblin Model" parent="." unique_id=1834059154 instance=ExtResource("5_44fa1")]
+position = Vector2(268.65308, 443.79843)

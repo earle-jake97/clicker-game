@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="clicker game"
+config/version="0.1.0"
 run/main_scene="res://start_scene.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=600
@@ -22,10 +23,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MapState="*res://map(old)/map_state.gd"
 PlayerController="*res://scenes/player_controller.gd"
 GameState="*res://systems/map/GameState.gd"
-TestPlayer="*res://scenes/test_player.tscn"
 ItemDatabase="*res://item_database.gd"
 PauseMenu="*res://systems/pause_menu.tscn"
 HealthBar="*res://scenes/health_bar.tscn"
@@ -38,10 +37,19 @@ SoundManager="*res://systems/sound_manager.tscn"
 ItemSpawner="*res://systems/ItemSpawner.gd"
 MapManager="*uid://cp8hp6bycn6td"
 RoomDatabase="*uid://bm5nxjgk1cnro"
+BetterTerrain="*uid://0es7gx6b0qyo"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 
 [global_group]
 

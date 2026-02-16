@@ -1,14 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://px47tge8r383"]
+[gd_scene format=3 uid="uid://px47tge8r383"]
 
-[ext_resource type="Script" path="res://scenes/enemies/ghost.gd" id="1_10d6v"]
+[ext_resource type="Script" uid="uid://4leubw33klr2" path="res://scenes/enemies/ghost.gd" id="1_10d6v"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_w7bj5"]
 [ext_resource type="Texture2D" uid="uid://b6bt7t7lnf7c3" path="res://sprites/enemies/ghost/ghost_defend.png" id="3_1luki"]
 [ext_resource type="Texture2D" uid="uid://csstc7rc3rhas" path="res://sprites/enemies/ghost/ghost1.png" id="3_7klk1"]
 [ext_resource type="Texture2D" uid="uid://1gcoe1mqb87o" path="res://sprites/enemies/ghost/ghost.png" id="4_5ojie"]
-[ext_resource type="Script" path="res://scenes/enemies/debuff_container.gd" id="8_33m5h"]
+[ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="8_33m5h"]
 [ext_resource type="Texture2D" uid="uid://ld2mbbhq1t46" path="res://sprites/test_player/health_red.png" id="9_emo6b"]
 [ext_resource type="Texture2D" uid="uid://d35cv6mcrm6kc" path="res://sprites/test_player/health_green.png" id="10_c0g14"]
-[ext_resource type="Script" path="res://systems/damage_batcher.gd" id="11_g43ji"]
+[ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="11_g43ji"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_optk0"]
 animations = [{
@@ -229,68 +229,67 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rw0yy"]
 _data = {
-"RESET": SubResource("Animation_q0fod"),
-"attack": SubResource("Animation_0xnkx"),
-"die": SubResource("Animation_fm6ug"),
-"hide": SubResource("Animation_ysu75"),
-"move": SubResource("Animation_y6b1v")
+&"RESET": SubResource("Animation_q0fod"),
+&"attack": SubResource("Animation_0xnkx"),
+&"die": SubResource("Animation_fm6ug"),
+&"hide": SubResource("Animation_ysu75"),
+&"move": SubResource("Animation_y6b1v")
 }
 
-[node name="ghost" type="Node2D" groups=["enemy"]]
+[node name="ghost" type="Node2D" unique_id=262955330 groups=["enemy"]]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_10d6v")
 max_health = 80.0
 
-[node name="container" type="Node2D" parent="."]
+[node name="container" type="Node2D" parent="." unique_id=1768116187]
 
-[node name="crosshair" type="Marker2D" parent="container"]
+[node name="crosshair" type="Marker2D" parent="container" unique_id=1024521360]
 position = Vector2(-25, -103)
 
-[node name="shadow" type="Sprite2D" parent="container"]
+[node name="shadow" type="Sprite2D" parent="container" unique_id=688322639]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
 position = Vector2(9, 6)
 scale = Vector2(0.0792833, 0.132945)
 texture = ExtResource("2_w7bj5")
 
-[node name="sprite" type="Node2D" parent="container"]
+[node name="sprite" type="Node2D" parent="container" unique_id=954379276]
 position = Vector2(8, -111)
 scale = Vector2(0.5, 0.5)
 
-[node name="body" type="AnimatedSprite2D" parent="container/sprite"]
+[node name="body" type="AnimatedSprite2D" parent="container/sprite" unique_id=297677920]
 modulate = Color(1, 1, 1, 0.666667)
 position = Vector2(21, 11)
 sprite_frames = SubResource("SpriteFrames_optk0")
 animation = &"hide"
 autoplay = "hide"
 
-[node name="pivot" type="Marker2D" parent="container/sprite/body"]
+[node name="pivot" type="Marker2D" parent="container/sprite/body" unique_id=2091706145]
 position = Vector2(-13, 19)
 
-[node name="Area2D" type="Area2D" parent="container"]
+[node name="Area2D" type="Area2D" parent="container" unique_id=1265115208]
 visible = false
 position = Vector2(5, -114)
 scale = Vector2(1, 1.44)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=1964305805]
 position = Vector2(12, 47)
 shape = SubResource("RectangleShape2D_tjubl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=279957009]
 root_node = NodePath("../sprite")
-libraries = {
-"": SubResource("AnimationLibrary_rw0yy")
-}
-autoplay = "hide"
+libraries/ = SubResource("AnimationLibrary_rw0yy")
+autoplay = &"hide"
 
-[node name="debuff_container" type="HBoxContainer" parent="."]
+[node name="debuff_container" type="HBoxContainer" parent="." unique_id=75314745]
 offset_left = 49.0
 offset_top = -151.0
 offset_right = 89.0
 offset_bottom = -111.0
 script = ExtResource("8_33m5h")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=257973884]
 texture_filter = 1
 offset_left = -24.0
 offset_top = -152.0
@@ -300,13 +299,13 @@ scale = Vector2(0.437226, 0.402117)
 texture_under = ExtResource("9_emo6b")
 texture_progress = ExtResource("10_c0g14")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=353008957]
 position = Vector2(-58, -65)
 
-[node name="batcher" type="Node" parent="Node2D"]
+[node name="batcher" type="Node" parent="Node2D" unique_id=516475622]
 script = ExtResource("11_g43ji")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1150956878]
 
 [connection signal="area_entered" from="container/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="container/Area2D" to="." method="_on_area_2d_area_exited"]

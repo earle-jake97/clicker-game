@@ -4,7 +4,7 @@ class_name BaseEnemy
 var is_frozen = false
 signal died
 var player = PlayerController
-var player_model = TestPlayer
+var player_model = PlayerController.player
 @export var min_speed: float
 @export var max_speed: float
 var speed: float
@@ -45,7 +45,7 @@ var push_strength = 0.0
 var pushback_length = 2.0
 var pushback_timer = 0.0
 var is_pushed = false
-var target = TestPlayer
+var target = player_model
 var moving = true
 var pitch_scale = randf_range(0.9, 1.3)
 var base_attack_speed = 0.7
@@ -83,11 +83,11 @@ func get_target():
 		if entity.has_method("is_alive") and entity.is_alive() and is_closer:
 			target = entity
 		else:
-			target = TestPlayer
+			target = player_model
 
 func look_at_player():
 	if not dead:
-			if global_position.x > TestPlayer.global_position.x:
+			if global_position.x > player_model.global_position.x:
 				container.scale.x = abs(container.scale.x)
 			else:
 				container.scale.x = -abs(container.scale.x)

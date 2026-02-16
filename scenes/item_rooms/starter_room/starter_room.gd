@@ -5,5 +5,4 @@ const MAP = "res://map/map_scene.tscn"
 func _ready() -> void:
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
-	TestPlayer.visible = false
 	GameState.on_map_screen = false

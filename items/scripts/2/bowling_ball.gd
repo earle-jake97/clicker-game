@@ -5,7 +5,6 @@ const item_icon = preload("res://items/icons/bowling_ball.png")
 const tags = []
 const rarity = 2
 var file_name = "res://items/scripts/2/bowling_ball.gd"
-var player_body = TestPlayer
 var chance = 0.05
 
 @export var ball_scene = preload("res://items/misc/bowling_ball_projectile.tscn")
@@ -36,7 +35,7 @@ func instantiate_ball(target: Node, tree, multiplier):
 	var result = player.calculate_damage()
 	proj.damage = result.damage * multiplier
 	proj.speed = randf_range(1000.0, 1200.0)
-	proj.start_pos = player_body.global_position - Vector2(0, 10)
+	proj.start_pos = get_player_body().global_position - Vector2(0, 10)
 	proj.target_pos = target.global_position
 	proj.crit = result.crit
 	tree.current_scene.add_child(proj)

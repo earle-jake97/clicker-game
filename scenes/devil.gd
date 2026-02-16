@@ -48,8 +48,6 @@ func _physics_process(delta: float) -> void:
 
 	health_below_zero()
 
-	z_index = round(global_position.y)
-
 	attack_check()
 	process_attack_check(delta)
 	

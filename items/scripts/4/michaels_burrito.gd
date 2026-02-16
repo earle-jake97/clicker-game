@@ -5,7 +5,6 @@ const item_icon = preload("res://items/icons/michaels_burrito.png")
 const tags = []
 const rarity = 4
 var file_name = "res://items/scripts/4/michaels_burrito.gd"
-var player_body = TestPlayer
 static var percent_dmg = 0.2
 static var puddle_chance = 0.1
 var puddle := preload("res://items/misc/burrito_puddle.tscn")

@@ -13,6 +13,7 @@ extends Node2D
 @export var enemy_cash_value_min: int
 @export var enemy_cash_value_max: int
 @export var enemy_speed: int
+@export var base_terrain: TileMapLayer
 const PROJECTILE_DEMON = preload("res://scenes/projectile_demon.tscn")
 const DEVIL = preload("res://scenes/devil.tscn")
 const IMP = preload("res://scenes/enemies/imp.tscn")
@@ -145,13 +146,23 @@ func spawn_position_logic():
 	var ry = screen_size.y / 2 - margin
 
 	var angle := randf() * TAU
-	var center = TestPlayer.global_position
-
-	var spawn_pos := Vector2(
-		center.x + cos(angle) * rx,
-		center.y + sin(angle) * ry
-	)
-
+	var center = PlayerController.player.global_position
+	var loop = true
+	var spawn_pos = Vector2.ZERO
+	var increment = 0
+	while loop:
+		spawn_pos = Vector2(
+			center.x + cos(angle) * rx,
+			center.y + sin(angle) * ry
+		)
+		var tilemap_pos = base_terrain.local_to_map(base_terrain.to_local(spawn_pos))
+		var cell_data = base_terrain.get_cell_tile_data(tilemap_pos)
+		if cell_data and cell_data.get_custom_data("spawnable") == true:
+			loop = false
+		increment += 1
+		if increment >= 20:
+			return Vector2.ZERO
+			
 	return spawn_pos
 
 func get_spawn_cap():

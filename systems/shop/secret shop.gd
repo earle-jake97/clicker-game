@@ -16,7 +16,6 @@ var difficulty_scaling = 0.15
 var lowest_price = 30
 
 func _ready() -> void:
-	TestPlayer.visible = false
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
 	set_up_items()
