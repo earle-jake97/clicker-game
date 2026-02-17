@@ -388,6 +388,18 @@ tracks/30/keys = {
 "update": 0,
 "values": [Vector2(47.5, 317.49994)]
 }
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("container/sprite/Minion_ball:visible")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_xx0cn"]
 resource_name = "die"
@@ -1996,6 +2008,18 @@ tracks/23/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.9, 1.1), Vector2(1, 1)]
 }
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("container/sprite/Minion_ball:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.85, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_st71r"]
 _data = {
@@ -2135,6 +2159,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_s526b"]
 radius = 417.81
 
+[sub_resource type="Environment" id="Environment_nco0c"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.41
+
 [node name="Devil_Boss" type="Node2D" unique_id=1695056971 groups=["boss", "enemy"]]
 script = ExtResource("1_i6dqg")
 max_health = 10000.0
@@ -2238,6 +2267,9 @@ one_shot = true
 
 [node name="Attack Duration Timer" type="Timer" parent="." unique_id=1206423039]
 one_shot = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=574900903]
+environment = SubResource("Environment_nco0c")
 
 [connection signal="timeout" from="Jump timer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="Attack Duration Timer" to="." method="_on_attack_duration_timer_timeout"]

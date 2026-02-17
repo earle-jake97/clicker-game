@@ -50,6 +50,7 @@ var moving = true
 var pitch_scale = randf_range(0.9, 1.3)
 var base_attack_speed = 0.7
 var attack_animation_length = 0.5333
+var knockback_strength = 0
 
 func stun(duration):
 	is_frozen = true
@@ -139,8 +140,13 @@ func process_attack(delta):
 		if is_instance_valid(touching_entity) and not dead:
 			if touching_entity.has_method("take_damage"):
 				touching_entity.take_damage(damage, armor_penetration)
+				if touching_entity.has_method("apply_knockback"):
+					var knock_direction = touching_entity.global_position - global_position
+					touching_entity.apply_knockback(knock_direction, knockback_strength)
 		elif guarantee_hit and not dead:
 			player.take_damage(damage, armor_penetration)
+			var knock_direction = player.global_position - global_position
+			player.get_player_body().apply_knockback(knock_direction, knockback_strength)
 		else:
 			touching_entity = null
 		guarantee_hit = false

@@ -8,6 +8,7 @@ const NEW_DEVIL_HEAD_DEAD = preload("res://sprites/enemies/devil/new_devil_head_
 const NEW_DEVIL_HEAD_SMILE = preload("res://sprites/enemies/devil/new_devil_head_smile.png")
 
 func _ready() -> void:
+	knockback_strength = 500
 	attack_animation_length = 0.5333
 	base_attack_speed = 0.7
 	value = randi_range(value_min, value_max)

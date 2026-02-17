@@ -38,6 +38,7 @@ var overshields = 0
 var overshields_cap = 0
 var overshield_timer = 0.0
 signal reset
+signal player_damage_taken
 var dash_animation_timer = 0.0
 var processed_items = []
 var inventory: Array = []
@@ -48,6 +49,8 @@ var bleed_timer = 0
 var bleed_cooldown = 1
 var attacking = false
 var dead = false
+var iframes = 0.5
+var invincible = false
 
 func _ready():
 	luck = base_luck
@@ -248,15 +251,19 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 		"crit": is_crit
 	}
 
-func take_damage(damage, penetration) -> void:
-	if current_hp <= 0:
+func take_damage(damage, penetration, trigger_iframes: bool = true) -> void:
+	if current_hp <= 0 or invincible:
 		return
+	
 	var block = calculate_luck()
 	if block <= get_block_chance():
 		var miss = preload("res://items/misc/miss.tscn").instantiate()
 		miss.global_position = player.global_position + Vector2(randf_range(-50.0, 10.0), randf_range(-80, -40.0))
 		get_tree().current_scene.add_child(miss)
 		return
+	if trigger_iframes:
+		trigger_iframes()
+	player_damage_taken.emit()
 	var damage_reduction = (total_armor - penetration)/(100.0 + total_armor - penetration)
 	damage *= (1 - damage_reduction)
 	damage = round(damage)
@@ -399,6 +406,13 @@ func _deal_damage_to_enemy(enemy, damage_result, damage_source: String = "Player
 		enemy.take_damage(damage_result.damage, damage_result.crit, damage_source)
 		if can_proc:
 			proc_items(enemy)
+
+func trigger_iframes():
+	invincible = true
+	print("Invincible")
+	await get_tree().create_timer(iframe_duration).timeout
+	print("Vulnerable")
+	invincible = false
 
 func set_player(p):
 	player = p

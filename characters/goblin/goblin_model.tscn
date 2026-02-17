@@ -2,32 +2,41 @@
 
 [ext_resource type="Script" uid="uid://c8onflwux21aw" path="res://characters/goblin/goblin_model.gd" id="1_2ln6p"]
 [ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="2_e53r1"]
-[ext_resource type="Texture2D" uid="uid://b1u8ie74mol7s" path="res://sprites/test_player/leg1.png" id="3_x42ye"]
-[ext_resource type="Texture2D" uid="uid://cycovta23wlx5" path="res://sprites/test_player/leg2.png" id="4_3lxob"]
-[ext_resource type="Texture2D" uid="uid://3n6edpwrpop7" path="res://sprites/test_player/body.png" id="5_bcp4i"]
-[ext_resource type="Texture2D" uid="uid://cgra5bald00k8" path="res://sprites/test_player/arms1.png" id="6_njbw4"]
-[ext_resource type="Texture2D" uid="uid://fmh34smgt5g2" path="res://sprites/test_player/arms2.png" id="7_ro7o7"]
-[ext_resource type="Texture2D" uid="uid://cykc6cytdswx" path="res://sprites/test_player/arms3.png" id="8_iuvno"]
-[ext_resource type="Texture2D" uid="uid://uus72pbnu2dn" path="res://sprites/test_player/arms4.png" id="9_ar31f"]
+[ext_resource type="Texture2D" uid="uid://bfgx7ahdj8js1" path="res://sprites/player_character/goblin/leg1.png" id="3_2ln6p"]
+[ext_resource type="Texture2D" uid="uid://b64gu4yb3dshr" path="res://sprites/player_character/goblin/leg2.png" id="4_e53r1"]
+[ext_resource type="Texture2D" uid="uid://dwo83e3ia7k1f" path="res://sprites/player_character/goblin/body.png" id="5_x42ye"]
+[ext_resource type="Texture2D" uid="uid://c3wv5neuhvbtv" path="res://sprites/player_character/goblin/arms1.png" id="6_2ln6p"]
+[ext_resource type="Texture2D" uid="uid://j583bj4mi6kb" path="res://sprites/player_character/goblin/arms2.png" id="7_e53r1"]
+[ext_resource type="Texture2D" uid="uid://dle7ogr5osqy8" path="res://sprites/player_character/goblin/arms4.png" id="9_x42ye"]
 [ext_resource type="Texture2D" uid="uid://cjg7rggrcmuxj" path="res://sprites/test_player/gun1.png" id="10_8twma"]
 [ext_resource type="Texture2D" uid="uid://d0t484haut3kj" path="res://sprites/test_player/gun2.png" id="11_7y8id"]
-[ext_resource type="Texture2D" uid="uid://dg1vr05p6v14k" path="res://sprites/test_player/head.png" id="12_6xagy"]
-[ext_resource type="Texture2D" uid="uid://bf6bdyypykhvu" path="res://sprites/test_player/fez.png" id="13_0ufah"]
+[ext_resource type="Texture2D" uid="uid://c6mj2drhhsiuq" path="res://sprites/player_character/goblin/head_healthy.png" id="12_3lxob"]
+[ext_resource type="Texture2D" uid="uid://c2jc53o8f53rc" path="res://sprites/player_character/goblin/arms3.png" id="12_e53r1"]
+[ext_resource type="Texture2D" uid="uid://clevfs8bvo0vb" path="res://sprites/player_character/goblin/fez.png" id="13_bcp4i"]
+[ext_resource type="Texture2D" uid="uid://ccvy0l6gvwp3h" path="res://sprites/player_character/goblin/eyes_blink.png" id="14_8twma"]
+[ext_resource type="Texture2D" uid="uid://ccycuigdjyuw4" path="res://sprites/player_character/goblin/eyes_dead.png" id="14_ar31f"]
+[ext_resource type="Texture2D" uid="uid://bkqys77mgv5b5" path="res://sprites/player_character/goblin/eyes_sad.png" id="14_iuvno"]
+[ext_resource type="Texture2D" uid="uid://dlrci3td4yur" path="res://sprites/player_character/goblin/eyes_smile.png" id="14_x42ye"]
+[ext_resource type="Texture2D" uid="uid://b4i4bqeqc3y0" path="res://sprites/player_character/goblin/mouth_smile.png" id="15_3lxob"]
+[ext_resource type="Texture2D" uid="uid://dou7pc6lwdc3b" path="res://sprites/player_character/goblin/mouth_sad.png" id="15_bcp4i"]
+[ext_resource type="Texture2D" uid="uid://do1nc8ellb35u" path="res://sprites/player_character/goblin/mouth_hurt.png" id="15_njbw4"]
+[ext_resource type="Texture2D" uid="uid://dha2j7xwep5wf" path="res://sprites/player_character/goblin/eyes_weak.png" id="15_ro7o7"]
+[ext_resource type="Texture2D" uid="uid://c1byah6mgbh5f" path="res://sprites/player_character/goblin/mouth_normal.png" id="16_njbw4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rjapy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_njbw4")
+"texture": ExtResource("6_2ln6p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_ro7o7")
+"texture": ExtResource("7_e53r1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_iuvno")
+"texture": ExtResource("12_e53r1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_ar31f")
+"texture": ExtResource("9_x42ye")
 }],
 "loop": true,
 "name": &"default",
@@ -35,7 +44,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_iuvno")
+"texture": ExtResource("12_e53r1")
 }],
 "loop": false,
 "name": &"die",
@@ -54,10 +63,96 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_iuvno")
+"texture": ExtResource("12_e53r1")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcp4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_8twma")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_ar31f")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_8twma")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_iuvno")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_x42ye")
+}],
+"loop": true,
+"name": &"smile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_ro7o7")
+}],
+"loop": true,
+"name": &"weak",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x42ye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_njbw4")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_njbw4")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_bcp4i")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_3lxob")
+}],
+"loop": true,
+"name": &"smile",
 "speed": 5.0
 }]
 
@@ -1391,6 +1486,60 @@ _data = {
 radius = 20.0
 height = 40.0
 
+[sub_resource type="Animation" id="Animation_8twma"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6xagy"]
+resource_name = "damage"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7y8id"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xagy"]
+_data = {
+&"RESET": SubResource("Animation_8twma"),
+&"damage": SubResource("Animation_6xagy"),
+&"default": SubResource("Animation_7y8id")
+}
+
 [node name="Goblin Model" type="CharacterBody2D" unique_id=1834059154 groups=["main", "player"]]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_2ln6p")
@@ -1406,23 +1555,22 @@ texture = ExtResource("2_e53r1")
 
 [node name="leg1" type="Sprite2D" parent="sprite" unique_id=359121693]
 position = Vector2(8.33333, -28.3333)
-texture = ExtResource("3_x42ye")
+texture = ExtResource("3_2ln6p")
 offset = Vector2(9.16667, 13.3333)
 
 [node name="leg2" type="Sprite2D" parent="sprite" unique_id=444614132]
 position = Vector2(-14.1667, -28.3333)
 scale = Vector2(-1, 1)
-texture = ExtResource("4_3lxob")
+texture = ExtResource("4_e53r1")
 offset = Vector2(-6.66667, 12.5)
 
 [node name="body" type="Sprite2D" parent="sprite" unique_id=1554804164]
 position = Vector2(-2.5, -47.5)
-texture = ExtResource("5_bcp4i")
+texture = ExtResource("5_x42ye")
 
 [node name="arms" type="AnimatedSprite2D" parent="sprite/body" unique_id=281971411]
 position = Vector2(-0.833333, -12.5)
 sprite_frames = SubResource("SpriteFrames_rjapy")
-animation = &"idle"
 autoplay = "default"
 offset = Vector2(16.6667, 8.33334)
 
@@ -1431,12 +1579,22 @@ position = Vector2(39.333336, 0)
 
 [node name="head" type="Sprite2D" parent="sprite/body" unique_id=772031956]
 position = Vector2(0, -20.8333)
-texture = ExtResource("12_6xagy")
+texture = ExtResource("12_3lxob")
 offset = Vector2(-10, -30)
 
 [node name="fez" type="Sprite2D" parent="sprite/body/head" unique_id=1432612041]
 position = Vector2(-6.66667, -70)
-texture = ExtResource("13_0ufah")
+texture = ExtResource("13_bcp4i")
+
+[node name="eyes" type="AnimatedSprite2D" parent="sprite/body/head" unique_id=978151648]
+position = Vector2(-9.500002, -29.000038)
+sprite_frames = SubResource("SpriteFrames_bcp4i")
+animation = &"hurt"
+
+[node name="mouth" type="AnimatedSprite2D" parent="sprite/body/head" unique_id=861531842]
+position = Vector2(-9.5, -30.333366)
+sprite_frames = SubResource("SpriteFrames_x42ye")
+animation = &"hurt"
 
 [node name="pivot" type="Marker2D" parent="sprite/body" unique_id=1712554464]
 position = Vector2(6.5, 22.1667)
@@ -1455,3 +1613,19 @@ autoplay = &"walk_left"
 [node name="WallCollision" type="CollisionShape2D" parent="." unique_id=43522306]
 position = Vector2(0, -18.6667)
 shape = SubResource("CapsuleShape2D_lfmcr")
+
+[node name="timers" type="Node2D" parent="." unique_id=633746772]
+
+[node name="blink" type="Timer" parent="timers" unique_id=1719654151]
+wait_time = 5.0
+one_shot = true
+
+[node name="iframes" type="Timer" parent="timers" unique_id=1663897005]
+wait_time = 0.5
+one_shot = true
+
+[node name="ModulatePlayer" type="AnimationPlayer" parent="." unique_id=1954619561]
+libraries/ = SubResource("AnimationLibrary_6xagy")
+
+[connection signal="timeout" from="timers/blink" to="." method="_on_blink_timeout"]
+[connection signal="timeout" from="timers/iframes" to="." method="_on_iframes_timeout"]

@@ -2,31 +2,43 @@ extends CharacterBody2D
 var dead = false
 @onready var head: Sprite2D = $sprite/body/head
 var player = PlayerController
-const HEAD = preload("res://sprites/test_player/head.png")
-const HEAD_NORMAL = preload("res://sprites/test_player/head_normal.png")
-const HEAD_PAIN = preload("res://sprites/test_player/head_pain.png")
-const HEAD_DIRE = preload("res://sprites/test_player/head_dire.png")
-const HEAD_DEAD = preload("res://sprites/test_player/head_dead.png")
-const BODY_DIRE = preload("res://sprites/test_player/body_dire.png")
-const BODY_DEAD = preload("res://sprites/test_player/body_dead.png")
-const BODY_NORMAL = preload("res://sprites/test_player/body.png")
+const HEAD = preload("res://sprites/player_character/goblin/head_healthy.png")
+const HEAD_NORMAL = preload("res://sprites/player_character/goblin/head_healthy.png")
+const HEAD_PAIN = preload("res://sprites/player_character/goblin/head_healthy.png")
+const HEAD_DIRE = preload("res://sprites/player_character/goblin/head_dire.png")
+const HEAD_DEAD = preload("res://sprites/player_character/goblin/head_dead.png")
+const BODY_DIRE = preload("res://sprites/player_character/goblin/body_dire.png")
+const BODY_DEAD = preload("res://sprites/player_character/goblin/body_dead.png")
+const BODY_NORMAL = preload("res://sprites/player_character/goblin/body.png")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var arms: AnimatedSprite2D = $sprite/body/arms
 @onready var body: Sprite2D = $sprite/body
 @onready var shadow: Sprite2D = $shadow
 @onready var slingshot_origin: Marker2D = $sprite/body/arms/slingshot_origin
+@onready var eyes: AnimatedSprite2D = $sprite/body/head/eyes
+@onready var mouth: AnimatedSprite2D = $sprite/body/head/mouth
+@onready var blink_timer: Timer = $timers/blink
+@onready var iframes: Timer = $timers/iframes
+@onready var modulate_player: AnimationPlayer = $ModulatePlayer
+var damage_taken = false
+var external_velocity = Vector2.ZERO
+var external_drag = 1800.0
+
 
 @export var base_speed := 180.0
 var speed := base_speed
 var facing_right = true
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PlayerController.set_player(self)
+	PlayerController.player_damage_taken.connect(_on_damage_taken)
 	animation_player.animation_set_next("move_up", "idle")
 	animation_player.animation_set_next("move_down", "idle")
 	animation_player.animation_set_next("die", "dead")
+	blink_timer.start()
 	
 	
 func _physics_process(delta: float) -> void:
@@ -65,22 +77,27 @@ func _physics_process(delta: float) -> void:
 		else:
 			animation_player.play("idle_left")
 
+	var input_velocity = Vector2.ZERO
 	if dir != Vector2.ZERO:
-		dir = dir.normalized()
-		var motion := dir * speed * delta
-		var collision := move_and_collide(motion)
-
-		if collision:
-			var normal := collision.get_normal()
-			var move_dir := motion.normalized()
-			var angle = abs(move_dir.angle_to(normal))
-
-			if angle >= PI / 4.0:
-				move_and_collide(motion.slide(normal))
+		input_velocity = dir.normalized() * speed
+		#dir = dir.normalized()
+		#var motion := dir * speed * delta
+		#var collision := move_and_collide(motion)
+#
+		#if collision:
+			#var normal := collision.get_normal()
+			#var move_dir := motion.normalized()
+			#var angle = abs(move_dir.angle_to(normal))
+#
+			#if angle >= PI / 4.0:
+				#move_and_collide(motion.slide(normal))
+	var final_velocity = input_velocity + external_velocity
+	velocity = final_velocity
+	move_and_slide()
+	external_velocity = external_velocity.move_toward(Vector2.ZERO, external_drag * delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	queue_redraw()
 	speed = PlayerController.movement_speed
 	face_enemy()
 	
@@ -103,23 +120,35 @@ func _process(delta: float) -> void:
 		animation_player.play("die")
 		head.texture = HEAD_DEAD
 		body.texture = BODY_DEAD
+		eyes.play("dead")
+		mouth.play("sad")
 	elif percentage <= 0.10:
 		head.texture = HEAD_DIRE
 		body.texture = BODY_DIRE
-		body.texture = BODY_NORMAL
+		if not damage_taken:
+			eyes.play("weak")
+			mouth.play("sad")
 	elif percentage < 0.30:
 			head.texture = HEAD_PAIN
 			body.texture = BODY_NORMAL
-			
+			if not damage_taken:
+				eyes.play("sad")
+				mouth.play("sad")
 	elif percentage < 0.60:
 		body.texture = BODY_NORMAL
 		head.texture = HEAD_NORMAL
+		if not damage_taken:
+			eyes.play("smile")
+			mouth.play("normal")
 	elif percentage >= 0.60:
 		body.texture = BODY_NORMAL
 		head.texture = HEAD
+		if not damage_taken:
+			eyes.play("smile")
+			mouth.play("smile")
 
-func take_damage(damage, pen):
-	PlayerController.take_damage(damage, pen)
+func take_damage(damage, pen, trigger_iframes: bool = true):
+	PlayerController.take_damage(damage, pen, trigger_iframes)
 	
 func is_alive():
 	return true
@@ -141,3 +170,24 @@ func face_enemy():
 
 func get_sling_position():
 	return slingshot_origin.global_position
+
+
+func _on_blink_timeout() -> void:
+	blink_timer.start(randf_range(1.0, 10.0))
+
+func _on_damage_taken():
+	iframes.start(PlayerController.iframes)
+	if PlayerController.invincible:
+		modulate_player.play("damage")
+	eyes.play("hurt")
+	mouth.play("hurt")
+	damage_taken = true
+	return
+
+
+func _on_iframes_timeout() -> void:
+	damage_taken = false
+	modulate_player.play("default")
+
+func apply_knockback(dir: Vector2, strength: float = 500.0):
+	external_velocity += dir.normalized() * strength

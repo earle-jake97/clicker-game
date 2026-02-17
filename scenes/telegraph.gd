@@ -3,6 +3,7 @@ extends Node2D
 @export var damage: int
 @export var armor_penetration: int
 @export var duration: float = 1.0
+var knockback_strength = 0.0
 var max_scale = Vector2(1.0, 1.0)
 
 var elapsed_time := 0.0
@@ -23,6 +24,10 @@ func _process(delta: float) -> void:
 		for target in targets_in_area.duplicate():
 			if is_instance_valid(target) and target.has_method("take_damage"):
 				target.take_damage(damage, armor_penetration)
+				if is_instance_valid(target) and target.has_method("apply_knockback"):
+					print("RAN")
+					var direction = target.global_position - global_position
+					target.apply_knockback(direction, knockback_strength)
 		queue_free()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

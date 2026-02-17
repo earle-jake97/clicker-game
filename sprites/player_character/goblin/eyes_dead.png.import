@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgnrpf68a0jat"
-path="res://.godot/imported/head.png-3631a4d4a116c9a542c2ccc13a522bb2.ctex"
+uid="uid://ccycuigdjyuw4"
+path="res://.godot/imported/eyes_dead.png-f8ec77bc461b7f576439b32b8782161c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemies/devil_boss/head.png"
-dest_files=["res://.godot/imported/head.png-3631a4d4a116c9a542c2ccc13a522bb2.ctex"]
+source_file="res://sprites/player_character/goblin/eyes_dead.png"
+dest_files=["res://.godot/imported/eyes_dead.png-f8ec77bc461b7f576439b32b8782161c.ctex"]
 
 [params]
 

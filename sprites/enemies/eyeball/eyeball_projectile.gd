@@ -60,10 +60,13 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
-		if target.has_method("take_damage"):
-			target.take_damage(1, 0)
-		else:
-			PlayerController.take_damage(1, 0)
+		var this_target = area.get_parent()
+		if this_target.has_method("take_damage"):
+			this_target.take_damage(1, 0, false)
+			if this_target.has_method("apply_knockback"):
+				print("SDAFS")
+				var direction = this_target.global_position - global_position
+				this_target.apply_knockback(direction, 200)
 		queue_free()
 
 func destroy_projectile():

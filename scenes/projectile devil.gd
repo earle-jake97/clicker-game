@@ -85,6 +85,7 @@ func launch_projectile():
 	head.texture = HEAD_SPIT
 	var telegraph = telegraph_scene.instantiate()
 	telegraph.damage = 20
+	telegraph.knockback_strength = 700
 	telegraph.armor_penetration = armor_penetration
 	chosen_position = player_model.global_position + Vector2(randf_range(-shot_precision, shot_precision), randf_range(-shot_precision, shot_precision))
 	telegraph.global_position = chosen_position
