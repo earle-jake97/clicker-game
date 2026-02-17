@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxjqsycd2o1db"]
+[gd_scene format=3 uid="uid://dxjqsycd2o1db"]
 
-[ext_resource type="Script" path="res://sprites/enemies/devil/diving_minion.gd" id="1_hnf7u"]
+[ext_resource type="Script" uid="uid://crn1471bs2yky" path="res://sprites/enemies/devil/diving_minion.gd" id="1_hnf7u"]
 [ext_resource type="Texture2D" uid="uid://c5m3epwanymut" path="res://sprites/enemies/devil_boss/curled_devil.png" id="2_6evll"]
 
-[node name="Diving Minion" type="Node2D"]
+[node name="Diving Minion" type="Node2D" unique_id=1480178688]
 scale = Vector2(0.51, 0.51)
 script = ExtResource("1_hnf7u")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=797686084]
 texture = ExtResource("2_6evll")

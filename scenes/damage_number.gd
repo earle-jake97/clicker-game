@@ -9,8 +9,6 @@ const STALE_TIME := 1.0
 var stale_timer := Timer.new()
 
 func _ready() -> void:
-	SceneManager.connect("scene_switched", Callable(self, "queue_free"))
-
 	# Setup stale timer
 	stale_timer.one_shot = true
 	stale_timer.wait_time = STALE_TIME

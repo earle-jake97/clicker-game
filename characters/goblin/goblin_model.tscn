@@ -1392,12 +1392,12 @@ radius = 20.0
 height = 40.0
 
 [node name="Goblin Model" type="CharacterBody2D" unique_id=1834059154 groups=["main", "player"]]
-y_sort_enabled = true
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_2ln6p")
 
 [node name="shadow" type="Sprite2D" parent="." unique_id=97042796]
 modulate = Color(1, 1, 1, 0.537255)
+z_index = -1
 position = Vector2(-2, 3)
 scale = Vector2(0.0963802, 0.191225)
 texture = ExtResource("2_e53r1")

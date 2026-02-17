@@ -1,7 +1,6 @@
 extends Control
 
 @onready var sprite_2d: Button = $Sprite2D
-@onready var area_2d: Area2D = $Area2D
 @onready var deferral: Button = $deferral
 
 var room_category

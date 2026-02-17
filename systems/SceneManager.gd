@@ -15,11 +15,19 @@ func switch_to_scene(path: String) -> void:
 
 func _do_scene_switch():
 	scene_switched.emit()
-	if get_tree().current_scene:
-		get_tree().current_scene.queue_free()
+
+	var tree = get_tree()
+	var root = tree.root
+
+	if tree.current_scene:
+		tree.current_scene.queue_free()
 
 	var new_scene = target_scene_instance.instantiate()
-	get_tree().root.add_child(new_scene)
-	await get_tree().process_frame
-	
-	get_tree().current_scene = new_scene
+	root.add_child(new_scene)
+
+	await tree.process_frame
+
+	if is_instance_valid(new_scene) and new_scene.get_parent() == root:
+		tree.current_scene = new_scene
+	else:
+		push_warning("SceneManager: Scene invalid before set_current_scene")

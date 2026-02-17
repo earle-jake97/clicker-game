@@ -35,8 +35,6 @@ func _process(delta: float) -> void:
 				var item_script = item.new()
 				PlayerController.add_item(item_script)
 				Tooltip.hide_tooltip()
-				GameState.on_map_screen = true
-				GameState.leave_shop_triggered = true
 				leave_room.emit()
 
 # Assign item properties for the item

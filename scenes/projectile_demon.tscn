@@ -946,7 +946,6 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D" unique_id=1869019149 groups=["enemy"]]
-y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_magoy")
 
@@ -1017,7 +1016,7 @@ position = Vector2(-14, -30)
 scale = Vector2(7.28, 5)
 shape = SubResource("CircleShape2D_fvuer")
 
-[node name="limbs" type="AnimationPlayer" parent="container" unique_id=121680571]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=121680571]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_b5orv")
 autoplay = &"jump"

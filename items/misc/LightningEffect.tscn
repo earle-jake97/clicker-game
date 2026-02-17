@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://7p6482eul4du"]
+[gd_scene format=3 uid="uid://7p6482eul4du"]
 
-[ext_resource type="Script" path="res://items/misc/lightning_effect.gd" id="1_1f8lc"]
+[ext_resource type="Script" uid="uid://ik4en6tb54kp" path="res://items/misc/lightning_effect.gd" id="1_1f8lc"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=2106015056]
 z_index = 4096
 script = ExtResource("1_1f8lc")
 points = 10
 jaggedness = 40.0
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=49859287]
 position = Vector2(-1.88635, 0)
 scale = Vector2(1.00568, 1)
 points = PackedVector2Array(335, 45, 503.028, 46)

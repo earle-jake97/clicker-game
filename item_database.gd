@@ -4,9 +4,9 @@ extends Node
 var items := []
 var hearts := []
 var starter_items := []
+var item_backup
 func _ready():
 	register_items()
-	set_starter_items()
 
 func register_items():
 	# Add all items here
@@ -64,21 +64,12 @@ func register_items():
 
 func get_random_item_by_rarity(rarity: int):
 	var filtered = items.filter(func(i): return i.new().rarity == rarity)
-	return filtered.pick_random() if filtered.size() > 0 else null
-
-func set_starter_items():
-	var filtered = items.filter(func(i): return i.new().rarity == 2)
-	var count = 3  # or however many starter items you want
-
-	starter_items.clear()
-	var attempts = 0
-
-	while starter_items.size() < count and attempts < 100:
-		var candidate = filtered.pick_random()
-		var instance = candidate.new()
-		if instance not in starter_items:
-			starter_items.append(instance)
-		attempts += 1
+	var item_choice
+	if filtered.size() > 0:
+		item_choice = filtered.pick_random()  
+	else: return load("res://items/scripts/1/slop.gd")
+	remove_item(item_choice)
+	return item_choice
 
 func get_starter_items():
 	if starter_items.is_empty():
@@ -90,10 +81,16 @@ func get_random_heart_by_rarity(rarity: int):
 	return filtered.pick_random() if filtered.size() > 0 else null
 
 func get_random_item():
-	return items.pick_random()
+	var item_choice = items.pick_random()
+	remove_item(item_choice)
+	return item_choice
 
 func reset_items():
-	set_starter_items()
+	items = []
+	register_items()
+
+func add_item(script:Script):
+	items.append(script)
 
 func remove_item(script: Script):
 	if script in items:

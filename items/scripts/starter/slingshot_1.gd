@@ -4,7 +4,7 @@ const item_name = "Splitshot"
 const item_description = "Every attack shoots a second shot that targets the most dangerous enemy. 
 These shots do 5 damage, will not trigger on procs and do not proc other items."
 var tags = []
-var item_icon = preload("res://sprites/aaron.png")
+var item_icon = preload("res://items/icons/starter_items/splitshot.png")
 const file_name = "res://items/scripts/starter/slingshot_1.gd"
 var damage = 5
 

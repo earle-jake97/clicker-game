@@ -9,7 +9,6 @@ func _ready() -> void:
 	camera_2d.reset_to_zero()
 	GameState.horde_bool = true
 	GameState.enemy_count = 0
-	GameState.on_map_screen = false
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
 	for spawner in get_tree().get_nodes_in_group("spawner"):
@@ -32,7 +31,6 @@ func check_spawner_complete():
 			return
 	if get_tree().get_nodes_in_group("enemy").size() > 0:
 		return
-	GameState.on_map_screen = true
 	GameState.enemy_count = 0
 	GameState.horde_bool = false
 	SceneManager.switch_to_scene(MapView)

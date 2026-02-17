@@ -134,11 +134,13 @@ func attack_specific_enemy(enemy, damage_multiplier: float = 1.0, damage_type = 
 func attack_all_enemies():
 	if dead:
 		return
+	var result = calculate_damage()
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		last_enemy_attacked = enemy
-		var result = calculate_damage()
-		enemy.take_damage(result.damage, result.crit, "Player Global Attack")
-		proc_items(enemy)
+		if is_instance_valid(enemy):
+			enemy.take_damage(result.damage, result.crit, "Player Global Attack")
+			proc_items(enemy)
+		await get_tree().process_frame
 
 func get_nearest_enemy():
 	var closest_enemy = null
@@ -325,7 +327,6 @@ func reset_to_defaults():
 	HealthBar.dead = false
 	dead = false
 	ItemDatabase.reset_items()
-	player.reset_player_model()
 	GameState.reset_all()
 	MapManager.reset_defaults()
 	PauseMenu.update_inventory_display()

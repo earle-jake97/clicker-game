@@ -1,10 +1,10 @@
 extends Node2D
 
 @onready var hands: Sprite2D = $Hands
-@onready var area_2d: Area2D = $Area2D
 
 @onready var item_tree = get_tree().get_nodes_in_group("item")
 @onready var heart_tree = get_tree().get_nodes_in_group("heart")
+@onready var exit: Button = $Exit
 
 
 var hover_exit = false
@@ -12,7 +12,6 @@ const BROKE = preload("res://systems/shop/player_hands2.png")
 const WOKE = preload("res://systems/shop/player_hands.png")
 const SHOPKEEP = preload("res://systems/shop/shopkeep.png")
 const SHOPKEEP_MAD = preload("res://systems/shop/shopkeep_mad.png")
-const HORDE = preload("res://systems/map/horde_scenes/horde_endless.tscn")
 const BOSS_1_MAP = preload("res://systems/map/boss_scenes/boss_1_map.tscn")
 var difficulty_scaling = 0.15
 var lowest_price = 30
@@ -25,18 +24,7 @@ func _ready() -> void:
 	PlayerController.difficulty -= 1 # Bandaid fix
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
-	GameState.on_map_screen = false
 	set_up_items()
-
-func _process(delta: float) -> void:
-	if hover_exit and Input.is_action_just_pressed("Click"):
-		var rand = randf()
-		if GameState.endless_mode:
-			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
-		else:
-			SceneManager.switch_to_scene("res://map/map_scene.tscn")
-
-	hands.texture = WOKE if PlayerController.cash > lowest_price else BROKE
 
 func set_up_items():
 	var ok = ItemSpawner.populate_shop(
@@ -46,9 +34,6 @@ func set_up_items():
 			if price < lowest_price:
 				lowest_price = price
 	)
-
-	if not ok:
-		queue_free()
 	for heart in heart_tree:
 		var rarity = roll_heart_rarity()
 		var base_price = get_health_price(rarity)
@@ -129,15 +114,6 @@ func apply_discount(base_price: int) -> int:
 	else:
 		return base_price  # No discount
 
-
-
-func _on_area_2d_mouse_entered() -> void:
-	hover_exit = true
-
-
-func _on_area_2d_mouse_exited() -> void:
-	hover_exit = false
-
 func _get_unique_item_script(get_script_func: Callable, used_paths: Array[String]):
 	for i in range(MAX_ATTEMPTS):
 		var script = get_script_func.call()
@@ -150,3 +126,10 @@ func _get_unique_item_script(get_script_func: Callable, used_paths: Array[String
 
 	# Could not find a unique item
 	return null
+
+
+func _on_exit_pressed() -> void:
+	var items_unpurchased = get_tree().get_nodes_in_group("item")
+	print("Items unpurchased", items_unpurchased)
+	ItemSpawner.return_unused_items(items_unpurchased)
+	SceneManager.switch_to_scene("res://map/map_scene.tscn")

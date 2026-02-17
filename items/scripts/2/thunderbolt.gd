@@ -52,21 +52,22 @@ func proc(target: Node, source_item: BaseItem = null):
 				if rand <= 0.2:
 					procs = true
 					player.proc_items(nearest, self)  # mark this Thunderbolt as the source
-
-			var bolt = preload("res://items/misc/LightningEffect.tscn").instantiate()
-			bolt.top_level = true
-			var target_pivot_1
-			var target_pivot_2
-			if current_target.find_child("pivot", 1, 1):
-				target_pivot_1 = current_target.find_child("pivot", 1, 1).global_position
-			else:
-				target_pivot_1 = current_target.global_position
-			if nearest.find_child("pivot", 1, 1):
-				target_pivot_2 = nearest.find_child("pivot", 1, 1).global_position
-			else:
-				target_pivot_2 = nearest.global_position
-			bolt.setup(target_pivot_1, target_pivot_2, procs)
-			tree.current_scene.add_child(bolt)
+			var enemy_check = player.get_player_body().get_tree().get_nodes_in_group("enemy")
+			if enemy_check.size() <= 50:
+				var bolt = preload("res://items/misc/LightningEffect.tscn").instantiate()
+				bolt.top_level = true
+				var target_pivot_1
+				var target_pivot_2
+				if current_target.find_child("pivot", 1, 1):
+					target_pivot_1 = current_target.find_child("pivot", 1, 1).global_position
+				else:
+					target_pivot_1 = current_target.global_position
+				if nearest.find_child("pivot", 1, 1):
+					target_pivot_2 = nearest.find_child("pivot", 1, 1).global_position
+				else:
+					target_pivot_2 = nearest.global_position
+				bolt.setup(target_pivot_1, target_pivot_2, procs)
+				tree.current_scene.add_child(bolt)
 
 			current_target = nearest
 		else:

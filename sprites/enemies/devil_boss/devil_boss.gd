@@ -16,16 +16,23 @@ const FIREBALL_INTERVAL = 1.5
 const MEDITATE_TIME = 2.3
 const GLOBAL_INTERVAL = 3.5
 const FIREBALL_TRAVEL_TIME = 0.8
+const JUMP_WINDUP = 0.5
+const JUMP_AIRTIME = 0.5
+const TIME_TO_LAND = 0.2
 const TELEGRAPH = preload("res://scenes/telegraph.tscn")
 const FIREBALL = preload("res://sprites/enemies/devil_boss/fireball.tscn")
 @onready var pivot: Marker2D = $container/sprite/Body/pivot
+@onready var jump_timer: Timer = $"Jump timer"
+@onready var attack_duration_timer: Timer = $"Attack Duration Timer"
 
 var previous_debuffs = []
-
+var attack_duration_time = 0.0
+var can_fireball = true
 var mouth_timer = 0.0
 var armor = 50
 var meditate_timer = 0.0
 var meditating = false
+var jump_pos = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,6 +48,7 @@ func _ready() -> void:
 	animation_player.animation_set_next("slam", "idle")
 	animation_player.animation_set_next("meditate", "idle")
 	animation_player.animation_set_next("throw_minions", "idle")
+	animation_player.animation_set_next("jump", "idle")
 	if PlayerController.difficulty >= 15:
 		max_health = max_health * pow(1 + 0.12, PlayerController.difficulty)
 	else:
@@ -59,13 +67,14 @@ func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageTy
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	mouth_timer += delta
-	if health <= max_health/2:
-		fireball_cooldown += delta * 2
-	elif health <= max_health/4:
-		fireball_cooldown += delta * 2.5
-	else:
-		fireball_cooldown += delta
-
+	if can_fireball:
+		if health <= max_health/2:
+			fireball_cooldown += delta * 2
+		elif health <= max_health/4:
+			fireball_cooldown += delta * 2.5
+		else:
+			fireball_cooldown += delta
+	look_at_player()
 	throw_cooldown += delta
 	meditate_cooldown += delta
 	global_cooldown += delta
@@ -77,16 +86,6 @@ func _process(delta: float) -> void:
 		debuff_container.update_debuffs()
 		meditating = false
 	
-	if not is_attacking and global_cooldown >= GLOBAL_INTERVAL and not dead:
-		var ran = randi_range(1,5)
-		if ran <= 1 and throw_cooldown >= THROW_INTERVAL:
-			throw_minions()
-		elif ran <= 2 and bleed_stacks > 0 and meditate_cooldown >= MEDITATE_INTERVAL:
-			meditate()
-		else:
-			slam()
-		global_cooldown = 0.0
-	
 	if dead:
 		shadow.visible = false
 		var color = modulate
@@ -95,7 +94,9 @@ func _process(delta: float) -> void:
 		death_timer += delta
 		if death_timer >= 2:
 			queue_free()
-
+	
+	handle_attack()
+	
 	if health <= 0:
 		if not paid_out:
 			paid_out = true
@@ -118,18 +119,57 @@ func _process(delta: float) -> void:
 	if head.texture == HEAD_EYES_CLOSED and not meditating:
 		head.texture = HEAD
 
+func handle_attack():
+	if dead:
+		return
+	if global_cooldown >= GLOBAL_INTERVAL:
+		var ran = randf_range(0,1)
+		if ran <= 0.25 and throw_cooldown >= THROW_INTERVAL:
+			throw_minions()
+		elif ran <= 0.5 and bleed_stacks > 0 and meditate_cooldown >= MEDITATE_INTERVAL:
+			meditate()
+		elif ran <= 0.75:
+			jump_attack()
+		else:
+			slam()
+		global_cooldown = 0.0
 
 func throw_minions():
+	if dead:
+		return
 	throw_cooldown = 0.0
 	minion_ball.visible = true
 	animation_player.play("throw_minions")
 	for i in range(5):
 		var enemy = DIVING_MINION.instantiate()
-		enemy.target_pos = Vector2(randf_range(550.0, 999),randf_range(300.0, 600))
-		enemy.global_position = Vector2(randf_range(550.0, 999), randf_range(-500, -700 ))
+		var enemy_chosen_position = get_valid_tile_near_point(Vector2(randf_range(-1000, 1000), randf_range(-500, 500)))
+		enemy.target_pos = enemy_chosen_position
+		enemy.shadow_position = enemy_chosen_position
+		enemy.global_position = Vector2(enemy_chosen_position.x, randf_range(-2500, -3500 ))
+		enemy.speed = randf_range(500, 900)
 		get_tree().current_scene.add_child(enemy)
 
+func jump_attack():
+	if dead:
+		return
+	animation_player.play("jump")
+	jump_timer.start(JUMP_WINDUP + JUMP_AIRTIME)
+	set_attack_duration(JUMP_WINDUP + JUMP_AIRTIME + TIME_TO_LAND)
+	jump_pos = player_model.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	var telegraph = TELEGRAPH.instantiate()
+	telegraph.max_scale = Vector2(2.8, 1.75)
+	telegraph.damage = damage + (controller.difficulty * 0.2)
+	telegraph.armor_penetration = 0
+	telegraph.duration = JUMP_WINDUP + JUMP_AIRTIME + TIME_TO_LAND
+	telegraph.global_position = jump_pos
+	get_tree().current_scene.add_child(telegraph)
+
+func change_position(pos):
+	global_position = pos
+
 func shoot_fireball():
+	if dead:
+		return
 	open_mouth()
 	var telegraph = TELEGRAPH.instantiate()
 	telegraph.damage = damage + (controller.difficulty * 0.2)
@@ -159,6 +199,8 @@ func open_mouth():
 	mouth_timer = 0.0
 
 func meditate():
+	if dead:
+		return
 	meditate_timer = 0.0
 	head.texture = HEAD_EYES_CLOSED
 	meditating = true
@@ -166,6 +208,8 @@ func meditate():
 	meditate_cooldown = 0.0
 
 func slam():
+	if dead:
+		return
 	animation_player.play("slam")
 	var ran = player_model.global_position + Vector2(2000, randf_range( -200, 200))
 	var shockwave = SHOCKWAVE.instantiate()
@@ -185,3 +229,13 @@ func die():
 
 func apply_debuff():
 	debuff_container.update_debuffs()
+	
+func set_attack_duration(time):
+	can_fireball = false
+	attack_duration_timer.start(time)
+	
+func _on_jump_timer_timeout() -> void:
+	change_position(jump_pos)
+
+func _on_attack_duration_timer_timeout() -> void:
+	can_fireball = true

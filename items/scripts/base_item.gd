@@ -9,6 +9,9 @@ func _ready() -> void:
 func on_pickup(player):
 	pass
 
+func add_to_inventory():
+	player.add_item(self)
+
 func resolve_enemy_from_node(node):
 	var current = node
 	while current:

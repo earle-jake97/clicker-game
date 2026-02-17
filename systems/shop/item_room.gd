@@ -10,8 +10,6 @@ func _ready() -> void:
 
 func set_up_items():
 	var ok = ItemSpawner.populate_items(item_tree)
-	if not ok:
-		queue_free()
 	#
 	#for item in item_tree:
 		#var rarity = roll_rarity()

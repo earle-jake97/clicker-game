@@ -2,24 +2,16 @@ extends Node
 class_name ShopItemSpawner
 
 const MAX_ATTEMPTS := 25
-
 func populate_items(
 	items: Array,
 ) -> bool:
-	var used_item_paths: Array[String] = []
-	var used_heart_paths: Array[String] = []
-
 	# Items
 	for item in items:
 		var rarity = _roll_item_rarity()
-		var script = _get_unique(
-			func(): return ItemDatabase.get_random_item_by_rarity(rarity),
-			used_item_paths
-		)
+		var script = ItemDatabase.get_random_item_by_rarity(rarity)
 
 		if not script:
 			return false
-
 		var instance = script.new()
 
 		item.assign_item(
@@ -37,22 +29,15 @@ func populate_shop(
 	difficulty: float,
 	lowest_price_ref: Callable
 ) -> bool:
-	var used_item_paths: Array[String] = []
-	var used_heart_paths: Array[String] = []
-
 	# Items
 	for item in items:
 		var rarity = _roll_item_rarity()
 		var base_price = _get_item_price(rarity, difficulty)
 
-		var script = _get_unique(
-			func(): return ItemDatabase.get_random_item_by_rarity(rarity),
-			used_item_paths
-		)
+		var script = ItemDatabase.get_random_item_by_rarity(rarity)
 
 		if not script:
 			return false
-
 		var instance = script.new()
 		var price = _apply_discount(base_price)
 		lowest_price_ref.call(price)
@@ -68,16 +53,11 @@ func populate_shop(
 		)
 	return true
 
-func _get_unique(getter: Callable, used: Array[String]):
-	for i in range(MAX_ATTEMPTS):
-		var script = getter.call()
-		if not script:
-			return null
-		if script.resource_path not in used:
-			used.append(script.resource_path)
-			return script
-	return null
-
+func return_unused_items(items):
+	for item in items:
+		var loaded = item.item_file_name
+		print("Return unused items item type: ", loaded)
+		ItemDatabase.add_item(load(item.item_file_name))
 
 func _apply_discount(base: int) -> int:
 	var r = randf()

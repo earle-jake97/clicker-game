@@ -2,7 +2,10 @@ extends Node2D
 
 var spawners = []
 const MapView = "res://map/map_scene.tscn"
-# Called when the node enters the scene tree for the first time.
+const eyeball_enemy = preload("uid://b41mbcd7jm5er")
+@onready var label: Label = $CanvasLayer/Label
+
+
 func _ready() -> void:
 	PlayerController.difficulty = 1
 	HealthBar.button.visible = true
@@ -14,7 +17,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("debug"):
+		var enemy_scene = eyeball_enemy.instantiate()
+		enemy_scene.max_health = 10000
+		enemy_scene.global_position = randi_range(-1000, 1000) * Vector2.ONE
+		add_child(enemy_scene)
+		label.text = "Enemy Count: " + str(get_tree().get_nodes_in_group("enemy").size())
+		
 
 func check_spawner_complete():
 	for spawner in spawners:
@@ -22,5 +31,4 @@ func check_spawner_complete():
 			return
 	if get_tree().get_nodes_in_group("elite").size() > 0:
 		return
-	GameState.on_map_screen = true
 	SceneManager.switch_to_scene(MapView)

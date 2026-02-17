@@ -87,3 +87,5 @@ shape = SubResource("RectangleShape2D_yb4g0")
 
 [node name="Goblin Model" parent="." unique_id=1834059154 instance=ExtResource("5_44fa1")]
 position = Vector2(268.65308, 443.79843)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

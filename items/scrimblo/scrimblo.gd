@@ -18,7 +18,6 @@ var health_percentage
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SceneManager.scene_switched.connect(queue_free)
 	progress_bar.value = health
 	health = max_hp
 	progress_bar.max_value = max_hp

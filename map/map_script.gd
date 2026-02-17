@@ -10,7 +10,6 @@ func _ready() -> void:
 	PauseMenu.update_labels()
 	HealthBar.button.visible = false
 	HealthBar.fast_forward = false
-	GameState.on_map_screen = true
 	generate_choices()
 
 
@@ -125,7 +124,6 @@ func _on_choice_selected(room_name):
 	manager.round += 1
 	PlayerController.difficulty += 1
 	if GameState.endless_mode:
-		PlayerController.difficulty += 1
 		GameState.endless_counter += 1
 	SceneManager.switch_to_scene(scene_path)
 	

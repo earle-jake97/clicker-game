@@ -1467,7 +1467,6 @@ _data = {
 }
 
 [node name="devil" type="Node2D" unique_id=92870889 groups=["enemy"]]
-y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_31ic6")
 max_health = 80.0

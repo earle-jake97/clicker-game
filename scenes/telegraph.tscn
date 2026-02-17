@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://of0v6y3d5ahr"]
+[gd_scene format=3 uid="uid://of0v6y3d5ahr"]
 
-[ext_resource type="Script" path="res://scenes/telegraph.gd" id="1_eipol"]
+[ext_resource type="Script" uid="uid://c4jxnq25q1ycn" path="res://scenes/telegraph.gd" id="1_eipol"]
 [ext_resource type="Texture2D" uid="uid://cvv2ujiutbk48" path="res://sprites/test_player/reticle.png" id="2_kt5kf"]
 [ext_resource type="Texture2D" uid="uid://bmha2etvp4icf" path="res://sprites/test_player/reticle2.png" id="3_0reu5"]
 
@@ -21,21 +21,24 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_nyih7"]
 radius = 49.0408
 
-[node name="projectile" type="Node2D"]
+[node name="projectile" type="Node2D" unique_id=28297448]
 process_mode = 1
+z_index = -1
+y_sort_enabled = true
+texture_filter = 1
 script = ExtResource("1_eipol")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1555574013]
 modulate = Color(1, 1, 1, 0.356863)
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_ifdyd")
 autoplay = "default"
 frame_progress = 0.76925
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1428694437]
 position = Vector2(0, -16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=816402158]
 position = Vector2(0, 5)
 scale = Vector2(1, 0.405)
 shape = SubResource("CircleShape2D_nyih7")

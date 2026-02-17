@@ -3,8 +3,6 @@ extends Node2D
 @onready var area_2d: Area2D = $Area2D
 @export var item_name = "test_name"
 @export var item_description = "does bladfljsdlafasfgbask klbdsf lkjsbdflk sadk bsadffk bjkbs kbsafd kbfasd ksdfk jasfdk afsdkbasd fk"
-@onready var label: Label = $Label
-
 
 var item_file_name
 var cost

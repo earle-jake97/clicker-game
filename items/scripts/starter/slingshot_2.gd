@@ -3,20 +3,21 @@ extends BaseItem
 const item_name = "Explosive Shot"
 const item_description = "Every attack detonates, dealing 2 damage in a small area around your target."
 var tags = []
-var item_icon = preload("res://sprites/aaron.png")
+var item_icon = preload("res://items/icons/starter_items/explosive_shot.png")
 const file_name = "res://items/scripts/starter/slingshot_2.gd"
 var damage = 2
 var radius = 105
 
 func starter_proc(target: Node, source_item: BaseItem = null):
-	if player or not target or not is_instance_valid(target):
+	if not player or not target or not is_instance_valid(target):
+		print("?")
 		return
 
 	var tree = player.get_tree() if player.is_inside_tree() else null
 	
 	if not tree:
 		return
-		
+
 	var target_position = get_target_position(target)
 	var enemies = get_enemies_in_radius(target_position)
 	

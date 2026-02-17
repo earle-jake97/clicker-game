@@ -22,5 +22,4 @@ func check_spawner_complete():
 			return
 	if get_tree().get_nodes_in_group("elite").size() > 0:
 		return
-	GameState.on_map_screen = true
 	SceneManager.switch_to_scene(MapView)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdgffrgymtrl0"]
 
 [ext_resource type="Script" uid="uid://ct3ldnv2s3wwg" path="res://scenes/item_rooms/starter_room/slingshot_2.gd" id="1_jd287"]
-[ext_resource type="Texture2D" uid="uid://cmbcwqgij04qi" path="res://sprites/aaron.png" id="2_j5bvg"]
+[ext_resource type="Texture2D" uid="uid://ctcmqqa0ebt06" path="res://items/icons/starter_items/explosive_shot.png" id="2_jd287"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl6vj"]
 radius = 38.0526
@@ -10,7 +10,7 @@ radius = 38.0526
 script = ExtResource("1_jd287")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=870149259]
-texture = ExtResource("2_j5bvg")
+texture = ExtResource("2_jd287")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1986688578]
 

@@ -4,6 +4,7 @@ extends Node2D
 
 const DEVIL_BOSS = preload("res://sprites/enemies/devil_boss/devil_boss.tscn")
 const EVIL_WIZARD = preload("res://sprites/enemies/evil_wizard/evil_wizard.tscn")
+const MapView = "res://map/map_scene.tscn"
 @onready var marker_2d_2: Marker2D = $Positions/Marker2D2
 
 var boss
@@ -23,11 +24,8 @@ func _ready() -> void:
 	add_child(boss)
 	boss.died.connect(_on_boss_died)
 	
-	GameState.on_map_screen = false
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
-	if GameState.endless_mode:
-		GameState.endless_counter += 1
 	
 
 func _on_boss_died():
@@ -35,8 +33,4 @@ func _on_boss_died():
 	GameState.endless_mode = true
 	HealthBar.endless_sprite.visible = true
 	var rand = randf()
-	queue_free()
-	if rand <= 0.3:
-		SceneManager.switch_to_scene("res://systems/shop/shop_endless.tscn")
-	else:
-		SceneManager.switch_to_scene("res://systems/shop/item_room_endless.tscn")
+	SceneManager.switch_to_scene(MapView)

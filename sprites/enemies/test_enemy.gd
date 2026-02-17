@@ -6,8 +6,10 @@ const EYEBALL_ATTACK = preload("res://sprites/enemies/eyeball/eyeball2.png")
 const EYEBALL_PROJECTILE = preload("res://sprites/enemies/eyeball/eyeball_projectile.tscn")
 var attack_cooldown = 5.0
 var attack_timer = 3.0
+@onready var goblin_model: CharacterBody2D = $"../Goblin Model"
 
 func _ready() -> void:
+	player_model = goblin_model
 	animation_player.animation_set_next("attack", "float")
 	value = randi_range(value_min, value_max)
 	health_bar.visible = false
@@ -98,10 +100,3 @@ func die():
 
 func apply_debuff():
 	debuff_container.update_debuffs()
-
-func look_at_player():
-	if not dead:
-			if global_position.x > player_model.global_position.x:
-				container.scale.x = abs(container.scale.x)
-			else:
-				container.scale.x = -abs(container.scale.x)

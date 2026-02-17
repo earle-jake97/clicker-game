@@ -1,6 +1,5 @@
 extends CanvasLayer
 @onready var pause_menu: CanvasLayer = $"."
-@onready var restart: Button = $Restart
 @onready var item_grid: GridContainer = $ItemGrid
 const ITEM_DISPLAY = preload("res://systems/item_display.tscn")
 @onready var dmg_label: Label = $dmg_label

@@ -40,7 +40,7 @@ const ROOM_DESCRIPTIONS := {
 
 const ROOM_SPRITES := {
 	RoomName.HORDE: preload("res://map/icons/horde.png"),
-	RoomName.TRAVERSAL: preload("res://sprites/aaron.png"),
+	RoomName.TRAVERSAL: preload("res://map/icons/traversal.png"),
 	RoomName.MINIBOSS: preload("res://map/icons/miniboss.png"),
 	RoomName.SHOP: preload("res://map/icons/shop.png"),
 	RoomName.ITEM: preload("res://map/icons/item.png"),

@@ -23,8 +23,6 @@ func _process(delta: float) -> void:
 			PlayerController.add_item(item_script)
 			Tooltip.hide_tooltip()
 			SceneManager.switch_to_scene("res://map/map_scene.tscn")
-			GameState.on_map_screen = true
-			GameState.leave_shop_triggered = true
 
 func _on_area_2d_mouse_entered() -> void:
 	entered = true

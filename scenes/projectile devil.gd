@@ -2,7 +2,6 @@ extends BaseEnemy
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 const SMOKE_CLOUD = preload("res://items/misc/smoke_cloud.tscn")
 
-@onready var limbs: AnimationPlayer = $container/limbs
 @onready var head: Sprite2D = $container/sprite/head
 @export var projectile_scene: PackedScene = preload("res://scenes/mad projectile.tscn")
 @export var telegraph_scene: PackedScene = preload("res://scenes/telegraph.tscn")
@@ -50,7 +49,7 @@ func _process(delta: float) -> void:
 
 	if spit_timer >= 0.2 and spitting:
 		head.texture = HEAD
-		limbs.play("idle")
+		animation_player.play("idle")
 		spitting = false
 	spit_timer += delta
 	if dead:
@@ -82,7 +81,7 @@ func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageTy
 func launch_projectile():
 	spit_timer = 0.0
 	spitting = true
-	limbs.play("throw")
+	animation_player.play("throw")
 	head.texture = HEAD_SPIT
 	var telegraph = telegraph_scene.instantiate()
 	telegraph.damage = 20
@@ -102,7 +101,7 @@ func die():
 	died.emit()
 	shadow.visible = false
 	debuff_container.hide()
-	limbs.play("die")
+	animation_player.play("die")
 	progress_bar.hide()
 	remove_from_group("enemy")
 	dead = true
@@ -161,8 +160,8 @@ func initialize():
 	tween.tween_property(shadow, "scale", Vector2(0.22, 0.22), 0.75).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	spit_timer = 0.0
 	attack_timer = 0.0
-	limbs.stop()
-	limbs.play("jump")
+	animation_player.stop()
+	animation_player.play("jump")
 	
 	if SoundManager.thrower_spawn_sound():
 		audio_stream_player_2d.play()

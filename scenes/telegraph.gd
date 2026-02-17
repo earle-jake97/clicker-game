@@ -3,6 +3,7 @@ extends Node2D
 @export var damage: int
 @export var armor_penetration: int
 @export var duration: float = 1.0
+var max_scale = Vector2(1.0, 1.0)
 
 var elapsed_time := 0.0
 var targets_in_area := []
@@ -15,7 +16,7 @@ func _process(delta: float) -> void:
 	
 	# Scale up smoothly to 1.0 over duration
 	var t = clamp(elapsed_time / duration, 0.0, 1.0)
-	scale = Vector2.ONE * t
+	scale = max_scale * t
 	
 	if elapsed_time >= duration:
 		# Only damage the targets still in the area

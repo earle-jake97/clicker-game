@@ -20,8 +20,7 @@ const IMP = preload("res://scenes/enemies/imp.tscn")
 const ENT = preload("res://scenes/enemies/ent.tscn")
 const PROJECTILE_DEMON_ELITE = preload("res://scenes/enemies/projectile_demon_elite.tscn")
 const EYEBALL_ENEMY = preload("res://sprites/enemies/eyeball/eyeball_enemy.tscn")
-
-
+const DEVIL_BOSS = preload("uid://27xngsos4sod")
 var player_controller = PlayerController
 var spawn_cap
 var spawn_timer := 0.0
@@ -38,32 +37,32 @@ func _ready() -> void:
 	min_spawn_time = min_spawn_time * pow(1 - decayRate, difficulty);
 	max_spawn_time = max_spawn_time * pow(1 - decayRate/2, difficulty)
 	if enemy_scene == DEVIL:
-		min_spawns = max(difficulty * 15, max_spawns)
+		min_spawns = max(12 + difficulty * 3, max_spawns)
 		max_spawns = min_spawns + randi_range(0, 5) 
 	if enemy_scene == PROJECTILE_DEMON:
-		min_spawns = max(min_spawns, round(difficulty/2.0))
-		max_spawns = min_spawns
-	if enemy_scene == PROJECTILE_DEMON_ELITE:
-		min_spawns = max(min_spawns, round(difficulty/8.0))
+		min_spawns = max(min_spawns, round(difficulty/3.0))
 		max_spawns = min_spawns
 	if enemy_scene == EYEBALL_ENEMY:
 		if difficulty <= 1:
 			min_spawns = 0
 			max_spawns = 0
 		else:
-			min_spawns = max(min_spawns, difficulty/2.0)
+			min_spawns = max(min_spawns, difficulty/4.0)
 	if enemy_scene == IMP:
 		if difficulty <= 2:
 			min_spawns = 0
 			max_spawns = 0
 		else:
-			min_spawns = max(difficulty * 3, max_spawns)
+			min_spawns = max(difficulty * 1, max_spawns)
 	if enemy_scene == ENT:
 		if difficulty <= 5:
 			min_spawns = 0
 			max_spawns = 0
 		else:
 			min_spawns = max(difficulty * 1, max_spawns)
+	if enemy_scene == DEVIL_BOSS:
+		min_spawns = randi_range(0, round(GameState.endless_counter / 10))
+		max_spawns = min_spawns
 	if GameState.endless_counter >= 60:
 		enemy_max_health *= pow(1 + 0.5, difficulty)
 	elif GameState.endless_counter >= 45:
@@ -125,8 +124,8 @@ func spawn_devil():
 		sprite.modulate = final_color
 	
 	var spawn_pos = spawn_position_logic()
+	get_node("../y_sort_node").add_child(enemy)
 	enemy.global_position = spawn_pos
-	get_tree().current_scene.add_child(enemy)
 	spawn_count += 1
 
 func check_level_finished():
@@ -146,7 +145,7 @@ func spawn_position_logic():
 	var ry = screen_size.y / 2 - margin
 
 	var angle := randf() * TAU
-	var center = PlayerController.player.global_position
+	var center = PlayerController.get_player_body().global_position
 	var loop = true
 	var spawn_pos = Vector2.ZERO
 	var increment = 0
@@ -157,7 +156,7 @@ func spawn_position_logic():
 		)
 		var tilemap_pos = base_terrain.local_to_map(base_terrain.to_local(spawn_pos))
 		var cell_data = base_terrain.get_cell_tile_data(tilemap_pos)
-		if cell_data and cell_data.get_custom_data("spawnable") == true:
+		if cell_data and cell_data.get_custom_data("inhabitable") == true:
 			loop = false
 		increment += 1
 		if increment >= 20:

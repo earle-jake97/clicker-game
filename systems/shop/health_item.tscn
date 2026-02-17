@@ -1,28 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqse1hh85l6qv"]
+[gd_scene format=3 uid="uid://cqse1hh85l6qv"]
 
-[ext_resource type="Script" path="res://systems/shop/health_item.gd" id="1_2elka"]
+[ext_resource type="Script" uid="uid://dw6scxa20btch" path="res://systems/shop/health_item.gd" id="1_2elka"]
 [ext_resource type="Texture2D" uid="uid://c5wdw4tr3o24" path="res://systems/shop/heart1.png" id="2_i2eef"]
 [ext_resource type="Texture2D" uid="uid://baj0go04hwiyg" path="res://systems/shop/pricetag.png" id="3_n8yqi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl6vj"]
 radius = 38.0526
 
-[node name="Shop_Item" type="Node2D" groups=["heart"]]
+[node name="Shop_Item" type="Node2D" unique_id=937389734 groups=["heart"]]
 script = ExtResource("1_2elka")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1295853102]
 texture = ExtResource("2_i2eef")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=322135578]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2128113841]
 shape = SubResource("CircleShape2D_vl6vj")
 
-[node name="Pricetag" type="Sprite2D" parent="."]
+[node name="Pricetag" type="Sprite2D" parent="." unique_id=1729088349]
 position = Vector2(50, -2)
 texture = ExtResource("3_n8yqi")
 
-[node name="price" type="Label" parent="."]
+[node name="price" type="Label" parent="." unique_id=997179962]
 offset_left = 46.0
 offset_top = -21.0
 offset_right = 86.0

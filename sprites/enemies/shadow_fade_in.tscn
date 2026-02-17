@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dfthyp7i3g6to"]
+
+[ext_resource type="Script" uid="uid://dd3x53pnry18b" path="res://sprites/enemies/shadow_fade_in.gd" id="1_dw3m3"]
+[ext_resource type="Texture2D" uid="uid://d0obrsj8fjkdt" path="res://sprites/enemies/shadow.png" id="1_rwtpb"]
+
+[node name="Node2D" type="Node2D" unique_id=1677431749]
+z_index = -1
+script = ExtResource("1_dw3m3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=344641255]
+modulate = Color(1, 1, 1, 0.537255)
+scale = Vector2(0.106461, 0.222496)
+texture = ExtResource("1_rwtpb")

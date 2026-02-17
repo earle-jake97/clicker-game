@@ -9,7 +9,6 @@ const BURRITO_SCRIPT := preload("res://items/scripts/4/michaels_burrito.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SceneManager.connect("scene_switched", Callable(self, "queue_free"))
 	scale = GameState.get_size_modifier()
 
 
@@ -24,13 +23,10 @@ func _process(delta: float) -> void:
 		animation_player.play("fade")
 	if lifetime >= 4.0:
 		queue_free()
-	if GameState.on_map_screen:
-		queue_free()
-
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
-	if is_instance_valid(enemy):
+	if is_instance_valid(enemy) and enemy.get_groups().has("enemy"):
 		enemy_list.get_or_add(enemy)
 
 

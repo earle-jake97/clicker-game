@@ -23,10 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if hover_exit and Input.is_action_just_pressed("Click"):
 		Tooltip.hide_tooltip()
-		if GameState.endless_mode:
-			SceneManager.switch_to_scene("res://systems/map/horde_scenes/horde_endless.tscn")
 		SceneManager.switch_to_scene("res://map/map_scene.tscn")
-		GameState.on_map_screen = true
 
 	hands.texture = WOKE if PlayerController.cash > lowest_price else BROKE
 
