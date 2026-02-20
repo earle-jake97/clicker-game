@@ -8,7 +8,7 @@ var start_pos: Vector2
 var damage: float
 var crit: bool
 var target_pos: Vector2
-var max_lifetime = 4.0
+var max_lifetime = 6.0
 var lifetime = 0.0
 var enemy
 
@@ -28,5 +28,7 @@ func _process(delta):
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	enemy = area.get_parent()
-	if enemy.has_method("take_damage") and enemy.is_in_group("enemy"):
+	while enemy and not enemy.is_in_group("enemy"):
+		enemy = enemy.get_parent()
+	if enemy and is_instance_valid(enemy) and enemy.has_method("take_damage"):
 			enemy.take_damage(round(damage), crit, "Bowling Ball Projectile")

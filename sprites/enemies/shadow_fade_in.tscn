@@ -5,6 +5,7 @@
 
 [node name="Node2D" type="Node2D" unique_id=1677431749]
 z_index = -1
+scale = Vector2(1e-05, 1e-05)
 script = ExtResource("1_dw3m3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=344641255]

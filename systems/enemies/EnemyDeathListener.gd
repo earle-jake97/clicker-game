@@ -29,7 +29,7 @@ func _on_enemy_died(enemy):
 	PlayerController.grant_shields(GameState.scythe_amount * 5)
 	var scrimblo_random = PlayerController.calculate_luck()
 	if scrimblo_random <= 0.08:
-		spawn_scrimblo(PlayerController.player.global_position + Vector2(randf_range(120, 400), randf_range(-60, 60)))
+		spawn_scrimblo(enemy.global_position)
 		
 	
 	
@@ -43,7 +43,7 @@ func spawn_scrimblo(position: Vector2):
 	var scrimblo = SCRIMBLO.instantiate()
 	scrimblo.global_position = position
 	scrimblo.max_hp = health
-	add_child(scrimblo)
+	get_tree().current_scene.get_node("y_sort_node").add_child(scrimblo)
 
 func spawn_blood_puddle(position: Vector2):
 	var strength = 0
@@ -55,7 +55,7 @@ func spawn_blood_puddle(position: Vector2):
 	var puddle = BURRITO_PUDDLE.instantiate()
 	puddle.puddle_damage = (burrito_script.percent_dmg + (0.1 * strength)) * PlayerController.calculate_damage().damage
 	puddle.global_position = position
-	add_child(puddle)
+	get_tree().current_scene.get_node("y_sort_node").add_child(puddle)
 
 func spawn_oil_explosion(position: Vector2, enemy: Node):
 	var strength = 1

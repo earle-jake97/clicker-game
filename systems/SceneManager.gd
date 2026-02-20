@@ -14,6 +14,7 @@ func switch_to_scene(path: String) -> void:
 		push_error("SceneManager: Failed to load scene at path: " + path)
 
 func _do_scene_switch():
+	EnemyManager.clear_list()
 	scene_switched.emit()
 
 	var tree = get_tree()

@@ -35,7 +35,6 @@ func _process(delta: float) -> void:
 	projectile_timer += delta
 	if health < max_hp and is_alive():
 		progress_bar.visible = true
-	z_index = global_position.y
 	progress_bar.value = health
 	if health <= 0:
 		animated_sprite_2d.play("die")
@@ -50,7 +49,7 @@ func _process(delta: float) -> void:
 		projectile_timer = 0.0
 		shoot_projectile()
 
-func take_damage(damage, pen, trigger_iframes: bool = false):
+func take_damage(damage, pen, trigger_iframes: bool = false, knockback_params = []):
 	health -= damage
 
 func is_alive():
@@ -72,7 +71,7 @@ func shoot_projectile():
 func get_closest_enemy():
 	var closest_enemy = null
 	var shortest_distance = INF
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in EnemyManager.get_all_enemies():
 		if enemy and enemy.is_inside_tree():
 			var distance = global_position.distance_to(enemy.global_position)
 			if distance < shortest_distance:

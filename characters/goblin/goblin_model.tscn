@@ -1589,7 +1589,7 @@ texture = ExtResource("13_bcp4i")
 [node name="eyes" type="AnimatedSprite2D" parent="sprite/body/head" unique_id=978151648]
 position = Vector2(-9.500002, -29.000038)
 sprite_frames = SubResource("SpriteFrames_bcp4i")
-animation = &"hurt"
+animation = &"blink"
 
 [node name="mouth" type="AnimatedSprite2D" parent="sprite/body/head" unique_id=861531842]
 position = Vector2(-9.5, -30.333366)
@@ -1600,6 +1600,8 @@ animation = &"hurt"
 position = Vector2(6.5, 22.1667)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=733991170 groups=["player_hitbox"]]
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2017286258]
 position = Vector2(-0.833333, -24.8833)

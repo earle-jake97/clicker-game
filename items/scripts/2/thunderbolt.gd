@@ -35,7 +35,7 @@ func proc(target: Node, source_item: BaseItem = null):
 		var shortest = INF
 		var procs = false
 
-		for enemy in tree.get_nodes_in_group("enemy"):
+		for enemy in EnemyManager.get_all_enemies():
 			if enemy != current_target and enemy.is_inside_tree():
 				var dist = current_target.global_position.distance_to(enemy.global_position)
 				var dx = (enemy.global_position.x - current_target.global_position.x) / bounce_radius_x
@@ -52,7 +52,7 @@ func proc(target: Node, source_item: BaseItem = null):
 				if rand <= 0.2:
 					procs = true
 					player.proc_items(nearest, self)  # mark this Thunderbolt as the source
-			var enemy_check = player.get_player_body().get_tree().get_nodes_in_group("enemy")
+			var enemy_check = EnemyManager.enemy_list
 			if enemy_check.size() <= 50:
 				var bolt = preload("res://items/misc/LightningEffect.tscn").instantiate()
 				bolt.top_level = true

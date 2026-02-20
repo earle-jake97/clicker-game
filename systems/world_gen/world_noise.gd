@@ -36,7 +36,6 @@ func bake_navmesh():
 	await get_tree().physics_frame   # ensures colliders exist
 	await get_tree().physics_frame   # ensures colliders exist
 	
-	print("baking")
 	ground_region.bake_navigation_polygon()
 	NavigationServer2D.map_changed
 

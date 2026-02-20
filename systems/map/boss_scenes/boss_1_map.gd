@@ -21,9 +21,8 @@ func _ready() -> void:
 	boss.damage = 20
 	boss.health = 2500
 	boss.add_to_group("boss")
-	add_child(boss)
 	boss.died.connect(_on_boss_died)
-	
+	get_node("y_sort_node").add_child(boss)
 	HealthBar.button.visible = true
 	HealthBar.fast_forward = false
 	

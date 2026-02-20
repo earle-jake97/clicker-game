@@ -1,6 +1,6 @@
 extends BaseItem
 const item_name = "Bowling Ball"
-const item_description = "5% chance to roll a bowling ball at the nearest enemy on hit."
+const item_description = "5% chance to roll a bowling ball at the nearest enemy on hit. The bowling ball uses your damage and cannot apply procs from other items."
 const item_icon = preload("res://items/icons/bowling_ball.png")
 const tags = []
 const rarity = 2
@@ -37,5 +37,7 @@ func instantiate_ball(target: Node, tree, multiplier):
 	proj.speed = randf_range(1000.0, 1200.0)
 	proj.start_pos = get_player_body().global_position - Vector2(0, 10)
 	proj.target_pos = target.global_position
+	if target.find_child("pivot", 1, 1):
+		proj.target_pos = target.find_child("pivot", 1, 1).global_position
 	proj.crit = result.crit
 	tree.current_scene.add_child(proj)

@@ -43,7 +43,7 @@ var global_cooldown = 0.0
 var throw_cooldown = 0.0
 var meditate_cooldown = 0.0
 
-func _ready() -> void:
+func extra_ready():
 	animation_player = $container/sprite/AnimationPlayer
 	animation_player.animation_set_next("slam", "idle")
 	animation_player.animation_set_next("meditate", "idle")
@@ -57,15 +57,11 @@ func _ready() -> void:
 		else:
 			max_health = controller.difficulty * 500 + 2000
 	health = max_health
-	health_bar.visible = false
-	health_bar.max_value = max_health
-	health_bar.value = health
 
 func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
 	damage_batcher.add_damage(amount, damage_type)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+
+func extra_processing(delta):
 	mouth_timer += delta
 	if can_fireball:
 		if health <= max_health/2:
@@ -74,6 +70,7 @@ func _process(delta: float) -> void:
 			fireball_cooldown += delta * 2.5
 		else:
 			fireball_cooldown += delta
+			
 	look_at_player()
 	throw_cooldown += delta
 	meditate_cooldown += delta
@@ -86,26 +83,6 @@ func _process(delta: float) -> void:
 		debuff_container.update_debuffs()
 		meditating = false
 	
-	if dead:
-		shadow.visible = false
-		var color = modulate
-		color.a = max(color.a - delta * 0.5, 0.0)
-		modulate = color
-		death_timer += delta
-		if death_timer >= 2:
-			queue_free()
-	
-	handle_attack()
-	
-	if health <= 0:
-		if not paid_out:
-			paid_out = true
-			controller.add_cash(value)
-		die()
-	
-	if health < max_health:
-		health_bar.visible = true
-		
 	if fireball_cooldown >= FIREBALL_INTERVAL and not dead:
 		fireball_cooldown = 0.0
 		shoot_fireball()
@@ -118,6 +95,8 @@ func _process(delta: float) -> void:
 	
 	if head.texture == HEAD_EYES_CLOSED and not meditating:
 		head.texture = HEAD
+	
+	handle_attack()
 
 func handle_attack():
 	if dead:
@@ -162,6 +141,7 @@ func jump_attack():
 	telegraph.armor_penetration = 0
 	telegraph.duration = JUMP_WINDUP + JUMP_AIRTIME + TIME_TO_LAND
 	telegraph.global_position = jump_pos
+	telegraph.knockback_strength = 1400.0
 	get_tree().current_scene.add_child(telegraph)
 
 func change_position(pos):

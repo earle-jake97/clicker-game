@@ -30,7 +30,7 @@ texture_filter = 2
 script = ExtResource("1_bhgnr")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1123001442]
-position = Vector2(525, 692)
+position = Vector2(2213, 1800)
 zoom = Vector2(0.8, 0.8)
 script = ExtResource("10_wpgga")
 
@@ -48,7 +48,7 @@ enemy_max_health = 80
 enemy_damage = 5
 enemy_cash_value_min = 1
 enemy_cash_value_max = 1
-enemy_speed = 100
+enemy_speed = 100.0
 base_terrain = NodePath("../y_sort_node/terrain_base")
 
 [node name="boss spawner" type="Node2D" parent="." unique_id=373197769 node_paths=PackedStringArray("base_terrain") groups=["spawner"]]
@@ -65,7 +65,6 @@ enemy_max_health = 80
 enemy_damage = 5
 enemy_cash_value_min = 1
 enemy_cash_value_max = 1
-enemy_speed = 100
 base_terrain = NodePath("../y_sort_node/terrain_base")
 
 [node name="thrower spawner" type="Node2D" parent="." unique_id=1239346740 node_paths=PackedStringArray("base_terrain") groups=["spawner"]]
@@ -80,7 +79,6 @@ enemy_max_health = 350
 enemy_damage = 20
 enemy_cash_value_min = 5
 enemy_cash_value_max = 5
-enemy_speed = 100
 base_terrain = NodePath("../y_sort_node/terrain_base")
 
 [node name="imp spawner" type="Node2D" parent="." unique_id=1229848627 node_paths=PackedStringArray("base_terrain") groups=["spawner"]]
@@ -97,7 +95,7 @@ enemy_max_health = 85
 enemy_damage = 5
 enemy_cash_value_min = 2
 enemy_cash_value_max = 2
-enemy_speed = 275
+enemy_speed = 100.0
 base_terrain = NodePath("../y_sort_node/terrain_base")
 
 [node name="eye spawner" type="Node2D" parent="." unique_id=394391604 node_paths=PackedStringArray("base_terrain") groups=["spawner"]]
@@ -111,12 +109,11 @@ enemy_max_health = 180
 enemy_damage = 1
 enemy_cash_value_min = 5
 enemy_cash_value_max = 5
-enemy_speed = 100
+enemy_speed = 50.0
 base_terrain = NodePath("../y_sort_node/terrain_base")
 
 [node name="y_sort_node" type="NavigationRegion2D" parent="." unique_id=925144654]
 y_sort_enabled = true
-position = Vector2(-1945, -1272)
 navigation_polygon = SubResource("NavigationPolygon_r7bkx")
 navigation_layers = 3
 

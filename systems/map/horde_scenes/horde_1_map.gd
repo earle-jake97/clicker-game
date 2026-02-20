@@ -17,10 +17,9 @@ func _ready() -> void:
 		GameState.enemy_count += spawner.get_spawn_cap()
 	await get_tree().create_timer(0.5).timeout
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if get_tree().get_nodes_in_group("enemy"):
+	if EnemyManager.get_all_enemies():
 		pass
 	else:
 		check_spawner_complete()
@@ -29,7 +28,7 @@ func check_spawner_complete():
 	for spawner in spawners:
 		if not spawner.all_enemies_spawned:
 			return
-	if get_tree().get_nodes_in_group("enemy").size() > 0:
+	if EnemyManager.get_all_enemies().size() > 0:
 		return
 	GameState.enemy_count = 0
 	GameState.horde_bool = false

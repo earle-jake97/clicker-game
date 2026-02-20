@@ -10,7 +10,6 @@ var radius = 105
 
 func starter_proc(target: Node, source_item: BaseItem = null):
 	if not player or not target or not is_instance_valid(target):
-		print("?")
 		return
 
 	var tree = player.get_tree() if player.is_inside_tree() else null
@@ -23,6 +22,7 @@ func starter_proc(target: Node, source_item: BaseItem = null):
 	
 	for enemy in enemies:
 		if enemy.has_method("take_damage"):
+			print("Hitting: ", enemy)
 			enemy.take_damage(damage, DamageBatcher.DamageType.NORMAL, "Explosive Shot")
 
 func get_target_position(target):

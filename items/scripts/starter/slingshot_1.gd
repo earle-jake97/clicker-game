@@ -8,7 +8,7 @@ var item_icon = preload("res://items/icons/starter_items/splitshot.png")
 const file_name = "res://items/scripts/starter/slingshot_1.gd"
 var damage = 5
 
-func starter_proc(target: Node, source_item: BaseItem = null):
+func on_attack(target: Node, source_item: BaseItem = null):
 	if not player or not target or not is_instance_valid(target):
 		return
 
@@ -46,3 +46,17 @@ func seek_strongest_enemy():
 		return
 
 	return strongest_enemy
+
+func spawn_slingshot_projectile(target, result, size: float = 1.0, damage_source: String = "Player Attack", can_proc: bool = true):
+	var projectile_scene = preload("res://characters/goblin/slingshot_projectile.tscn")
+	var projectile = projectile_scene.instantiate()
+	projectile.global_position = player.get_player_body().get_sling_position()
+	var target_position = target.global_position 
+	if target.find_child("pivot", 1, 1):
+		target_position = target.find_child("pivot", 1, 1).global_position
+	target_position += Vector2(randf_range(-30, 30), randf_range(-30, 30))
+	projectile.target_position = target_position
+	projectile.scale *= size
+	projectile.damage = result
+	projectile.on_reach = Callable(self, "_deal_damage_to_enemy").bind(target, result, damage_source, can_proc)
+	get_tree().current_scene.add_child(projectile)

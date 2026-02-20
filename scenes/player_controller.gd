@@ -51,6 +51,7 @@ var attacking = false
 var dead = false
 var iframes = 0.5
 var invincible = false
+var item_duration_multiplier = 1.0
 
 func _ready():
 	luck = base_luck
@@ -125,6 +126,7 @@ func attack() -> void:
 		last_enemy_attacked = closest_enemy
 		var result = calculate_damage()
 		spawn_slingshot_projectile(closest_enemy, result)
+		trigger_on_attack_items(closest_enemy)
 
 func attack_specific_enemy(enemy, damage_multiplier: float = 1.0, damage_type = DamageBatcher.DamageType.NORMAL):
 	if dead:
@@ -138,7 +140,7 @@ func attack_all_enemies():
 	if dead:
 		return
 	var result = calculate_damage()
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in EnemyManager.get_all_enemies():
 		last_enemy_attacked = enemy
 		if is_instance_valid(enemy):
 			enemy.take_damage(result.damage, result.crit, "Player Global Attack")
@@ -251,7 +253,7 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 		"crit": is_crit
 	}
 
-func take_damage(damage, penetration, trigger_iframes: bool = true) -> void:
+func take_damage(damage, penetration, trigger_iframes: bool = true, knockback_parameters:Array = [Vector2.ZERO, 0.0, false]) -> void:
 	if current_hp <= 0 or invincible:
 		return
 	
@@ -264,6 +266,8 @@ func take_damage(damage, penetration, trigger_iframes: bool = true) -> void:
 	if trigger_iframes:
 		trigger_iframes()
 	player_damage_taken.emit()
+	if knockback_parameters[1] != 0:
+		player.apply_knockback(knockback_parameters[0], knockback_parameters[1], knockback_parameters[2])
 	var damage_reduction = (total_armor - penetration)/(100.0 + total_armor - penetration)
 	damage *= (1 - damage_reduction)
 	damage = round(damage)
@@ -277,6 +281,11 @@ func heal(amount):
 	if current_hp >= max_hp:
 		current_hp = max_hp
 
+func trigger_on_attack_items(target, source_item: BaseItem = null):
+	for item in inventory:
+		if item.has_method("on_attack"):
+			item.on_attack(target, source_item)
+
 func proc_items(target, source_item: BaseItem = null):
 	var proc_count = 1
 	for item in inventory:
@@ -288,7 +297,7 @@ func proc_items(target, source_item: BaseItem = null):
 	var used_bowling_ball = false
 	for item in inventory:
 		if item.has_method("starter_proc"):
-				item.starter_proc(target, source_item)
+			item.starter_proc(target, source_item)
 		for i in range(proc_count):
 			if item.has_method("proc"):
 				if item.tags.has("thunderbolt") and not used_thunderbolt:
@@ -302,11 +311,6 @@ func proc_items(target, source_item: BaseItem = null):
 					used_bowling_ball = true
 				else:
 					item.proc(target, source_item)
-
-func proc_starter_items(target, source_item: BaseItem = null):
-	for item in inventory:
-		if item.has_method("starter_proc"):
-			item.starter_proc(target, source_item)
 
 func add_cash(amount) -> void:
 	cash += amount
@@ -330,6 +334,7 @@ func reset_to_defaults():
 	luck = base_luck
 	current_hp = base_max_hp
 	movement_speed = base_movement_speed
+	item_duration_multiplier = 1.0
 	update_modifiers()
 	HealthBar.dead = false
 	dead = false
@@ -379,7 +384,7 @@ func is_in_attack_oval(point: Vector2, center: Vector2) -> bool:
 
 func get_enemies_in_range(center: Vector2):
 	var in_range = []
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in EnemyManager.get_all_enemies():
 		if not enemy or not enemy.is_inside_tree():
 			continue
 
@@ -398,6 +403,8 @@ func spawn_slingshot_projectile(target, result, size: float = 1.0, damage_source
 	target_position += Vector2(randf_range(-30, 30), randf_range(-30, 30))
 	projectile.target_position = target_position
 	projectile.scale *= size
+	projectile.damage = result
+	projectile.can_proc = can_proc
 	projectile.on_reach = Callable(self, "_deal_damage_to_enemy").bind(target, result, damage_source, can_proc)
 	get_tree().current_scene.add_child(projectile)
 
@@ -409,9 +416,7 @@ func _deal_damage_to_enemy(enemy, damage_result, damage_source: String = "Player
 
 func trigger_iframes():
 	invincible = true
-	print("Invincible")
 	await get_tree().create_timer(iframe_duration).timeout
-	print("Vulnerable")
 	invincible = false
 
 func set_player(p):

@@ -62,11 +62,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hitbox"):
 		var this_target = area.get_parent()
 		if this_target.has_method("take_damage"):
-			this_target.take_damage(1, 0, false)
-			if this_target.has_method("apply_knockback"):
-				print("SDAFS")
-				var direction = this_target.global_position - global_position
-				this_target.apply_knockback(direction, 200)
+			var direction = this_target.global_position - global_position
+			var knockback_parameters = [direction, 200, false]
+			this_target.take_damage(1, 0, false, knockback_parameters)
 		queue_free()
 
 func destroy_projectile():

@@ -1,0 +1,57 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://c5l23xrpd4lhf"]
+
+[ext_resource type="Texture2D" uid="uid://04yf8wm5014g" path="res://rooms/gamble/seven.png" id="1_6lgae"]
+[ext_resource type="Texture2D" uid="uid://bbix8jdgajhmr" path="res://rooms/gamble/bad.png" id="2_rlrjp"]
+[ext_resource type="Texture2D" uid="uid://crcovgy2hgfca" path="res://rooms/gamble/spam.png" id="3_4jud8"]
+[ext_resource type="Texture2D" uid="uid://c0mtdg0rh6s2b" path="res://rooms/gamble/roll_1.png" id="3_itrid"]
+[ext_resource type="Texture2D" uid="uid://dfd3dkr4x08lh" path="res://rooms/gamble/roll_2.png" id="4_6lhok"]
+[ext_resource type="Texture2D" uid="uid://bge3gtxycyslv" path="res://rooms/gamble/roll_3.png" id="5_mru54"]
+[ext_resource type="Texture2D" uid="uid://bx8fmmfgeqdus" path="res://rooms/gamble/roll_4.png" id="6_4dhbu"]
+[ext_resource type="Texture2D" uid="uid://d1f03dnu43qun" path="res://rooms/gamble/roll_5.png" id="7_s63hb"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6lgae")
+}],
+"loop": true,
+"name": &"7",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rlrjp")
+}],
+"loop": true,
+"name": &"bad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_itrid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6lhok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mru54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4dhbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_s63hb")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4jud8")
+}],
+"loop": true,
+"name": &"spam",
+"speed": 5.0
+}]

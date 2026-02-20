@@ -8,8 +8,11 @@
 [ext_resource type="Script" uid="uid://cxel3w8ngib2h" path="res://scenes/enemies/debuff_container.gd" id="6_6aytr"]
 [ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="7_v26fw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmqrv"]
-size = Vector2(43, 88)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugna0"]
+size = Vector2(43, 11.53344)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lv6ep"]
+radius = 29.034506
 
 [sub_resource type="Animation" id="Animation_3rrg6"]
 length = 0.001
@@ -162,11 +165,18 @@ position = Vector2(-5.43048, 21.5022)
 [node name="Area2D" type="Area2D" parent="container" unique_id=552568676]
 position = Vector2(-5, 5)
 scale = Vector2(1, 2.12)
+collision_layer = 8
+collision_mask = 32770
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=862135443]
-position = Vector2(11.5, -34)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=20819444]
+position = Vector2(11.5, -3.9595768)
 scale = Vector2(1.66667, 0.785714)
-shape = SubResource("RectangleShape2D_rmqrv")
+shape = SubResource("RectangleShape2D_ugna0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="container/Area2D" unique_id=668733376]
+position = Vector2(13, -49.056606)
+scale = Vector2(1, 0.49056602)
+shape = SubResource("CircleShape2D_lv6ep")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=768620118]
 root_node = NodePath("../..")

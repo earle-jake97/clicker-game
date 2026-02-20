@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://byj4ahyq7dtdg"]
+
+[ext_resource type="PackedScene" uid="uid://cdjjjvfpsn86k" path="res://characters/goblin/goblin_model.tscn" id="1_a6pln"]
+[ext_resource type="PackedScene" uid="uid://bcy776ttcme8l" path="res://rooms/gamble/slot_machine.tscn" id="2_cjrq0"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_a6pln"]
+vertices = PackedVector2Array(1301.1172, -56.0625, 1352.8203, 586.2578, 1206.9297, 914.28125, 637, 341, 637, 298, 530, 341, 305.54688, 1105.8672, -464.8828, 1013.53906, -819.52344, 590.72656, 530, 298, -922.8906, -102.0625, -858.21875, -565.52344, -27.960938, -616.97656, 1144.5469, -548.4219)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 3, 2, 6, 7, 8), PackedInt32Array(9, 5, 8, 10, 11, 12), PackedInt32Array(9, 12, 13, 0, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-867, -575, -28, -627, 1152, -558, 1311, -58, 1363, 588, 1214, 923, 306, 1116, -470, 1023, -829, 595, -933, -102)])
+
+[node name="Gambling Room" type="Node2D" unique_id=1847170178]
+
+[node name="y_sort_node" type="NavigationRegion2D" parent="." unique_id=1322556865]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_a6pln")
+navigation_layers = 3
+
+[node name="Goblin Model" parent="y_sort_node" unique_id=1834059154 instance=ExtResource("1_a6pln")]
+position = Vector2(581, 614)
+
+[node name="Slot Machine" parent="y_sort_node" unique_id=2037351223 instance=ExtResource("2_cjrq0")]
+position = Vector2(584, 327)

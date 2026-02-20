@@ -23,6 +23,8 @@ const BODY_NORMAL = preload("res://sprites/player_character/goblin/body.png")
 var damage_taken = false
 var external_velocity = Vector2.ZERO
 var external_drag = 1800.0
+var blinking = false
+var knockback_cooldown_active = false
 
 
 @export var base_speed := 180.0
@@ -115,7 +117,6 @@ func _process(delta: float) -> void:
 	if player.current_hp <= 0:
 		dead = true
 		PlayerController.dead = true
-		shadow.visible = false
 		arms.play("die")
 		animation_player.play("die")
 		head.texture = HEAD_DEAD
@@ -125,30 +126,30 @@ func _process(delta: float) -> void:
 	elif percentage <= 0.10:
 		head.texture = HEAD_DIRE
 		body.texture = BODY_DIRE
-		if not damage_taken:
+		if not damage_taken and not blinking:
 			eyes.play("weak")
 			mouth.play("sad")
 	elif percentage < 0.30:
 			head.texture = HEAD_PAIN
 			body.texture = BODY_NORMAL
-			if not damage_taken:
+			if not damage_taken and not blinking:
 				eyes.play("sad")
 				mouth.play("sad")
 	elif percentage < 0.60:
 		body.texture = BODY_NORMAL
 		head.texture = HEAD_NORMAL
-		if not damage_taken:
+		if not damage_taken and not blinking:
 			eyes.play("smile")
 			mouth.play("normal")
 	elif percentage >= 0.60:
 		body.texture = BODY_NORMAL
 		head.texture = HEAD
-		if not damage_taken:
+		if not damage_taken and not blinking:
 			eyes.play("smile")
 			mouth.play("smile")
 
-func take_damage(damage, pen, trigger_iframes: bool = true):
-	PlayerController.take_damage(damage, pen, trigger_iframes)
+func take_damage(damage, pen, trigger_iframes: bool = true, params = []):
+	PlayerController.take_damage(damage, pen, trigger_iframes, params)
 	
 func is_alive():
 	return true
@@ -171,9 +172,18 @@ func face_enemy():
 func get_sling_position():
 	return slingshot_origin.global_position
 
-
 func _on_blink_timeout() -> void:
-	blink_timer.start(randf_range(1.0, 10.0))
+	eyes.play("blink")
+	blinking = true
+	await get_tree().create_timer(0.2).timeout
+	blinking = false
+	if randi_range(0, 1) == 1:
+		await get_tree().create_timer(0.2).timeout
+		eyes.play("blink")
+		blinking = true
+		await get_tree().create_timer(0.2).timeout
+		blinking = false
+	blink_timer.start(randf_range(1.0, 6.0))
 
 func _on_damage_taken():
 	iframes.start(PlayerController.iframes)
@@ -182,12 +192,19 @@ func _on_damage_taken():
 	eyes.play("hurt")
 	mouth.play("hurt")
 	damage_taken = true
-	return
-
 
 func _on_iframes_timeout() -> void:
 	damage_taken = false
 	modulate_player.play("default")
 
-func apply_knockback(dir: Vector2, strength: float = 500.0):
+func apply_knockback(dir: Vector2, strength: float = 500.0, trigger_knockback_cd: bool = true):
+	if knockback_cooldown_active:
+		return
 	external_velocity += dir.normalized() * strength
+	if trigger_knockback_cd:
+		apply_knockback_cooldown()
+
+func apply_knockback_cooldown():
+	knockback_cooldown_active = true
+	await get_tree().create_timer(0.2).timeout
+	knockback_cooldown_active = false

@@ -1,21 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1bo6q0splh32"]
+[gd_scene format=3 uid="uid://d1bo6q0splh32"]
 
-[ext_resource type="Script" path="res://items/misc/bowling_ball_projectile.gd" id="1_fpb6m"]
+[ext_resource type="Script" uid="uid://djjw857lt8d7k" path="res://items/misc/bowling_ball_projectile.gd" id="1_fpb6m"]
 [ext_resource type="Texture2D" uid="uid://tioaqilj2m0v" path="res://items/icons/bowling_ball.png" id="1_jy0fu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gcthr"]
-radius = 54.1479
+radius = 73.00685
 
-[node name="Bowling Ball" type="Node2D"]
+[node name="Bowling Ball" type="Node2D" unique_id=464214038]
 texture_filter = 1
 script = ExtResource("1_fpb6m")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1879055296]
 texture = ExtResource("1_jy0fu")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2135478209]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1764004685]
 shape = SubResource("CircleShape2D_gcthr")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

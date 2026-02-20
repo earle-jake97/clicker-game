@@ -77,7 +77,7 @@ func _process(delta):
 
 func get_next_bounce_target() -> Node:
 	var valid_targets = []
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in EnemyManager.get_all_enemies():
 		if is_instance_valid(enemy) and enemy != target and enemy not in hit_chain and enemy.is_inside_tree():
 			if enemy.health > 0:
 				valid_targets.append(enemy)

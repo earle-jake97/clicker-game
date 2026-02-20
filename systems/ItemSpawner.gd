@@ -56,7 +56,6 @@ func populate_shop(
 func return_unused_items(items):
 	for item in items:
 		var loaded = item.item_file_name
-		print("Return unused items item type: ", loaded)
 		ItemDatabase.add_item(load(item.item_file_name))
 
 func _apply_discount(base: int) -> int:

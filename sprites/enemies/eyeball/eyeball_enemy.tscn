@@ -9,7 +9,10 @@
 [ext_resource type="Script" uid="uid://cilnsnxy5j6e3" path="res://systems/damage_batcher.gd" id="6_ob0hh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmqrv"]
-size = Vector2(43, 88)
+size = Vector2(43, 11.53344)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sdkag"]
+radius = 29.034506
 
 [sub_resource type="Animation" id="Animation_3rrg6"]
 length = 0.001
@@ -68,7 +71,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ywchr"]
 resource_name = "die"
-length = 3.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -132,6 +135,7 @@ _data = {
 }
 
 [node name="eyeball_enemy" type="Node2D" unique_id=2130876883 groups=["enemy"]]
+z_index = 1
 texture_filter = 1
 script = ExtResource("1_anfwb")
 
@@ -162,11 +166,18 @@ position = Vector2(-5.43048, 21.5022)
 [node name="Area2D" type="Area2D" parent="container" unique_id=1270326880]
 position = Vector2(-5, 5)
 scale = Vector2(1, 2.12)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="container/Area2D" unique_id=786745709]
-position = Vector2(11.5, -34)
+position = Vector2(11.5, -3.9595768)
 scale = Vector2(1.66667, 0.785714)
 shape = SubResource("RectangleShape2D_rmqrv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="container/Area2D" unique_id=99943920]
+position = Vector2(13, -49.056606)
+scale = Vector2(1, 0.49056602)
+shape = SubResource("CircleShape2D_sdkag")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="container" unique_id=912814356]
 root_node = NodePath("../..")

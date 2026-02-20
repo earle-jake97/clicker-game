@@ -2,8 +2,10 @@ extends Node2D
 
 var spawners = []
 const MapView = "res://map/map_scene.tscn"
-const eyeball_enemy = preload("uid://b41mbcd7jm5er")
+const devil_enemy = preload("res://scenes/devil.tscn")
 @onready var label: Label = $CanvasLayer/Label
+const EYEBALL_ENEMY = preload("uid://t8ttvohfehwf")
+const IMP = preload("uid://b0vaiulul6fbm")
 
 
 func _ready() -> void:
@@ -18,11 +20,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
-		var enemy_scene = eyeball_enemy.instantiate()
-		enemy_scene.max_health = 10000
-		enemy_scene.global_position = randi_range(-1000, 1000) * Vector2.ONE
-		add_child(enemy_scene)
-		label.text = "Enemy Count: " + str(get_tree().get_nodes_in_group("enemy").size())
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
 		
 
 func check_spawner_complete():
@@ -32,3 +34,11 @@ func check_spawner_complete():
 	if get_tree().get_nodes_in_group("elite").size() > 0:
 		return
 	SceneManager.switch_to_scene(MapView)
+
+func spawn_enemy():
+	var enemy_scene = IMP.instantiate()
+	enemy_scene.speed = 100.0
+	enemy_scene.max_health = 10000
+	enemy_scene.global_position = randi_range(-1000, 1000) * Vector2.ONE
+	add_child(enemy_scene)
+	label.text = "Enemy Count: " + str(EnemyManager.get_all_enemies().size())

@@ -29,7 +29,7 @@ ItemDatabase="*res://item_database.gd"
 PauseMenu="*res://systems/pause_menu.tscn"
 HealthBar="*res://scenes/health_bar.tscn"
 Tooltip="*res://systems/shop/tooltip.tscn"
-EnemyDeathListener="*res://systems/EnemyDeathListener.gd"
+EnemyDeathListener="*res://systems/enemies/EnemyDeathListener.gd"
 Crosshair="*res://scenes/crosshair.tscn"
 SceneManager="*res://systems/SceneManager.gd"
 Backgrounds="*res://backgrounds.gd"
@@ -38,6 +38,7 @@ ItemSpawner="*res://systems/ItemSpawner.gd"
 MapManager="*uid://cp8hp6bycn6td"
 RoomDatabase="*uid://bm5nxjgk1cnro"
 BetterTerrain="*uid://0es7gx6b0qyo"
+EnemyManager="*uid://ddffohggwnoiy"
 
 [debug]
 
@@ -137,7 +138,10 @@ debug={
 [layer_names]
 
 2d_navigation/layer_1="Global(Stop ALL Enemies)"
+2d_physics/layer_2="player"
 2d_navigation/layer_2="Walkers only"
+2d_physics/layer_4="enemies"
+2d_physics/layer_16="player_projectile"
 
 [rendering]
 

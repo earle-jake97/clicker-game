@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bcy776ttcme8l"]
+
+[ext_resource type="Script" uid="uid://dlhiibkrsyobu" path="res://rooms/gamble/slot_machine.gd" id="1_0g3xc"]
+[ext_resource type="Texture2D" uid="uid://co8r41yjy1gw8" path="res://rooms/gamble/slot_machine.png" id="1_wydgw"]
+[ext_resource type="SpriteFrames" uid="uid://c5l23xrpd4lhf" path="res://rooms/gamble/slot_machine_spriteframes.tres" id="2_38xfs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmvh3"]
+size = Vector2(87, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38xfs"]
+size = Vector2(114, 99)
+
+[node name="Node2D" type="Node2D" unique_id=2037351223]
+script = ExtResource("1_0g3xc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874340351]
+position = Vector2(0, -44)
+texture = ExtResource("1_wydgw")
+
+[node name="1" type="AnimatedSprite2D" parent="." unique_id=1695608132]
+position = Vector2(-27, -51)
+sprite_frames = ExtResource("2_38xfs")
+animation = &"7"
+frame_progress = 0.8323527
+
+[node name="2" type="AnimatedSprite2D" parent="." unique_id=711037738]
+position = Vector2(-1, -51)
+sprite_frames = ExtResource("2_38xfs")
+animation = &"7"
+
+[node name="3" type="AnimatedSprite2D" parent="." unique_id=590182415]
+position = Vector2(26, -51)
+sprite_frames = ExtResource("2_38xfs")
+animation = &"7"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1141420890]
+position = Vector2(0, -44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2109742240]
+position = Vector2(-0.5, 36.5)
+shape = SubResource("RectangleShape2D_lmvh3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=726878185]
+position = Vector2(0, -44)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=614879765]
+position = Vector2(1, 28.5)
+shape = SubResource("RectangleShape2D_38xfs")
+
+[node name="Timer" type="Timer" parent="." unique_id=1106183649]
+wait_time = 5.0
+one_shot = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=292649635]
+vertices = PackedVector2Array(-56, -45, 58, -45, 58, 17, -57, 17)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

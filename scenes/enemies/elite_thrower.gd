@@ -83,7 +83,6 @@ func launch_projectile():
 
 	# Defensive check
 	if player_positions.size() < 2:
-		print("Not enough target positions to shoot two different projectiles.")
 		return
 
 	# Pick two different random positions

@@ -6,6 +6,11 @@
 [ext_resource type="FontFile" uid="uid://w4754gdg1xfu" path="res://fonts/Jersey25-Regular.ttf" id="4_r3fbf"]
 [ext_resource type="PackedScene" uid="uid://cdjjjvfpsn86k" path="res://characters/goblin/goblin_model.tscn" id="5_44fa1"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_44fa1"]
+vertices = PackedVector2Array(1317.3906, 847.09375, 869.0703, 969.9922, 996.22656, 600.6406, 1406.1797, -429.5625, 967.78125, 632.96875, 973.53906, 423.4297, 913.4922, -449.35156, 778.3672, 610.75, -166.00781, 1072.6016, 813.3906, -474.4375, 794.27344, 423.4297, -487.47656, -416.35156, 731.1719, 521.96094, -1035.1172, 592.1719, -1004.5, 96.34375, -995.1797, -377.2578, -933.78125, -432.6875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(3, 2, 5, 6), PackedInt32Array(7, 4, 1, 8), PackedInt32Array(9, 6, 5, 10, 11), PackedInt32Array(11, 12, 7, 8, 13, 14), PackedInt32Array(11, 10, 12), PackedInt32Array(11, 14, 15, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-937.4677, -442.82944, -487.5208, -426.35657, 814.4134, -484.4961, 914.92346, -459.3023, 1416.8787, -439.13953, 1326.8787, 854.8605, 870.8787, 979.8605, -168.1213, 1082.8605, -1045.4926, 597.8682, -1014.49414, 95.93024, -1005.10065, -381.78293)])
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cs66e"]
 size = Vector2(1125, 173.76)
 
@@ -21,6 +26,17 @@ size = Vector2(1165.4, 89.3024)
 [node name="Timer Room" type="Node2D" unique_id=584451619]
 texture_filter = 1
 script = ExtResource("1_cblr7")
+
+[node name="y_sort_node" type="NavigationRegion2D" parent="." unique_id=566250442]
+position = Vector2(-1.8786929, -66.860466)
+navigation_polygon = SubResource("NavigationPolygon_44fa1")
+navigation_layers = 3
+
+[node name="Goblin Model" parent="y_sort_node" unique_id=1834059154 instance=ExtResource("5_44fa1")]
+position = Vector2(270.53177, 510.6589)
+
+[node name="djungelskog" parent="y_sort_node" unique_id=265886674 instance=ExtResource("3_met8w")]
+position = Vector2(855.74475, 455.42648)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=903001143]
 
@@ -40,9 +56,6 @@ theme_override_font_sizes/font_size = 64
 text = "60
 "
 horizontal_alignment = 1
-
-[node name="djungelskog" parent="." unique_id=265886674 instance=ExtResource("3_met8w")]
-position = Vector2(853.866, 388.566)
 
 [node name="background" type="Sprite2D" parent="." unique_id=2108526418]
 z_index = -100
@@ -84,8 +97,5 @@ shape = SubResource("RectangleShape2D_2rmff")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1282063220]
 position = Vector2(557.032, 669.574)
 shape = SubResource("RectangleShape2D_yb4g0")
-
-[node name="Goblin Model" parent="." unique_id=1834059154 instance=ExtResource("5_44fa1")]
-position = Vector2(268.65308, 443.79843)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

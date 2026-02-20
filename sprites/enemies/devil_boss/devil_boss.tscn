@@ -2249,6 +2249,8 @@ position = Vector2(1253, 316)
 [node name="Area2D" type="Area2D" parent="." unique_id=718215283]
 position = Vector2(6, -139.00006)
 scale = Vector2(0.52, 0.44)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1370853369]
 position = Vector2(41, 6)

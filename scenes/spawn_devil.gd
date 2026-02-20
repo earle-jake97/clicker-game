@@ -12,7 +12,7 @@ extends Node2D
 @export var enemy_damage: int
 @export var enemy_cash_value_min: int
 @export var enemy_cash_value_max: int
-@export var enemy_speed: int
+@export var enemy_speed: float
 @export var base_terrain: TileMapLayer
 const PROJECTILE_DEMON = preload("res://scenes/projectile_demon.tscn")
 const DEVIL = preload("res://scenes/devil.tscn")
@@ -95,34 +95,13 @@ func spawn_devil():
 	enemy.armor_penetration = enemy_max_armor_penetration
 	enemy.value_min = enemy_cash_value_min
 	enemy.value_max = enemy_cash_value_max
-	enemy.min_speed = enemy_speed - 25
-	enemy.max_speed = enemy_speed + 25
+	enemy.speed = enemy_speed
 	var rand_value = randi_range(1, 100)
 	if rand_value == 1:
 		sprite.modulate = Color.GOLD
 		enemy.value_min *= 10
 		enemy.value_max *= 10
-	else:
-		var base_color = Color.SALMON
-		var red_variation
-		var blue_variation
-		var green_variation
-		if enemy_scene == ENT:
-			base_color = Color.DARK_GRAY
-			red_variation = randf_range(-0.3,0.3)
-			blue_variation = randf_range(-0.3,0.3)
-			green_variation = randf_range(-0.3,0.3)
-		else:
-			red_variation = randf_range(-0.3,0.3)
-			blue_variation = randf_range(-0.2,0.2)
-			green_variation = randf_range(-0.1,0.1)
-		var final_color = Color(
-			clamp(base_color.r + red_variation, 0.0, 1.0),
-			clamp(base_color.g + green_variation, 0.0, 1.0),
-			clamp(base_color.b + blue_variation, 0.0, 1.0),
-		)
-		sprite.modulate = final_color
-	
+
 	var spawn_pos = spawn_position_logic()
 	get_node("../y_sort_node").add_child(enemy)
 	enemy.global_position = spawn_pos

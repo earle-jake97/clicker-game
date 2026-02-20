@@ -4,6 +4,7 @@ var enemy_list = {}
 var interval = 0.2
 var time = 0.0
 var lifetime = 0.0
+var duration = 4.0
 const BURRITO_SCRIPT := preload("res://items/scripts/4/michaels_burrito.gd")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -19,14 +20,16 @@ func _process(delta: float) -> void:
 	if time >= interval:
 		time = 0.0
 		damage_all_enemies()
-	if lifetime >= 3.0:
+	if lifetime >= duration - 1.0:
 		animation_player.play("fade")
-	if lifetime >= 4.0:
+	if lifetime >= duration:
 		queue_free()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
-	if is_instance_valid(enemy) and enemy.get_groups().has("enemy"):
+	while enemy and not enemy.is_in_group("enemy"):
+		enemy = enemy.get_parent()
+	if enemy and is_instance_valid(enemy) and enemy.has_method("take_damage"):
 		enemy_list.get_or_add(enemy)
 
 

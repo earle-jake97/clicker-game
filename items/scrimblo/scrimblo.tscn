@@ -195,12 +195,11 @@ _data = {
 radius = 35.0143
 
 [node name="Node2D" type="Node2D" unique_id=865877476 groups=["player"]]
-y_sort_enabled = true
 script = ExtResource("1_y56bs")
 
 [node name="shadow" type="Sprite2D" parent="." unique_id=1822565118]
 modulate = Color(1, 1, 1, 0.537255)
-z_as_relative = false
+z_index = -1
 position = Vector2(-2, 2)
 scale = Vector2(0.12457, 0.176419)
 texture = ExtResource("2_f23j6")
@@ -210,6 +209,7 @@ position = Vector2(0, -48)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_8a3tm")
 autoplay = "default"
+frame_progress = 0.9829376
 
 [node name="mouth" type="Marker2D" parent="." unique_id=504046168]
 position = Vector2(-1, -37)
@@ -229,6 +229,8 @@ tint_progress = Color(0.36, 0.968, 1, 1)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=358373769 groups=["player_hitbox", "scrimblo"]]
 position = Vector2(-1, -40)
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=447881579 groups=["player_hitbox"]]
 position = Vector2(0, 4)

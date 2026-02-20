@@ -35,7 +35,7 @@ func spawn_ghost():
 	if not tree:
 		return
 
-	var enemies = tree.get_nodes_in_group("enemy")
+	var enemies = EnemyManager.get_all_enemies()
 	if enemies.is_empty():
 		return
 

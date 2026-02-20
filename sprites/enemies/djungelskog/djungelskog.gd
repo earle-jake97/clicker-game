@@ -2,7 +2,6 @@ extends BaseEnemy
 var damage_accumulated = 0
 var total_damage = 0
 
-@onready var area_2d: Area2D = $Area2D
 @onready var cum_damage: Label = $cum_damage
 const MONEY_PARTICLE = preload("res://systems/money_particle.tscn")
 const DAMAGE_THRESHOLD = 50.0
@@ -10,10 +9,10 @@ const DAMAGE_THRESHOLD = 50.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	EnemyManager.register(self)
 	max_health = max_health * PlayerController.difficulty
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+	
+func _physics_process(delta: float) -> void:
 	cum_damage.text = str(format_large_number(total_damage))
 	if damage_accumulated >= DAMAGE_THRESHOLD:
 		damage_accumulated -= DAMAGE_THRESHOLD

@@ -8,7 +8,7 @@ var explosion_damage
 func _ready():
 	scale = GameState.get_size_modifier()
 	explosion.play("explode")
-	if get_tree().get_nodes_in_group("enemy").size() >= 50:
+	if EnemyManager.get_all_enemies().size() >= 50:
 		explosion.visible = false
 		for i in range(cloud_count):
 			var cloud = smoke_scene.instantiate()

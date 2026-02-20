@@ -24,59 +24,32 @@ var spit_timer = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func extra_ready():
+	can_move = false
 	base_attack_speed = 1.5
 	attack_speed = base_attack_speed
-	hop()
-	attack_speed = base_attack_speed
 	initialize()
-	attack_speed /= (max(player_controller.difficulty/10, 0.8))
-		
-	health_bar.visible = false
-	health_bar.max_value = max_health
-	health = max_health
-	health_bar.value = health
-	speed = randf_range(50.0, 100.0)
-	value = randi_range(value_min, value_max)
+	hop()
 
-func _process(delta: float) -> void:
-	hop_timer -= delta
+func extra_processing(delta):
 	look_at_player()
+	hop_timer -= delta
 	if hop_timer <= 0.0 and check_distance() and not dead:
 		hop_timer = hop_cooldown
 		initialize()
 		hop()
-
 	if spit_timer >= 0.2 and spitting:
 		head.texture = HEAD
 		animation_player.play("idle")
 		spitting = false
-	spit_timer += delta
-	if dead:
-		head.texture = HEAD_DEAD
-		var color = sprite.modulate
-		color.a = max(color.a - delta * 0.5, 0.0)
-		sprite.modulate = color
-		death_timer += delta
-		if death_timer >= 2:
-			queue_free()
-	
-	if health < max_health:
-		health_bar.visible = true
-	if health <= 0:
-		if not paid_out:
-			paid_out = true
-			player_controller.add_cash(value)
-		die()
-
-func _physics_process(delta: float) -> void:
+		spit_timer += delta
 	attack_timer += delta
 	if attack_timer >= attack_speed and not dead and not is_frozen:
 		attack_timer = 0.0
 		launch_projectile()
-
-func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
-	damage_batcher.add_damage(amount, damage_type)
+		
+func extra_death_parameters():
+	head.texture = HEAD_DEAD
 
 func launch_projectile():
 	spit_timer = 0.0
@@ -97,19 +70,7 @@ func launch_projectile():
 	projectile.global_position = global_position
 	projectile.chosen_area = chosen_position
 	get_tree().current_scene.add_child(projectile)
-	
-func die():
-	died.emit()
-	shadow.visible = false
-	debuff_container.hide()
-	animation_player.play("die")
-	progress_bar.hide()
-	remove_from_group("enemy")
-	dead = true
 
-func apply_debuff():
-	debuff_container.update_debuffs()
-	
 func hop():
 	var cam = get_viewport().get_camera_2d()
 	if cam == null:
@@ -132,13 +93,6 @@ func hop():
 	)
 
 	global_position = spawn_pos
-
-func look_at_player():
-	if not dead:
-			if global_position.x > player_model.global_position.x:
-				container.scale.x = abs(container.scale.x)
-			else:
-				container.scale.x = -abs(container.scale.x)
 
 func check_distance():
 	var cam = get_viewport().get_camera_2d()

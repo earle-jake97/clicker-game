@@ -4,10 +4,8 @@ class_name BaseEnemy
 var is_frozen = false
 signal died
 var player = PlayerController
-var player_model = PlayerController.player
-@export var min_speed: float
-@export var max_speed: float
-var speed: float
+var player_model = PlayerController.get_player_body()
+@export var speed: float
 @export var damage: int
 @export var armor_penetration: int
 var health: float
@@ -24,6 +22,8 @@ var health: float
 @onready var container: Node = $container
 @onready var sprite: Node2D = $container/sprite
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
+@onready var area_2d: Area2D = $container/Area2D
+
 var guarantee_hit = false
 var debuffs = []
 var touching_entity: Node = null
@@ -51,6 +51,47 @@ var pitch_scale = randf_range(0.9, 1.3)
 var base_attack_speed = 0.7
 var attack_animation_length = 0.5333
 var knockback_strength = 0
+var trigger_knockback = true
+var can_move = true
+var unique_attack = false
+var unique_movement = false
+var path_update_timer = 0.0
+var update_interval = 0.3
+
+func _ready() -> void:
+	if EnemyManager.get_all_enemies().size() >= 50:
+		shadow.visible = false
+	EnemyManager.optimize.connect(_optimize)
+	EnemyManager.register(self)
+	value = randi_range(value_min, value_max)
+	if health_bar:
+		health_bar.visible = false
+	health_bar.max_value = max_health
+	health = max_health
+	health_bar.value = health
+	base_speed = speed
+	attack_speed = base_attack_speed
+	nav2d.target_position = player_model.global_position
+	extra_ready()
+	
+func extra_ready():
+	pass
+
+func _physics_process(delta: float) -> void:
+	path_update_timer += delta
+	check_touch()
+	get_target()
+	damage_cooldown += delta
+	if health < max_health:
+		health_bar.visible = true
+	extra_processing(delta)
+	if path_update_timer >= update_interval:
+		nav2d.target_position = target.global_position
+		path_update_timer = 0.0
+	move_towards_target(delta)
+	health_below_zero()
+	attack_check()
+	process_attack_check(delta)
 
 func stun(duration):
 	is_frozen = true
@@ -93,31 +134,12 @@ func look_at_player():
 			else:
 				container.scale.x = -abs(container.scale.x)
 
-func handle_death(delta):
-	if dead:
-		var color = sprite.modulate
-		shadow.visible = false
-		color.a = max(color.a - delta * 0.5, 0.0)
-		sprite.modulate = color
-		death_timer += delta
-		if death_timer >= 2:
-			queue_free()
-
 func health_below_zero():
 	if health <= 0:
 		if not paid_out:
 			paid_out = true
 			player.add_cash(value)
 		die()
-
-func die():
-	dead = true
-	damage_batcher.clear_all()
-	progress_bar.hide()
-	debuff_container.hide()
-	remove_from_group("enemy")
-	animation_player.play("die")
-	died.emit()
 
 func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL, source: String = ""):
 	health -= amount
@@ -131,22 +153,24 @@ func push_back(strength: float):
 
 func start_attack():
 	is_attacking = true
+	animation_player.play("attack")
 	attack_duration = 0.0
 
 func process_attack(delta):
+	if unique_attack:
+		return
 	attack_duration += delta
 
 	if attack_duration >= attack_animation_length and is_attacking:
 		if is_instance_valid(touching_entity) and not dead:
 			if touching_entity.has_method("take_damage"):
-				touching_entity.take_damage(damage, armor_penetration)
-				if touching_entity.has_method("apply_knockback"):
-					var knock_direction = touching_entity.global_position - global_position
-					touching_entity.apply_knockback(knock_direction, knockback_strength)
+				var knock_direction = touching_entity.global_position - global_position
+				var knockback_params = [knock_direction, knockback_strength, trigger_knockback]
+				touching_entity.take_damage(damage, armor_penetration, true, knockback_params)
 		elif guarantee_hit and not dead:
-			player.take_damage(damage, armor_penetration)
-			var knock_direction = player.global_position - global_position
-			player.get_player_body().apply_knockback(knock_direction, knockback_strength)
+			var knock_direction = PlayerController.get_player_body().global_position - global_position
+			var knockback_params = [knock_direction, knockback_strength, trigger_knockback]
+			player.take_damage(damage, armor_penetration, true, knockback_params)
 		else:
 			touching_entity = null
 		guarantee_hit = false
@@ -159,19 +183,22 @@ func apply_debuff():
 	debuff_container.update_debuffs()
 
 func attack_check():
+	if unique_attack: 
+		return
 	if touching_entity != null and damage_cooldown >= base_attack_speed + 1 and not is_attacking and not dead and not is_frozen:
 		start_attack()
 
 func process_attack_check(delta):
+	if unique_attack:
+		return
 	if is_attacking and not dead:
 		process_attack(delta)
 
 func move_towards_target(delta):
+	if not can_move or unique_movement:
+		return
 	# Move toward player only if not waiting after attack
 	if player and not is_attacking and post_attack_delay <= 0.01 and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
-		
-		nav2d.target_position = target.global_position
-		
 		var next_position = nav2d.get_next_path_position()
 		if next_position != Vector2.ZERO:
 			global_position = global_position.move_toward(next_position, speed * delta)
@@ -179,9 +206,6 @@ func move_towards_target(delta):
 func move_towards_target_flying(delta):
 	# Move toward player only if not waiting after attack
 	if player and not is_attacking and post_attack_delay <= 0.01 and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
-		
-		nav2d.target_position = target.global_position
-		
 		var next_position = nav2d.get_next_path_position()
 		if next_position != Vector2.ZERO:
 			global_position = global_position.move_toward(next_position, speed * delta)
@@ -227,3 +251,37 @@ func get_valid_tile_near_point(pos: Vector2, max_radius: int = 10):
 				queue.push_back(next)
 
 	return Vector2.ZERO
+
+func die():
+	clear_groups()
+	damage_batcher.clear_all()
+	area_2d.monitoring = false
+	for col in area_2d.get_children():
+		col.set_deferred("disabled", true)
+	EnemyManager.unregister(self)
+	extra_death_parameters()
+	animation_player.play("die")
+	dead = true
+	died.emit()
+	progress_bar.hide()
+	debuff_container.hide()
+	shadow.hide()
+	await get_tree().create_timer(5.0).timeout
+	queue_free()
+	
+func clear_groups():
+	for group in self.get_groups():
+		remove_from_group(group)
+
+func extra_death_parameters():
+	pass
+
+func extra_processing(delta):
+	pass
+
+func _free_node(anim_name: String):
+	if anim_name == "die":
+		queue_free()
+
+func _optimize():
+	shadow.visible = false

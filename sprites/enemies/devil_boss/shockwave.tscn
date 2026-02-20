@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b62sssblj0rrf"]
+[gd_scene format=3 uid="uid://b62sssblj0rrf"]
 
 [ext_resource type="Texture2D" uid="uid://bd63ewd0buxmw" path="res://sprites/enemies/devil_boss/shockwave.png" id="1_5oa2u"]
-[ext_resource type="Script" path="res://sprites/enemies/devil_boss/shockwave.gd" id="1_ntc48"]
+[ext_resource type="Script" uid="uid://dvldxu5h5yjrf" path="res://sprites/enemies/devil_boss/shockwave.gd" id="1_ntc48"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pntvj"]
 animations = [{
@@ -17,17 +17,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2nhfa"]
 radius = 15.6792
 
-[node name="Shockwave" type="Node2D"]
+[node name="Shockwave" type="Node2D" unique_id=1651383111]
 z_as_relative = false
 script = ExtResource("1_ntc48")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1383914771]
 modulate = Color(1, 1, 1, 0.0392157)
 sprite_frames = SubResource("SpriteFrames_pntvj")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=999676060]
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=323492616]
 position = Vector2(-25, 36)
 scale = Vector2(5.2, 7.68)
 shape = SubResource("CircleShape2D_2nhfa")

@@ -13,7 +13,7 @@ const TIMER_DURATION = 11.0
 
 func _process(delta: float) -> void:
 	elapsed_time += delta
-	if elapsed_time >= TIMER_DURATION and get_tree().get_nodes_in_group("enemy").size() > 0:
+	if elapsed_time >= TIMER_DURATION and EnemyManager.get_all_enemies().size() > 0:
 		elapsed_time -= TIMER_DURATION 
 		timed_blow()
 	

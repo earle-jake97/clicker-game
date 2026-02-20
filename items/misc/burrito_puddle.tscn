@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://h8glldnta74u"]
+[gd_scene format=3 uid="uid://h8glldnta74u"]
 
 [ext_resource type="Texture2D" uid="uid://7wx0wgj60bti" path="res://items/misc/colitis.png" id="1_3iey8"]
-[ext_resource type="Script" path="res://items/misc/burrito_puddle.gd" id="1_liu75"]
+[ext_resource type="Script" uid="uid://cajqr050ox8wa" path="res://items/misc/burrito_puddle.gd" id="1_liu75"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4rfw"]
 radius = 42.2966
@@ -78,30 +78,30 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fliqo"]
 _data = {
-"RESET": SubResource("Animation_jnyxj"),
-"fade": SubResource("Animation_idbg4"),
-"new_animation": SubResource("Animation_65oy7")
+&"RESET": SubResource("Animation_jnyxj"),
+&"fade": SubResource("Animation_idbg4"),
+&"new_animation": SubResource("Animation_65oy7")
 }
 
-[node name="burrito_puddle" type="Node2D"]
+[node name="burrito_puddle" type="Node2D" unique_id=645174858]
 z_index = -1
 z_as_relative = false
 script = ExtResource("1_liu75")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1633949235]
 texture = ExtResource("1_3iey8")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=732486100]
+collision_layer = 0
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=66369684]
 scale = Vector2(3.04, 1.08)
 shape = SubResource("CircleShape2D_o4rfw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fliqo")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=74167488]
+libraries/ = SubResource("AnimationLibrary_fliqo")
+autoplay = &"new_animation"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

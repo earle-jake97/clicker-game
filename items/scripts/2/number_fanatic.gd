@@ -41,7 +41,7 @@ func fire_chain_lightning():
 func get_nearest_enemy(from_pos: Vector2, exclude: Node) -> Node:
 	var nearest = null
 	var shortest = INF
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in EnemyManager.get_all_enemies():
 		if enemy != exclude and enemy.is_inside_tree():
 			var dist = from_pos.distance_to(enemy.global_position)
 			if dist < shortest:
