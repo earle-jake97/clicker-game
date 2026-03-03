@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dlqbo6a6xvspg" path="res://world1/tileset_48_temp_water.png" id="1_ndnn6"]
 [ext_resource type="Texture2D" uid="uid://ccwtu68bej3r" path="res://world1/tileset_48_dock.png" id="2_j2kku"]
 [ext_resource type="Texture2D" uid="uid://c72h08lvokynu" path="res://world1/stump.png" id="3_bsi6p"]
+[ext_resource type="Texture2D" uid="uid://bnlc7dpsbp62s" path="res://world1/tileset_48_bush.png" id="4_hnhh8"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ndnn6"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -1324,6 +1325,122 @@ texture_region_size = Vector2i(64, 64)
 3:3/0 = 0
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -7.9026337, 32, -7.3381615, 32, 32, -32, 32)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c785v"]
+texture = ExtResource("4_hnhh8")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/metadata/_better_terrain = {
+4: [4],
+&"type": 4
+}
+1:0/0 = 0
+1:0/0/metadata/_better_terrain = {
+0: [4],
+3: [4],
+4: [4],
+&"type": 4
+}
+2:0/0 = 0
+2:0/0/metadata/_better_terrain = {
+0: [4],
+3: [4],
+4: [4],
+7: [4],
+8: [4],
+&"type": 4
+}
+3:0/0 = 0
+3:0/0/metadata/_better_terrain = {
+4: [4],
+7: [4],
+8: [4],
+&"type": 4
+}
+0:1/0 = 0
+0:1/0/metadata/_better_terrain = {
+4: [4],
+12: [4],
+&"type": 4
+}
+1:1/0 = 0
+1:1/0/metadata/_better_terrain = {
+0: [4],
+3: [4],
+4: [4],
+12: [4],
+15: [4],
+&"type": 4
+}
+2:1/0 = 0
+2:1/0/metadata/_better_terrain = {
+0: [4],
+3: [4],
+4: [4],
+7: [4],
+8: [4],
+11: [4],
+12: [4],
+15: [4],
+&"type": 4
+}
+3:1/0 = 0
+3:1/0/metadata/_better_terrain = {
+4: [4],
+7: [4],
+8: [4],
+11: [4],
+12: [4],
+&"type": 4
+}
+0:2/0 = 0
+0:2/0/metadata/_better_terrain = {
+12: [4],
+&"type": 4
+}
+1:2/0 = 0
+1:2/0/metadata/_better_terrain = {
+0: [4],
+12: [4],
+15: [4],
+&"type": 4
+}
+2:2/0 = 0
+2:2/0/metadata/_better_terrain = {
+0: [4],
+8: [4],
+11: [4],
+12: [4],
+15: [4],
+&"type": 4
+}
+3:2/0 = 0
+3:2/0/metadata/_better_terrain = {
+8: [4],
+11: [4],
+12: [4],
+&"type": 4
+}
+0:3/0 = 0
+0:3/0/metadata/_better_terrain = {
+&"type": 4
+}
+1:3/0 = 0
+1:3/0/metadata/_better_terrain = {
+0: [4],
+&"type": 4
+}
+2:3/0 = 0
+2:3/0/metadata/_better_terrain = {
+0: [4],
+8: [4],
+&"type": 4
+}
+3:3/0 = 0
+3:3/0/metadata/_better_terrain = {
+8: [4],
+&"type": 4
+}
+
 [resource]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
@@ -1334,6 +1451,7 @@ sources/0 = SubResource("TileSetAtlasSource_j2kku")
 sources/1 = SubResource("TileSetAtlasSource_bsi6p")
 sources/2 = SubResource("TileSetAtlasSource_hnhh8")
 sources/3 = SubResource("TileSetAtlasSource_j8wdr")
+sources/4 = SubResource("TileSetAtlasSource_c785v")
 metadata/_better_terrain = {
 &"decoration": ["Decoration", Color(0.4117647, 0.4117647, 0.4117647, 1), 3, [], {
 &"path": "res://addons/better-terrain/icons/Decoration.svg"
@@ -1345,6 +1463,8 @@ metadata/_better_terrain = {
 }], ["Water_No_Collision", Color(0.113725476, 0.13992034, 0.78431374, 1), 0, [3], {
 &"path": ""
 }], ["Water_Category", Color(0.6055376, 0.8578134, 0.5234494, 1), 2, [], {
+&"path": ""
+}], ["Leaves", Color(0.7510244, 0.8321643, 0.40507597, 1), 0, [], {
 &"path": ""
 }]],
 &"version": "0.2"

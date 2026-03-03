@@ -20,18 +20,23 @@ shader_parameter/lava_overlay_tex = ExtResource("4_rl72c")
 shader_parameter/scale = 0.006944444
 
 [node name="boss1" type="Node2D" unique_id=1001497368]
-y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(1.06457, 1.032)
 script = ExtResource("1_45nq4")
 
-[node name="boss_spawn" type="Marker2D" parent="." unique_id=2044831634]
-position = Vector2(795.6264, 1.9380188)
-
 [node name="y_sort_node" type="NavigationRegion2D" parent="." unique_id=1953500623]
+y_sort_enabled = true
 position = Vector2(-1.8786929, -66.860466)
 navigation_polygon = SubResource("NavigationPolygon_g0e5y")
 navigation_layers = 3
+
+[node name="boss_spawn" type="Marker2D" parent="y_sort_node" unique_id=2044831634]
+position = Vector2(797.50507, 68.798485)
+scale = Vector2(1, 0.99999994)
+
+[node name="Goblin Model" parent="y_sort_node" unique_id=1834059154 instance=ExtResource("3_hqdlh")]
+position = Vector2(2.8180392, 118.217026)
+scale = Vector2(0.75, 0.74999994)
 
 [node name="base_terrain" type="TileMapLayer" parent="y_sort_node" unique_id=233779413 groups=["base_terrain"]]
 z_index = -10
@@ -48,9 +53,6 @@ material = SubResource("ShaderMaterial_vrt0c")
 position = Vector2(12, 3.0000038)
 scale = Vector2(1, 0.9999998)
 tile_set = ExtResource("4_jofdl")
-
-[node name="Goblin Model" parent="." unique_id=1834059154 instance=ExtResource("3_hqdlh")]
-position = Vector2(0.9393463, 51.356567)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=410248286]
 zoom = Vector2(0.6, 0.6)

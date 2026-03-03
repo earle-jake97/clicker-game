@@ -43,7 +43,7 @@ func shoot():
 		return
 	
 	for enemy in enemies:
-		if enemy.max_health > max_hp:
+		if is_instance_valid(enemy) and enemy.max_health > max_hp:
 			max_hp = enemy.max_health
 			strongest_enemy = enemy
 	

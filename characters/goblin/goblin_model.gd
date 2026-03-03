@@ -20,6 +20,8 @@ const BODY_NORMAL = preload("res://sprites/player_character/goblin/body.png")
 @onready var blink_timer: Timer = $timers/blink
 @onready var iframes: Timer = $timers/iframes
 @onready var modulate_player: AnimationPlayer = $ModulatePlayer
+@onready var pivot: Marker2D = $sprite/body/pivot
+
 var damage_taken = false
 var external_velocity = Vector2.ZERO
 var external_drag = 1800.0
@@ -40,7 +42,7 @@ func _ready() -> void:
 	animation_player.animation_set_next("move_up", "idle")
 	animation_player.animation_set_next("move_down", "idle")
 	animation_player.animation_set_next("die", "dead")
-	blink_timer.start()
+	arms.connect("animation_finished", _arms_animation_finished)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -98,15 +100,18 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	external_velocity = external_velocity.move_toward(Vector2.ZERO, external_drag * delta)
 
+func play_attack_animation():
+	arms.speed_scale = PlayerController.clicks_per_second
+	arms.play("default")
+
+func _arms_animation_finished():
+	if arms.animation == "default" and not player.attacking:
+		arms.play("idle")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	speed = PlayerController.movement_speed
 	face_enemy()
-	
-	if player.attacking == false and not dead:
-		arms.play("idle")
-	if player.attacking == true and not dead:
-		arms.play("default")
 	
 	if PlayerController.clicks_per_second >= 15:
 		arms.set_speed_scale(2.0)
@@ -148,7 +153,7 @@ func _process(delta: float) -> void:
 			eyes.play("smile")
 			mouth.play("smile")
 
-func take_damage(damage, pen, trigger_iframes: bool = true, params = []):
+func take_damage(damage, pen: float = 0, trigger_iframes: bool = true, params = []):
 	PlayerController.take_damage(damage, pen, trigger_iframes, params)
 	
 func is_alive():
@@ -196,6 +201,9 @@ func _on_damage_taken():
 func _on_iframes_timeout() -> void:
 	damage_taken = false
 	modulate_player.play("default")
+
+func get_center():
+	return pivot
 
 func apply_knockback(dir: Vector2, strength: float = 500.0, trigger_knockback_cd: bool = true):
 	if knockback_cooldown_active:

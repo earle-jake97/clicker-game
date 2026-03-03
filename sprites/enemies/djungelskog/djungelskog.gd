@@ -3,9 +3,10 @@ var damage_accumulated = 0
 var total_damage = 0
 
 @onready var cum_damage: Label = $cum_damage
-const MONEY_PARTICLE = preload("res://systems/money_particle.tscn")
-const DAMAGE_THRESHOLD = 50.0
+const DAMAGE_THRESHOLD = 180.0
 @onready var pivot: Marker2D = $container/sprite/pivot
+const MONEY_PARTICLE = preload("uid://du4i6uerwqj2v")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

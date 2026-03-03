@@ -8,18 +8,20 @@ var attack_cooldown = 5.0
 var attack_timer = 3.0
 
 func extra_ready():
+	base_speed = 50.0
+	damage = 1
+	max_health = 180.0
 	unique_attack = true
 	unique_movement = true
 	animation_player.animation_set_next("attack", "float")
 
 func extra_processing(delta):
 	attack_timer += delta
-	if attack_timer >= attack_cooldown and not is_attacking:
+	if attack_timer >= attack_cooldown and not is_attacking and target_in_range():
 		attack()
 	if is_attacking:
 		speed = base_speed/2
-	else:
-		speed = base_speed
+
 	# Move toward player only if not waiting after attack
 	if player and not dead and not is_pushed and not is_frozen:
 		var direction = player_model.global_position - global_position
@@ -34,6 +36,11 @@ func extra_processing(delta):
 		else:
 			# Move away from the player
 			global_position -= direction * speed * delta
+
+func target_in_range():
+	if global_position.distance_to(target.global_position) <= 1000:
+		return true
+	return false
 
 func attack():
 	is_attacking = true

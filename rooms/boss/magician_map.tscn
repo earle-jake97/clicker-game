@@ -1,0 +1,173 @@
+[gd_scene format=4 uid="uid://dn658omin3beg"]
+
+[ext_resource type="Script" uid="uid://dkpc7aumwqfws" path="res://rooms/boss/magician_map.gd" id="1_doox3"]
+[ext_resource type="Texture2D" uid="uid://ca4g0atxcp0xt" path="res://rooms/boss/magician_tent.png" id="1_yk56t"]
+[ext_resource type="PackedScene" uid="uid://cdjjjvfpsn86k" path="res://characters/goblin/goblin_model.tscn" id="2_irsjm"]
+[ext_resource type="Shader" uid="uid://wjwmrn04brmw" path="res://world1/light_grass.gdshader" id="3_sowtm"]
+[ext_resource type="Texture2D" uid="uid://b3pju3o3ohtis" path="res://world1/grass_texture.png" id="4_xy7fv"]
+[ext_resource type="TileSet" uid="uid://b57vj6bo1mswq" path="res://world1/temp_tileset.tres" id="5_doox3"]
+[ext_resource type="PackedScene" uid="uid://bf7wu515ndyoh" path="res://sprites/enemies/imp_boss/magician.tscn" id="6_s3ndo"]
+[ext_resource type="Script" uid="uid://dbo7l6ar52cqe" path="res://systems/camera.gd" id="7_sowtm"]
+[ext_resource type="PackedScene" uid="uid://qdhkktq0td5u" path="res://sprites/enemies/imp_boss/simon_says.tscn" id="8_s3ndo"]
+[ext_resource type="PackedScene" uid="uid://c4kyoa5f5nxp6" path="res://sprites/enemies/imp_boss/clown_foreground.tscn" id="10_s3ndo"]
+[ext_resource type="PackedScene" uid="uid://b7npbrfkm5ryl" path="res://lighting/spotlight.tscn" id="11_c8nu7"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c8nu7"]
+vertices = PackedVector2Array(1946.5703, 212.27344, 1988.3438, 861.1172, -444.40625, 890.8828, -473.60156, 187.40625, 758.84375, 116.02344)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(759, 106, 1956, 203, 1999, 871, -454, 901, -484, 178)])
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_827o8"]
+shader = ExtResource("3_sowtm")
+shader_parameter/overlay_tex = ExtResource("4_xy7fv")
+shader_parameter/scale = 0.006944444
+
+[sub_resource type="Animation" id="Animation_s3ndo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Clown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1155, 808)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Clown2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1319, 839)]
+}
+
+[sub_resource type="Animation" id="Animation_c8nu7"]
+resource_name = "clowns_run"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Clown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-388, 808), Vector2(1954, 808)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Clown2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.9333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-944, 839), Vector2(1790, 839)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_827o8"]
+_data = {
+&"RESET": SubResource("Animation_s3ndo"),
+&"clowns_run": SubResource("Animation_c8nu7")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8nu7"]
+radius = 75.690155
+
+[node name="magician_map" type="Node2D" unique_id=1699201410]
+script = ExtResource("1_doox3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=945303873]
+z_index = -2
+position = Vector2(779, 359)
+texture = ExtResource("1_yk56t")
+
+[node name="y_sort_node" type="NavigationRegion2D" parent="." unique_id=39733362]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_c8nu7")
+navigation_layers = 3
+
+[node name="Goblin Model" parent="y_sort_node" unique_id=1834059154 instance=ExtResource("2_irsjm")]
+position = Vector2(783, 589)
+
+[node name="tilemap_base" type="TileMapLayer" parent="y_sort_node" unique_id=347615346 groups=["base_terrain"]]
+visible = false
+z_as_relative = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_827o8")
+position = Vector2(12, 3)
+tile_map_data = PackedByteArray("AAAAAAMABQAIAAEAAAAAAAQABQAIAAEAAAAAAAUABQAIAAEAAAAAAAYABQAIAAEAAAAAAAcABQAIAAEAAAAAAAgABQAIAAEAAAABAAMABQAJAAIAAAABAAIABQAJAAIAAAACAAIABQAJAAIAAAADAAIABQAJAAIAAAAEAAIABQAJAAIAAAAFAAIABQAJAAIAAAAGAAIABQAJAAIAAAAHAAIABQAJAAIAAAAIAAIABQAJAAIAAAAJAAIABQAJAAIAAAAKAAIABQAJAAIAAAALAAIABQAJAAIAAAAMAAIABQAJAAIAAAANAAIABQAJAAIAAAAOAAIABQAJAAIAAAAPAAIABQAJAAIAAAAQAAIABQAJAAIAAAARAAIABQAJAAIAAAASAAIABQAJAAIAAAATAAIABQAJAAIAAAAUAAIABQAJAAIAAAAVAAIABQAJAAIAAAAWAAIABQAJAAIAAAAWAAMABQAJAAIAAAAXAAMABQALAAIAAAAXAAQABQALAAIAAAAXAAUABQALAAIAAAAXAAYABQALAAIAAAAXAAcABQALAAIAAAAXAAgABQALAAIAAAAXAAkABQALAAIAAAAXAAoABQALAAMAAAAWAAoABQAJAAMAAAAVAAoABQAJAAMAAAAUAAoABQAJAAMAAAATAAoABQAJAAMAAAASAAoABQAJAAMAAAARAAoABQAJAAMAAAAQAAoABQAJAAMAAAAPAAoABQAJAAMAAAAOAAoABQAJAAMAAAANAAoABQAJAAMAAAAMAAoABQAJAAMAAAALAAoABQAJAAMAAAAKAAoABQAJAAMAAAAJAAoABQAJAAMAAAAIAAoABQAJAAMAAAAHAAoABQAJAAMAAAAGAAoABQAJAAMAAAAFAAoABQAJAAMAAAAEAAoABQAJAAMAAAADAAoABQAJAAMAAAACAAoABQAJAAMAAAABAAoABQAJAAMAAAAAAAoABQAIAAMAAAAAAAkABQAIAAEAAAAFAAYABQAJAAIAAAAGAAYABQAJAAIAAAAFAAcABQAJAAIAAAAEAAYABQAJAAIAAAAFAAUABQAJAAIAAAAHAAYABQAJAAIAAAAGAAcABQAJAAIAAAAGAAUABQAJAAIAAAAFAAgABQAJAAIAAAAEAAcABQAJAAIAAAADAAYABQAJAAIAAAAEAAUABQAJAAIAAAAFAAQABQAJAAIAAAAIAAYABQAJAAIAAAAHAAcABQAJAAIAAAAHAAUABQAJAAIAAAAGAAgABQAJAAIAAAAGAAQABQAJAAIAAAAFAAkABQAJAAIAAAAEAAgABQAJAAIAAAADAAcABQAJAAIAAAACAAYABQAJAAIAAAADAAUABQAJAAIAAAAEAAQABQAJAAIAAAAFAAMABQAJAAIAAAAJAAYABQAJAAIAAAAIAAcABQAJAAIAAAAIAAUABQAJAAIAAAAHAAgABQAJAAIAAAAHAAQABQAJAAIAAAAGAAkABQAJAAIAAAAGAAMABQAJAAIAAAAEAAkABQAJAAIAAAADAAgABQAJAAIAAAACAAcABQAJAAIAAAABAAYABQAJAAIAAAACAAUABQAJAAIAAAADAAQABQAJAAIAAAAEAAMABQAJAAIAAAAKAAYABQAJAAIAAAAJAAcABQAJAAIAAAAJAAUABQAJAAIAAAAIAAgABQAJAAIAAAAIAAQABQAJAAIAAAAHAAkABQAJAAIAAAAHAAMABQAJAAIAAAADAAkABQAJAAIAAAACAAgABQAJAAIAAAABAAcABQAJAAIAAAABAAUABQAJAAIAAAACAAQABQAJAAIAAAADAAMABQAJAAIAAAALAAYABQAJAAIAAAAKAAcABQAJAAIAAAAKAAUABQAJAAIAAAAJAAgABQAJAAIAAAAJAAQABQAJAAIAAAAIAAkABQAJAAIAAAAIAAMABQAJAAIAAAACAAkABQAJAAIAAAABAAgABQAJAAIAAAABAAQABQAJAAIAAAACAAMABQAJAAIAAAAMAAYABQAJAAIAAAALAAcABQAJAAIAAAALAAUABQAJAAIAAAAKAAgABQAJAAIAAAAKAAQABQAJAAIAAAAJAAkABQAJAAIAAAAJAAMABQAJAAIAAAABAAkABQAJAAIAAAANAAYABQAJAAIAAAAMAAcABQAJAAIAAAAMAAUABQAJAAIAAAALAAgABQAJAAIAAAALAAQABQAJAAIAAAAKAAkABQAJAAIAAAAKAAMABQAJAAIAAAAOAAYABQAJAAIAAAANAAcABQAJAAIAAAANAAUABQAJAAIAAAAMAAgABQAJAAIAAAAMAAQABQAJAAIAAAALAAkABQAJAAIAAAALAAMABQAJAAIAAAAPAAYABQAJAAIAAAAOAAcABQAJAAIAAAAOAAUABQAJAAIAAAANAAgABQAJAAIAAAANAAQABQAJAAIAAAAMAAkABQAJAAIAAAAMAAMABQAJAAIAAAAQAAYABQAJAAIAAAAPAAcABQAJAAIAAAAPAAUABQAJAAIAAAAOAAgABQAJAAIAAAAOAAQABQAJAAIAAAANAAkABQAJAAIAAAANAAMABQAJAAIAAAARAAYABQAJAAIAAAAQAAcABQAJAAIAAAAQAAUABQAJAAIAAAAPAAgABQAJAAIAAAAPAAQABQAJAAIAAAAOAAkABQAJAAIAAAAOAAMABQAJAAIAAAASAAYABQAJAAIAAAARAAcABQAJAAIAAAARAAUABQAJAAIAAAAQAAgABQAJAAIAAAAQAAQABQAJAAIAAAAPAAkABQAJAAIAAAAPAAMABQAJAAIAAAATAAYABQAJAAIAAAASAAcABQAJAAIAAAASAAUABQAJAAIAAAARAAgABQAJAAIAAAARAAQABQAJAAIAAAAQAAkABQAJAAIAAAAQAAMABQAJAAIAAAAUAAYABQAJAAIAAAATAAcABQAJAAIAAAATAAUABQAJAAIAAAASAAgABQAJAAIAAAASAAQABQAJAAIAAAARAAkABQAJAAIAAAARAAMABQAJAAIAAAAVAAYABQAJAAIAAAAUAAcABQAJAAIAAAAUAAUABQAJAAIAAAATAAgABQAJAAIAAAATAAQABQAJAAIAAAASAAkABQAJAAIAAAASAAMABQAJAAIAAAAWAAYABQAJAAIAAAAVAAcABQAJAAIAAAAVAAUABQAJAAIAAAAUAAgABQAJAAIAAAAUAAQABQAJAAIAAAATAAkABQAJAAIAAAATAAMABQAJAAIAAAAWAAcABQAJAAIAAAAWAAUABQAJAAIAAAAVAAgABQAJAAIAAAAVAAQABQAJAAIAAAAUAAkABQAJAAIAAAAUAAMABQAJAAIAAAAWAAgABQAJAAIAAAAWAAQABQAJAAIAAAAVAAkABQAJAAIAAAAVAAMABQAJAAIAAAAWAAkABQAJAAIAAAAAAAIABQAIAAEAAAAAAAEABQAIAAEAAAAAAAAABQAIAAAAAAABAAAABQAKAAAAAAABAAEABQAJAAIAAAACAAEABQAJAAIAAAADAAEABQAJAAIAAAAEAAEABQAJAAIAAAAFAAEABQAJAAIAAAAGAAEABQAJAAIAAAAHAAEABQAJAAIAAAAIAAEABQAJAAIAAAAJAAEABQAJAAIAAAAKAAEABQAJAAIAAAALAAEABQAJAAIAAAAMAAEABQAJAAIAAAANAAEABQAJAAIAAAAOAAEABQAJAAIAAAAPAAEABQAJAAIAAAAQAAEABQAJAAIAAAARAAEABQAJAAIAAAASAAEABQAJAAIAAAATAAEABQAJAAIAAAAUAAEABQAJAAIAAAAVAAEABQAJAAIAAAAWAAEABQAJAAIAAAAXAAEABQALAAIAAAAXAAIABQALAAIAAAAXAAAABQALAAAAAAAWAAAABQAKAAAAAAAVAAAABQAKAAAAAAAUAAAABQAKAAAAAAATAAAABQAKAAAAAAASAAAABQAKAAAAAAARAAAABQAKAAAAAAAQAAAABQAKAAAAAAAPAAAABQAKAAAAAAAOAAAABQAKAAAAAAANAAAABQAKAAAAAAAMAAAABQAKAAAAAAALAAAABQAKAAAAAAAKAAAABQAKAAAAAAAJAAAABQAKAAAAAAAIAAAABQAKAAAAAAAHAAAABQAKAAAAAAAGAAAABQAKAAAAAAAFAAAABQAKAAAAAAAEAAAABQAKAAAAAAADAAAABQAKAAAAAAACAAAABQAKAAAAAAA=")
+tile_set = ExtResource("5_doox3")
+
+[node name="magician" parent="y_sort_node" unique_id=390845229 instance=ExtResource("6_s3ndo")]
+position = Vector2(799, 172)
+bounding_box = Vector2(1500, 600)
+max_health = 10000.0
+
+[node name="simon says" parent="y_sort_node" unique_id=445636304 instance=ExtResource("8_s3ndo")]
+position = Vector2(766, 423)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=778243876]
+position = Vector2(801, 355)
+zoom = Vector2(0.91, 0.91)
+limit_left = 0
+limit_top = 0
+limit_right = 1558
+limit_bottom = 708
+script = ExtResource("7_sowtm")
+
+[node name="arena_walls" type="StaticBody2D" parent="." unique_id=997013594]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="arena_walls" unique_id=1686012350]
+polygon = PackedVector2Array(-155, 721, -142, -113, 1716, -110, 1722, 861, -164, 857, -155, 736, 0, 718, 1559, 719, 1559, 182, 1492, 155, 1387, 132, 1255, 120, 1090, 120, 918, 113, 662, 113, 430, 119, 227, 124, 105, 144, -1, 182, 0, 717, -155, 734)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1656335948]
+color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=470778753]
+
+[node name="Clown" parent="CanvasLayer" unique_id=207875164 instance=ExtResource("10_s3ndo")]
+position = Vector2(-1155, 808)
+scale = Vector2(-4, 4)
+
+[node name="Clown2" parent="CanvasLayer" unique_id=1749269078 instance=ExtResource("10_s3ndo")]
+position = Vector2(-1319, 839)
+scale = Vector2(-4, 4)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=818617466]
+libraries/ = SubResource("AnimationLibrary_827o8")
+
+[node name="Exit" type="Area2D" parent="." unique_id=610702854]
+position = Vector2(777, 76)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=560867216]
+shape = SubResource("CircleShape2D_c8nu7")
+disabled = true
+
+[node name="Spotlight" parent="." unique_id=316277873 node_paths=PackedStringArray("target") instance=ExtResource("11_c8nu7")]
+position = Vector2(-101, -96)
+target = NodePath("../y_sort_node/magician")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=954515582]
+position = Vector2(801, 176)
+
+[connection signal="halftime" from="y_sort_node/magician" to="." method="_on_magician_halftime"]
+[connection signal="magician_dead" from="y_sort_node/magician" to="." method="_on_magician_magician_dead"]
+[connection signal="game_off" from="y_sort_node/simon says" to="." method="_on_simon_says_game_off"]
+[connection signal="game_on" from="y_sort_node/simon says" to="." method="_on_simon_says_game_on"]
+[connection signal="area_entered" from="Exit" to="." method="_on_exit_area_entered"]

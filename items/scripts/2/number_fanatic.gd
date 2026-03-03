@@ -30,7 +30,7 @@ func _process(delta):
 
 
 func fire_chain_lightning():
-	var first_target = get_nearest_enemy(get_player_body().global_position, null)
+	var first_target = PlayerController.get_nearest_enemy()
 	if first_target:
 		launch_bounce_projectile(first_target, 0, [])
 		for item in PlayerController.inventory:

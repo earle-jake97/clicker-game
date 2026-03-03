@@ -53,6 +53,8 @@ func register_items():
 		preload("res://items/scripts/1/moldy_boot.gd"),
 		preload("res://items/scripts/3/fossilized_tooth.gd"),
 		preload("res://items/scripts/1/needles.gd"),
+		preload("uid://bgcwteed25y7j")
+		
 		# preload more items here...
 	]
 	hearts = [

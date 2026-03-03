@@ -2,11 +2,11 @@ extends BaseItem
 
 const item_name = "Splitshot"
 const item_description = "Every attack shoots a second shot that targets the most dangerous enemy. 
-These shots do 5 damage, will not trigger on procs and do not proc other items."
+These shots do 20 damage, will not trigger on procs and do not proc other items."
 var tags = []
 var item_icon = preload("res://items/icons/starter_items/splitshot.png")
 const file_name = "res://items/scripts/starter/slingshot_1.gd"
-var damage = 5
+var damage = 20
 
 func on_attack(target: Node, source_item: BaseItem = null):
 	if not player or not target or not is_instance_valid(target):

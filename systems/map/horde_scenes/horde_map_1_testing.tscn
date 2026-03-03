@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://cbhb014aptrgm"]
+
+[ext_resource type="Script" uid="uid://df6t4kqttcfoi" path="res://systems/map/horde_scenes/horde_map_1_testing.gd" id="1_piuxs"]
+[ext_resource type="Script" uid="uid://dbo7l6ar52cqe" path="res://systems/camera.gd" id="2_flcnk"]
+[ext_resource type="PackedScene" uid="uid://6s0runx8xfil" path="res://rooms/basic_enemy_room/world_1/01/world_1_01.tscn" id="5_qdtw8"]
+[ext_resource type="Texture2D" uid="uid://c1iwsrkis4247" path="res://systems/shop/exit.png" id="17_ms1dc"]
+[ext_resource type="PackedScene" uid="uid://cfjpre6kqll55" path="res://systems/enemies/enemy_indicator_manager.tscn" id="18_pw85b"]
+
+[node name="Horde Map 1" type="Node2D" unique_id=1037279341]
+texture_filter = 2
+script = ExtResource("1_piuxs")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1123001442]
+position = Vector2(1450, 957)
+zoom = Vector2(0.8, 0.8)
+script = ExtResource("2_flcnk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=163347137]
+layer = 126
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1957023434]
+visible = false
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -78.145996
+offset_top = 7.75194
+offset_right = 17.854004
+offset_bottom = 186.75194
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 64
+text = "60
+"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Button" parent="CanvasLayer" unique_id=696735599]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_top = 18.0
+offset_right = 111.0
+offset_bottom = 131.0
+grow_horizontal = 2
+icon = ExtResource("17_ms1dc")
+flat = true
+
+[node name="Indicator Manager" parent="CanvasLayer" unique_id=616368075 instance=ExtResource("18_pw85b")]
+z_index = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=341111519]
+wait_time = 60.0
+one_shot = true
+
+[node name="Zoomed Out Camera" type="Camera2D" parent="." unique_id=1631499465]
+position = Vector2(1475, 979)
+enabled = false
+zoom = Vector2(0.145, 0.145)
+
+[node name="y_sort_node" parent="." unique_id=1664505275 instance=ExtResource("5_qdtw8")]
+
+[connection signal="pressed" from="CanvasLayer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

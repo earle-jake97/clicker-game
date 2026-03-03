@@ -1,11 +1,11 @@
 extends BaseItem
 
 const item_name = "Explosive Shot"
-const item_description = "Every attack detonates, dealing 2 damage in a small area around your target."
+const item_description = "Every attack detonates, dealing 10 damage in a small area around your target."
 var tags = []
 var item_icon = preload("res://items/icons/starter_items/explosive_shot.png")
 const file_name = "res://items/scripts/starter/slingshot_2.gd"
-var damage = 2
+var damage = 10
 var radius = 105
 
 func starter_proc(target: Node, source_item: BaseItem = null):

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://des8mfellrerw"]
+
+[ext_resource type="Script" uid="uid://xttophavu2p1" path="res://systems/enemies/enemy_indicator.gd" id="1_pqqce"]
+[ext_resource type="Texture2D" uid="uid://bbix8jdgajhmr" path="res://rooms/gamble/bad.png" id="1_xa4ym"]
+[ext_resource type="Texture2D" uid="uid://c5l0hl5nmrrqv" path="res://systems/enemies/arrow.png" id="2_vepl1"]
+
+[node name="Enemy Indicator" type="Control" unique_id=1506852180]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pqqce")
+
+[node name="Sprite2D" type="TextureRect" parent="." unique_id=1610934078]
+layout_mode = 0
+texture = ExtResource("1_xa4ym")
+
+[node name="Arrow" type="TextureRect" parent="." unique_id=1853834844]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 9.0
+offset_right = 33.0
+offset_bottom = 26.0
+pivot_offset = Vector2(-12, 9)
+texture = ExtResource("2_vepl1")

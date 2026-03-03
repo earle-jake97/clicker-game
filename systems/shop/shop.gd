@@ -84,25 +84,24 @@ func roll_heart_rarity():
 func get_price_for_rarity(rarity: int) -> int:
 	match rarity:
 		4:
-			return round(50 + PlayerController.difficulty * 2)
+			return 25
 		3:
-			return round(35 + PlayerController.difficulty * 1.8)
+			return 20
 		2:
-			return round(20 + PlayerController.difficulty * 1.5)
+			return 15
 		_:
-			return round(10 + PlayerController.difficulty * 1.1)
+			return 10
 
 func get_health_price(rarity: int) -> int:
 	match rarity:
 		4:
-			return round(50 + PlayerController.difficulty * 2)
+			return 17
 		3:
-			return round(35 + PlayerController.difficulty * 1.8)
+			return 12
 		2:
-			return round(20 + PlayerController.difficulty * 1.5)
+			return 8
 		_:
-			
-			return round(10 + PlayerController.difficulty * 1.1)
+			return 5
 
 # Helper function to apply discount
 func apply_discount(base_price: int) -> int:

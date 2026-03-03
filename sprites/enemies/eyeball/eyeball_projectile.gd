@@ -8,6 +8,7 @@ var target = PlayerController.player
 @export var turn_speed: float = 2 # radians per second (lower = wider turns)
 @export var lifetime: float = 4.5
 var timer = 0.0
+var damage = 1
 
 var velocity: Vector2 = Vector2.RIGHT
 
@@ -64,8 +65,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if this_target.has_method("take_damage"):
 			var direction = this_target.global_position - global_position
 			var knockback_parameters = [direction, 200, false]
-			this_target.take_damage(1, 0, false, knockback_parameters)
+			this_target.take_damage(damage, 0, false, knockback_parameters)
 		queue_free()
+
+func clear():
+	queue_free()
 
 func destroy_projectile():
 	queue_free()

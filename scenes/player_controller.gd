@@ -9,7 +9,7 @@ var show_attack_range = true
 var attack_radius_x = 600
 var attack_radius_y = 420
 var attack_cooldown = 0.0
-var base_attack_damage = 10
+var base_attack_damage = 50
 var base_max_hp = 100.0
 var attack_range_multiplier = 1.0
 var max_hp = 0.0
@@ -27,10 +27,10 @@ var damage = base_attack_damage
 var cash = 0
 var difficulty = 0
 var paused = false
-var base_clicks_per_second = 6.0
+var base_clicks_per_second = 1.5
 var clicks_per_second
-var base_passive_regen = 0.2 # 1 HP / 5 seconds
-var passive_regen = 0.2
+var base_passive_regen = 0.05 # 1 HP / 20 seconds
+var passive_regen = 0.05
 var regen_timer = 0.0
 var luck
 var base_luck = 0
@@ -125,6 +125,7 @@ func attack() -> void:
 	if closest_enemy:
 		last_enemy_attacked = closest_enemy
 		var result = calculate_damage()
+		player.play_attack_animation()
 		spawn_slingshot_projectile(closest_enemy, result)
 		trigger_on_attack_items(closest_enemy)
 
@@ -253,7 +254,7 @@ func calculate_damage(damage_type : int = DamageBatcher.DamageType.NORMAL, speci
 		"crit": is_crit
 	}
 
-func take_damage(damage, penetration, trigger_iframes: bool = true, knockback_parameters:Array = [Vector2.ZERO, 0.0, false]) -> void:
+func take_damage(damage, penetration: float = 0, trigger_iframes: bool = true, knockback_parameters:Array = [Vector2.ZERO, 0.0, false]) -> void:
 	if current_hp <= 0 or invincible:
 		return
 	
@@ -402,10 +403,10 @@ func spawn_slingshot_projectile(target, result, size: float = 1.0, damage_source
 		target_position = target.find_child("pivot", 1, 1).global_position
 	target_position += Vector2(randf_range(-30, 30), randf_range(-30, 30))
 	projectile.target_position = target_position
+	projectile.original_target = target
 	projectile.scale *= size
 	projectile.damage = result
 	projectile.can_proc = can_proc
-	projectile.on_reach = Callable(self, "_deal_damage_to_enemy").bind(target, result, damage_source, can_proc)
 	get_tree().current_scene.add_child(projectile)
 
 func _deal_damage_to_enemy(enemy, damage_result, damage_source: String = "Player Attack", can_proc: bool = true):

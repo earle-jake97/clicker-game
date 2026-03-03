@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b7npbrfkm5ryl"]
+
+[ext_resource type="Texture2D" uid="uid://casr4e81nj7y5" path="res://lighting/spotlight.webp" id="1_dwbvv"]
+[ext_resource type="Script" uid="uid://d0ax6vatm1hbc" path="res://rooms/boss/spotlight.gd" id="2_yrr1e"]
+
+[node name="Spotlight" type="PointLight2D" unique_id=316277873]
+texture = ExtResource("1_dwbvv")
+script = ExtResource("2_yrr1e")

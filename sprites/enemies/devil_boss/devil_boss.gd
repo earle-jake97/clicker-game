@@ -24,7 +24,6 @@ const FIREBALL = preload("res://sprites/enemies/devil_boss/fireball.tscn")
 @onready var pivot: Marker2D = $container/sprite/Body/pivot
 @onready var jump_timer: Timer = $"Jump timer"
 @onready var attack_duration_timer: Timer = $"Attack Duration Timer"
-
 var previous_debuffs = []
 var attack_duration_time = 0.0
 var can_fireball = true
@@ -33,6 +32,7 @@ var armor = 50
 var meditate_timer = 0.0
 var meditating = false
 var jump_pos = Vector2.ZERO
+var dropped_money = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -55,8 +55,10 @@ func extra_ready():
 		if controller.difficulty == 0:
 			max_health = 99999
 		else:
-			max_health = controller.difficulty * 500 + 2000
+			max_health = 8000
 	health = max_health
+	progress_bar.value = max_health
+
 
 func show_damage_number(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL):
 	damage_batcher.add_damage(amount, damage_type)
@@ -121,12 +123,13 @@ func throw_minions():
 	animation_player.play("throw_minions")
 	for i in range(5):
 		var enemy = DIVING_MINION.instantiate()
-		var enemy_chosen_position = get_valid_tile_near_point(Vector2(randf_range(-1000, 1000), randf_range(-500, 500)))
+		var enemy_chosen_position = EnemyManager.get_valid_tile_near_point(Vector2(randf_range(-1000, 1000), randf_range(-500, 500)))
 		enemy.target_pos = enemy_chosen_position
 		enemy.shadow_position = enemy_chosen_position
+		enemy.decay = true
 		enemy.global_position = Vector2(enemy_chosen_position.x, randf_range(-2500, -3500 ))
 		enemy.speed = randf_range(500, 900)
-		get_tree().current_scene.add_child(enemy)
+		get_parent().add_child(enemy)
 
 func jump_attack():
 	if dead:
@@ -197,19 +200,25 @@ func slam():
 	shockwave.chosen_pos = ran
 	shockwave.global_position = ran
 
-func die():
-	debuff_container.hide()
+func extra_death_parameters():
 	head.texture = HEAD_POG_EYES_CLOSED
-	animation_player_head.pause()
-	health_bar.hide()
-	remove_from_group("enemy")
-	animation_player.play("die")
-	dead = true
-	died.emit()
+	if dropped_money:
+		return
+	dropped_money = true
+	for i in range(3):
+		var money = MONEY_DROP.instantiate()
+		money.value = 1
+		money.global_position = pivot.global_position + Vector2(randf_range(-100, 100), randf_range(-100, 100))
+		money.z_index += 1
+		var ran = randf_range(0, 1)
+		if ran <= 0.2:
+			money.value = 5
+		if ran <= 0.1:
+			money.value = 10
+		if i == 2:
+			money.value = 10
+		get_parent().add_child(money)
 
-func apply_debuff():
-	debuff_container.update_debuffs()
-	
 func set_attack_duration(time):
 	can_fireball = false
 	attack_duration_timer.start(time)

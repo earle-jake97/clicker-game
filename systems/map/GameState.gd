@@ -13,6 +13,8 @@ var scythe_amount = 0
 var on_start_screen = false
 var enemy_count = 0
 var horde_bool = false
+var timed_room = false
+var bubble_shield_active = false
 
 func get_size_modifier():
 	var size = Vector2(1.0, 1.0)

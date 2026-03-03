@@ -18,7 +18,7 @@ const HEART_CASH_DEAD = preload("res://systems/heart_cash_dead.png")
 @onready var shields: Label = $Shields
 @onready var count_container: Control = $Count_Container
 @onready var enemy_count_label: Label = $Count_Container/Enemy_Count_Label
-
+@onready var exit: Button = $Exit
 
 var fast_forward = false
 
@@ -65,6 +65,8 @@ func _process(delta: float) -> void:
 	hp.text = str(format_large_number(player.current_hp)) + "/" + str(format_large_number(player.max_hp))
 	cash.text = format_large_number(player.cash)
 	
+func show_exit_button():
+	exit.show()
 
 func switch_sprite(percent):
 	if percent <= 0.0:

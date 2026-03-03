@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://qubpyjargler"]
+
+[ext_resource type="Script" uid="uid://cvxcegc84p0th" path="res://systems/enemies/spawn_node.gd" id="1_an5tu"]
+[ext_resource type="Texture2D" uid="uid://cnlf514o0hift" path="res://sprites/enemies/devil/new_devil_head.png" id="2_jdmhn"]
+
+[node name="Spawn Node" type="Node2D" unique_id=538267480 groups=["spawner"]]
+script = ExtResource("1_an5tu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=89064279]
+texture = ExtResource("2_jdmhn")

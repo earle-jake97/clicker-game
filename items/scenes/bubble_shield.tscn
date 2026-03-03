@@ -1,0 +1,258 @@
+[gd_scene format=3 uid="uid://ctsw1qe0rylja"]
+
+[ext_resource type="Script" uid="uid://mgji152ty0bj" path="res://items/scenes/bubble_shield.gd" id="1_rcj6a"]
+[ext_resource type="Texture2D" uid="uid://c71hlwclwppuy" path="res://items/sprites/bubble_1.png" id="1_ti376"]
+[ext_resource type="Texture2D" uid="uid://dx6mvvkb5sr8y" path="res://items/sprites/bubble_2.png" id="2_rcj6a"]
+[ext_resource type="Texture2D" uid="uid://btgm4hxbac2bi" path="res://items/sprites/bubble_3.png" id="3_4uops"]
+[ext_resource type="Texture2D" uid="uid://bir12d4wi6lf5" path="res://items/sprites/bubble_4.png" id="4_82bov"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_itqie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ti376")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rcj6a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dn8er"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4uops")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_82bov")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_ti376"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubbles:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bubbles:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bubbles:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.24705882)]
+}
+
+[sub_resource type="Animation" id="Animation_rcj6a"]
+resource_name = "rotate"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubbles:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="Animation" id="Animation_4uops"]
+resource_name = "shrink"
+length = 0.47
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubbles:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.700003, 0.700003), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_82bov"]
+resource_name = "take_damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubbles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.24705882), Color(1, 0, 0, 0.5647059), Color(1, 1, 1, 0.24705882)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_82bov"]
+_data = {
+&"RESET": SubResource("Animation_ti376"),
+&"rotate": SubResource("Animation_rcj6a"),
+&"shrink": SubResource("Animation_4uops"),
+&"take_damage": SubResource("Animation_82bov")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcj6a"]
+radius = 115.952576
+
+[sub_resource type="Animation" id="Animation_6qlav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubbles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.24705882)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bubbles/AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bubbles/AnimatedSprite2D2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_itqie"]
+resource_name = "default"
+
+[sub_resource type="Animation" id="Animation_dn8er"]
+resource_name = "take_damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubbles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.24705882), Color(1, 0, 0, 0.42745098), Color(1, 1, 1, 0.24705882)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bubbles/AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.34, 0.34), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bubbles/AnimatedSprite2D2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qlav"]
+_data = {
+&"RESET": SubResource("Animation_6qlav"),
+&"default": SubResource("Animation_itqie"),
+&"take_damage": SubResource("Animation_dn8er")
+}
+
+[node name="bubble_shield" type="Node2D" unique_id=557813666]
+script = ExtResource("1_rcj6a")
+
+[node name="bubbles" type="Node2D" parent="." unique_id=1259946179]
+modulate = Color(1, 1, 1, 0.24705882)
+position = Vector2(0, -80)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bubbles" unique_id=2128164664]
+sprite_frames = SubResource("SpriteFrames_itqie")
+autoplay = "default"
+frame_progress = 0.33104044
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="bubbles" unique_id=1611063651]
+sprite_frames = SubResource("SpriteFrames_dn8er")
+autoplay = "default"
+frame_progress = 0.6686863
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=177877443]
+libraries/ = SubResource("AnimationLibrary_82bov")
+autoplay = &"rotate"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1802813416]
+position = Vector2(0, -80)
+collision_layer = 0
+collision_mask = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1790062014]
+shape = SubResource("CircleShape2D_rcj6a")
+
+[node name="ModulatePlayer" type="AnimationPlayer" parent="." unique_id=1802912955]
+libraries/ = SubResource("AnimationLibrary_6qlav")
+autoplay = &"default"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

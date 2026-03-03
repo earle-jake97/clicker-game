@@ -15,5 +15,5 @@ texture = ExtResource("2_2nymk")
 [node name="Slingshot1" parent="." unique_id=1413166667 instance=ExtResource("3_2nymk")]
 position = Vector2(580, 367)
 
-[node name="Slingshot2" parent="." unique_id=1664642383 instance=ExtResource("4_seoot")]
-position = Vector2(684, 365)
+[node name="Slingshot2" parent="." unique_id=643376398 instance=ExtResource("4_seoot")]
+position = Vector2(713, 364)

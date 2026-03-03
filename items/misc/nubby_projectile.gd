@@ -76,11 +76,7 @@ func _process(delta):
 		queue_free()
 
 func get_next_bounce_target() -> Node:
-	var valid_targets = []
-	for enemy in EnemyManager.get_all_enemies():
-		if is_instance_valid(enemy) and enemy != target and enemy not in hit_chain and enemy.is_inside_tree():
-			if enemy.health > 0:
-				valid_targets.append(enemy)
+	var valid_targets = PlayerController.get_enemies_in_range(global_position)
 
 	if valid_targets.is_empty():
 		if hit_chain.size() > 0:

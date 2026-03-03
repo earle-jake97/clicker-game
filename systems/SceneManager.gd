@@ -15,6 +15,8 @@ func switch_to_scene(path: String) -> void:
 
 func _do_scene_switch():
 	EnemyManager.clear_list()
+	Crosshair.hide_crosshair()
+	GameState.bubble_shield_active = false
 	scene_switched.emit()
 
 	var tree = get_tree()

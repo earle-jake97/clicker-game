@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://c2k7a5h1qbeer"]
+
+[ext_resource type="Texture2D" uid="uid://bsv17b3kfmih" path="res://sprites/enemies/clown/explosion1.png" id="1_vjuox"]
+[ext_resource type="Script" uid="uid://c1q2tles75g8" path="res://sprites/enemies/clown/clown_explosion.gd" id="1_wuqdu"]
+[ext_resource type="Texture2D" uid="uid://cojuwja8g31qm" path="res://sprites/enemies/clown/explosion2.png" id="2_wuqdu"]
+[ext_resource type="Texture2D" uid="uid://578hss1dswhd" path="res://sprites/enemies/clown/explosion3.png" id="3_cqnq2"]
+[ext_resource type="Texture2D" uid="uid://b8vfl8axsf2ul" path="res://sprites/enemies/clown/explosion4.png" id="4_f4hja"]
+[ext_resource type="Texture2D" uid="uid://ctbkv54i4j05w" path="res://sprites/enemies/clown/explosion5.png" id="5_csk0q"]
+[ext_resource type="Texture2D" uid="uid://csl3ostahrj48" path="res://sprites/enemies/clown/explosion6.png" id="6_q8g5k"]
+[ext_resource type="Texture2D" uid="uid://8p380n4n2vgi" path="res://sprites/enemies/clown/explosion7.png" id="7_v7541"]
+[ext_resource type="Texture2D" uid="uid://cfx2hqmaoxnu7" path="res://sprites/enemies/clown/explosion8.png" id="8_lr4va"]
+[ext_resource type="Texture2D" uid="uid://70nij45asp2b" path="res://lighting/2d_lights_and_shadows_neutral_point_light.webp" id="10_cqnq2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n432t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vjuox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wuqdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cqnq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f4hja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_csk0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q8g5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_v7541")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lr4va")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cqnq2"]
+radius = 111.0
+
+[node name="Node2D" type="Node2D" unique_id=173019445]
+z_index = 3
+script = ExtResource("1_wuqdu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1003802701]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_n432t")
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=5551976]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=884073495]
+shape = SubResource("CircleShape2D_cqnq2")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=153269478]
+scale = Vector2(2.0078125, 1.9531249)
+color = Color(1, 0.98333335, 0, 1)
+energy = 1.74
+shadow_enabled = true
+texture = ExtResource("10_cqnq2")
+texture_scale = 2.16
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

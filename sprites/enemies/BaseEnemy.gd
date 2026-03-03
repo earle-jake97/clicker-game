@@ -4,12 +4,12 @@ class_name BaseEnemy
 var is_frozen = false
 signal died
 var player = PlayerController
-var player_model = PlayerController.get_player_body()
-@export var speed: float
-@export var damage: int
-@export var armor_penetration: int
-var health: float
-@export var max_health: float
+var player_model
+@export var speed: float = 0
+@export var damage: int = 0
+@export var armor_penetration: int = 0
+var health: float = 10
+@export var max_health: float = 10
 @onready var health_bar: TextureProgressBar = $ProgressBar
 @export var damage_number_scene: PackedScene = preload("res://scenes/damage_number.tscn")
 @onready var debuff_container: HBoxContainer = $debuff_container
@@ -23,7 +23,11 @@ var health: float
 @onready var sprite: Node2D = $container/sprite
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 @onready var area_2d: Area2D = $container/Area2D
+var variant = EnemyManager.variant.NORMAL
 
+const MONEY_DROP = preload("uid://c0vl7qr3w4dfp")
+
+var independent_look = false
 var guarantee_hit = false
 var debuffs = []
 var touching_entity: Node = null
@@ -40,7 +44,7 @@ var dead = false
 var paid_out = false
 var value = 0
 var base_speed = 0
-var attack_speed
+var attack_speed = 0
 var push_strength = 0.0
 var pushback_length = 2.0
 var pushback_timer = 0.0
@@ -56,35 +60,56 @@ var can_move = true
 var unique_attack = false
 var unique_movement = false
 var path_update_timer = 0.0
-var update_interval = 0.3
+var update_interval = 0.1
+var item_rolled = false
+var decay = false
+var active = false
+var spawning = true
+var catchup_timer = 0.0
+var catchup_interval = 0.5
 
 func _ready() -> void:
+	await get_tree().process_frame
+	player_model = PlayerController.get_player_body()
 	if EnemyManager.get_all_enemies().size() >= 50:
 		shadow.visible = false
 	EnemyManager.optimize.connect(_optimize)
+	EnemyManager.kill_all.connect(_die_from_manager)
 	EnemyManager.register(self)
 	value = randi_range(value_min, value_max)
+	extra_ready()
 	if health_bar:
 		health_bar.visible = false
 	health_bar.max_value = max_health
 	health = max_health
 	health_bar.value = health
-	base_speed = speed
+	speed = base_speed
 	attack_speed = base_attack_speed
 	nav2d.target_position = player_model.global_position
-	extra_ready()
+	value = 1
+	if animation_player.has_animation("spawn"):
+		animation_player.play("spawn")
+		await animation_player.animation_finished
+	spawning = false
+	await get_tree().physics_frame
+	nav2d.target_position = player_model.global_position
 	
 func extra_ready():
 	pass
 
 func _physics_process(delta: float) -> void:
+	if spawning:
+		return
 	path_update_timer += delta
+	catchup_timer += delta
 	check_touch()
 	get_target()
 	damage_cooldown += delta
 	if health < max_health:
 		health_bar.visible = true
 	extra_processing(delta)
+	if catchup_timer >= catchup_interval:
+		catch_up()
 	if path_update_timer >= update_interval:
 		nav2d.target_position = target.global_position
 		path_update_timer = 0.0
@@ -128,17 +153,37 @@ func get_target():
 			target = player_model
 
 func look_at_player():
-	if not dead:
+	if not dead and not independent_look:
 			if global_position.x > player_model.global_position.x:
 				container.scale.x = abs(container.scale.x)
 			else:
 				container.scale.x = -abs(container.scale.x)
 
+func random_drop():
+	if decay:
+		return
+	if item_rolled or value == 0:
+		return
+	item_rolled = true
+		
+	var ran = randf_range(0, 1)
+	if variant == EnemyManager.variant.MONEY:
+		ran = 0.0
+	if ran <= 0.1:
+		value = 1
+		if ran <= 0.05:
+			value = 5
+		if ran <= 0.015:
+			value = 10
+		var money = MONEY_DROP.instantiate()
+		money.global_position = global_position
+		money.value = value
+		EnemyManager.magnet_all.connect(money._on_magnet_call)
+		get_tree().current_scene.add_child(money)
+	
+
 func health_below_zero():
 	if health <= 0:
-		if not paid_out:
-			paid_out = true
-			player.add_cash(value)
 		die()
 
 func take_damage(amount: float, damage_type: int = DamageBatcher.DamageType.NORMAL, source: String = ""):
@@ -151,10 +196,18 @@ func push_back(strength: float):
 	push_strength = strength
 	pushback_timer = 0.0
 
+func catch_up():
+	catchup_timer = 0.0
+	if global_position.distance_to(player_model.global_position) >= 1500.0:
+		speed = 1000.0
+	else:
+		speed = base_speed
+
 func start_attack():
 	is_attacking = true
-	animation_player.play("attack")
 	attack_duration = 0.0
+	if animation_player.get_animation_list().has("attack"):
+		animation_player.play("attack")
 
 func process_attack(delta):
 	if unique_attack:
@@ -183,7 +236,7 @@ func apply_debuff():
 	debuff_container.update_debuffs()
 
 func attack_check():
-	if unique_attack: 
+	if unique_attack or spawning: 
 		return
 	if touching_entity != null and damage_cooldown >= base_attack_speed + 1 and not is_attacking and not dead and not is_frozen:
 		start_attack()
@@ -195,7 +248,7 @@ func process_attack_check(delta):
 		process_attack(delta)
 
 func move_towards_target(delta):
-	if not can_move or unique_movement:
+	if not can_move or unique_movement or spawning:
 		return
 	# Move toward player only if not waiting after attack
 	if player and not is_attacking and post_attack_delay <= 0.01 and not dead and not is_pushed and not is_frozen and global_position.distance_to(target.global_position) >= 40.0:
@@ -253,11 +306,12 @@ func get_valid_tile_near_point(pos: Vector2, max_radius: int = 10):
 	return Vector2.ZERO
 
 func die():
+	random_drop()
 	clear_groups()
 	damage_batcher.clear_all()
-	area_2d.monitoring = false
-	for col in area_2d.get_children():
-		col.set_deferred("disabled", true)
+	if is_instance_valid(area_2d):
+		for col in area_2d.get_children():
+			col.set_deferred("disabled", true)
 	EnemyManager.unregister(self)
 	extra_death_parameters()
 	animation_player.play("die")
@@ -268,6 +322,10 @@ func die():
 	shadow.hide()
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
+
+func _die_from_manager():
+	value = 0
+	health = 0
 	
 func clear_groups():
 	for group in self.get_groups():

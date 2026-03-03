@@ -76,7 +76,7 @@ func _roll_item_rarity() -> int:
 
 func _get_item_price(rarity: int, difficulty: float) -> int:
 	match rarity:
-		4: return round(50 + difficulty * 2)
-		3: return round(35 + difficulty * 1.8)
-		2: return round(20 + difficulty * 1.5)
-		_: return round(10 + difficulty * 1.1)
+		4: return round(30)
+		3: return round(20)
+		2: return round(15)
+		_: return round(10)

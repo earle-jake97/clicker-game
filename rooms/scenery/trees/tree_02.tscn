@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cf4swvm1obtye"]
+
+[ext_resource type="Texture2D" uid="uid://b1lc7mhf3fbuc" path="res://sprites/scenery/trees/tree_02.png" id="1_pbpu6"]
+[ext_resource type="Script" uid="uid://djjxc7k600vx4" path="res://rooms/scenery/trees/object_fade.gd" id="1_s1ypl"]
+
+[sub_resource type="Animation" id="Animation_oelrn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0foai"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jkd78"]
+resource_name = "fade_in"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.45490196), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_01bae"]
+resource_name = "fade_out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.45490196)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x5koa"]
+_data = {
+&"RESET": SubResource("Animation_oelrn"),
+&"default": SubResource("Animation_0foai"),
+&"fade_in": SubResource("Animation_jkd78"),
+&"fade_out": SubResource("Animation_01bae")
+}
+
+[node name="Tree" type="StaticBody2D" unique_id=1238232063]
+script = ExtResource("1_s1ypl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=824392221]
+position = Vector2(7, -282)
+texture = ExtResource("1_pbpu6")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1629381844]
+visible = false
+position = Vector2(20, -253)
+vertices = PackedVector2Array(-111, 287, -102, 193, 67, 193, 76, 286)
+affect_navigation_mesh = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1230747244]
+position = Vector2(90, 15)
+polygon = PackedVector2Array(0, 0, -80, 5, -168, 5, -149, -65, -36, -60)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=908394265]
+libraries/ = SubResource("AnimationLibrary_x5koa")
+autoplay = &"default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1712615129]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=44927303]
+polygon = PackedVector2Array(72, -44, 63, -71, 50, -247, 304, -314, 330, -406, 315, -491, 201, -574, 160, -672, -176, -658, -261, -543, -311, -410, -293, -308, -52, -249, -78, -46)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

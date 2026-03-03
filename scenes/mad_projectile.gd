@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 var start_pos: Vector2
 var target_pos: Vector2
@@ -7,9 +7,20 @@ var timer := 0.0
 var arc_height := 400.0  # how high the arc goes
 var chosen_area
 var player = PlayerController
+var knockback_strength = 100
+var damage = 20
+const TELEGRAPH = preload("uid://of0v6y3d5ahr")
+var telegraph
+@onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 
 func _ready():
 	global_position = start_pos
+	telegraph = TELEGRAPH.instantiate()
+	telegraph.damage = 20
+	telegraph.knockback_strength = knockback_strength
+	telegraph.armor_penetration = 0
+	telegraph.global_position = chosen_area
+	get_tree().current_scene.add_child(telegraph)
 
 func _physics_process(delta):
 	timer += delta
@@ -24,10 +35,15 @@ func _physics_process(delta):
 	var arc_pos = linear_pos - Vector2(0, height)
 
 	global_position = arc_pos
-
+	if timer >= flight_time - 0.1:
+		collision_shape_2d.disabled = false
 	if timer >= flight_time:
 		explode()
+		
+func clear():
+	if is_instance_valid(telegraph):
+		telegraph.queue_free()
+	queue_free()
 
 func explode():
-	# (You can play an animation or damage here)
 	queue_free()

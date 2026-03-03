@@ -6,16 +6,28 @@ const DEVON = preload("res://sprites/enemies/devil/devon.wav")
 const NEW_DEVIL_HEAD = preload("res://sprites/enemies/devil/new_devil_head.png")
 const NEW_DEVIL_HEAD_DEAD = preload("res://sprites/enemies/devil/new_devil_head_dead.png")
 const NEW_DEVIL_HEAD_SMILE = preload("res://sprites/enemies/devil/new_devil_head_smile.png")
+var decay_timer = 0.0
+var decay_value
 
 func extra_ready():
+	animation_player.animation_set_next("spawn", "walk")
+	max_health = 120.0
+	base_speed = 100.0
+	damage = 10
 	knockback_strength = 500
 	attack_animation_length = 0.2
 	base_attack_speed = 0.35
+	decay_value = max_health / 20
 	if SoundManager.imp_spawn_sound():
 		audio_stream_player_2d.pitch_scale = pitch_scale
 		audio_stream_player_2d.play()
 
 func extra_processing(delta):
+	if decay:
+		decay_timer += delta
+		if decay_timer >= 0.5:
+			decay_timer = 0.0
+			take_damage(decay_value)
 	# Handle post-attack delay
 	if waiting_after_attack:
 		post_attack_delay += delta

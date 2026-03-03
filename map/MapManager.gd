@@ -1,8 +1,8 @@
 extends Node
 class_name map_manager_class
 enum RoomCategory { COMBAT, POWERUP, BONUS, VARIED, VARIED_NO_ITEM, DANGER, ENDLESS }
-enum RoomName { HORDE, TRAVERSAL, MINIBOSS, SHOP, ITEM, TIMER, DUMMY, BOSS, SECRET_SHOP }
-var round = 1
+enum RoomName { HORDE, TRAVERSAL, MINIBOSS, SHOP, ITEM, TIMER, DUMMY, BOSS, SECRET_SHOP, CASINO, BOSS_IMP }
+var round = 8
 var world = 1
 var deferrals = 1
 var deferred = []
@@ -16,17 +16,18 @@ var category_to_types = {
 	
 	RoomCategory.VARIED: 
 		[RoomName.HORDE, RoomName.TRAVERSAL, RoomName.MINIBOSS, RoomName.ITEM, 
-		RoomName.SHOP, RoomName.SECRET_SHOP, RoomName.DUMMY, RoomName.TIMER],
+		RoomName.SHOP, RoomName.SECRET_SHOP, RoomName.DUMMY, RoomName.TIMER, RoomName.CASINO],
 		
 	RoomCategory.VARIED_NO_ITEM:
 		[RoomName.HORDE, RoomName.TRAVERSAL, RoomName.MINIBOSS, RoomName.SECRET_SHOP, 
-		RoomName.DUMMY, RoomName.TIMER],
+		RoomName.DUMMY, RoomName.TIMER, RoomName.CASINO],
 		
 	RoomCategory.DANGER:
 		[RoomName.MINIBOSS, RoomName.TIMER, RoomName.MINIBOSS, RoomName.TIMER, RoomName.HORDE],
 	RoomCategory.ENDLESS:
 		[RoomName.HORDE, RoomName.TRAVERSAL, RoomName.MINIBOSS, RoomName.ITEM, 
-		RoomName.SHOP, RoomName.SECRET_SHOP, RoomName.DUMMY, RoomName.TIMER, RoomName.BOSS]
+		RoomName.SHOP, RoomName.SECRET_SHOP, RoomName.DUMMY, RoomName.TIMER, RoomName.BOSS,
+		RoomName.CASINO, RoomName.BOSS_IMP ]
 }
 
 func pick_room_for_category(category: RoomCategory):

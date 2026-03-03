@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var boss_spawn: Marker2D = $boss_spawn
+@onready var boss_spawn: Marker2D = $y_sort_node/boss_spawn
 
 const DEVIL_BOSS = preload("res://sprites/enemies/devil_boss/devil_boss.tscn")
 const EVIL_WIZARD = preload("res://sprites/enemies/evil_wizard/evil_wizard.tscn")
@@ -19,7 +19,6 @@ func _ready() -> void:
 		boss = EVIL_WIZARD.instantiate()
 	boss.global_position = boss_spawn.global_position
 	boss.damage = 20
-	boss.health = 2500
 	boss.add_to_group("boss")
 	boss.died.connect(_on_boss_died)
 	get_node("y_sort_node").add_child(boss)
@@ -28,7 +27,7 @@ func _ready() -> void:
 	
 
 func _on_boss_died():
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(4.0).timeout
 	GameState.endless_mode = true
 	HealthBar.endless_sprite.visible = true
 	var rand = randf()

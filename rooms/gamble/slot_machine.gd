@@ -2,10 +2,11 @@ extends Node2D
 @onready var _1: AnimatedSprite2D = $"1"
 @onready var _2: AnimatedSprite2D = $"2"
 @onready var _3: AnimatedSprite2D = $"3"
-@onready var navigation_region_2d: NavigationRegion2D = $".."
 
+const MONEY_DROP = preload("uid://c0vl7qr3w4dfp")
+const MONEY_PARTICLE = preload("uid://du4i6uerwqj2v")
 
-const COST = 10
+const COST = 1
 const DIVING = preload("uid://dxjqsycd2o1db")
 const DEVIL = preload("uid://c46jces8nqyq6")
 
@@ -19,14 +20,14 @@ func gamble():
 	can_gamble = false
 	PlayerController.add_cash(-COST)
 	_1.play("roll")
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
 	_2.play("roll")
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
 	_3.play("roll")
 	slot_1 = roll_slot()
 	slot_2 = roll_slot()
 	slot_3 = roll_slot()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.75).timeout
 	set_slots()
 
 func get_slot_sprite(value):
@@ -39,9 +40,9 @@ func get_slot_sprite(value):
 
 func set_slots():
 	_1.play(get_slot_sprite(slot_1))
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	_2.play(get_slot_sprite(slot_2))
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	_3.play(get_slot_sprite(slot_3))
 	give_reward()
 	can_gamble = true
@@ -51,7 +52,16 @@ func give_reward():
 		if slot_1 == 3:
 			spawn_enemy()
 		elif slot_1 == 1:
-			PlayerController.add_cash(COST * 10)
+			var winnings = randi_range(10, 20)
+			for i in range(winnings):
+				var money = MONEY_DROP.instantiate()
+				var money_particles = MONEY_PARTICLE.instantiate()
+				money.value = 1
+				money.global_position = Vector2(randf_range(-123, 123), randf_range(-123, 123)) + global_position
+				money_particles.global_position = global_position
+				money_particles.z_index += 1
+				get_tree().current_scene.get_node("y_sort_node").add_child(money)
+				get_tree().current_scene.get_node("y_sort_node").add_child(money_particles)
 
 func spawn_enemy():
 	var enemy = DIVING.instantiate()
@@ -60,7 +70,7 @@ func spawn_enemy():
 	enemy.shadow_position = chosen_pos
 	enemy.global_position = Vector2(chosen_pos.x, randf_range(-2500, -3500 ))
 	enemy.speed = 2000
-	enemy.health = 10000
+	enemy.health = 500
 	get_tree().current_scene.get_node("y_sort_node").add_child(enemy)
 
 func roll_slot():

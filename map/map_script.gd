@@ -55,7 +55,7 @@ func generate_choices():
 			options = 1
 			populate_deferred(manager.deferred.pop_front())
 		12:
-			options = 1
+			options = 2
 			populate_boss_container(options)
 		_:
 			options = 4
@@ -65,6 +65,8 @@ func populate_boss_container(amount):
 	for i in range(amount):
 		var choice_instance = choice_scene.instantiate()
 		var room_name = manager.RoomName.BOSS
+		if i == 1:
+			room_name = manager.RoomName.BOSS_IMP
 		choice_instance.room_name = room_name
 		choice_instance.room_sprite = RoomDatabase.get_sprite_for_room(room_name)
 		choice_instance.room_description = RoomDatabase.get_description_for_room(room_name)
@@ -121,6 +123,9 @@ func _on_choice_selected(room_name):
 	if scene_path == "":
 		push_error("No scene mapped for room: " + str(room_name))
 		return
+	print(RoomDatabase.get_room_name(room_name))
+	if RoomDatabase.get_room_name(room_name) == "Time Attack":
+		GameState.timed_room = true
 	manager.round += 1
 	PlayerController.difficulty += 1
 	if GameState.endless_mode:

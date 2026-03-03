@@ -67,24 +67,23 @@ func get_price_for_rarity(rarity: int) -> int:
 	var difficulty = PlayerController.difficulty
 	match rarity:
 		4:
-			return 120
+			return 30
 		3:
-			return 75
+			return 30
 		2:
-			return 55
+			return 30
 		_:
 			
-			return 40
+			return 30
 
 # Helper function to apply discount
 func apply_discount(base_price: int) -> int:
 	var rand = randf()
-	if rand <= 0.1:  # 10% chance for 50% discount
+	if rand <= 0.25:  # 25% chance for 50% discount
 		return int(base_price * 0.5)
-	elif rand <= 0.15:  # 15% chance for 15% discount (total 15% for 5% + 10%)
+	if rand <= 0.6:  # 30% chance for 15% discount (total 15% for 5% + 10%)
 		return int(base_price * 0.85)
-	else:
-		return base_price  # No discount
+	return base_price  # No discount
 
 func _on_area_2d_mouse_entered() -> void:
 	hover_exit = true

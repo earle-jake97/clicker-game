@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cqdlhggea4she"]
+
+[ext_resource type="PackedScene" uid="uid://b0vaiulul6fbm" path="res://scenes/enemies/imp.tscn" id="2_7vkdf"]
+[ext_resource type="Texture2D" uid="uid://dw6o4uafkf0gb" path="res://sprites/enemies/imp/head.png" id="3_823wg"]
+
+[sub_resource type="GDScript" id="GDScript_q3c1e"]
+script/source = "extends Node2D
+
+# Difficulty scaling reference: 0.1 = 1 per 10 rounds, 
+# 0.2 1 per 5, 
+# 0.5 1 per 2, 
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+@export var enemy_1: PackedScene = preload(\"uid://c46jces8nqyq6\")
+@export var enemy_1_count: int = 0
+@export var enemy_1_spawn_interval: float = 10.0
+@export var enemy_1_difficulty_scaling: float = 0.0 #Adds this many enemies every round 
+
+@export var bounding_start: Vector2
+@export var bounding_end: Vector2
+
+var timer_1 = 0.0
+var timer_2 = 0.0
+var timer_3 = 0.0
+
+func _ready() -> void:
+	sprite_2d.hide()
+	enemy_1_count += floor(enemy_1_difficulty_scaling * PlayerController.difficulty)
+	await get_tree().process_frame
+
+	GameState.enemy_count += enemy_1_count
+	
+	spawn_enemies()
+
+func _process(delta: float) -> void:
+	if not GameState.timed_room:
+		return
+	timer_1 += delta
+	
+	if timer_1 >= enemy_1_spawn_interval:
+		timer_1 = 0.0
+		spawn_enemies()
+	
+func spawn_enemies():
+	for i in range(enemy_1_count):
+		var enemy_scene = enemy_1.instantiate()
+		var this_position = EnemyManager.get_valid_tile_near_point(
+			Vector2(randf_range(bounding_start.x, bounding_end.x), randf_range(bounding_start.y, bounding_end.y)), 30
+		)
+		get_tree().current_scene.get_node(\"y_sort_node\").add_child(enemy_scene)
+		enemy_scene.global_position = this_position
+		
+"
+
+[node name="Spawner" type="Node2D" unique_id=783081497]
+script = SubResource("GDScript_q3c1e")
+enemy_1 = ExtResource("2_7vkdf")
+enemy_1_count = 1
+enemy_1_difficulty_scaling = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1579497618]
+texture = ExtResource("3_823wg")

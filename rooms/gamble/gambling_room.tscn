@@ -1,14 +1,24 @@
 [gd_scene format=3 uid="uid://byj4ahyq7dtdg"]
 
 [ext_resource type="PackedScene" uid="uid://cdjjjvfpsn86k" path="res://characters/goblin/goblin_model.tscn" id="1_a6pln"]
+[ext_resource type="Script" uid="uid://dwm2l8css7k8v" path="res://rooms/gamble/gambling_room.gd" id="1_pqqjl"]
 [ext_resource type="PackedScene" uid="uid://bcy776ttcme8l" path="res://rooms/gamble/slot_machine.tscn" id="2_cjrq0"]
+[ext_resource type="Texture2D" uid="uid://c1iwsrkis4247" path="res://systems/shop/exit.png" id="3_dnv7f"]
+[ext_resource type="Texture2D" uid="uid://u100s35vi4vm" path="res://backgrounds/casino_filler.png" id="5_6np1r"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_a6pln"]
-vertices = PackedVector2Array(1301.1172, -56.0625, 1352.8203, 586.2578, 1206.9297, 914.28125, 637, 341, 637, 298, 530, 341, 305.54688, 1105.8672, -464.8828, 1013.53906, -819.52344, 590.72656, 530, 298, -922.8906, -102.0625, -858.21875, -565.52344, -27.960938, -616.97656, 1144.5469, -548.4219)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 3, 2, 6, 7, 8), PackedInt32Array(9, 5, 8, 10, 11, 12), PackedInt32Array(9, 12, 13, 0, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-867, -575, -28, -627, 1152, -558, 1311, -58, 1363, 588, 1214, 923, 306, 1116, -470, 1023, -829, 595, -933, -102)])
+vertices = PackedVector2Array(1301.4531, -51.953125, 1352.8203, 586.2578, 1207.3281, 913.3828, 637, 341, 637, 298, 1072.8672, -183.25781, 421.89844, -247.96094, 530, 298, 530, 341, 450.4375, 958.9531, -102.34375, 876.5781, -362.82813, 623.9531, -452.2422, 198.54688, -130.88281, -204.36719)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 5, 4, 7), PackedInt32Array(8, 3, 2, 9, 10, 11), PackedInt32Array(8, 11, 12, 13, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-136, -214, 422, -258, 1076, -193, 1311, -58, 1363, 588, 1214, 923, 450, 969, -107, 886, -372, 629, -463, 196)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqqjl"]
+size = Vector2(1170, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnv7f"]
+size = Vector2(19, 663)
 
 [node name="Gambling Room" type="Node2D" unique_id=1847170178]
+script = ExtResource("1_pqqjl")
 
 [node name="y_sort_node" type="NavigationRegion2D" parent="." unique_id=1322556865]
 y_sort_enabled = true
@@ -20,3 +30,40 @@ position = Vector2(581, 614)
 
 [node name="Slot Machine" parent="y_sort_node" unique_id=2037351223 instance=ExtResource("2_cjrq0")]
 position = Vector2(584, 327)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1405598198]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1660466087]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -113.0
+offset_right = 222.0
+grow_vertical = 0
+icon = ExtResource("3_dnv7f")
+flat = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=975377319]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=648533221]
+position = Vector2(575, 0)
+shape = SubResource("RectangleShape2D_pqqjl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1113787971]
+position = Vector2(575, 646)
+shape = SubResource("RectangleShape2D_pqqjl")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=546332488]
+position = Vector2(-0.5, 321.5)
+shape = SubResource("RectangleShape2D_dnv7f")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=225944676]
+position = Vector2(1152, 322)
+shape = SubResource("RectangleShape2D_dnv7f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1689971275]
+z_index = -1
+position = Vector2(566, 314)
+texture = ExtResource("5_6np1r")
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

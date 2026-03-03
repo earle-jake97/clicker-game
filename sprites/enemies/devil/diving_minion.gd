@@ -2,12 +2,12 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 const DEVIL = preload("res://scenes/devil.tscn")
 var target_pos
-var final_color = Color.SALMON
 var speed = 300
 var shadow_position = Vector2.ZERO
 const SHADOW_SCENE = preload("uid://dfthyp7i3g6to")
 var shadow: Node2D = null
 var health = null
+var decay = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,12 +34,13 @@ func spawn_devil():
 	enemy.max_health = 40 * PlayerController.difficulty
 	if health:
 		enemy.max_health = health
+	if decay:
+		enemy.decay = true
 	enemy.damage = 10
 	enemy.armor_penetration = 1
 	enemy.value_min = 0
 	enemy.value_max = 0
 	enemy.speed = 100
-	sprite.modulate = final_color
 	
 	var spawn_pos = global_position
 	enemy.global_position = spawn_pos

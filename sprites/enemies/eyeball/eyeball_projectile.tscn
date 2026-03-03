@@ -73,6 +73,8 @@ autoplay = "default"
 frame_progress = 0.150432
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2113116760]
+collision_layer = 16384
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=103845534]
 scale = Vector2(0.319999, 0.16)

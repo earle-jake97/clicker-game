@@ -9,7 +9,6 @@ var player = null
 func _ready() -> void:
 	if pc.get_player_body():
 		player = pc.get_player_body()
-		global_position = player.global_position
 		last_player_position = player.global_position
 
 func _physics_process(delta: float) -> void:

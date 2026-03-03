@@ -1,6 +1,6 @@
 extends Node
 
-enum RoomName { HORDE, TRAVERSAL, MINIBOSS, SHOP, ITEM, TIMER, DUMMY, BOSS, SECRET_SHOP }
+enum RoomName { HORDE, TRAVERSAL, MINIBOSS, SHOP, ITEM, TIMER, DUMMY, BOSS, SECRET_SHOP, CASINO, BOSS_IMP }
 
 const ROOM_SCENES := {
 	RoomName.HORDE: "res://systems/map/horde_scenes/horde_1_map.tscn",
@@ -8,10 +8,12 @@ const ROOM_SCENES := {
 	RoomName.MINIBOSS: "res://systems/map/horde_scenes/horde_1_map.tscn",
 	RoomName.SHOP: "res://systems/shop/shop.tscn",
 	RoomName.ITEM: "res://systems/shop/item_room.tscn",
-	RoomName.TIMER: "res://systems/map/horde_scenes/horde_map_1_timed.tscn",
+	RoomName.TIMER: "res://systems/map/horde_scenes/horde_1_map.tscn",
 	RoomName.DUMMY: "res://systems/map/loot_dummy.tscn",
 	RoomName.BOSS: "res://systems/map/boss_scenes/boss_1_map.tscn",
-	RoomName.SECRET_SHOP: "res://systems/shop/secret_shop.tscn"
+	RoomName.SECRET_SHOP: "res://systems/shop/secret_shop.tscn",
+	RoomName.CASINO: "res://rooms/gamble/gambling_room.tscn",
+	RoomName.BOSS_IMP: "res://rooms/boss/magician_map.tscn"
 }
 
 const ROOM_NAMES := {
@@ -23,7 +25,9 @@ const ROOM_NAMES := {
 	RoomName.TIMER: "Time Attack",
 	RoomName.DUMMY: "Bonus Room",
 	RoomName.BOSS: "Boss",
-	RoomName.SECRET_SHOP: "Bonus Room"
+	RoomName.SECRET_SHOP: "Bonus Room",
+	RoomName.CASINO: "Casino",
+	RoomName.BOSS_IMP: "The Magician's Show"
 }
 
 const ROOM_DESCRIPTIONS := {
@@ -33,9 +37,11 @@ const ROOM_DESCRIPTIONS := {
 	RoomName.SHOP: "Visit the shop!",
 	RoomName.ITEM: "Grab a free item!",
 	RoomName.TIMER: "Survive an endless onslaught until time runs out.",
-	RoomName.DUMMY: "A strange room awaits you...",
+	RoomName.DUMMY: "Something cute and cuddly lies ahead...",
 	RoomName.BOSS: "The boss of this realm stands in your way.",
-	RoomName.SECRET_SHOP: "A strange room awaits you..."
+	RoomName.SECRET_SHOP: "A shop with... interesting prices.",
+	RoomName.CASINO: "This room smells like lost hopes and dreams.",
+	RoomName.BOSS_IMP: "The boss of this realm stands in your way."
 }
 
 const ROOM_SPRITES := {
@@ -45,9 +51,11 @@ const ROOM_SPRITES := {
 	RoomName.SHOP: preload("res://map/icons/shop.png"),
 	RoomName.ITEM: preload("res://map/icons/item.png"),
 	RoomName.TIMER: preload("res://map/icons/timer.png"),
-	RoomName.DUMMY: preload("res://map/icons/secret.png"),
+	RoomName.DUMMY: preload("res://map/icons/dummy.png"),
 	RoomName.BOSS: preload("res://map/icons/boss.png"),
-	RoomName.SECRET_SHOP: preload("res://map/icons/secret.png")
+	RoomName.SECRET_SHOP: preload("res://map/icons/devil_shop.png"),
+	RoomName.CASINO: preload("res://map/icons/casino.png"),
+	RoomName.BOSS_IMP: preload("uid://dqh0bpbsab3w3")
 }
 
 func get_scene_for_room(room_type: int) -> String:
