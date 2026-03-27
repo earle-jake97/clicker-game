@@ -2,7 +2,7 @@ extends Node
 class_name map_manager_class
 enum RoomCategory { COMBAT, POWERUP, BONUS, VARIED, VARIED_NO_ITEM, DANGER, ENDLESS }
 enum RoomName { HORDE, TRAVERSAL, MINIBOSS, SHOP, ITEM, TIMER, DUMMY, BOSS, SECRET_SHOP, CASINO, BOSS_IMP }
-var round = 8
+var round = 1
 var world = 1
 var deferrals = 1
 var deferred = []

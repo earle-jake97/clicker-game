@@ -73,12 +73,50 @@ _data = {
 &"fade_out": SubResource("Animation_01bae")
 }
 
+[sub_resource type="Animation" id="Animation_njin5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yivoe"]
+resource_name = "sway"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.7666667, 8.166667, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.03490658503988659, -0.03490658503988659, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdh5y"]
+_data = {
+&"RESET": SubResource("Animation_njin5"),
+&"sway": SubResource("Animation_yivoe")
+}
+
 [node name="Tree" type="StaticBody2D" unique_id=1238232063]
 script = ExtResource("1_njin5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=824392221]
-position = Vector2(7, -282)
 texture = ExtResource("1_2l34p")
+offset = Vector2(9, -279)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1629381844]
 position = Vector2(20, -253)
@@ -99,6 +137,10 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=44927303]
 polygon = PackedVector2Array(72, -44, 63, -71, 50, -247, 304, -314, 330, -406, 315, -491, 201, -574, 160, -672, -176, -658, -261, -543, -311, -410, -293, -308, -52, -249, -78, -46)
+
+[node name="wind" type="AnimationPlayer" parent="." unique_id=1069554864]
+libraries/ = SubResource("AnimationLibrary_mdh5y")
+autoplay = &"sway"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

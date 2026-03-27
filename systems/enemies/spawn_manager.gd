@@ -27,7 +27,7 @@ var spawns = [
 	{DEVIL: 16, PROJECTILE_DEMON: 2, EYEBALL_ENEMY: 2, IMP: 12, GHOST: 5},
 	{DEVIL: 20, PROJECTILE_DEMON: 2, EYEBALL_ENEMY: 2, IMP: 20, GHOST: 4},
 	
-	
+
 ]
 
 func init_spawner(spawner):
@@ -36,10 +36,11 @@ func init_spawner(spawner):
 func get_enemies_for_round(round):
 	var enemy_list = []
 	
+	var round_data
 	if round - 1 >= spawns.size():
-		return get_default_round()
-	
-	var round_data = spawns[round - 1]
+		round_data = get_default_round()
+	else:
+		round_data = spawns[round - 1]
 	
 	for enemy_type in round_data:
 		var count = round_data[enemy_type]
@@ -56,6 +57,7 @@ func get_default_round():
 		IMP: floor(PlayerController.difficulty / 3), 
 		GHOST: floor(PlayerController.difficulty / 4)
 		}
+	return default_spawns
 
 func add_spawner(spawner):
 	if spawner in active_spawners:
