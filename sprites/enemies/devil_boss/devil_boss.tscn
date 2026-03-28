@@ -2166,7 +2166,6 @@ glow_intensity = 2.41
 
 [node name="Devil_Boss" type="Node2D" unique_id=1695056971 groups=["boss", "enemy"]]
 script = ExtResource("1_i6dqg")
-max_health = 10000.0
 
 [node name="debuff_container" type="HBoxContainer" parent="." unique_id=1933764444]
 texture_filter = 2

@@ -1,8 +1,8 @@
 extends Node
 
-const DEVIL = preload("uid://c46jces8nqyq6")
-const PROJECTILE_DEMON = preload("uid://dop45afcxfw37")
-const IMP = preload("uid://b0vaiulul6fbm")
+const DEVIL = preload("uid://ducyvw4p4i56c")
+const PROJECTILE_DEMON = preload("uid://dbfgo5uaeo76m")
+const IMP = preload("uid://b43cnfq107mjk")
 const EYEBALL_ENEMY = preload("uid://t8ttvohfehwf")
 const GHOST = preload("uid://px47tge8r383")
 const DEVIL_BOSS = preload("uid://27xngsos4sod")

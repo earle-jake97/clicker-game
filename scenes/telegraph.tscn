@@ -35,7 +35,7 @@ sprite_frames = SubResource("SpriteFrames_ifdyd")
 autoplay = "default"
 frame_progress = 0.76925
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1428694437]
+[node name="Area2D" type="Area2D" parent="." unique_id=1428694437 groups=["projectile"]]
 position = Vector2(0, -16)
 collision_layer = 0
 collision_mask = 2

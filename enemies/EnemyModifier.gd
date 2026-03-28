@@ -18,12 +18,14 @@ func on_enemy_spawned() -> void:
 func on_enemy_process(_delta: float) -> void:
 	pass
 
-func on_enemy_death_started() -> void:
+func on_enemy_died() -> void:
 	pass
 
 func apply_stats(stats: Dictionary) -> Dictionary:
 	return stats
 
-func recalculate_enemy_stats() -> void:
-	if enemy:
-		enemy.recalculate_stats()
+func get_modifier_id() -> String:
+	return ""
+
+func get_modifier_icon() -> Texture2D:
+	return null

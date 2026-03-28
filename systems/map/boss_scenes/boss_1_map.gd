@@ -3,7 +3,6 @@ extends Node2D
 @onready var boss_spawn: Marker2D = $y_sort_node/boss_spawn
 
 const DEVIL_BOSS = preload("res://sprites/enemies/devil_boss/devil_boss.tscn")
-const EVIL_WIZARD = preload("res://sprites/enemies/evil_wizard/evil_wizard.tscn")
 const MapView = "res://map/map_scene.tscn"
 @onready var marker_2d_2: Marker2D = $Positions/Marker2D2
 
@@ -15,8 +14,6 @@ func _ready() -> void:
 	var rand = 0.1
 	if rand <= 0.3:
 		boss = DEVIL_BOSS.instantiate()
-	else:
-		boss = EVIL_WIZARD.instantiate()
 	boss.global_position = boss_spawn.global_position
 	boss.damage = 20
 	boss.add_to_group("boss")

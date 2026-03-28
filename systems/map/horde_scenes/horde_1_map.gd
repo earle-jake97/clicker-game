@@ -35,7 +35,8 @@ func room_complete():
 	GameState.horde_bool = false
 	EnemyManager.signal_magnet()
 	SpawnManager.clear_all_spawners()
-	EnemyManager.kill_all_enemies_in_list()
+	EnemyManager.clear_list()
+	EnemyManager.clear_room_entities()
 	exit.show()
 	
 func _on_timer_timeout() -> void:

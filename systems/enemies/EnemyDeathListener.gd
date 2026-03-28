@@ -20,7 +20,7 @@ func _on_enemy_died(enemy):
 	enemy_list.erase(enemy)
 	if GameState.horde_bool:
 		GameState.enemy_count -= 1
-	if enemy.debuffs.has(debuff.Debuff.OIL):
+	if "debuffs" in enemy and enemy.debuffs.has(debuff.Debuff.OIL):
 		if PlayerController.calculate_luck() <= oil_item_script.explosion_chance:
 			spawn_oil_explosion(enemy.global_position, enemy)
 	var chance = burrito_script.calculate_puddle_chance()

@@ -124,7 +124,6 @@ text = "1233
 horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1109277208]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(29.2082, 16.6792)

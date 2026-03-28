@@ -41,10 +41,6 @@ BetterTerrain="*uid://0es7gx6b0qyo"
 EnemyManager="*uid://ddffohggwnoiy"
 SpawnManager="*uid://cwmkuxmrx702v"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/stretch/mode="viewport"
@@ -73,6 +69,7 @@ main=""
 scrimblo=""
 minion_hitbox=""
 base_terrain=""
+projectile=""
 
 [input]
 

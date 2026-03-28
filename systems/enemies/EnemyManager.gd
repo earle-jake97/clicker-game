@@ -27,6 +27,13 @@ func kill_all_enemies_in_list():
 func signal_magnet():
 	magnet_all.emit()
 	
+func clear_room_entities():
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if is_instance_valid(enemy):
+			enemy.queue_free()
+	for projectile in get_tree().get_nodes_in_group("projectile"):
+		if is_instance_valid(projectile):
+			projectile.queue_free()
 
 func get_terrain_node():
 	return get_tree().get_first_node_in_group("base_terrain")
